@@ -11,6 +11,7 @@ namespace AdminPanelLibrary
         public int SessionId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public bool Tariff { get; set; }
         public decimal TotalAmount { get; set; }
     }
 }
