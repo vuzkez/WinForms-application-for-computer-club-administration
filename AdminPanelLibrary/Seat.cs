@@ -12,5 +12,6 @@ namespace AdminPanelLibrary
         public string SeatRoom {  get; set; }
         public string Hardware { get; set; }
         public string Devices { get; set; }
+        public SeatStatus Status { get; set; }
     }
 }
