@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AdminPanelLibrary
 {
-    public interface IAdministrator
+    public enum TariffType
     {
-        decimal GetRevenue(DateTime from,DateTime to);
-        void ConfigureTariff(TariffType tariff,decimal newPrice);
+        Day,
+        Night
     }
 }
