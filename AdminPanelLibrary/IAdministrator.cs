@@ -8,7 +8,7 @@ namespace AdminPanelLibrary
 {
     public interface IAdministrator
     {
-        decimal GetRevenue();
-        void ConfigureTariff(decimal newPrice);
+        decimal GetRevenue(DateTime from, DateTime to);
+        void ConfigureTariff(TariffType tariff, decimal newPrice);
     }
 }
