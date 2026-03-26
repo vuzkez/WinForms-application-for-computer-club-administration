@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace AdminPanelLibrary
 {
-    public static class DbConnection
+    public class DataContext : IDataContext
     {
-        public static string connectionString = @"Data Source=VUZKEZ\SQLEXPRESS;Initial Catalog=GameClub;Integrated Security=True";
+        private readonly string connectionString;
 
-        public static DataContext GetConnection()
+        public DataContext(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+        public DataContext Create()
         {
             return new DataContext(connectionString);
         }
