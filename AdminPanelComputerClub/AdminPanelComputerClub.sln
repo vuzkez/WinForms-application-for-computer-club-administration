@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36109.1 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanelComputerClub", "AdminPanelComputerClub.csproj", "{0FA69045-38D8-49CF-A3C9-AEEA43498C37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanelLibrary", "..\AdminPanelLibrary\AdminPanelLibrary.csproj", "{1EE29A79-8223-473D-AE51-E20BBF59ECCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0FA69045-38D8-49CF-A3C9-AEEA43498C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FA69045-38D8-49CF-A3C9-AEEA43498C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FA69045-38D8-49CF-A3C9-AEEA43498C37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EE29A79-8223-473D-AE51-E20BBF59ECCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EE29A79-8223-473D-AE51-E20BBF59ECCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EE29A79-8223-473D-AE51-E20BBF59ECCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EE29A79-8223-473D-AE51-E20BBF59ECCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
