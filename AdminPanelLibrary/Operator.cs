@@ -24,8 +24,16 @@ namespace AdminPanelLibrary
             newClient.StartTime = startTime;
             newClient.EndTime = endTime;
 
+            int hours = (int)(endTime - startTime).TotalHours;
             using (var db = dataContext.Create())
             {
+                var pricePerHour = db.GetTable<TariffSetting>().Where(p => p.Type == tariff).Select(x => x.PricePerHour).ToString();
+                if (pricePerHour != null)
+                {
+                    newClient.TotalAmount = decimal.Parse(pricePerHour) * hours;
+                }
+                db.GetTable<Session>().InsertOnSubmit(newClient);
+                db.SubmitChanges();
             }
         }
     }
