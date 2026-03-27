@@ -15,17 +15,18 @@ namespace AdminPanelLibrary
         {
             this.dataContext = dataContext;
         }
-        public Seat FindFreeSeat(string roomType)
+
+        public void OpenSession(int seatId, int userId, TariffType tariff, DateTime startTime, DateTime endTime)
         {
+            var newClient = new Session();
+            newClient.Tariff = tariff;
+            newClient.UserId = userId;
+            newClient.StartTime = startTime;
+            newClient.EndTime = endTime;
+
             using (var db = dataContext.Create())
             {
-
             }
-        }
-
-        public void OpenSession(int seatId, int userId, TariffType tariff)
-        {
-            throw new NotImplementedException();
         }
     }
 }

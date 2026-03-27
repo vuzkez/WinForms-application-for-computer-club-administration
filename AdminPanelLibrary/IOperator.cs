@@ -8,7 +8,6 @@ namespace AdminPanelLibrary
 {
     public interface IOperator
     {
-        void OpenSession(int seatId, int userId, TariffType tariff);
-        Seat FindFreeSeat(string roomType);
+        void OpenSession(int seatId, int userId, TariffType tariff,DateTime startTime,DateTime endTime);
     }
 }
