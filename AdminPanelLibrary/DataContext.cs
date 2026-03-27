@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace AdminPanelLibrary
 {
-    public class DataContext : IDataContext
+    public class MyDataContext : IDataContext
     {
         private readonly string connectionString;
 
-        public DataContext(string connectionString)
+        public MyDataContext(string connectionString)
         {
             this.connectionString = connectionString;
         }
