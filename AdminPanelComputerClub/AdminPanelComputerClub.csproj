@@ -8,4 +8,8 @@
 	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Mindbox.Data.Linq" Version="10.8.2" />
+  </ItemGroup>
+
 </Project>
