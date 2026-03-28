@@ -9,7 +9,8 @@ namespace AdminPanelLibrary
     public interface IOperator
     {
         void OpenSession(int seatId, int userId, TariffType tariff,DateTime startTime,DateTime endTime);
-        void CloseSession(Session session);
-        void AddHours(Session session,int hours);
+        void CloseSession(int sessionId);
+        void AddHours(int sessionId,int hours);
+        Seat? FindFreeSeat(string roomType);
     }
 }

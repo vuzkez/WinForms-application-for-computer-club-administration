@@ -29,17 +29,12 @@ namespace AdminPanelLibrary
 
         public decimal GetRevenue(DateTime from, DateTime to)
         {
-            decimal revenue = 0;
             using (var db = dataContext.Create())
             {
-                var sessionsList = db.GetTable<Session>().Where(t => t.EndTime >= from && t.EndTime <= to).ToList();
-
-                foreach (var t in sessionsList)
-                {
-                    revenue += t.TotalAmount;
-                }
+                return db.GetTable<Session>()
+                    .Where(s => s.EndTime >= from && s.EndTime <= to)
+                    .Sum(s => s.TotalAmount);
             }
-            return revenue;
         }
     }
 }
