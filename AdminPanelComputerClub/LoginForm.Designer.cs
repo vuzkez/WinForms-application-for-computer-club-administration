@@ -5,6 +5,7 @@ namespace AdminPanelComputerClub
 {
     public partial class LoginForm : Form
     {
+
         private TextBox txtLogin;
         private TextBox txtPassword;
         private Button btnLogin;

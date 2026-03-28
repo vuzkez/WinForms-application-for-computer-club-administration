@@ -10,10 +10,26 @@ namespace AdminPanelComputerClub
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new LoginForm(new MyDataContext("Data Source=VUZKEZ\\SQLEXPRESS;Initial Catalog=GameClub;Integrated Security=True;TrustServerCertificate=True")));
+
+            string connectionString = "Data Source=VUZKEZ\\SQLEXPRESS;Initial Catalog=GameClub;Integrated Security=True;TrustServerCertificate=True";
+
+            IDataContext dataContextFactory = new MyDataContext(connectionString);
+
+            IOperator operatorService = new Operator(dataContextFactory);
+            IAdministrator administratorService = new Admin(dataContextFactory);
+
+            using (var loginForm = new LoginForm(dataContextFactory))
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    // ѕолучаем авторизованного пользовател€
+                    User currentUser = loginForm.CurrentUser;
+
+                    // «апускаем главную форму, передава€ ей пользовател€ и сервисы
+                    Application.Run(new MainForm(currentUser,operatorService,administratorService,dataContextFactory));
+                }
+            }
         }
     }
 }
