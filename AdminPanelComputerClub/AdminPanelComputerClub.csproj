@@ -12,4 +12,8 @@
     <PackageReference Include="Mindbox.Data.Linq" Version="10.8.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdminPanelLibrary\AdminPanelLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
