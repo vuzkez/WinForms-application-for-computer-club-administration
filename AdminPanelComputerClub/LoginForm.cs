@@ -16,7 +16,7 @@ namespace AdminPanelComputerClub
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string login = txtLogin.Text;  
+            string login = txtLogin.Text;
             string password = txtPassword.Text;
 
             using (var db = context.Create())
@@ -27,12 +27,12 @@ namespace AdminPanelComputerClub
                 if (user != null && user.IsActive == false)
                 {
                     user.IsActive = true;
-                    CurrentUser = user;        
+                    CurrentUser = user;
                     DialogResult = DialogResult.OK;
                     db.SubmitChanges();
                     Close();
                 }
-                else if (user != null && user.IsActive == true) 
+                else if (user != null && user.IsActive == true)
                 {
                     MessageBox.Show("Пользователь уже активен.", "Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -44,6 +44,5 @@ namespace AdminPanelComputerClub
                 }
             }
         }
-
     }
 }

@@ -78,11 +78,13 @@ namespace AdminPanelLibrary
         {
             using (var db = dataContext.Create())
             {
-                var freeSeats = db.GetTable<Seat>().Where(p => p.Status == SeatStatus.Free);
+                var freeSeats = db.GetTable<Seat>()
+                    .Where(s => !db.GetTable<Session>()
+                    .Any(session => session.SeatId == s.SeatId && session.EndTime > DateTime.Now));
 
                 if (!string.IsNullOrEmpty(roomType))
                 {
-                    return freeSeats.FirstOrDefault(s => s.SeatRoom == roomType);
+                    return freeSeats.FirstOrDefault(s => s.SeatRoom.ToLower() == roomType.ToLower());
                 }
                 
                 return freeSeats.FirstOrDefault();

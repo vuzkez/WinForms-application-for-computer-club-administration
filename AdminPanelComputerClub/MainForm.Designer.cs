@@ -108,6 +108,7 @@
             btnVip9 = new Button();
             btnVip10 = new Button();
             pnlBottom = new Panel();
+            btnInfoUser = new Button();
             btnFindFreeSeat = new Button();
             btnRefresh = new Button();
             btnRevenue = new Button();
@@ -476,7 +477,7 @@
             btnVip1.Name = "btnVip1";
             btnVip1.Size = new Size(70, 70);
             btnVip1.TabIndex = 1;
-            btnVip1.Text = "VIP #1";
+            btnVip1.Text = "VIP #26";
             // 
             // btnVip2
             // 
@@ -484,7 +485,7 @@
             btnVip2.Name = "btnVip2";
             btnVip2.Size = new Size(70, 70);
             btnVip2.TabIndex = 2;
-            btnVip2.Text = "VIP #2";
+            btnVip2.Text = "VIP #27";
             // 
             // btnVip3
             // 
@@ -492,7 +493,7 @@
             btnVip3.Name = "btnVip3";
             btnVip3.Size = new Size(70, 70);
             btnVip3.TabIndex = 3;
-            btnVip3.Text = "VIP #3";
+            btnVip3.Text = "VIP #28";
             // 
             // btnVip4
             // 
@@ -500,7 +501,7 @@
             btnVip4.Name = "btnVip4";
             btnVip4.Size = new Size(70, 70);
             btnVip4.TabIndex = 4;
-            btnVip4.Text = "VIP #4";
+            btnVip4.Text = "VIP #29";
             // 
             // btnVip5
             // 
@@ -508,7 +509,7 @@
             btnVip5.Name = "btnVip5";
             btnVip5.Size = new Size(70, 70);
             btnVip5.TabIndex = 5;
-            btnVip5.Text = "VIP #5";
+            btnVip5.Text = "VIP #30";
             // 
             // pnlVipEntrance
             // 
@@ -560,7 +561,7 @@
             btnVip6.Name = "btnVip6";
             btnVip6.Size = new Size(70, 70);
             btnVip6.TabIndex = 1;
-            btnVip6.Text = "VIP #6";
+            btnVip6.Text = "VIP #31";
             // 
             // btnVip7
             // 
@@ -568,7 +569,7 @@
             btnVip7.Name = "btnVip7";
             btnVip7.Size = new Size(70, 70);
             btnVip7.TabIndex = 2;
-            btnVip7.Text = "VIP #7";
+            btnVip7.Text = "VIP #32";
             // 
             // btnVip8
             // 
@@ -576,7 +577,7 @@
             btnVip8.Name = "btnVip8";
             btnVip8.Size = new Size(70, 70);
             btnVip8.TabIndex = 3;
-            btnVip8.Text = "VIP #8";
+            btnVip8.Text = "VIP #33";
             // 
             // btnVip9
             // 
@@ -584,7 +585,7 @@
             btnVip9.Name = "btnVip9";
             btnVip9.Size = new Size(70, 70);
             btnVip9.TabIndex = 4;
-            btnVip9.Text = "VIP #9";
+            btnVip9.Text = "VIP #34";
             // 
             // btnVip10
             // 
@@ -592,11 +593,12 @@
             btnVip10.Name = "btnVip10";
             btnVip10.Size = new Size(70, 70);
             btnVip10.TabIndex = 5;
-            btnVip10.Text = "VIP #10";
+            btnVip10.Text = "VIP #35";
             // 
             // pnlBottom
             // 
             pnlBottom.BackColor = Color.FromArgb(45, 45, 50);
+            pnlBottom.Controls.Add(btnInfoUser);
             pnlBottom.Controls.Add(btnFindFreeSeat);
             pnlBottom.Controls.Add(btnRefresh);
             pnlBottom.Controls.Add(btnRevenue);
@@ -606,36 +608,51 @@
             pnlBottom.Size = new Size(1212, 75);
             pnlBottom.TabIndex = 8;
             // 
+            // btnInfoUser
+            // 
+            btnInfoUser.BackColor = Color.LightSeaGreen;
+            btnInfoUser.FlatStyle = FlatStyle.Flat;
+            btnInfoUser.ForeColor = Color.White;
+            btnInfoUser.Location = new Point(10, 12);
+            btnInfoUser.Name = "btnInfoUser";
+            btnInfoUser.Size = new Size(115, 36);
+            btnInfoUser.TabIndex = 4;
+            btnInfoUser.Text = "Пользователь";
+            btnInfoUser.UseVisualStyleBackColor = false;
+            btnInfoUser.Click += btnInfoUser_Click;
+            // 
             // btnFindFreeSeat
             // 
             btnFindFreeSeat.BackColor = Color.SteelBlue;
             btnFindFreeSeat.FlatStyle = FlatStyle.Flat;
             btnFindFreeSeat.ForeColor = Color.White;
-            btnFindFreeSeat.Location = new Point(12, 12);
+            btnFindFreeSeat.Location = new Point(131, 12);
             btnFindFreeSeat.Name = "btnFindFreeSeat";
-            btnFindFreeSeat.Size = new Size(150, 36);
+            btnFindFreeSeat.Size = new Size(139, 36);
             btnFindFreeSeat.TabIndex = 0;
             btnFindFreeSeat.Text = "Найти свободный ПК";
             btnFindFreeSeat.UseVisualStyleBackColor = false;
+            btnFindFreeSeat.Click += btnFindFreeSeat_Click;
             // 
             // btnRefresh
             // 
             btnRefresh.BackColor = Color.DarkGreen;
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(178, 12);
+            btnRefresh.Location = new Point(276, 12);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(130, 36);
             btnRefresh.TabIndex = 1;
             btnRefresh.Text = "Обновить карту";
             btnRefresh.UseVisualStyleBackColor = false;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnRevenue
             // 
             btnRevenue.BackColor = Color.DarkOrange;
             btnRevenue.FlatStyle = FlatStyle.Flat;
             btnRevenue.ForeColor = Color.White;
-            btnRevenue.Location = new Point(324, 12);
+            btnRevenue.Location = new Point(925, 12);
             btnRevenue.Name = "btnRevenue";
             btnRevenue.Size = new Size(120, 36);
             btnRevenue.TabIndex = 2;
@@ -647,7 +664,7 @@
             btnAdminPanel.BackColor = Color.Purple;
             btnAdminPanel.FlatStyle = FlatStyle.Flat;
             btnAdminPanel.ForeColor = Color.White;
-            btnAdminPanel.Location = new Point(460, 12);
+            btnAdminPanel.Location = new Point(1055, 12);
             btnAdminPanel.Name = "btnAdminPanel";
             btnAdminPanel.Size = new Size(130, 36);
             btnAdminPanel.TabIndex = 3;
@@ -657,9 +674,9 @@
             // statusStrip
             // 
             statusStrip.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip.Location = new Point(0, 685);
+            statusStrip.Location = new Point(0, 678);
             statusStrip.Name = "statusStrip";
-            statusStrip.Size = new Size(1202, 22);
+            statusStrip.Size = new Size(1200, 22);
             statusStrip.TabIndex = 9;
             // 
             // lblStatus
@@ -671,11 +688,11 @@
             // MainForm
             // 
             ClientSize = new Size(1200, 700);
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             Controls.Add(pnlRight);
             Controls.Add(pnlLeft);
             Controls.Add(pnlBottom);
             Controls.Add(statusStrip);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MinimumSize = new Size(800, 600);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -705,5 +722,6 @@
         private Label lblVip2;
         private Label lblEntranceTitle;
         private Label lblRegistration;
+        private Button btnInfoUser;
     }
 }

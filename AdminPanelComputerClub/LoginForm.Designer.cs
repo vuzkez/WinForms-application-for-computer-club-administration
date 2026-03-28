@@ -67,7 +67,7 @@ namespace AdminPanelComputerClub
             btnLogin.TabIndex = 5;
             btnLogin.Text = "Войти";
             btnLogin.UseVisualStyleBackColor = false;
-            btnLogin.Click += this.btnLogin_Click;
+            btnLogin.Click += btnLogin_Click;
             // 
             // lblStatus
             // 

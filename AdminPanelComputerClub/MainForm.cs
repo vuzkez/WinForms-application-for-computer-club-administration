@@ -25,6 +25,7 @@ namespace AdminPanelComputerClub
             this.dataContext = dataContext;
             InitializeComponent();
             ConfigureUIByRole();
+            UpdateSeatColors();
         }
 
         private void ConfigureUIByRole()
@@ -43,6 +44,45 @@ namespace AdminPanelComputerClub
             }
         }
 
+        private void UpdateSeatColors()
+        {
+            var seats = operatorService.GetAllSeatsWithStatus();
+
+            var seatButtons = new Dictionary<int, Button>()
+            {
+                { 1, btnGen1 }, { 2, btnGen2 }, { 3, btnGen3 }, { 4, btnGen4 }, { 5, btnGen5 },
+                { 6, btnGen6 }, { 7, btnGen7 }, { 8, btnGen8 }, { 9, btnGen9 }, { 10, btnGen10 },
+                { 11, btnGen11 }, { 12, btnGen12 }, { 13, btnGen13 }, { 14, btnGen14 }, { 15, btnGen15 },
+                { 16, btnGen16 }, { 17, btnGen17 }, { 18, btnGen18 }, { 19, btnGen19 }, { 20, btnGen20 },
+                { 21, btnGen21 }, { 22, btnGen22 }, { 23, btnGen23 }, { 24, btnGen24 }, { 25, btnGen25 },
+                { 26, btnVip1 }, { 27, btnVip2 }, { 28, btnVip3 }, { 29, btnVip4 }, { 30, btnVip5 },
+                { 31, btnVip6 }, { 32, btnVip7 }, { 33, btnVip8 }, { 34, btnVip9 }, { 35, btnVip10 }
+            };
+
+            foreach (var seat in seats)
+            {
+                if (seatButtons.TryGetValue(seat.SeatId, out var btn))
+                {
+                    btn.BackColor = GetColor(seat);
+                }
+            }
+        }
+
+        private Color GetColor(Seat seat)
+        {
+            switch (seat.Status)
+            {
+                case SeatStatus.Free:
+                    return Color.Green;
+                case SeatStatus.Expiring:
+                    return Color.Yellow;
+                case SeatStatus.Busy:
+                    return Color.Red;
+                default:
+                    return Color.Gray;
+            }
+        }
+
         private void MainForm_FormClosing(object sender, EventArgs e)
         {
             using (var db = dataContext.Create())
@@ -52,6 +92,38 @@ namespace AdminPanelComputerClub
                 {
                     userFromDb.IsActive = false;
                     db.SubmitChanges();
+                }
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            UpdateSeatColors();
+        }
+
+        private void btnInfoUser_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Пользователь: {user.FullName}.\nРоль: {user.UserRole}.", "Информация по пользователю",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnFindFreeSeat_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new InputDialog("Введите тип комнаты для поиска свободного ПК.", "Найти свободный ПК по типу комнаты"))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var seat = operatorService.FindFreeSeat(dialog.Result);
+                    if (seat != null)
+                    {
+                        MessageBox.Show($"Свободный пк в комнате типа: {seat.SeatRoom}\nКомпьтер номер: {seat.SeatId}\nЖелезо: {seat.Hardware}\nДевайсы: {seat.Devices}","Поиск пк",
+                            MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Нету свободного пк", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
