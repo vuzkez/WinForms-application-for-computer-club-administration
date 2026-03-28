@@ -17,7 +17,7 @@ namespace AdminPanelComputerClub
         private readonly IDataContext dataContext;
         private readonly IOperator operatorService;
         private readonly IAdministrator administratorService;
-        public MainForm(User user, IOperator operatorService, IAdministrator administratorService,IDataContext dataContext)
+        public MainForm(User user, IOperator operatorService, IAdministrator administratorService, IDataContext dataContext)
         {
             this.user = user;
             this.operatorService = operatorService;
@@ -43,15 +43,17 @@ namespace AdminPanelComputerClub
             }
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void MainForm_FormClosing(object sender, EventArgs e)
         {
             using (var db = dataContext.Create())
             {
-                var userFromDb = db.GetTable<User>().First(u => u.UserId == user.UserId);
-                userFromDb.IsActive = false;
-                db.SubmitChanges();
+                var userFromDb = db.GetTable<User>().FirstOrDefault(u => u.UserId == user.UserId);
+                if (userFromDb != null)
+                {
+                    userFromDb.IsActive = false;
+                    db.SubmitChanges();
+                }
             }
-            Close();
         }
     }
 }
