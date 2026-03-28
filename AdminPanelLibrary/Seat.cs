@@ -23,6 +23,12 @@ namespace AdminPanelLibrary
         public string Devices { get; set; }
 
         [Column(Name = "Status")]
-        public SeatStatus Status { get; set; }
+        public int StatusValue { get; set; }
+
+        public SeatStatus Status
+        {
+            get => (SeatStatus)StatusValue;
+            set => StatusValue = (int)value;
+        }
     }
 }

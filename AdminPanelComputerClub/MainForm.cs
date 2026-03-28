@@ -14,17 +14,44 @@ namespace AdminPanelComputerClub
     public partial class MainForm : Form
     {
         private readonly User user;
+        private readonly IDataContext dataContext;
         private readonly IOperator operatorService;
         private readonly IAdministrator administratorService;
-        private readonly IDataContext dataContext;
-        public MainForm(User user,IOperator operatorService, IAdministrator administratorService, IDataContext dataContext)
+        public MainForm(User user, IOperator operatorService, IAdministrator administratorService,IDataContext dataContext)
         {
-            InitializeComponent();
             this.user = user;
             this.operatorService = operatorService;
             this.administratorService = administratorService;
             this.dataContext = dataContext;
+            InitializeComponent();
+            ConfigureUIByRole();
         }
 
+        private void ConfigureUIByRole()
+        {
+            if (user.UserRole == UserRole.Administrator)
+            {
+                btnRevenue.Visible = true;
+                btnAdminPanel.Visible = true;
+                this.Text = "GameClub - Администратор";
+            }
+            else
+            {
+                btnRevenue.Visible = false;
+                btnAdminPanel.Visible = false;
+                this.Text = "GameClub - Оператор";
+            }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            using (var db = dataContext.Create())
+            {
+                var userFromDb = db.GetTable<User>().First(u => u.UserId == user.UserId);
+                userFromDb.IsActive = false;
+                db.SubmitChanges();
+            }
+            Close();
+        }
     }
 }

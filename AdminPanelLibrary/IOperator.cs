@@ -12,5 +12,6 @@ namespace AdminPanelLibrary
         void CloseSession(int sessionId);
         void AddHours(int sessionId,int hours);
         Seat? FindFreeSeat(string roomType);
+        List<Seat> GetAllSeatsWithStatus();
     }
 }

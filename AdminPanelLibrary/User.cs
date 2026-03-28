@@ -16,7 +16,12 @@ namespace AdminPanelLibrary
         public string Password { get; set; }
 
         [Column(Name = "UserRole")]
-        public UserRole UserRole { get; set; }
+        public string UserRoleValue { get; set; }
+        public UserRole UserRole
+        {
+            get => Enum.Parse<UserRole>(UserRoleValue);
+            set => UserRoleValue = value.ToString();
+        }
 
         [Column(Name = "FullName")]
         public string FullName { get; set; }

@@ -20,7 +20,13 @@ namespace AdminPanelLibrary
         public int UserId { get; set; }
 
         [Column(Name = "Tariff")]
-        public TariffType Tariff { get; set; }
+        private string TariffValue { get; set; }
+
+        public TariffType Tariff
+        {
+            get => Enum.Parse<TariffType>(TariffValue);
+            set => TariffValue = value.ToString();
+        }
 
         [Column(Name = "StartTime")]
         public DateTime StartTime { get; set; }

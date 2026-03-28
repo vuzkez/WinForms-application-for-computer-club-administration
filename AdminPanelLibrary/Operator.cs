@@ -88,5 +88,30 @@ namespace AdminPanelLibrary
                 return freeSeats.FirstOrDefault();
             }
         }
+
+        public List<Seat> GetAllSeatsWithStatus()
+        {
+            using (var db = dataContext.Create())
+            {
+                var seats = db.GetTable<Seat>().ToList();
+                var activeSeassions = db.GetTable<Session>()
+                    .Where(s => s.EndTime > DateTime.Now)
+                    .ToDictionary(s => s.SeatId);
+
+                foreach (var seat in seats)
+                {
+                    if (activeSeassions.TryGetValue(seat.SeatId,out var session))
+                    {
+                        var remaining = (session.EndTime - DateTime.Now).TotalMinutes;
+                        seat.Status = remaining <= 15 ? SeatStatus.Expiring : SeatStatus.Busy;
+                    }
+                    else
+                    {
+                        seat.Status = SeatStatus.Free;
+                    }
+                }
+                return seats;
+            }
+        }
     }
 }

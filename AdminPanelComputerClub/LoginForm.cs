@@ -22,13 +22,20 @@ namespace AdminPanelComputerClub
             using (var db = context.Create())
             {
                 var user = db.GetTable<User>()
-                    .FirstOrDefault(u => u.Login == login && u.Password == password && u.IsActive);
+                    .FirstOrDefault(u => u.Login == login && u.Password == password);
 
-                if (user != null)
+                if (user != null && user.IsActive == false)
                 {
+                    user.IsActive = true;
                     CurrentUser = user;        
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    DialogResult = DialogResult.OK;
+                    db.SubmitChanges();
+                    Close();
+                }
+                else if (user != null && user.IsActive == true) 
+                {
+                    MessageBox.Show("Пользователь уже активен.", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

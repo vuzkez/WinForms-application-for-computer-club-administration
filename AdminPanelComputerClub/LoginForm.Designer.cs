@@ -3,9 +3,12 @@ using AdminPanelLibrary;
 
 namespace AdminPanelComputerClub
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm
     {
-
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
         private TextBox txtLogin;
         private TextBox txtPassword;
         private Button btnLogin;
@@ -13,6 +16,19 @@ namespace AdminPanelComputerClub
         private Label lblTitle;
         private Label lblLogin;
         private Label lblPassword;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         private void InitializeComponent()
         {

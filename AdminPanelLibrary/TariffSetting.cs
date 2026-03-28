@@ -11,7 +11,13 @@ namespace AdminPanelLibrary
     public class TariffSetting
     {
         [Column(Name = "Type", IsPrimaryKey = true)]
-        public TariffType Type { get; set; }
+        private string TypeValue { get; set; }
+
+        public TariffType Type
+        {
+            get => Enum.Parse<TariffType>(TypeValue);
+            set => TypeValue = value.ToString();
+        }
 
         [Column(Name = "PricePerHour")]
         public decimal PricePerHour { get; set; }
