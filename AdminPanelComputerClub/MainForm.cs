@@ -114,7 +114,7 @@ namespace AdminPanelComputerClub
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     var seat = operatorService.FindFreeSeat(dialog.Result);
-       
+
                     if (seat != null)
                     {
                         MessageBox.Show($"Свободный пк в комнате типа: {seat.SeatRoom}\nКомпьтер номер: {seat.SeatId}\nЖелезо: {seat.Hardware}\nДевайсы: {seat.Devices}", "Поиск пк",
@@ -163,12 +163,7 @@ namespace AdminPanelComputerClub
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    Session? activeSession;
-                    using (var db = dataContext.Create())
-                    {
-                            activeSession = db.GetTable<Session>()
-                            .FirstOrDefault(s => s.SeatId == seatId && s.EndTime > DateTime.Now);
-                    }
+                    var activeSession = operatorService.GetActiveSessionBySeatId(seatId);
 
                     // Проверка, есть ли активная сессия
                     if (activeSession == null)
@@ -198,6 +193,21 @@ namespace AdminPanelComputerClub
                         MessageBox.Show($"Сессия на ПК #{seatId} успешно закрыта.", "Успех",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                }
+            }
+        }
+
+        private void btnAddHours_Click(object sender, EventArgs e)
+        {
+            using(var form = new AddHoursForm(operatorService))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    operatorService.AddHours(form.SessionId, form.AdditionalHours);
+                    UpdateSeatColors();
+
+                    MessageBox.Show($"Добавлено {form.AdditionalHours} час(ов) к сессии на ПК #{form.SelectedSeatId}",
+                        "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

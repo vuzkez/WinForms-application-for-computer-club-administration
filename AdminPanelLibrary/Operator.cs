@@ -127,5 +127,14 @@ namespace AdminPanelLibrary
                 return seats;
             }
         }
+
+        public Session? GetActiveSessionBySeatId(int seatId)
+        {
+            using (var db = dataContext.Create())
+            {
+                return db.GetTable<Session>()
+                    .FirstOrDefault(s => s.SeatId == seatId && s.EndTime > DateTime.Now);
+            }
+        }
     }
 }

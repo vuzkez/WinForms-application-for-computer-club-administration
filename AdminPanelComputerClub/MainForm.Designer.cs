@@ -108,6 +108,7 @@
             btnVip9 = new Button();
             btnVip10 = new Button();
             pnlBottom = new Panel();
+            btnCloseSession = new Button();
             btnOpenSession = new Button();
             btnInfoUser = new Button();
             btnFindFreeSeat = new Button();
@@ -116,7 +117,7 @@
             btnAdminPanel = new Button();
             statusStrip = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
-            btnCloseSession = new Button();
+            btnAddHours = new Button();
             pnlLeft.SuspendLayout();
             pnlEntrance.SuspendLayout();
             pnlGeneralZone.SuspendLayout();
@@ -600,6 +601,7 @@
             // pnlBottom
             // 
             pnlBottom.BackColor = Color.FromArgb(45, 45, 50);
+            pnlBottom.Controls.Add(btnAddHours);
             pnlBottom.Controls.Add(btnCloseSession);
             pnlBottom.Controls.Add(btnOpenSession);
             pnlBottom.Controls.Add(btnInfoUser);
@@ -611,6 +613,19 @@
             pnlBottom.Name = "pnlBottom";
             pnlBottom.Size = new Size(1212, 75);
             pnlBottom.TabIndex = 8;
+            // 
+            // btnCloseSession
+            // 
+            btnCloseSession.BackColor = Color.LightSalmon;
+            btnCloseSession.FlatStyle = FlatStyle.Flat;
+            btnCloseSession.ForeColor = Color.White;
+            btnCloseSession.Location = new Point(548, 12);
+            btnCloseSession.Name = "btnCloseSession";
+            btnCloseSession.Size = new Size(130, 36);
+            btnCloseSession.TabIndex = 6;
+            btnCloseSession.Text = "Закрыть сессию";
+            btnCloseSession.UseVisualStyleBackColor = false;
+            btnCloseSession.Click += btnCloseSession_Click;
             // 
             // btnOpenSession
             // 
@@ -702,18 +717,18 @@
             lblStatus.Size = new Size(88, 17);
             lblStatus.Text = "Готов к работе";
             // 
-            // btnCloseSession
+            // btnAddHours
             // 
-            btnCloseSession.BackColor = Color.LightSalmon;
-            btnCloseSession.FlatStyle = FlatStyle.Flat;
-            btnCloseSession.ForeColor = Color.White;
-            btnCloseSession.Location = new Point(548, 12);
-            btnCloseSession.Name = "btnCloseSession";
-            btnCloseSession.Size = new Size(130, 36);
-            btnCloseSession.TabIndex = 6;
-            btnCloseSession.Text = "Закрыть сессию";
-            btnCloseSession.UseVisualStyleBackColor = false;
-            btnCloseSession.Click += btnCloseSession_Click;
+            btnAddHours.BackColor = Color.Red;
+            btnAddHours.FlatStyle = FlatStyle.Flat;
+            btnAddHours.ForeColor = Color.White;
+            btnAddHours.Location = new Point(684, 12);
+            btnAddHours.Name = "btnAddHours";
+            btnAddHours.Size = new Size(130, 36);
+            btnAddHours.TabIndex = 7;
+            btnAddHours.Text = "Добавить часы";
+            btnAddHours.UseVisualStyleBackColor = false;
+            btnAddHours.Click += btnAddHours_Click;
             // 
             // MainForm
             // 
@@ -755,5 +770,6 @@
         private Button btnInfoUser;
         private Button btnOpenSession;
         private Button btnCloseSession;
+        private Button btnAddHours;
     }
 }
