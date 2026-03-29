@@ -109,7 +109,7 @@ namespace AdminPanelComputerClub
 
         private void btnFindFreeSeat_Click(object sender, EventArgs e)
         {
-            using (var dialog = new InputDialog("Введите тип комнаты для поиска свободного ПК.", "Найти свободный ПК по типу комнаты"))
+            using (var dialog = new FindFreeSeatForm())
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {

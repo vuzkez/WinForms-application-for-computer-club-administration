@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdminPanelLibrary;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace AdminPanelComputerClub
 {
@@ -61,7 +62,25 @@ namespace AdminPanelComputerClub
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                var seat = db.GetTable<Seat>()
+                    .First(s => s.SeatId == seatId);
+
+                if (seat.StatusValue == (int)SeatStatus.Busy || seat.StatusValue == (int)SeatStatus.Expiring)
+                {
+                    MessageBox.Show("Введите корректный номер ПК", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
+
+            if (!radioButton1.Checked && !radioButton2.Checked)
+            {
+                MessageBox.Show("Выберите хотя бы один вариант тарифа!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
 
             if (!int.TryParse(textBox3.Text, out int hours) || hours <= 0)
             {

@@ -26,7 +26,7 @@ namespace AdminPanelComputerClub
             try
             {
                 DateTime from = dtpFrom.Value.Date;
-                DateTime to = dtpTo.Value.Date.AddDays(1).AddSeconds(-1);
+                DateTime to = dtpTo.Value.Date.AddDays(1);
 
                 decimal revenue = _adminService.GetRevenue(from, to);
 
