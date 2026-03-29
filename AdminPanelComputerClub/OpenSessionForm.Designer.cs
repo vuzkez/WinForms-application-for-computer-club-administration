@@ -19,6 +19,7 @@ namespace AdminPanelComputerClub
         private Label label4;
         private Label label5;
         private TextBox textBox3;
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -55,55 +56,73 @@ namespace AdminPanelComputerClub
             // 
             // btnOk
             // 
-            btnOk.Location = new Point(27, 283);
+            btnOk.BackColor = Color.SteelBlue;
+            btnOk.FlatStyle = FlatStyle.Flat;
+            btnOk.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnOk.ForeColor = Color.White;
+            btnOk.Location = new Point(27, 320);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(102, 37);
+            btnOk.Size = new Size(130, 42);
             btnOk.TabIndex = 1;
-            btnOk.Text = "Ок";
-            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Text = "Открыть сессию";
+            btnOk.UseVisualStyleBackColor = false;
             btnOk.Click += btnOk_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(251, 283);
+            btnCancel.BackColor = Color.DarkRed;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCancel.ForeColor = Color.White;
+            btnCancel.Location = new Point(248, 320);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(102, 37);
+            btnCancel.Size = new Size(130, 42);
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Отмена";
-            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
             // label1
             // 
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.DarkSlateBlue;
             label1.Location = new Point(84, 9);
             label1.Name = "label1";
-            label1.Size = new Size(200, 32);
+            label1.Size = new Size(240, 32);
             label1.TabIndex = 3;
             label1.Text = "Выберите номер ПК";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
-            label2.Location = new Point(84, 76);
+            label2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            label2.ForeColor = Color.DarkSlateBlue;
+            label2.Location = new Point(84, 85);
             label2.Name = "label2";
-            label2.Size = new Size(200, 30);
+            label2.Size = new Size(240, 30);
             label2.TabIndex = 4;
-            label2.Text = "Выберите тариф (день/ночь)";
+            label2.Text = "Выберите тариф";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(84, 44);
+            textBox2.BackColor = Color.LightYellow;
+            textBox2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            textBox2.ForeColor = Color.DarkGreen;
+            textBox2.Location = new Point(110, 44);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(194, 23);
+            textBox2.Size = new Size(188, 27);
             textBox2.TabIndex = 6;
+            textBox2.TextAlign = HorizontalAlignment.Center;
             // 
             // radioButton1
             // 
             radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(27, 109);
+            radioButton1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            radioButton1.ForeColor = Color.SteelBlue;
+            radioButton1.Location = new Point(102, 118);
             radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(73, 20);
+            radioButton1.Size = new Size(90, 23);
             radioButton1.TabIndex = 7;
             radioButton1.TabStop = true;
             radioButton1.Text = "Дневной";
@@ -112,9 +131,11 @@ namespace AdminPanelComputerClub
             // radioButton2
             // 
             radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(206, 109);
+            radioButton2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            radioButton2.ForeColor = Color.Purple;
+            radioButton2.Location = new Point(102, 147);
             radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(69, 20);
+            radioButton2.Size = new Size(82, 23);
             radioButton2.TabIndex = 8;
             radioButton2.TabStop = true;
             radioButton2.Text = "Ночной";
@@ -123,42 +144,51 @@ namespace AdminPanelComputerClub
             // dateTimePicker1
             // 
             dateTimePicker1.CustomFormat = "dd.MM.yyyy HH:mm";
+            dateTimePicker1.Font = new Font("Segoe UI", 10F);
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(84, 175);
+            dateTimePicker1.Location = new Point(110, 210);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(194, 23);
+            dateTimePicker1.Size = new Size(188, 25);
             dateTimePicker1.TabIndex = 11;
             // 
             // label4
             // 
-            label4.Location = new Point(111, 142);
+            label4.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            label4.ForeColor = Color.DarkSlateBlue;
+            label4.Location = new Point(110, 187);
             label4.Name = "label4";
-            label4.Size = new Size(146, 20);
+            label4.Size = new Size(188, 20);
             label4.TabIndex = 12;
-            label4.Text = "Выберите начало сессии";
+            label4.Text = "Начало сессии";
             label4.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
-            label5.Location = new Point(99, 213);
+            label5.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            label5.ForeColor = Color.DarkSlateBlue;
+            label5.Location = new Point(110, 247);
             label5.Name = "label5";
-            label5.Size = new Size(146, 20);
+            label5.Size = new Size(188, 20);
             label5.TabIndex = 13;
             label5.Text = "Количество часов";
             label5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(99, 245);
+            textBox3.BackColor = Color.LightYellow;
+            textBox3.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            textBox3.ForeColor = Color.DarkGreen;
+            textBox3.Location = new Point(124, 277);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(146, 23);
+            textBox3.Size = new Size(158, 27);
             textBox3.TabIndex = 14;
+            textBox3.TextAlign = HorizontalAlignment.Center;
             // 
             // OpenSessionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(365, 330);
+            ClientSize = new Size(405, 385);
             Controls.Add(textBox3);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -170,8 +200,12 @@ namespace AdminPanelComputerClub
             Controls.Add(label1);
             Controls.Add(btnCancel);
             Controls.Add(btnOk);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "OpenSessionForm";
-            Text = "OpenSessionForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Открытие новой сессии";
             ResumeLayout(false);
             PerformLayout();
         }

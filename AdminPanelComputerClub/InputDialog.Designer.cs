@@ -11,6 +11,7 @@
         private Label lblPrompt;
         private Microsoft.Data.SqlClient.SqlDataAdapter sqlDataAdapter1;
         private TextBox inputBox;
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -41,50 +42,68 @@
             // 
             // btnOk
             // 
-            btnOk.Location = new Point(12, 135);
+            btnOk.BackColor = Color.SteelBlue;
+            btnOk.FlatStyle = FlatStyle.Flat;
+            btnOk.ForeColor = Color.White;
+            btnOk.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnOk.Location = new Point(27, 165);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(102, 37);
+            btnOk.Size = new Size(110, 40);
             btnOk.TabIndex = 0;
-            btnOk.Text = "Ок";
-            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Text = "ОК";
+            btnOk.UseVisualStyleBackColor = false;
             btnOk.Click += btnOk_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(151, 135);
+            btnCancel.BackColor = Color.DarkRed;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.ForeColor = Color.White;
+            btnCancel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnCancel.Location = new Point(163, 165);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(102, 37);
+            btnCancel.Size = new Size(110, 40);
             btnCancel.TabIndex = 1;
             btnCancel.Text = "Отмена";
-            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
             // lblPrompt
             // 
-            lblPrompt.Location = new Point(14, 39);
+            lblPrompt.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            lblPrompt.ForeColor = Color.DarkSlateBlue;
+            lblPrompt.Location = new Point(14, 30);
             lblPrompt.Name = "lblPrompt";
-            lblPrompt.Size = new Size(248, 28);
+            lblPrompt.Size = new Size(272, 35);
             lblPrompt.TabIndex = 2;
             lblPrompt.Text = "текст";
             lblPrompt.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // inputBox
             // 
-            inputBox.Location = new Point(46, 81);
+            inputBox.BackColor = Color.LightYellow;
+            inputBox.Font = new Font("Segoe UI", 11F);
+            inputBox.ForeColor = Color.DarkGreen;
+            inputBox.Location = new Point(46, 90);
             inputBox.Name = "inputBox";
-            inputBox.Size = new Size(165, 23);
+            inputBox.Size = new Size(208, 27);
             inputBox.TabIndex = 3;
+            inputBox.TextAlign = HorizontalAlignment.Center;
             // 
             // InputDialog
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(274, 191);
+            ClientSize = new Size(300, 230);
             Controls.Add(inputBox);
             Controls.Add(lblPrompt);
             Controls.Add(btnCancel);
             Controls.Add(btnOk);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "InputDialog";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "InputDialog";
             ResumeLayout(false);
             PerformLayout();
