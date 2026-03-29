@@ -115,6 +115,7 @@
             btnAdminPanel = new Button();
             statusStrip = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
+            btnOpenSession = new Button();
             pnlLeft.SuspendLayout();
             pnlEntrance.SuspendLayout();
             pnlGeneralZone.SuspendLayout();
@@ -598,6 +599,7 @@
             // pnlBottom
             // 
             pnlBottom.BackColor = Color.FromArgb(45, 45, 50);
+            pnlBottom.Controls.Add(btnOpenSession);
             pnlBottom.Controls.Add(btnInfoUser);
             pnlBottom.Controls.Add(btnFindFreeSeat);
             pnlBottom.Controls.Add(btnRefresh);
@@ -685,6 +687,19 @@
             lblStatus.Size = new Size(88, 17);
             lblStatus.Text = "Готов к работе";
             // 
+            // btnOpenSession
+            // 
+            btnOpenSession.BackColor = Color.FromArgb(0, 0, 192);
+            btnOpenSession.FlatStyle = FlatStyle.Flat;
+            btnOpenSession.ForeColor = Color.White;
+            btnOpenSession.Location = new Point(412, 12);
+            btnOpenSession.Name = "btnOpenSession";
+            btnOpenSession.Size = new Size(130, 36);
+            btnOpenSession.TabIndex = 5;
+            btnOpenSession.Text = "Открыть сессию";
+            btnOpenSession.UseVisualStyleBackColor = false;
+            btnOpenSession.Click += button1_Click;
+            // 
             // MainForm
             // 
             ClientSize = new Size(1200, 700);
@@ -723,5 +738,6 @@
         private Label lblEntranceTitle;
         private Label lblRegistration;
         private Button btnInfoUser;
+        private Button btnOpenSession;
     }
 }

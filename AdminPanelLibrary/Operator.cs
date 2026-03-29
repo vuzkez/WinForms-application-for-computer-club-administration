@@ -25,7 +25,7 @@ namespace AdminPanelLibrary
                 var sessionDb = db.GetTable<Session>().First(p => p.SessionId == sessionId);
                 
                 var price = db.GetTable<TariffSetting>()
-                      .First(t => t.Type == sessionDb.Tariff)
+                      .First(t => t.TypeValue == sessionDb.Tariff.ToString())
                       .PricePerHour;
 
                 sessionDb.EndTime = sessionDb.EndTime.AddHours(hours);
@@ -65,7 +65,7 @@ namespace AdminPanelLibrary
 
             using (var db = dataContext.Create())
             {
-                var pricePerHour = db.GetTable<TariffSetting>().First(p => p.Type == tariff).PricePerHour;
+                var pricePerHour = db.GetTable<TariffSetting>().First(p => p.TypeValue == tariff.ToString()).PricePerHour;
                 newClient.TotalAmount = pricePerHour * hours;
                 db.GetTable<Session>().InsertOnSubmit(newClient);
                 var seat = db.GetTable<Seat>().First(s => s.SeatId == seatId);
@@ -84,7 +84,18 @@ namespace AdminPanelLibrary
 
                 if (!string.IsNullOrEmpty(roomType))
                 {
-                    return freeSeats.FirstOrDefault(s => s.SeatRoom.ToLower() == roomType.ToLower());
+                    string translation = string.Empty;
+                    switch (roomType.ToLower())
+                    {
+                        case "общий":
+                            translation = "General";
+                            break;
+                        case "вип":
+                            translation = "Vip";
+                            break;
+                    }
+                    return freeSeats.FirstOrDefault(s => s.SeatRoom.ToLower() == roomType.ToLower()
+                    || s.SeatRoom.ToLower() == translation.ToLower());
                 }
                 
                 return freeSeats.FirstOrDefault();

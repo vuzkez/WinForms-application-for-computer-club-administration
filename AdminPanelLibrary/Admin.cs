@@ -18,7 +18,7 @@ namespace AdminPanelLibrary
         {
             using (var db = dataContext.Create())
             {
-                var tariffSettings = db.GetTable<TariffSetting>().FirstOrDefault(t => t.Type == tariff);
+                var tariffSettings = db.GetTable<TariffSetting>().FirstOrDefault(t => t.TypeValue == tariff.ToString());
                 if (tariffSettings != null)
                 {
                     tariffSettings.PricePerHour = newPrice;

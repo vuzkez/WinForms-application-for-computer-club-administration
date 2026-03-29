@@ -116,14 +116,27 @@ namespace AdminPanelComputerClub
                     var seat = operatorService.FindFreeSeat(dialog.Result);
                     if (seat != null)
                     {
-                        MessageBox.Show($"Свободный пк в комнате типа: {seat.SeatRoom}\nКомпьтер номер: {seat.SeatId}\nЖелезо: {seat.Hardware}\nДевайсы: {seat.Devices}","Поиск пк",
-                            MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        MessageBox.Show($"Свободный пк в комнате типа: {seat.SeatRoom}\nКомпьтер номер: {seat.SeatId}\nЖелезо: {seat.Hardware}\nДевайсы: {seat.Devices}", "Поиск пк",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
                         MessageBox.Show($"Нету свободного пк", "Ошибка",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var inputDialog = new OpenSessionForm(dataContext))
+            {
+                if (inputDialog.ShowDialog() == DialogResult.OK)
+                {
+                    operatorService.OpenSession(inputDialog.SelectedSeatId, user.UserId, inputDialog.SelectedTariff, inputDialog.StartTime,
+                    inputDialog.StartTime.AddHours(inputDialog.Hours));
+                    UpdateSeatColors();
                 }
             }
         }

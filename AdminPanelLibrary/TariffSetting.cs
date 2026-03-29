@@ -11,7 +11,7 @@ namespace AdminPanelLibrary
     public class TariffSetting
     {
         [Column(Name = "Type", IsPrimaryKey = true)]
-        private string TypeValue { get; set; }
+        public string TypeValue { get; set; }
 
         public TariffType Type
         {
