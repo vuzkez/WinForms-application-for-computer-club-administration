@@ -8,7 +8,17 @@ namespace AdminPanelComputerClub
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
+        private Button btnOk;
+        private Button btnCancel;
+        private Label label1;
+        private Label label2;
+        private TextBox textBox2;
+        private RadioButton radioButton1;
+        private RadioButton radioButton2;
+        private DateTimePicker dateTimePicker1;
+        private Label label4;
+        private Label label5;
+        private TextBox textBox3;
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -168,17 +178,5 @@ namespace AdminPanelComputerClub
         }
 
         #endregion
-
-        private Button btnOk;
-        private Button btnCancel;
-        private Label label1;
-        private Label label2;
-        private TextBox textBox2;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
-        private DateTimePicker dateTimePicker1;
-        private Label label4;
-        private Label label5;
-        private TextBox textBox3;
     }
 }

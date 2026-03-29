@@ -36,5 +36,16 @@ namespace AdminPanelLibrary
                     .Sum(s => s.TotalAmount);
             }
         }
+
+        public decimal GetTariffPrice(TariffType tariff)
+        {
+            using (var db = dataContext.Create())
+            {
+                var setting = db.GetTable<TariffSetting>()
+                    .FirstOrDefault(t => t.TypeValue == tariff.ToString());
+
+                return setting?.PricePerHour ?? 0;
+            }
+        }
     }
 }

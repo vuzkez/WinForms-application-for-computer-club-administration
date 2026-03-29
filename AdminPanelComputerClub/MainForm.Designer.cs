@@ -697,7 +697,7 @@
             btnRevenue.BackColor = Color.DarkOrange;
             btnRevenue.FlatStyle = FlatStyle.Flat;
             btnRevenue.ForeColor = Color.White;
-            btnRevenue.Location = new Point(925, 12);
+            btnRevenue.Location = new Point(902, 12);
             btnRevenue.Name = "btnRevenue";
             btnRevenue.Size = new Size(120, 36);
             btnRevenue.TabIndex = 2;
@@ -710,12 +710,13 @@
             btnAdminPanel.BackColor = Color.Purple;
             btnAdminPanel.FlatStyle = FlatStyle.Flat;
             btnAdminPanel.ForeColor = Color.White;
-            btnAdminPanel.Location = new Point(1055, 12);
+            btnAdminPanel.Location = new Point(1028, 12);
             btnAdminPanel.Name = "btnAdminPanel";
-            btnAdminPanel.Size = new Size(130, 36);
+            btnAdminPanel.Size = new Size(157, 36);
             btnAdminPanel.TabIndex = 3;
-            btnAdminPanel.Text = "Админ панель";
+            btnAdminPanel.Text = "Настроить цену тарифа";
             btnAdminPanel.UseVisualStyleBackColor = false;
+            btnAdminPanel.Click += btnAdminPanel_Click;
             // 
             // statusStrip
             // 

@@ -219,5 +219,21 @@ namespace AdminPanelComputerClub
                 form.ShowDialog();
             }
         }
+
+        private void btnAdminPanel_Click(object sender, EventArgs e)
+        {
+            // Получаем текущие цены
+            decimal dayPrice = administratorService.GetTariffPrice(TariffType.Day);
+            decimal nightPrice = administratorService.GetTariffPrice(TariffType.Night);
+
+            using (var form = new TariffForm(administratorService, dayPrice, nightPrice))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    UpdateSeatColors();
+                    lblStatus.Text = "Тарифы обновлены";
+                }
+            }
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace AdminPanelLibrary
     {
         decimal GetRevenue(DateTime from, DateTime to);
         void ConfigureTariff(TariffType tariff, decimal newPrice);
+        decimal GetTariffPrice(TariffType tariff);
     }
 }
