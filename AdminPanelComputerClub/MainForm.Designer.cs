@@ -108,6 +108,7 @@
             btnVip9 = new Button();
             btnVip10 = new Button();
             pnlBottom = new Panel();
+            btnAddHours = new Button();
             btnCloseSession = new Button();
             btnOpenSession = new Button();
             btnInfoUser = new Button();
@@ -117,7 +118,6 @@
             btnAdminPanel = new Button();
             statusStrip = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
-            btnAddHours = new Button();
             pnlLeft.SuspendLayout();
             pnlEntrance.SuspendLayout();
             pnlGeneralZone.SuspendLayout();
@@ -614,6 +614,19 @@
             pnlBottom.Size = new Size(1212, 75);
             pnlBottom.TabIndex = 8;
             // 
+            // btnAddHours
+            // 
+            btnAddHours.BackColor = Color.Red;
+            btnAddHours.FlatStyle = FlatStyle.Flat;
+            btnAddHours.ForeColor = Color.White;
+            btnAddHours.Location = new Point(684, 12);
+            btnAddHours.Name = "btnAddHours";
+            btnAddHours.Size = new Size(130, 36);
+            btnAddHours.TabIndex = 7;
+            btnAddHours.Text = "Добавить часы";
+            btnAddHours.UseVisualStyleBackColor = false;
+            btnAddHours.Click += btnAddHours_Click;
+            // 
             // btnCloseSession
             // 
             btnCloseSession.BackColor = Color.LightSalmon;
@@ -690,6 +703,7 @@
             btnRevenue.TabIndex = 2;
             btnRevenue.Text = "Выручка";
             btnRevenue.UseVisualStyleBackColor = false;
+            btnRevenue.Click += btnRevenue_Click;
             // 
             // btnAdminPanel
             // 
@@ -716,19 +730,6 @@
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(88, 17);
             lblStatus.Text = "Готов к работе";
-            // 
-            // btnAddHours
-            // 
-            btnAddHours.BackColor = Color.Red;
-            btnAddHours.FlatStyle = FlatStyle.Flat;
-            btnAddHours.ForeColor = Color.White;
-            btnAddHours.Location = new Point(684, 12);
-            btnAddHours.Name = "btnAddHours";
-            btnAddHours.Size = new Size(130, 36);
-            btnAddHours.TabIndex = 7;
-            btnAddHours.Text = "Добавить часы";
-            btnAddHours.UseVisualStyleBackColor = false;
-            btnAddHours.Click += btnAddHours_Click;
             // 
             // MainForm
             // 

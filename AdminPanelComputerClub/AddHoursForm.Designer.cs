@@ -34,102 +34,108 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblSeatId = new Label();
-            this.txtSeatId = new TextBox();
-            this.lblHours = new Label();
-            this.nudHours = new NumericUpDown();
-            this.lblSessionInfo = new Label();
-            this.btnOk = new Button();
-            this.btnCancel = new Button();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHours)).BeginInit();
-            this.SuspendLayout();
-
-            // lblSeatId
-            this.lblSeatId.AutoSize = true;
-            this.lblSeatId.Location = new Point(20, 20);
-            this.lblSeatId.Name = "lblSeatId";
-            this.lblSeatId.Size = new Size(124, 20);
-            this.lblSeatId.TabIndex = 0;
-            this.lblSeatId.Text = "Номер ПК:";
-
-            // txtSeatId
-            this.txtSeatId.Location = new Point(150, 17);
-            this.txtSeatId.Name = "txtSeatId";
-            this.txtSeatId.Size = new Size(100, 23);
-            this.txtSeatId.TabIndex = 1;
-
-            // lblHours
-            this.lblHours.AutoSize = true;
-            this.lblHours.Location = new Point(20, 60);
-            this.lblHours.Name = "lblHours";
-            this.lblHours.Size = new Size(168, 20);
-            this.lblHours.TabIndex = 2;
-            this.lblHours.Text = "Дополнительно часов:";
-
-            // nudHours
-            this.nudHours.Location = new Point(150, 57);
-            this.nudHours.Name = "nudHours";
-            this.nudHours.Size = new Size(100, 23);
-            this.nudHours.TabIndex = 3;
-            this.nudHours.Minimum = 1;
-            this.nudHours.Maximum = 24;
-            this.nudHours.Value = 1;
-
-            // lblSessionInfo
-            this.lblSessionInfo.BackColor = System.Drawing.Color.LightGray;
-            this.lblSessionInfo.BorderStyle = BorderStyle.FixedSingle;
-            this.lblSessionInfo.Location = new Point(20, 100);
-            this.lblSessionInfo.Name = "lblSessionInfo";
-            this.lblSessionInfo.Size = new Size(330, 120);
-            this.lblSessionInfo.TabIndex = 4;
-            this.lblSessionInfo.Text = "Введите номер ПК...";
-            this.lblSessionInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
+            btnOk = new Button();
+            btnCancel = new Button();
+            lblSeatId = new Label();
+            txtSeatId = new TextBox();
+            lblHours = new Label();
+            nudHours = new NumericUpDown();
+            lblSessionInfo = new Label();
+            SuspendLayout();
+            // 
             // btnOk
-            this.btnOk.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnOk.FlatStyle = FlatStyle.Flat;
-            this.btnOk.ForeColor = System.Drawing.Color.White;
-            this.btnOk.Location = new Point(20, 240);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new Size(100, 35);
-            this.btnOk.TabIndex = 5;
-            this.btnOk.Text = "Добавить";
-            this.btnOk.UseVisualStyleBackColor = false;
-            this.btnOk.Click += btnOk_Click;
-            this.btnOk.Enabled = false;
-
+            // 
+            btnOk.BackColor = Color.SteelBlue;
+            btnOk.Enabled = false;
+            btnOk.FlatStyle = FlatStyle.Flat;
+            btnOk.ForeColor = Color.White;
+            btnOk.Location = new Point(20, 240);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new Size(100, 35);
+            btnOk.TabIndex = 5;
+            btnOk.Text = "Добавить";
+            btnOk.UseVisualStyleBackColor = false;
+            btnOk.Click += btnOk_Click;
+            // 
             // btnCancel
-            this.btnCancel.BackColor = System.Drawing.Color.DarkRed;
-            this.btnCancel.FlatStyle = FlatStyle.Flat;
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new Point(250, 240);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new Size(100, 35);
-            this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += btnCancel_Click;
-
+            // 
+            btnCancel.BackColor = Color.DarkRed;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.ForeColor = Color.White;
+            btnCancel.Location = new Point(250, 240);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(100, 35);
+            btnCancel.TabIndex = 6;
+            btnCancel.Text = "Отмена";
+            btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
+            // 
+            // lblSeatId
+            // 
+            lblSeatId.AutoSize = true;
+            lblSeatId.Location = new Point(20, 22);
+            lblSeatId.Name = "lblSeatId";
+            lblSeatId.Size = new Size(76, 20);
+            lblSeatId.TabIndex = 0;
+            lblSeatId.Text = "Номер ПК:";
+            // 
+            // txtSeatId
+            // 
+            txtSeatId.Location = new Point(120, 19);
+            txtSeatId.Name = "txtSeatId";
+            txtSeatId.Size = new Size(100, 23);
+            txtSeatId.TabIndex = 1;
+            // 
+            // lblHours
+            // 
+            lblHours.AutoSize = true;
+            lblHours.Location = new Point(20, 60);
+            lblHours.Name = "lblHours";
+            lblHours.Size = new Size(94, 20);
+            lblHours.TabIndex = 2;
+            lblHours.Text = "Кол-во часов:";
+            // 
+            // nudHours
+            // 
+            nudHours.Location = new Point(120, 57);
+            nudHours.Name = "nudHours";
+            nudHours.Size = new Size(100, 23);
+            nudHours.TabIndex = 3;
+            nudHours.Minimum = 1;
+            nudHours.Maximum = 24;
+            nudHours.Value = 1;
+            // 
+            // lblSessionInfo
+            // 
+            lblSessionInfo.BackColor = Color.LightGray;
+            lblSessionInfo.BorderStyle = BorderStyle.FixedSingle;
+            lblSessionInfo.Location = new Point(20, 100);
+            lblSessionInfo.Name = "lblSessionInfo";
+            lblSessionInfo.Size = new Size(330, 100);
+            lblSessionInfo.TabIndex = 4;
+            lblSessionInfo.Text = "Введите номер ПК...";
+            lblSessionInfo.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // AddHoursForm
-            this.AutoScaleDimensions = new SizeF(7F, 16F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(370, 300);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.lblSessionInfo);
-            this.Controls.Add(this.nudHours);
-            this.Controls.Add(this.lblHours);
-            this.Controls.Add(this.txtSeatId);
-            this.Controls.Add(this.lblSeatId);
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "AddHoursForm";
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.Text = "Добавление часов";
-            ((System.ComponentModel.ISupportInitialize)(this.nudHours)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            AutoScaleDimensions = new SizeF(7F, 16F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(370, 300);
+            Controls.Add(btnCancel);
+            Controls.Add(btnOk);
+            Controls.Add(lblSessionInfo);
+            Controls.Add(nudHours);
+            Controls.Add(lblHours);
+            Controls.Add(txtSeatId);
+            Controls.Add(lblSeatId);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "AddHoursForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Добавление часов";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

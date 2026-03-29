@@ -199,7 +199,7 @@ namespace AdminPanelComputerClub
 
         private void btnAddHours_Click(object sender, EventArgs e)
         {
-            using(var form = new AddHoursForm(operatorService))
+            using (var form = new AddHoursForm(operatorService))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -209,6 +209,14 @@ namespace AdminPanelComputerClub
                     MessageBox.Show($"Добавлено {form.AdditionalHours} час(ов) к сессии на ПК #{form.SelectedSeatId}",
                         "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
+
+        private void btnRevenue_Click(object sender, EventArgs e)
+        {
+            using (var form = new RevenueForm(administratorService))
+            {
+                form.ShowDialog();
             }
         }
     }
