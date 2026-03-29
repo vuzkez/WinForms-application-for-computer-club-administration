@@ -114,6 +114,7 @@ namespace AdminPanelComputerClub
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     var seat = operatorService.FindFreeSeat(dialog.Result);
+       
                     if (seat != null)
                     {
                         MessageBox.Show($"Свободный пк в комнате типа: {seat.SeatRoom}\nКомпьтер номер: {seat.SeatId}\nЖелезо: {seat.Hardware}\nДевайсы: {seat.Devices}", "Поиск пк",
@@ -137,6 +138,66 @@ namespace AdminPanelComputerClub
                     operatorService.OpenSession(inputDialog.SelectedSeatId, user.UserId, inputDialog.SelectedTariff, inputDialog.StartTime,
                     inputDialog.StartTime.AddHours(inputDialog.Hours));
                     UpdateSeatColors();
+                }
+            }
+        }
+
+        private void btnCloseSession_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new InputDialog("Введите номер ПК для закрытия сессии:", "Закрытие сессии"))
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Проверка, что введено число
+                    if (!int.TryParse(dialog.Result, out int seatId))
+                    {
+                        MessageBox.Show("Введите корректный номер ПК (целое число).", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Проверка, что ПК существует в диапазоне 1-35
+                    if (seatId < 1 || seatId > 35)
+                    {
+                        MessageBox.Show($"ПК #{seatId} не существует. Доступны номера 1-35.", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    Session? activeSession;
+                    using (var db = dataContext.Create())
+                    {
+                            activeSession = db.GetTable<Session>()
+                            .FirstOrDefault(s => s.SeatId == seatId && s.EndTime > DateTime.Now);
+                    }
+
+                    // Проверка, есть ли активная сессия
+                    if (activeSession == null)
+                    {
+                        MessageBox.Show($"На ПК #{seatId} нет активной сессии.", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Подтверждение закрытия сессии
+                    var confirmResult = MessageBox.Show(
+                        $"Закрыть сессию на ПК #{seatId}?\n\n" +
+                        $"Начало: {activeSession.StartTime:dd.MM.yyyy HH:mm}\n" +
+                        $"Окончание: {activeSession.EndTime:dd.MM.yyyy HH:mm}\n" +
+                        $"Тариф: {(activeSession.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
+                        $"Сумма: {activeSession.TotalAmount} руб",
+                        "Подтверждение закрытия",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        // Закрываем сессию
+                        operatorService.CloseSession(activeSession.SessionId);
+                        UpdateSeatColors();
+
+                        MessageBox.Show($"Сессия на ПК #{seatId} успешно закрыта.", "Успех",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
         }

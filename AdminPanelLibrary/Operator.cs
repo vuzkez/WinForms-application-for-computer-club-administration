@@ -46,6 +46,7 @@ namespace AdminPanelLibrary
             using (var db = dataContext.Create())
             {
                 var session = db.GetTable<Session>().First(p => p.SessionId == sessionId);
+                session.EndTime = DateTime.Now;
                 var seat = db.GetTable<Seat>().First(s => s.SeatId == session.SeatId);
                 seat.Status = SeatStatus.Free;
                 db.SubmitChanges();

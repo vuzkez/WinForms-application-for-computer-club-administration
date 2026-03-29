@@ -61,7 +61,7 @@
             lblPrompt.Name = "lblPrompt";
             lblPrompt.Size = new Size(248, 28);
             lblPrompt.TabIndex = 2;
-            lblPrompt.Text = "label1";
+            lblPrompt.Text = "текст";
             lblPrompt.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // inputBox

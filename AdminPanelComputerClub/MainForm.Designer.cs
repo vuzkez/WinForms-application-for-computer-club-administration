@@ -108,6 +108,7 @@
             btnVip9 = new Button();
             btnVip10 = new Button();
             pnlBottom = new Panel();
+            btnOpenSession = new Button();
             btnInfoUser = new Button();
             btnFindFreeSeat = new Button();
             btnRefresh = new Button();
@@ -115,7 +116,7 @@
             btnAdminPanel = new Button();
             statusStrip = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
-            btnOpenSession = new Button();
+            btnCloseSession = new Button();
             pnlLeft.SuspendLayout();
             pnlEntrance.SuspendLayout();
             pnlGeneralZone.SuspendLayout();
@@ -599,6 +600,7 @@
             // pnlBottom
             // 
             pnlBottom.BackColor = Color.FromArgb(45, 45, 50);
+            pnlBottom.Controls.Add(btnCloseSession);
             pnlBottom.Controls.Add(btnOpenSession);
             pnlBottom.Controls.Add(btnInfoUser);
             pnlBottom.Controls.Add(btnFindFreeSeat);
@@ -609,6 +611,19 @@
             pnlBottom.Name = "pnlBottom";
             pnlBottom.Size = new Size(1212, 75);
             pnlBottom.TabIndex = 8;
+            // 
+            // btnOpenSession
+            // 
+            btnOpenSession.BackColor = Color.FromArgb(0, 0, 192);
+            btnOpenSession.FlatStyle = FlatStyle.Flat;
+            btnOpenSession.ForeColor = Color.White;
+            btnOpenSession.Location = new Point(412, 12);
+            btnOpenSession.Name = "btnOpenSession";
+            btnOpenSession.Size = new Size(130, 36);
+            btnOpenSession.TabIndex = 5;
+            btnOpenSession.Text = "Открыть сессию";
+            btnOpenSession.UseVisualStyleBackColor = false;
+            btnOpenSession.Click += button1_Click;
             // 
             // btnInfoUser
             // 
@@ -687,18 +702,18 @@
             lblStatus.Size = new Size(88, 17);
             lblStatus.Text = "Готов к работе";
             // 
-            // btnOpenSession
+            // btnCloseSession
             // 
-            btnOpenSession.BackColor = Color.FromArgb(0, 0, 192);
-            btnOpenSession.FlatStyle = FlatStyle.Flat;
-            btnOpenSession.ForeColor = Color.White;
-            btnOpenSession.Location = new Point(412, 12);
-            btnOpenSession.Name = "btnOpenSession";
-            btnOpenSession.Size = new Size(130, 36);
-            btnOpenSession.TabIndex = 5;
-            btnOpenSession.Text = "Открыть сессию";
-            btnOpenSession.UseVisualStyleBackColor = false;
-            btnOpenSession.Click += button1_Click;
+            btnCloseSession.BackColor = Color.LightSalmon;
+            btnCloseSession.FlatStyle = FlatStyle.Flat;
+            btnCloseSession.ForeColor = Color.White;
+            btnCloseSession.Location = new Point(548, 12);
+            btnCloseSession.Name = "btnCloseSession";
+            btnCloseSession.Size = new Size(130, 36);
+            btnCloseSession.TabIndex = 6;
+            btnCloseSession.Text = "Закрыть сессию";
+            btnCloseSession.UseVisualStyleBackColor = false;
+            btnCloseSession.Click += btnCloseSession_Click;
             // 
             // MainForm
             // 
@@ -739,5 +754,6 @@
         private Label lblRegistration;
         private Button btnInfoUser;
         private Button btnOpenSession;
+        private Button btnCloseSession;
     }
 }
