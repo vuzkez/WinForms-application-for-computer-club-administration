@@ -20,7 +20,6 @@ namespace AdminPanelComputerClub
             InitializeComponent();
             _adminService = adminService;
 
-            // Устанавливаем текущие цены
             nudDayPrice.Value = dayPrice;
             nudNightPrice.Value = nightPrice;
         }
@@ -32,7 +31,6 @@ namespace AdminPanelComputerClub
                 decimal newDayPrice = nudDayPrice.Value;
                 decimal newNightPrice = nudNightPrice.Value;
 
-                // Проверка на отрицательные значения
                 if (newDayPrice <= 0 || newNightPrice <= 0)
                 {
                     MessageBox.Show("Цена должна быть больше 0 рублей.", "Ошибка",
@@ -40,7 +38,6 @@ namespace AdminPanelComputerClub
                     return;
                 }
 
-                // Подтверждение сохранения
                 var confirmResult = MessageBox.Show(
                     $"Сохранить новые цены?\n\n" +
                     $"Дневной тариф: {newDayPrice} руб/час\n" +
@@ -51,10 +48,8 @@ namespace AdminPanelComputerClub
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    // Сохраняем дневной тариф
                     _adminService.ConfigureTariff(TariffType.Day, newDayPrice);
 
-                    // Сохраняем ночной тариф
                     _adminService.ConfigureTariff(TariffType.Night, newNightPrice);
 
                     MessageBox.Show("Цены успешно обновлены!", "Успех",

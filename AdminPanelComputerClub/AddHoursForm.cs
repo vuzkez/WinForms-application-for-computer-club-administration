@@ -24,12 +24,10 @@ namespace AdminPanelComputerClub
             InitializeComponent();
             _operatorService = operatorService;
 
-            // Настройка NumericUpDown для часов
             nudHours.Minimum = 1;
             nudHours.Maximum = 24;
             nudHours.Value = 1;
 
-            // Подписка на изменения для автоматической проверки
             txtSeatId.TextChanged += TxtSeatId_TextChanged;
             nudHours.ValueChanged += NudHours_ValueChanged;
         }

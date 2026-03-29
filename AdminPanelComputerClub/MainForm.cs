@@ -148,7 +148,6 @@ namespace AdminPanelComputerClub
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Проверка, что введено число
                     if (!int.TryParse(dialog.Result, out int seatId))
                     {
                         MessageBox.Show("Введите корректный номер ПК (целое число).", "Ошибка",
@@ -156,7 +155,6 @@ namespace AdminPanelComputerClub
                         return;
                     }
 
-                    // Проверка, что ПК существует в диапазоне 1-35
                     if (seatId < 1 || seatId > 35)
                     {
                         MessageBox.Show($"ПК #{seatId} не существует. Доступны номера 1-35.", "Ошибка",
@@ -165,7 +163,6 @@ namespace AdminPanelComputerClub
                     }
                     var activeSession = operatorService.GetActiveSessionBySeatId(seatId);
 
-                    // Проверка, есть ли активная сессия
                     if (activeSession == null)
                     {
                         MessageBox.Show($"На ПК #{seatId} нет активной сессии.", "Ошибка",
@@ -173,7 +170,6 @@ namespace AdminPanelComputerClub
                         return;
                     }
 
-                    // Подтверждение закрытия сессии
                     var confirmResult = MessageBox.Show(
                         $"Закрыть сессию на ПК #{seatId}?\n\n" +
                         $"Начало: {activeSession.StartTime:dd.MM.yyyy HH:mm}\n" +
@@ -186,7 +182,6 @@ namespace AdminPanelComputerClub
 
                     if (confirmResult == DialogResult.Yes)
                     {
-                        // Закрываем сессию
                         operatorService.CloseSession(activeSession.SessionId);
                         UpdateSeatColors();
 
@@ -222,7 +217,6 @@ namespace AdminPanelComputerClub
 
         private void btnAdminPanel_Click(object sender, EventArgs e)
         {
-            // Получаем текущие цены
             decimal dayPrice = administratorService.GetTariffPrice(TariffType.Day);
             decimal nightPrice = administratorService.GetTariffPrice(TariffType.Night);
 

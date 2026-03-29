@@ -13,15 +13,10 @@ namespace AdminPanelComputerClub
 {
     public partial class OpenSessionForm : Form
     {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SelectedSeatId { get; private set; }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TariffType SelectedTariff { get; private set; }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DateTime StartTime { get; private set; }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Hours { get; private set; }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IDataContext MyDataContext {  get; private set; }
 
         private decimal dayPrice;
@@ -30,7 +25,6 @@ namespace AdminPanelComputerClub
         {
             InitializeComponent();
 
-            // Получаем цены
             using (var db = dataContext.Create())
             {
                 var daySetting = db.GetTable<TariffSetting>()
@@ -44,15 +38,12 @@ namespace AdminPanelComputerClub
                     nightPrice = nightSetting.PricePerHour;
             }
 
-            // Устанавливаем тексты радио-кнопок
             radioButton1.Text = $"Дневной ({dayPrice} руб/час)";
             radioButton2.Text = $"Ночной ({nightPrice} руб/час)";
 
-            // Устанавливаем дату и время по умолчанию
             dateTimePicker1.Value = DateTime.Now;
             dateTimePicker1.MinDate = DateTime.Now;
 
-            // Часы по умолчанию
             textBox3.Text = "1";
             MyDataContext = dataContext;
         }
@@ -63,7 +54,7 @@ namespace AdminPanelComputerClub
             {
                 var countSeats = db.GetTable<Seat>()
                     .Count();
-                // Проверка ввода
+
                 if (!int.TryParse(textBox2.Text, out int seatId) || seatId > countSeats || seatId <= 0)
                 {
                     MessageBox.Show("Введите корректный номер ПК", "Ошибка",
@@ -92,11 +83,6 @@ namespace AdminPanelComputerClub
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

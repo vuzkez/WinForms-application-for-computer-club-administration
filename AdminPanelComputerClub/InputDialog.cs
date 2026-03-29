@@ -12,7 +12,6 @@ namespace AdminPanelComputerClub
 {
     public partial class InputDialog : Form
     {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Result { get; private set; }
         public InputDialog(string prompt, string title)
         {

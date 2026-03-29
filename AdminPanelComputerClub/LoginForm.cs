@@ -6,7 +6,6 @@ namespace AdminPanelComputerClub
     public partial class LoginForm : Form
     {
         private readonly IDataContext context;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public User CurrentUser { get; private set; }
         public LoginForm(IDataContext context)
         {
