@@ -26,6 +26,7 @@ namespace AdminPanelComputerClub
                     // ѕолучаем авторизованного пользовател€
                     User currentUser = loginForm.CurrentUser;
 
+                    Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
                     // «апускаем главную форму, передава€ ей пользовател€ и сервисы
                     Application.Run(new MainForm(currentUser,operatorService,administratorService,dataContextFactory));
                 }
