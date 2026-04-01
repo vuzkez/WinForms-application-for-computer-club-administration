@@ -65,7 +65,19 @@ namespace AdminPanelComputerClub
 
                 var seat = db.GetTable<Seat>()
                     .First(s => s.SeatId == seatId);
+                if (seat != null)
+                {
+                    throw new Exception("Seat имеет null");
+                }
+                var activeSession = db.GetTable<Session>()
+                    .FirstOrDefault(s => s.EndTime > DateTime.Now && s.SeatId == seatId);
 
+                if (activeSession != null)
+                {
+                    MessageBox.Show("Это место уже занято!", "Ошибка", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 if (seat.StatusValue == (int)SeatStatus.Busy || seat.StatusValue == (int)SeatStatus.Expiring)
                 {
                     MessageBox.Show("Введите корректный номер ПК", "Ошибка",

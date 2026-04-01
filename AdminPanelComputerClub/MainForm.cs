@@ -34,13 +34,13 @@ namespace AdminPanelComputerClub
             {
                 btnRevenue.Visible = true;
                 btnAdminPanel.Visible = true;
-                this.Text = "GameClub - Администратор";
+                Text = "GameClub - Администратор";
             }
             else
             {
                 btnRevenue.Visible = false;
                 btnAdminPanel.Visible = false;
-                this.Text = "GameClub - Оператор";
+                Text = "GameClub - Оператор";
             }
         }
 

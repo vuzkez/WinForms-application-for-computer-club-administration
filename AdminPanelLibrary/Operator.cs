@@ -24,15 +24,23 @@ namespace AdminPanelLibrary
             {
                 var sessionDb = db.GetTable<Session>().First(p => p.SessionId == sessionId);
                 
-                var price = db.GetTable<TariffSetting>()
-                      .First(t => t.TypeValue == sessionDb.Tariff.ToString())
-                      .PricePerHour;
+                var trafficSettiong = db.GetTable<TariffSetting>()
+                      .FirstOrDefault(t => t.TypeValue == sessionDb.Tariff.ToString());
+                if (trafficSettiong == null)
+                {
+                    throw new Exception("Таблица тарифа не найдена");
+                }
+                var price = trafficSettiong.PricePerHour;
 
                 sessionDb.EndTime = sessionDb.EndTime.AddHours(hours);
                 sessionDb.TotalAmount += hours * price;
 
-                var seat = db.GetTable<Seat>().First(p => p.SeatId == sessionDb.SeatId);
-                if (seat.Status == SeatStatus.Expiring)
+                var seat = db.GetTable<Seat>().FirstOrDefault(p => p.SeatId == sessionDb.SeatId);
+                if (seat == null)
+                {
+                    throw new Exception("Место не найдено");
+                }
+                else if (seat.Status == SeatStatus.Expiring)
                 {
                     seat.Status = SeatStatus.Busy;
                 }
