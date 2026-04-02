@@ -63,48 +63,44 @@ namespace AdminPanelComputerClub
                     return;
                 }
 
-                var seat = db.GetTable<Seat>()
-                    .First(s => s.SeatId == seatId);
-                if (seat != null)
+                if (!radioButton1.Checked && !radioButton2.Checked)
                 {
-                    throw new Exception("Seat имеет null");
+                    MessageBox.Show("Выберите хотя бы один вариант тарифа!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+
+                if (!int.TryParse(textBox3.Text, out int hours) || hours <= 0)
+                {
+                    MessageBox.Show("Введите корректное количество часов (>0)", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var seat = db.GetTable<Seat>().FirstOrDefault(s => s.SeatId == seatId);
+
+                if (seat == null)
+                {
+                    MessageBox.Show($"ПК #{seatId} не существует!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 var activeSession = db.GetTable<Session>()
-                    .FirstOrDefault(s => s.EndTime > DateTime.Now && s.SeatId == seatId);
+                    .FirstOrDefault(s => s.SeatId == seatId && s.EndTime > DateTime.Now);
 
                 if (activeSession != null)
                 {
-                    MessageBox.Show("Это место уже занято!", "Ошибка", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"ПК #{seatId} уже занят! Сессия активна до {activeSession.EndTime}",
+                        "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (seat.StatusValue == (int)SeatStatus.Busy || seat.StatusValue == (int)SeatStatus.Expiring)
-                {
-                    MessageBox.Show("Введите корректный номер ПК", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+
+                SelectedSeatId = int.Parse(textBox2.Text);
+                SelectedTariff = radioButton1.Checked ? TariffType.Day : TariffType.Night;
+                StartTime = dateTimePicker1.Value;
+                Hours = hours;
             }
-
-            if (!radioButton1.Checked && !radioButton2.Checked)
-            {
-                MessageBox.Show("Выберите хотя бы один вариант тарифа!", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-
-            if (!int.TryParse(textBox3.Text, out int hours) || hours <= 0)
-            {
-                MessageBox.Show("Введите корректное количество часов (>0)", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            SelectedSeatId = int.Parse(textBox2.Text);
-            SelectedTariff = radioButton1.Checked ? TariffType.Day : TariffType.Night;
-            StartTime = dateTimePicker1.Value;
-            Hours = hours;
 
             DialogResult = DialogResult.OK;
             Close();

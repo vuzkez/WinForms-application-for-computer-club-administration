@@ -12,7 +12,7 @@ namespace AdminPanelComputerClub
         {
             ApplicationConfiguration.Initialize();
 
-            string connectionString = "Data Source=VUZKEZ\\SQLEXPRESS;Initial Catalog=GameClub;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = "Data Source=VUZKEZ\\SQLEXPRESS;Initial Catalog=ComputerClubDb;Integrated Security=True;TrustServerCertificate=True";
 
             IDataContext dataContextFactory = new MyDataContext(connectionString);
 

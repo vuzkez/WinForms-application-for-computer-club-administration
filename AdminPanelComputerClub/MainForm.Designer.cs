@@ -58,8 +58,8 @@
         private void InitializeComponent()
         {
             pnlLeft = new Panel();
-            pnlEntrance = new Panel();
-            lblEntranceTitle = new Label();
+            pnlBar = new Panel();
+            lblBar = new Label();
             pnlGeneralZone = new Panel();
             lblGeneralTitle = new Label();
             lblRegistration = new Label();
@@ -88,8 +88,10 @@
             btnGen23 = new Button();
             btnGen24 = new Button();
             btnGen25 = new Button();
-            pnlBar = new Panel();
-            lblBar = new Label();
+            panel1 = new Panel();
+            label1 = new Label();
+            pnlEntrance = new Panel();
+            lblEntranceTitle = new Label();
             pnlRight = new Panel();
             pnlVipZone1 = new Panel();
             lblVip1 = new Label();
@@ -119,9 +121,10 @@
             statusStrip = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
             pnlLeft.SuspendLayout();
-            pnlEntrance.SuspendLayout();
-            pnlGeneralZone.SuspendLayout();
             pnlBar.SuspendLayout();
+            pnlGeneralZone.SuspendLayout();
+            panel1.SuspendLayout();
+            pnlEntrance.SuspendLayout();
             pnlRight.SuspendLayout();
             pnlVipZone1.SuspendLayout();
             pnlVipEntrance.SuspendLayout();
@@ -133,33 +136,36 @@
             // pnlLeft
             // 
             pnlLeft.BackColor = Color.FromArgb(30, 30, 35);
-            pnlLeft.Controls.Add(pnlEntrance);
-            pnlLeft.Controls.Add(pnlGeneralZone);
             pnlLeft.Controls.Add(pnlBar);
+            pnlLeft.Controls.Add(pnlGeneralZone);
+            pnlLeft.Controls.Add(panel1);
+            pnlLeft.Controls.Add(pnlEntrance);
             pnlLeft.Location = new Point(0, 0);
             pnlLeft.Name = "pnlLeft";
-            pnlLeft.Size = new Size(780, 640);
+            pnlLeft.Size = new Size(891, 640);
             pnlLeft.TabIndex = 0;
             // 
-            // pnlEntrance
+            // pnlBar
             // 
-            pnlEntrance.BackColor = Color.FromArgb(50, 50, 55);
-            pnlEntrance.BorderStyle = BorderStyle.FixedSingle;
-            pnlEntrance.Controls.Add(lblEntranceTitle);
-            pnlEntrance.Location = new Point(10, 10);
-            pnlEntrance.Name = "pnlEntrance";
-            pnlEntrance.Size = new Size(174, 99);
-            pnlEntrance.TabIndex = 2;
+            pnlBar.BackColor = Color.FromArgb(80, 60, 40);
+            pnlBar.BorderStyle = BorderStyle.FixedSingle;
+            pnlBar.Controls.Add(lblBar);
+            pnlBar.Location = new Point(266, 10);
+            pnlBar.Name = "pnlBar";
+            pnlBar.Size = new Size(615, 99);
+            pnlBar.TabIndex = 4;
             // 
-            // lblEntranceTitle
+            // lblBar
             // 
-            lblEntranceTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblEntranceTitle.ForeColor = Color.White;
-            lblEntranceTitle.Location = new Point(58, 39);
-            lblEntranceTitle.Name = "lblEntranceTitle";
-            lblEntranceTitle.Size = new Size(56, 29);
-            lblEntranceTitle.TabIndex = 0;
-            lblEntranceTitle.Text = "ВХОД";
+            lblBar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblBar.ForeColor = Color.Gold;
+            lblBar.Location = new Point(-1, -2);
+            lblBar.Name = "lblBar";
+            lblBar.Size = new Size(594, 97);
+            lblBar.TabIndex = 0;
+            lblBar.Text = "БАР\nНапитки\nЕда";
+            lblBar.TextAlign = ContentAlignment.MiddleCenter;
+            lblBar.Click += lblBar_Click;
             // 
             // pnlGeneralZone
             // 
@@ -194,16 +200,16 @@
             pnlGeneralZone.Controls.Add(btnGen25);
             pnlGeneralZone.Location = new Point(10, 115);
             pnlGeneralZone.Name = "pnlGeneralZone";
-            pnlGeneralZone.Size = new Size(760, 515);
+            pnlGeneralZone.Size = new Size(866, 525);
             pnlGeneralZone.TabIndex = 3;
             // 
             // lblGeneralTitle
             // 
             lblGeneralTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblGeneralTitle.ForeColor = Color.Cyan;
-            lblGeneralTitle.Location = new Point(603, 0);
+            lblGeneralTitle.Location = new Point(616, 472);
             lblGeneralTitle.Name = "lblGeneralTitle";
-            lblGeneralTitle.Size = new Size(154, 32);
+            lblGeneralTitle.Size = new Size(234, 32);
             lblGeneralTitle.TabIndex = 0;
             lblGeneralTitle.Text = "GENERAL ZONE";
             // 
@@ -212,242 +218,263 @@
             lblRegistration.BackColor = Color.DarkOliveGreen;
             lblRegistration.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblRegistration.ForeColor = Color.White;
-            lblRegistration.Location = new Point(15, 479);
+            lblRegistration.Location = new Point(15, 477);
             lblRegistration.Name = "lblRegistration";
-            lblRegistration.Size = new Size(196, 25);
+            lblRegistration.Size = new Size(299, 34);
             lblRegistration.TabIndex = 1;
             lblRegistration.Text = "СТОЙКА РЕГИСТРАЦИИ";
             // 
             // btnGen1
             // 
-            btnGen1.Location = new Point(168, 35);
+            btnGen1.Location = new Point(280, 3);
             btnGen1.Name = "btnGen1";
-            btnGen1.Size = new Size(75, 45);
+            btnGen1.Size = new Size(75, 68);
             btnGen1.TabIndex = 5;
             btnGen1.Text = "ПК #1";
             // 
             // btnGen2
             // 
-            btnGen2.Location = new Point(249, 35);
+            btnGen2.Location = new Point(361, 3);
             btnGen2.Name = "btnGen2";
-            btnGen2.Size = new Size(75, 45);
+            btnGen2.Size = new Size(75, 68);
             btnGen2.TabIndex = 6;
             btnGen2.Text = "ПК #2";
             // 
             // btnGen3
             // 
-            btnGen3.Location = new Point(330, 35);
+            btnGen3.Location = new Point(442, 3);
             btnGen3.Name = "btnGen3";
-            btnGen3.Size = new Size(75, 45);
+            btnGen3.Size = new Size(75, 68);
             btnGen3.TabIndex = 7;
             btnGen3.Text = "ПК #3";
             // 
             // btnGen4
             // 
-            btnGen4.Location = new Point(411, 35);
+            btnGen4.Location = new Point(523, 3);
             btnGen4.Name = "btnGen4";
-            btnGen4.Size = new Size(75, 45);
+            btnGen4.Size = new Size(75, 68);
             btnGen4.TabIndex = 8;
             btnGen4.Text = "ПК #4";
             // 
             // btnGen5
             // 
-            btnGen5.Location = new Point(492, 35);
+            btnGen5.Location = new Point(604, 3);
             btnGen5.Name = "btnGen5";
-            btnGen5.Size = new Size(75, 45);
+            btnGen5.Size = new Size(75, 68);
             btnGen5.TabIndex = 9;
             btnGen5.Text = "ПК #5";
             // 
             // btnGen6
             // 
-            btnGen6.Location = new Point(573, 35);
+            btnGen6.Location = new Point(683, 3);
             btnGen6.Name = "btnGen6";
-            btnGen6.Size = new Size(78, 45);
+            btnGen6.Size = new Size(75, 68);
             btnGen6.TabIndex = 10;
             btnGen6.Text = "ПК #6";
             // 
             // btnGen7
             // 
-            btnGen7.Location = new Point(168, 112);
+            btnGen7.Location = new Point(683, 95);
             btnGen7.Name = "btnGen7";
-            btnGen7.Size = new Size(75, 44);
+            btnGen7.Size = new Size(75, 68);
             btnGen7.TabIndex = 11;
             btnGen7.Text = "ПК #7";
+            btnGen7.Click += btnGen7_Click;
             // 
             // btnGen8
             // 
-            btnGen8.Location = new Point(249, 112);
+            btnGen8.Location = new Point(277, 95);
             btnGen8.Name = "btnGen8";
-            btnGen8.Size = new Size(75, 44);
+            btnGen8.Size = new Size(75, 68);
             btnGen8.TabIndex = 12;
             btnGen8.Text = "ПК #8";
             // 
             // btnGen9
             // 
-            btnGen9.Location = new Point(330, 110);
+            btnGen9.Location = new Point(358, 95);
             btnGen9.Name = "btnGen9";
-            btnGen9.Size = new Size(75, 46);
+            btnGen9.Size = new Size(75, 68);
             btnGen9.TabIndex = 13;
             btnGen9.Text = "ПК #9";
             // 
             // btnGen10
             // 
-            btnGen10.Location = new Point(411, 111);
+            btnGen10.Location = new Point(439, 96);
             btnGen10.Name = "btnGen10";
-            btnGen10.Size = new Size(78, 45);
+            btnGen10.Size = new Size(75, 68);
             btnGen10.TabIndex = 14;
             btnGen10.Text = "ПК #10";
             // 
             // btnGen11
             // 
-            btnGen11.Location = new Point(492, 112);
+            btnGen11.Location = new Point(523, 95);
             btnGen11.Name = "btnGen11";
-            btnGen11.Size = new Size(75, 44);
+            btnGen11.Size = new Size(75, 68);
             btnGen11.TabIndex = 15;
             btnGen11.Text = "ПК #11";
             // 
             // btnGen12
             // 
-            btnGen12.Location = new Point(573, 112);
+            btnGen12.Location = new Point(604, 97);
             btnGen12.Name = "btnGen12";
-            btnGen12.Size = new Size(75, 44);
+            btnGen12.Size = new Size(75, 68);
             btnGen12.TabIndex = 16;
             btnGen12.Text = "ПК #12";
             // 
             // btnGen13
             // 
-            btnGen13.Location = new Point(171, 242);
+            btnGen13.Location = new Point(278, 264);
             btnGen13.Name = "btnGen13";
-            btnGen13.Size = new Size(75, 44);
+            btnGen13.Size = new Size(75, 68);
             btnGen13.TabIndex = 17;
             btnGen13.Text = "ПК #13";
             // 
             // btnGen14
             // 
-            btnGen14.Location = new Point(252, 242);
+            btnGen14.Location = new Point(359, 264);
             btnGen14.Name = "btnGen14";
-            btnGen14.Size = new Size(75, 44);
+            btnGen14.Size = new Size(75, 68);
             btnGen14.TabIndex = 18;
             btnGen14.Text = "ПК #14";
             // 
             // btnGen15
             // 
-            btnGen15.Location = new Point(335, 242);
+            btnGen15.Location = new Point(440, 264);
             btnGen15.Name = "btnGen15";
-            btnGen15.Size = new Size(73, 44);
+            btnGen15.Size = new Size(75, 68);
             btnGen15.TabIndex = 19;
             btnGen15.Text = "ПК #15";
             // 
             // btnGen16
             // 
-            btnGen16.Location = new Point(414, 242);
+            btnGen16.Location = new Point(521, 264);
             btnGen16.Name = "btnGen16";
-            btnGen16.Size = new Size(75, 44);
+            btnGen16.Size = new Size(75, 68);
             btnGen16.TabIndex = 20;
             btnGen16.Text = "ПК #16";
             // 
             // btnGen17
             // 
-            btnGen17.Location = new Point(492, 243);
+            btnGen17.Location = new Point(602, 264);
             btnGen17.Name = "btnGen17";
-            btnGen17.Size = new Size(75, 43);
+            btnGen17.Size = new Size(75, 68);
             btnGen17.TabIndex = 21;
             btnGen17.Text = "ПК #17";
             // 
             // btnGen18
             // 
-            btnGen18.Location = new Point(573, 243);
+            btnGen18.Location = new Point(683, 264);
             btnGen18.Name = "btnGen18";
-            btnGen18.Size = new Size(75, 43);
+            btnGen18.Size = new Size(75, 68);
             btnGen18.TabIndex = 22;
             btnGen18.Text = "ПК #18";
             // 
             // btnGen19
             // 
-            btnGen19.Location = new Point(171, 319);
+            btnGen19.Location = new Point(278, 358);
             btnGen19.Name = "btnGen19";
-            btnGen19.Size = new Size(75, 46);
+            btnGen19.Size = new Size(75, 68);
             btnGen19.TabIndex = 23;
             btnGen19.Text = "ПК #19";
             // 
             // btnGen20
             // 
-            btnGen20.Location = new Point(252, 319);
+            btnGen20.Location = new Point(359, 358);
             btnGen20.Name = "btnGen20";
-            btnGen20.Size = new Size(75, 46);
+            btnGen20.Size = new Size(75, 68);
             btnGen20.TabIndex = 24;
             btnGen20.Text = "ПК #20";
             // 
             // btnGen21
             // 
-            btnGen21.Location = new Point(335, 319);
+            btnGen21.Location = new Point(440, 358);
             btnGen21.Name = "btnGen21";
-            btnGen21.Size = new Size(75, 46);
+            btnGen21.Size = new Size(75, 68);
             btnGen21.TabIndex = 25;
             btnGen21.Text = "ПК #21";
             // 
             // btnGen22
             // 
-            btnGen22.Location = new Point(416, 319);
+            btnGen22.Location = new Point(521, 358);
             btnGen22.Name = "btnGen22";
-            btnGen22.Size = new Size(75, 46);
+            btnGen22.Size = new Size(75, 68);
             btnGen22.TabIndex = 26;
             btnGen22.Text = "ПК #22";
             // 
             // btnGen23
             // 
-            btnGen23.Location = new Point(497, 319);
+            btnGen23.Location = new Point(602, 358);
             btnGen23.Name = "btnGen23";
-            btnGen23.Size = new Size(75, 46);
+            btnGen23.Size = new Size(75, 68);
             btnGen23.TabIndex = 27;
             btnGen23.Text = "ПК #23";
             // 
             // btnGen24
             // 
-            btnGen24.Location = new Point(578, 319);
+            btnGen24.Location = new Point(683, 358);
             btnGen24.Name = "btnGen24";
-            btnGen24.Size = new Size(70, 46);
+            btnGen24.Size = new Size(75, 68);
             btnGen24.TabIndex = 28;
             btnGen24.Text = "ПК #24";
             // 
             // btnGen25
             // 
-            btnGen25.Location = new Point(684, 262);
+            btnGen25.Location = new Point(775, 305);
             btnGen25.Name = "btnGen25";
-            btnGen25.Size = new Size(35, 82);
+            btnGen25.Size = new Size(75, 68);
             btnGen25.TabIndex = 29;
             btnGen25.Text = "ПК #25";
             // 
-            // pnlBar
+            // panel1
             // 
-            pnlBar.BackColor = Color.FromArgb(80, 60, 40);
-            pnlBar.BorderStyle = BorderStyle.FixedSingle;
-            pnlBar.Controls.Add(lblBar);
-            pnlBar.Location = new Point(190, 10);
-            pnlBar.Name = "pnlBar";
-            pnlBar.Size = new Size(580, 99);
-            pnlBar.TabIndex = 4;
+            panel1.BackColor = Color.Firebrick;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(156, 10);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(106, 99);
+            panel1.TabIndex = 5;
             // 
-            // lblBar
+            // label1
             // 
-            lblBar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblBar.ForeColor = Color.Gold;
-            lblBar.Location = new Point(21, 0);
-            lblBar.Name = "lblBar";
-            lblBar.Size = new Size(536, 97);
-            lblBar.TabIndex = 0;
-            lblBar.Text = "Напитки\nЕда";
-            lblBar.TextAlign = ContentAlignment.MiddleCenter;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(8, 15);
+            label1.Name = "label1";
+            label1.Size = new Size(93, 70);
+            label1.TabIndex = 0;
+            label1.Text = "ВХОД В БАР";
+            label1.Click += label1_Click;
+            // 
+            // pnlEntrance
+            // 
+            pnlEntrance.BackColor = Color.FromArgb(50, 50, 55);
+            pnlEntrance.BorderStyle = BorderStyle.FixedSingle;
+            pnlEntrance.Controls.Add(lblEntranceTitle);
+            pnlEntrance.Location = new Point(10, 10);
+            pnlEntrance.Name = "pnlEntrance";
+            pnlEntrance.Size = new Size(143, 99);
+            pnlEntrance.TabIndex = 2;
+            // 
+            // lblEntranceTitle
+            // 
+            lblEntranceTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblEntranceTitle.ForeColor = Color.White;
+            lblEntranceTitle.Location = new Point(30, 39);
+            lblEntranceTitle.Name = "lblEntranceTitle";
+            lblEntranceTitle.Size = new Size(84, 29);
+            lblEntranceTitle.TabIndex = 0;
+            lblEntranceTitle.Text = "ВХОД ";
             // 
             // pnlRight
             // 
-            pnlRight.BackColor = Color.FromArgb(25, 25, 30);
+            pnlRight.BackColor = Color.FromArgb(40, 40, 45);
             pnlRight.Controls.Add(pnlVipZone1);
             pnlRight.Controls.Add(pnlVipEntrance);
             pnlRight.Controls.Add(pnlVipZone2);
-            pnlRight.Location = new Point(780, 0);
+            pnlRight.Location = new Point(879, 0);
             pnlRight.Name = "pnlRight";
-            pnlRight.Size = new Size(432, 640);
+            pnlRight.Size = new Size(407, 640);
             pnlRight.TabIndex = 1;
             // 
             // pnlVipZone1
@@ -459,7 +486,7 @@
             pnlVipZone1.Controls.Add(btnVip3);
             pnlVipZone1.Controls.Add(btnVip4);
             pnlVipZone1.Controls.Add(btnVip5);
-            pnlVipZone1.Location = new Point(10, 10);
+            pnlVipZone1.Location = new Point(5, 10);
             pnlVipZone1.Name = "pnlVipZone1";
             pnlVipZone1.Size = new Size(400, 270);
             pnlVipZone1.TabIndex = 5;
@@ -468,9 +495,9 @@
             // 
             lblVip1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblVip1.ForeColor = Color.Gold;
-            lblVip1.Location = new Point(298, 0);
+            lblVip1.Location = new Point(268, 0);
             lblVip1.Name = "lblVip1";
-            lblVip1.Size = new Size(102, 30);
+            lblVip1.Size = new Size(132, 30);
             lblVip1.TabIndex = 0;
             lblVip1.Text = "VIP ZONE 1";
             // 
@@ -518,7 +545,7 @@
             // 
             pnlVipEntrance.BackColor = Color.FromArgb(100, 70, 50);
             pnlVipEntrance.Controls.Add(lblVipDoor);
-            pnlVipEntrance.Location = new Point(10, 286);
+            pnlVipEntrance.Location = new Point(5, 286);
             pnlVipEntrance.Name = "pnlVipEntrance";
             pnlVipEntrance.Size = new Size(400, 52);
             pnlVipEntrance.TabIndex = 6;
@@ -543,7 +570,7 @@
             pnlVipZone2.Controls.Add(btnVip8);
             pnlVipZone2.Controls.Add(btnVip9);
             pnlVipZone2.Controls.Add(btnVip10);
-            pnlVipZone2.Location = new Point(10, 344);
+            pnlVipZone2.Location = new Point(5, 344);
             pnlVipZone2.Name = "pnlVipZone2";
             pnlVipZone2.Size = new Size(400, 286);
             pnlVipZone2.TabIndex = 7;
@@ -552,9 +579,9 @@
             // 
             lblVip2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblVip2.ForeColor = Color.Gold;
-            lblVip2.Location = new Point(298, 0);
+            lblVip2.Location = new Point(268, 0);
             lblVip2.Name = "lblVip2";
-            lblVip2.Size = new Size(97, 30);
+            lblVip2.Size = new Size(127, 30);
             lblVip2.TabIndex = 0;
             lblVip2.Text = "VIP ZONE 2";
             // 
@@ -611,7 +638,7 @@
             pnlBottom.Controls.Add(btnAdminPanel);
             pnlBottom.Location = new Point(0, 640);
             pnlBottom.Name = "pnlBottom";
-            pnlBottom.Size = new Size(1212, 75);
+            pnlBottom.Size = new Size(1289, 75);
             pnlBottom.TabIndex = 8;
             // 
             // btnAddHours
@@ -619,9 +646,9 @@
             btnAddHours.BackColor = Color.Red;
             btnAddHours.FlatStyle = FlatStyle.Flat;
             btnAddHours.ForeColor = Color.White;
-            btnAddHours.Location = new Point(684, 12);
+            btnAddHours.Location = new Point(839, 12);
             btnAddHours.Name = "btnAddHours";
-            btnAddHours.Size = new Size(130, 36);
+            btnAddHours.Size = new Size(158, 36);
             btnAddHours.TabIndex = 7;
             btnAddHours.Text = "Добавить часы";
             btnAddHours.UseVisualStyleBackColor = false;
@@ -632,9 +659,9 @@
             btnCloseSession.BackColor = Color.LightSalmon;
             btnCloseSession.FlatStyle = FlatStyle.Flat;
             btnCloseSession.ForeColor = Color.White;
-            btnCloseSession.Location = new Point(548, 12);
+            btnCloseSession.Location = new Point(679, 12);
             btnCloseSession.Name = "btnCloseSession";
-            btnCloseSession.Size = new Size(130, 36);
+            btnCloseSession.Size = new Size(154, 36);
             btnCloseSession.TabIndex = 6;
             btnCloseSession.Text = "Закрыть сессию";
             btnCloseSession.UseVisualStyleBackColor = false;
@@ -645,9 +672,9 @@
             btnOpenSession.BackColor = Color.FromArgb(0, 0, 192);
             btnOpenSession.FlatStyle = FlatStyle.Flat;
             btnOpenSession.ForeColor = Color.White;
-            btnOpenSession.Location = new Point(412, 12);
+            btnOpenSession.Location = new Point(505, 12);
             btnOpenSession.Name = "btnOpenSession";
-            btnOpenSession.Size = new Size(130, 36);
+            btnOpenSession.Size = new Size(168, 36);
             btnOpenSession.TabIndex = 5;
             btnOpenSession.Text = "Открыть сессию";
             btnOpenSession.UseVisualStyleBackColor = false;
@@ -660,7 +687,7 @@
             btnInfoUser.ForeColor = Color.White;
             btnInfoUser.Location = new Point(10, 12);
             btnInfoUser.Name = "btnInfoUser";
-            btnInfoUser.Size = new Size(115, 36);
+            btnInfoUser.Size = new Size(143, 36);
             btnInfoUser.TabIndex = 4;
             btnInfoUser.Text = "Пользователь";
             btnInfoUser.UseVisualStyleBackColor = false;
@@ -671,9 +698,9 @@
             btnFindFreeSeat.BackColor = Color.SteelBlue;
             btnFindFreeSeat.FlatStyle = FlatStyle.Flat;
             btnFindFreeSeat.ForeColor = Color.White;
-            btnFindFreeSeat.Location = new Point(131, 12);
+            btnFindFreeSeat.Location = new Point(160, 12);
             btnFindFreeSeat.Name = "btnFindFreeSeat";
-            btnFindFreeSeat.Size = new Size(139, 36);
+            btnFindFreeSeat.Size = new Size(203, 36);
             btnFindFreeSeat.TabIndex = 0;
             btnFindFreeSeat.Text = "Найти свободный ПК";
             btnFindFreeSeat.UseVisualStyleBackColor = false;
@@ -684,7 +711,7 @@
             btnRefresh.BackColor = Color.DarkGreen;
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(276, 12);
+            btnRefresh.Location = new Point(369, 12);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(130, 36);
             btnRefresh.TabIndex = 1;
@@ -697,7 +724,7 @@
             btnRevenue.BackColor = Color.DarkOrange;
             btnRevenue.FlatStyle = FlatStyle.Flat;
             btnRevenue.ForeColor = Color.White;
-            btnRevenue.Location = new Point(902, 12);
+            btnRevenue.Location = new Point(1003, 12);
             btnRevenue.Name = "btnRevenue";
             btnRevenue.Size = new Size(120, 36);
             btnRevenue.TabIndex = 2;
@@ -710,7 +737,7 @@
             btnAdminPanel.BackColor = Color.Purple;
             btnAdminPanel.FlatStyle = FlatStyle.Flat;
             btnAdminPanel.ForeColor = Color.White;
-            btnAdminPanel.Location = new Point(1028, 12);
+            btnAdminPanel.Location = new Point(1129, 12);
             btnAdminPanel.Name = "btnAdminPanel";
             btnAdminPanel.Size = new Size(157, 36);
             btnAdminPanel.TabIndex = 3;
@@ -720,25 +747,26 @@
             // 
             // statusStrip
             // 
+            statusStrip.ImageScalingSize = new Size(24, 24);
             statusStrip.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip.Location = new Point(0, 678);
+            statusStrip.Location = new Point(0, 668);
             statusStrip.Name = "statusStrip";
-            statusStrip.Size = new Size(1200, 22);
+            statusStrip.Size = new Size(1289, 32);
             statusStrip.TabIndex = 9;
             // 
             // lblStatus
             // 
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(88, 17);
+            lblStatus.Size = new Size(135, 25);
             lblStatus.Text = "Готов к работе";
             // 
             // MainForm
             // 
-            ClientSize = new Size(1200, 700);
-            Controls.Add(pnlRight);
-            Controls.Add(pnlLeft);
+            ClientSize = new Size(1289, 700);
             Controls.Add(pnlBottom);
             Controls.Add(statusStrip);
+            Controls.Add(pnlRight);
+            Controls.Add(pnlLeft);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MinimumSize = new Size(800, 600);
             Name = "MainForm";
@@ -746,9 +774,10 @@
             Text = "GameClub";
             FormClosing += MainForm_FormClosing;
             pnlLeft.ResumeLayout(false);
-            pnlEntrance.ResumeLayout(false);
-            pnlGeneralZone.ResumeLayout(false);
             pnlBar.ResumeLayout(false);
+            pnlGeneralZone.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            pnlEntrance.ResumeLayout(false);
             pnlRight.ResumeLayout(false);
             pnlVipZone1.ResumeLayout(false);
             pnlVipEntrance.ResumeLayout(false);
@@ -773,5 +802,7 @@
         private Button btnOpenSession;
         private Button btnCloseSession;
         private Button btnAddHours;
+        private Panel panel1;
+        private Label label1;
     }
 }
