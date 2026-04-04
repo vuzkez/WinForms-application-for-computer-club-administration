@@ -181,10 +181,10 @@
             // 
             // lblGeneralTitle
             // 
-            lblGeneralTitle.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblGeneralTitle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblGeneralTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblGeneralTitle.ForeColor = Color.Cyan;
-            lblGeneralTitle.Location = new Point(721, 10);
+            lblGeneralTitle.Location = new Point(726, 606);
             lblGeneralTitle.Name = "lblGeneralTitle";
             lblGeneralTitle.Size = new Size(152, 32);
             lblGeneralTitle.TabIndex = 0;
@@ -195,7 +195,7 @@
             pnlEntrance.Anchor = AnchorStyles.Left;
             pnlEntrance.BackColor = Color.FromArgb(50, 50, 55);
             pnlEntrance.Controls.Add(lblEntranceTitle);
-            pnlEntrance.Location = new Point(10, 256);
+            pnlEntrance.Location = new Point(10, 281);
             pnlEntrance.Name = "pnlEntrance";
             pnlEntrance.Size = new Size(56, 110);
             pnlEntrance.TabIndex = 2;
@@ -205,7 +205,7 @@
             lblEntranceTitle.Anchor = AnchorStyles.Left;
             lblEntranceTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblEntranceTitle.ForeColor = Color.White;
-            lblEntranceTitle.Location = new Point(-1, -1);
+            lblEntranceTitle.Location = new Point(0, 0);
             lblEntranceTitle.Name = "lblEntranceTitle";
             lblEntranceTitle.Size = new Size(56, 111);
             lblEntranceTitle.TabIndex = 0;
@@ -250,7 +250,7 @@
             // 
             // btnGen1
             // 
-            btnGen1.Location = new Point(277, 79);
+            btnGen1.Location = new Point(12, 16);
             btnGen1.Name = "btnGen1";
             btnGen1.Size = new Size(75, 68);
             btnGen1.TabIndex = 5;
@@ -258,7 +258,7 @@
             // 
             // btnGen2
             // 
-            btnGen2.Location = new Point(361, 75);
+            btnGen2.Location = new Point(93, 16);
             btnGen2.Name = "btnGen2";
             btnGen2.Size = new Size(75, 68);
             btnGen2.TabIndex = 6;
@@ -266,7 +266,7 @@
             // 
             // btnGen3
             // 
-            btnGen3.Location = new Point(442, 75);
+            btnGen3.Location = new Point(174, 16);
             btnGen3.Name = "btnGen3";
             btnGen3.Size = new Size(75, 68);
             btnGen3.TabIndex = 7;
@@ -274,7 +274,7 @@
             // 
             // btnGen4
             // 
-            btnGen4.Location = new Point(523, 75);
+            btnGen4.Location = new Point(255, 16);
             btnGen4.Name = "btnGen4";
             btnGen4.Size = new Size(75, 68);
             btnGen4.TabIndex = 8;
@@ -282,7 +282,7 @@
             // 
             // btnGen5
             // 
-            btnGen5.Location = new Point(604, 75);
+            btnGen5.Location = new Point(336, 16);
             btnGen5.Name = "btnGen5";
             btnGen5.Size = new Size(75, 68);
             btnGen5.TabIndex = 9;
@@ -290,7 +290,7 @@
             // 
             // btnGen6
             // 
-            btnGen6.Location = new Point(683, 75);
+            btnGen6.Location = new Point(417, 16);
             btnGen6.Name = "btnGen6";
             btnGen6.Size = new Size(75, 68);
             btnGen6.TabIndex = 10;
@@ -298,7 +298,7 @@
             // 
             // btnGen7
             // 
-            btnGen7.Location = new Point(683, 167);
+            btnGen7.Location = new Point(499, 16);
             btnGen7.Name = "btnGen7";
             btnGen7.Size = new Size(75, 68);
             btnGen7.TabIndex = 11;
@@ -307,7 +307,7 @@
             // 
             // btnGen8
             // 
-            btnGen8.Location = new Point(277, 167);
+            btnGen8.Location = new Point(580, 16);
             btnGen8.Name = "btnGen8";
             btnGen8.Size = new Size(75, 68);
             btnGen8.TabIndex = 12;
@@ -315,7 +315,7 @@
             // 
             // btnGen9
             // 
-            btnGen9.Location = new Point(358, 167);
+            btnGen9.Location = new Point(664, 16);
             btnGen9.Name = "btnGen9";
             btnGen9.Size = new Size(75, 68);
             btnGen9.TabIndex = 13;
@@ -323,7 +323,7 @@
             // 
             // btnGen10
             // 
-            btnGen10.Location = new Point(439, 168);
+            btnGen10.Location = new Point(745, 16);
             btnGen10.Name = "btnGen10";
             btnGen10.Size = new Size(75, 68);
             btnGen10.TabIndex = 14;
@@ -331,7 +331,7 @@
             // 
             // btnGen11
             // 
-            btnGen11.Location = new Point(523, 167);
+            btnGen11.Location = new Point(15, 105);
             btnGen11.Name = "btnGen11";
             btnGen11.Size = new Size(75, 68);
             btnGen11.TabIndex = 15;
@@ -339,7 +339,7 @@
             // 
             // btnGen12
             // 
-            btnGen12.Location = new Point(604, 169);
+            btnGen12.Location = new Point(95, 105);
             btnGen12.Name = "btnGen12";
             btnGen12.Size = new Size(75, 68);
             btnGen12.TabIndex = 16;
@@ -347,7 +347,7 @@
             // 
             // btnGen13
             // 
-            btnGen13.Location = new Point(278, 336);
+            btnGen13.Location = new Point(176, 105);
             btnGen13.Name = "btnGen13";
             btnGen13.Size = new Size(75, 68);
             btnGen13.TabIndex = 17;
@@ -355,7 +355,7 @@
             // 
             // btnGen14
             // 
-            btnGen14.Location = new Point(359, 336);
+            btnGen14.Location = new Point(255, 105);
             btnGen14.Name = "btnGen14";
             btnGen14.Size = new Size(75, 68);
             btnGen14.TabIndex = 18;
@@ -363,7 +363,7 @@
             // 
             // btnGen15
             // 
-            btnGen15.Location = new Point(440, 336);
+            btnGen15.Location = new Point(339, 105);
             btnGen15.Name = "btnGen15";
             btnGen15.Size = new Size(75, 68);
             btnGen15.TabIndex = 19;
@@ -371,7 +371,7 @@
             // 
             // btnGen16
             // 
-            btnGen16.Location = new Point(521, 336);
+            btnGen16.Location = new Point(421, 105);
             btnGen16.Name = "btnGen16";
             btnGen16.Size = new Size(75, 68);
             btnGen16.TabIndex = 20;
@@ -379,7 +379,7 @@
             // 
             // btnGen17
             // 
-            btnGen17.Location = new Point(602, 336);
+            btnGen17.Location = new Point(502, 106);
             btnGen17.Name = "btnGen17";
             btnGen17.Size = new Size(75, 68);
             btnGen17.TabIndex = 21;
@@ -387,7 +387,7 @@
             // 
             // btnGen18
             // 
-            btnGen18.Location = new Point(683, 336);
+            btnGen18.Location = new Point(583, 107);
             btnGen18.Name = "btnGen18";
             btnGen18.Size = new Size(75, 68);
             btnGen18.TabIndex = 22;
@@ -395,7 +395,7 @@
             // 
             // btnGen19
             // 
-            btnGen19.Location = new Point(278, 430);
+            btnGen19.Location = new Point(664, 106);
             btnGen19.Name = "btnGen19";
             btnGen19.Size = new Size(75, 68);
             btnGen19.TabIndex = 23;
@@ -403,7 +403,7 @@
             // 
             // btnGen20
             // 
-            btnGen20.Location = new Point(359, 430);
+            btnGen20.Location = new Point(745, 107);
             btnGen20.Name = "btnGen20";
             btnGen20.Size = new Size(75, 68);
             btnGen20.TabIndex = 24;
@@ -411,7 +411,7 @@
             // 
             // btnGen21
             // 
-            btnGen21.Location = new Point(440, 430);
+            btnGen21.Location = new Point(209, 192);
             btnGen21.Name = "btnGen21";
             btnGen21.Size = new Size(75, 68);
             btnGen21.TabIndex = 25;
@@ -419,7 +419,7 @@
             // 
             // btnGen22
             // 
-            btnGen22.Location = new Point(521, 430);
+            btnGen22.Location = new Point(290, 192);
             btnGen22.Name = "btnGen22";
             btnGen22.Size = new Size(75, 68);
             btnGen22.TabIndex = 26;
@@ -427,7 +427,7 @@
             // 
             // btnGen23
             // 
-            btnGen23.Location = new Point(602, 430);
+            btnGen23.Location = new Point(371, 192);
             btnGen23.Name = "btnGen23";
             btnGen23.Size = new Size(75, 68);
             btnGen23.TabIndex = 27;
@@ -435,7 +435,7 @@
             // 
             // btnGen24
             // 
-            btnGen24.Location = new Point(683, 430);
+            btnGen24.Location = new Point(452, 192);
             btnGen24.Name = "btnGen24";
             btnGen24.Size = new Size(75, 68);
             btnGen24.TabIndex = 28;
@@ -443,7 +443,7 @@
             // 
             // btnGen25
             // 
-            btnGen25.Location = new Point(775, 377);
+            btnGen25.Location = new Point(533, 192);
             btnGen25.Name = "btnGen25";
             btnGen25.Size = new Size(75, 68);
             btnGen25.TabIndex = 29;
