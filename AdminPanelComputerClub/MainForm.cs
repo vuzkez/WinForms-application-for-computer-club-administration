@@ -25,6 +25,7 @@ namespace AdminPanelComputerClub
             this.dataContext = dataContext;
             AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
+            MinimumSize = new Size(1305, 740);
             ConfigureUIByRole();
             UpdateSeatColors();
         }
