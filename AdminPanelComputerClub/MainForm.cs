@@ -23,6 +23,7 @@ namespace AdminPanelComputerClub
             this.operatorService = operatorService;
             this.administratorService = administratorService;
             this.dataContext = dataContext;
+            AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
             ConfigureUIByRole();
             UpdateSeatColors();
