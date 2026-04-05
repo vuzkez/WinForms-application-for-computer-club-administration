@@ -181,16 +181,14 @@
             // 
             // lblGeneralTitle
             // 
-            lblGeneralTitle.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblGeneralTitle.AutoSize = true;
+            lblGeneralTitle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblGeneralTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblGeneralTitle.ForeColor = Color.Cyan;
-            lblGeneralTitle.Location = new Point(726, 613);
+            lblGeneralTitle.Location = new Point(726, 606);
             lblGeneralTitle.Name = "lblGeneralTitle";
-            lblGeneralTitle.Size = new Size(152, 25);
+            lblGeneralTitle.Size = new Size(152, 32);
             lblGeneralTitle.TabIndex = 0;
             lblGeneralTitle.Text = "GENERAL ZONE";
-            lblGeneralTitle.TextAlign = ContentAlignment.MiddleRight;
             // 
             // pnlEntrance
             // 
@@ -219,9 +217,9 @@
             pnlBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             pnlBar.BackColor = Color.FromArgb(80, 60, 40);
             pnlBar.Controls.Add(lblBar);
-            pnlBar.Location = new Point(209, 597);
+            pnlBar.Location = new Point(199, 578);
             pnlBar.Name = "pnlBar";
-            pnlBar.Size = new Size(355, 38);
+            pnlBar.Size = new Size(355, 54);
             pnlBar.TabIndex = 4;
             // 
             // lblBar
@@ -231,7 +229,7 @@
             lblBar.ForeColor = Color.Gold;
             lblBar.Location = new Point(0, 0);
             lblBar.Name = "lblBar";
-            lblBar.Size = new Size(355, 38);
+            lblBar.Size = new Size(355, 54);
             lblBar.TabIndex = 0;
             lblBar.Text = "БАР/Напитки/Еда";
             lblBar.TextAlign = ContentAlignment.MiddleCenter;
@@ -239,14 +237,13 @@
             // 
             // lblRegistration
             // 
-            lblRegistration.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lblRegistration.AutoSize = true;
+            lblRegistration.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblRegistration.BackColor = Color.DarkOliveGreen;
             lblRegistration.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblRegistration.ForeColor = Color.White;
-            lblRegistration.Location = new Point(10, 605);
+            lblRegistration.Location = new Point(10, 578);
             lblRegistration.Name = "lblRegistration";
-            lblRegistration.Size = new Size(196, 21);
+            lblRegistration.Size = new Size(193, 54);
             lblRegistration.TabIndex = 1;
             lblRegistration.Text = "СТОЙКА РЕГИСТРАЦИИ";
             lblRegistration.TextAlign = ContentAlignment.MiddleCenter;
@@ -481,16 +478,13 @@
             // 
             // lblVip1
             // 
-            lblVip1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblVip1.AutoSize = true;
             lblVip1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblVip1.ForeColor = Color.Gold;
-            lblVip1.Location = new Point(313, 0);
+            lblVip1.Location = new Point(310, 7);
             lblVip1.Name = "lblVip1";
-            lblVip1.Size = new Size(97, 21);
+            lblVip1.Size = new Size(97, 30);
             lblVip1.TabIndex = 0;
             lblVip1.Text = "VIP ZONE 1";
-            lblVip1.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btnVip1
             // 
@@ -571,16 +565,13 @@
             // 
             // lblVip2
             // 
-            lblVip2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblVip2.AutoSize = true;
             lblVip2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblVip2.ForeColor = Color.Gold;
-            lblVip2.Location = new Point(313, 6);
+            lblVip2.Location = new Point(312, 7);
             lblVip2.Name = "lblVip2";
-            lblVip2.Size = new Size(97, 21);
+            lblVip2.Size = new Size(98, 30);
             lblVip2.TabIndex = 0;
             lblVip2.Text = "VIP ZONE 2";
-            lblVip2.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btnVip6
             // 
@@ -772,15 +763,12 @@
             FormClosing += MainForm_FormClosing;
             pnlLeft.ResumeLayout(false);
             pnlGeneralZone.ResumeLayout(false);
-            pnlGeneralZone.PerformLayout();
             pnlEntrance.ResumeLayout(false);
             pnlBar.ResumeLayout(false);
             pnlRight.ResumeLayout(false);
             pnlVipZone1.ResumeLayout(false);
-            pnlVipZone1.PerformLayout();
             pnlVipEntrance.ResumeLayout(false);
             pnlVipZone2.ResumeLayout(false);
-            pnlVipZone2.PerformLayout();
             pnlBottom.ResumeLayout(false);
             statusStrip.ResumeLayout(false);
             statusStrip.PerformLayout();
