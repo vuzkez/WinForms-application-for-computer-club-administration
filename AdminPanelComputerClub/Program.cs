@@ -13,9 +13,8 @@ namespace AdminPanelComputerClub
             ApplicationConfiguration.Initialize();
 
             string connectionString = "Data Source=VUZKEZ\\SQLEXPRESS;Initial Catalog=GameClub;Integrated Security=True;TrustServerCertificate=True";
-
-            IDataContext dataContextFactory = new MyDataContext(connectionString);
-
+            
+            IDataContext dataContextFactory = DataContextSingleton.GetInstance(connectionString);
             IOperator operatorService = new Operator(dataContextFactory);
             IAdministrator administratorService = new Admin(dataContextFactory);
 
