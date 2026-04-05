@@ -10,10 +10,17 @@
 
   <ItemGroup>
     <PackageReference Include="Mindbox.Data.Linq" Version="10.8.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AdminPanelLibrary\AdminPanelLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,4 @@
+using System.Configuration;
 using AdminPanelLibrary;
 
 namespace AdminPanelComputerClub
@@ -12,7 +13,7 @@ namespace AdminPanelComputerClub
         {
             ApplicationConfiguration.Initialize();
 
-            string connectionString = "Data Source=VUZKEZ\\SQLEXPRESS;Initial Catalog=GameClub;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = ConfigurationManager.ConnectionStrings["GameClubDb"].ConnectionString;
             
             IDataContext dataContextFactory = DataContextSingleton.GetInstance(connectionString);
             IOperator operatorService = new Operator(dataContextFactory);

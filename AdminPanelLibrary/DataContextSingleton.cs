@@ -27,9 +27,7 @@ namespace AdminPanelLibrary
 
         public DataContext Create()
         {
-            if (dataContext == null)
-                dataContext = new DataContext(connectionString);
-            return dataContext;
+            return new DataContext(connectionString);
         }
     }
 }
