@@ -182,7 +182,7 @@
             // lblGeneralTitle
             // 
             lblGeneralTitle.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            lblGeneralTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblGeneralTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblGeneralTitle.ForeColor = Color.Cyan;
             lblGeneralTitle.Location = new Point(726, 606);
             lblGeneralTitle.Name = "lblGeneralTitle";
@@ -239,7 +239,7 @@
             // 
             lblRegistration.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblRegistration.BackColor = Color.DarkOliveGreen;
-            lblRegistration.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblRegistration.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblRegistration.ForeColor = Color.White;
             lblRegistration.Location = new Point(10, 578);
             lblRegistration.Name = "lblRegistration";
@@ -478,11 +478,11 @@
             // 
             // lblVip1
             // 
-            lblVip1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblVip1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblVip1.ForeColor = Color.Gold;
-            lblVip1.Location = new Point(310, 7);
+            lblVip1.Location = new Point(280, 7);
             lblVip1.Name = "lblVip1";
-            lblVip1.Size = new Size(97, 30);
+            lblVip1.Size = new Size(127, 30);
             lblVip1.TabIndex = 0;
             lblVip1.Text = "VIP ZONE 1";
             // 
@@ -565,11 +565,11 @@
             // 
             // lblVip2
             // 
-            lblVip2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblVip2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblVip2.ForeColor = Color.Gold;
-            lblVip2.Location = new Point(312, 7);
+            lblVip2.Location = new Point(280, 7);
             lblVip2.Name = "lblVip2";
-            lblVip2.Size = new Size(98, 30);
+            lblVip2.Size = new Size(130, 30);
             lblVip2.TabIndex = 0;
             lblVip2.Text = "VIP ZONE 2";
             // 
@@ -738,15 +738,15 @@
             // 
             statusStrip.ImageScalingSize = new Size(24, 24);
             statusStrip.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip.Location = new Point(0, 678);
+            statusStrip.Location = new Point(0, 668);
             statusStrip.Name = "statusStrip";
-            statusStrip.Size = new Size(1289, 22);
+            statusStrip.Size = new Size(1289, 32);
             statusStrip.TabIndex = 9;
             // 
             // lblStatus
             // 
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(88, 17);
+            lblStatus.Size = new Size(135, 25);
             lblStatus.Text = "Готов к работе";
             // 
             // MainForm
