@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using AdminPanelLibrary;
 
 namespace AdminPanelComputerClub
@@ -230,6 +231,58 @@ namespace AdminPanelComputerClub
                 {
                     UpdateSeatColors();
                     lblStatus.Text = "Тарифы обновлены";
+                }
+            }
+        }
+
+        private void SeatButton_Click(object sender, EventArgs e)
+        {
+            Button? clickedButton = sender as Button;
+            if (clickedButton == null) 
+                return;
+
+            string text = clickedButton.Text;
+            int seatId = 0;
+
+            var match = Regex.Match(text, @"\d+");
+            if (match.Success)
+            {
+                seatId = int.Parse(match.Value);
+            }
+
+            if (seatId == 0) 
+                return;
+
+            using (var db = dataContext.Create())
+            {
+                var seat = db.GetTable<Seat>().FirstOrDefault(s => s.SeatId == seatId);
+                if (seat != null)
+                {
+                    var activeSession = operatorService.GetActiveSessionBySeatId(seatId);
+                    string status = "";
+
+                    if (activeSession != null)
+                    {
+                        var remaining = activeSession.EndTime - DateTime.Now;
+                        status = activeSession.EndTime > DateTime.Now
+                            ? $"Занят до {activeSession.EndTime:HH:mm} (осталось {remaining.Hours}ч {remaining.Minutes}мин)"
+                            : "Свободен";
+                    }
+                    else
+                    {
+                        status = "Свободен";
+                    }
+
+                    MessageBox.Show(
+                        $"ПК №{seat.SeatId}\n" +
+                        $"Тип комнаты: {seat.SeatRoom}\n" +
+                        $"Железо: {seat.Hardware}\n" +
+                        $"Девайсы: {seat.Devices}\n" +
+                        $"Статус: {status}",
+                        "Информация о компьютере",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                 }
             }
         }

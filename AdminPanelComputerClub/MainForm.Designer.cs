@@ -772,6 +772,41 @@
             statusStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
+            btnGen1.Click += SeatButton_Click;
+            btnGen2.Click += SeatButton_Click;
+            btnGen3.Click += SeatButton_Click;
+            btnGen4.Click += SeatButton_Click;
+            btnGen5.Click += SeatButton_Click;
+            btnGen6.Click += SeatButton_Click;
+            btnGen7.Click += SeatButton_Click;
+            btnGen8.Click += SeatButton_Click;
+            btnGen9.Click += SeatButton_Click;
+            btnGen10.Click += SeatButton_Click;
+            btnGen11.Click += SeatButton_Click;
+            btnGen12.Click += SeatButton_Click;
+            btnGen13.Click += SeatButton_Click;
+            btnGen14.Click += SeatButton_Click;
+            btnGen15.Click += SeatButton_Click;
+            btnGen16.Click += SeatButton_Click;
+            btnGen17.Click += SeatButton_Click;
+            btnGen18.Click += SeatButton_Click;
+            btnGen19.Click += SeatButton_Click;
+            btnGen20.Click += SeatButton_Click;
+            btnGen21.Click += SeatButton_Click;
+            btnGen22.Click += SeatButton_Click;
+            btnGen23.Click += SeatButton_Click;
+            btnGen24.Click += SeatButton_Click;
+            btnGen25.Click += SeatButton_Click;
+            btnVip1.Click += SeatButton_Click;
+            btnVip2.Click += SeatButton_Click;
+            btnVip3.Click += SeatButton_Click;
+            btnVip4.Click += SeatButton_Click;
+            btnVip5.Click += SeatButton_Click;
+            btnVip6.Click += SeatButton_Click;
+            btnVip7.Click += SeatButton_Click;
+            btnVip8.Click += SeatButton_Click;
+            btnVip9.Click += SeatButton_Click;
+            btnVip10.Click += SeatButton_Click;
         }
 
         #endregion
