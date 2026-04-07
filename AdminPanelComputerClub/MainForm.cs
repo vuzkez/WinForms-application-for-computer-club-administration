@@ -131,7 +131,7 @@ namespace AdminPanelComputerClub
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnOpenSession_Click(object sender, EventArgs e)
         {
             using (var inputDialog = new OpenSessionForm(dataContext))
             {
@@ -230,21 +230,6 @@ namespace AdminPanelComputerClub
                     lblStatus.Text = "Тарифы обновлены";
                 }
             }
-        }
-
-        private void btnGen7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblBar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

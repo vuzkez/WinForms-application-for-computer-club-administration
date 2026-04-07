@@ -84,7 +84,6 @@
             // radioButton1
             // 
             radioButton1.AutoSize = true;
-            radioButton1.Checked = true;
             radioButton1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             radioButton1.ForeColor = Color.SteelBlue;
             radioButton1.Location = new Point(49, 70);

@@ -233,7 +233,6 @@
             lblBar.TabIndex = 0;
             lblBar.Text = "БАР/Напитки/Еда";
             lblBar.TextAlign = ContentAlignment.MiddleCenter;
-            lblBar.Click += lblBar_Click;
             // 
             // lblRegistration
             // 
@@ -303,7 +302,6 @@
             btnGen7.Size = new Size(75, 68);
             btnGen7.TabIndex = 11;
             btnGen7.Text = "ПК #7";
-            btnGen7.Click += btnGen7_Click;
             // 
             // btnGen8
             // 
@@ -667,7 +665,7 @@
             btnOpenSession.TabIndex = 5;
             btnOpenSession.Text = "Открыть сессию";
             btnOpenSession.UseVisualStyleBackColor = false;
-            btnOpenSession.Click += button1_Click;
+            btnOpenSession.Click += btnOpenSession_Click;
             // 
             // btnInfoUser
             // 

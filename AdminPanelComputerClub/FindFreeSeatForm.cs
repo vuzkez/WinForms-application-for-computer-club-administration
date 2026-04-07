@@ -24,6 +24,9 @@ namespace AdminPanelComputerClub
                 Result = "General";
             else if (radioButton2.Checked)
                 Result = "Vip";
+            else
+                MessageBox.Show("Выберите тип комнаты!", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             DialogResult = DialogResult.OK;
             Close();
         }

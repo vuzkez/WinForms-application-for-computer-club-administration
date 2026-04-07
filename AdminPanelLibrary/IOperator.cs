@@ -11,7 +11,7 @@ namespace AdminPanelLibrary
         void OpenSession(int seatId, int userId, TariffType tariff,DateTime startTime,DateTime endTime);
         void CloseSession(int sessionId);
         void AddHours(int sessionId,int hours);
-        Seat? FindFreeSeat(string roomType);
+        List<Seat> FindFreeSeat(string roomType);
         List<Seat> GetAllSeatsWithStatus();
         Session? GetActiveSessionBySeatId(int seatId);
     }

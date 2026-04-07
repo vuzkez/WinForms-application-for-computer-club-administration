@@ -83,31 +83,16 @@ namespace AdminPanelLibrary
             }
         }
 
-        public Seat? FindFreeSeat(string roomType)
+        public List<Seat> FindFreeSeat(string roomType)
         {
+            if (string.IsNullOrEmpty(roomType)) 
+                return new List<Seat>();
+
             using (var db = dataContext.Create())
             {
                 var freeSeats = db.GetTable<Seat>()
-                    .Where(s => !db.GetTable<Session>()
-                    .Any(session => session.SeatId == s.SeatId && session.EndTime > DateTime.Now));
-
-                if (!string.IsNullOrEmpty(roomType))
-                {
-                    string translation = string.Empty;
-                    switch (roomType.ToLower())
-                    {
-                        case "общий":
-                            translation = "General";
-                            break;
-                        case "вип":
-                            translation = "Vip";
-                            break;
-                    }
-                    return freeSeats.FirstOrDefault(s => s.SeatRoom.ToLower() == roomType.ToLower()
-                    || s.SeatRoom.ToLower() == translation.ToLower());
-                }
-                
-                return freeSeats.FirstOrDefault();
+                    .Where(s => s.SeatRoom == roomType && s.Status == SeatStatus.Free).ToList();
+                return freeSeats;
             }
         }
 
@@ -132,6 +117,7 @@ namespace AdminPanelLibrary
                         seat.Status = SeatStatus.Free;
                     }
                 }
+                db.SubmitChanges();
                 return seats;
             }
         }
