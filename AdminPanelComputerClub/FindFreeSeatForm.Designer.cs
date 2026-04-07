@@ -84,6 +84,7 @@
             // radioButton1
             // 
             radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
             radioButton1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             radioButton1.ForeColor = Color.SteelBlue;
             radioButton1.Location = new Point(49, 70);
@@ -102,7 +103,7 @@
             radioButton2.Location = new Point(175, 70);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(58, 24);
-            radioButton2.TabIndex = 0;
+            radioButton2.TabIndex = 1;
             radioButton2.TabStop = true;
             radioButton2.Text = "VIP";
             radioButton2.UseVisualStyleBackColor = true;

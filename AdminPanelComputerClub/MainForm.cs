@@ -115,17 +115,19 @@ namespace AdminPanelComputerClub
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var seat = operatorService.FindFreeSeat(dialog.Result);
+                    var seats = operatorService.FindFreeSeat(dialog.Result);
 
-                    if (seat != null)
+                    if (seats != null)
                     {
-                        MessageBox.Show($"Свободный пк в комнате типа: {seat.SeatRoom}\nКомпьтер номер: {seat.SeatId}\nЖелезо: {seat.Hardware}\nДевайсы: {seat.Devices}", "Поиск пк",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        using (var showFreeSeat = new FreeSeatsForm(seats, dialog.Result))
+                        {
+                            showFreeSeat.ShowDialog();
+                        }
                     }
                     else
                     {
-                        MessageBox.Show($"Нету свободного пк", "Ошибка",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Нет свободных ПК в комнате {dialog.Result}","Информация",
+                            MessageBoxButtons.OK,MessageBoxIcon.Information);
                     }
                 }
             }

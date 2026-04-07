@@ -91,7 +91,7 @@ namespace AdminPanelLibrary
             using (var db = dataContext.Create())
             {
                 var freeSeats = db.GetTable<Seat>()
-                    .Where(s => s.SeatRoom == roomType && s.Status == SeatStatus.Free).ToList();
+                    .Where(s => s.SeatRoom == roomType && s.StatusValue == (int)SeatStatus.Free).ToList();
                 return freeSeats;
             }
         }
