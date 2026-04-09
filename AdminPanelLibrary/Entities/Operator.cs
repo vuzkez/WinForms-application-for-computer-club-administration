@@ -1,6 +1,8 @@
-﻿using LinqToDB;
+﻿using AdminPanelLibrary.Enums;
+using AdminPanelLibrary.Repositories;
+using LinqToDB;
 
-namespace AdminPanelLibrary
+namespace AdminPanelLibrary.Entities
 {
     public class Operator : IOperator
     {

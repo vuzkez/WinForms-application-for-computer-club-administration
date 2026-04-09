@@ -1,4 +1,4 @@
-﻿namespace AdminPanelLibrary
+﻿namespace AdminPanelLibrary.Enums
 {
     public enum SeatStatus
     {

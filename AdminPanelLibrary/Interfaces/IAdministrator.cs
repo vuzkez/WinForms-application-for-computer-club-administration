@@ -1,6 +1,6 @@
 ﻿using AdminPanelLibrary.Enums;
 
-namespace AdminPanelLibrary
+namespace AdminPanelLibrary.Interfaces
 {
     public interface IAdministrator
     {

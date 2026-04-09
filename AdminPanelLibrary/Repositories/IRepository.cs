@@ -10,7 +10,7 @@ namespace AdminPanelLibrary.Repositories
     {
         void Update(T entity);
         void Add(T entity);
-        void Delete(T entity);
+        void Delete(int id);
         IEnumerable<T> GetAll();
     }
 }

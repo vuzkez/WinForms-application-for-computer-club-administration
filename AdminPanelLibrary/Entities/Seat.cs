@@ -1,6 +1,7 @@
-﻿using LinqToDB.Mapping;
+﻿using AdminPanelLibrary.Enums;
+using LinqToDB.Mapping;
 
-namespace AdminPanelLibrary
+namespace AdminPanelLibrary.Entities
 {
     [Table(Name = "Seats")]
     public class Seat

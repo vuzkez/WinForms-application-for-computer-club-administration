@@ -1,6 +1,9 @@
-﻿using LinqToDB;
+﻿using AdminPanelLibrary.Enums;
+using AdminPanelLibrary.Interfaces;
+using AdminPanelLibrary.Repositories;
+using LinqToDB;
 
-namespace AdminPanelLibrary
+namespace AdminPanelLibrary.Entities
 {
     public class Admin : IAdministrator
     {

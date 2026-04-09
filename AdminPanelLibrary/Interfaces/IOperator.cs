@@ -1,4 +1,5 @@
-﻿using AdminPanelLibrary.Enums;
+﻿using AdminPanelLibrary.Entities;
+using AdminPanelLibrary.Enums;
 
 namespace AdminPanelLibrary
 {

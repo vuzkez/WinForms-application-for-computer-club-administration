@@ -1,7 +1,7 @@
 ﻿using AdminPanelLibrary.Enums;
 using LinqToDB.Mapping;
 
-namespace AdminPanelLibrary
+namespace AdminPanelLibrary.Entities
 {
 
     [Table(Name = "Users")]

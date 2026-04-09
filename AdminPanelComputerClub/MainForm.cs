@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 using LinqToDB;
 using AdminPanelLibrary;
 using AdminPanelLibrary.Enums;
+using AdminPanelLibrary.Interfaces;
+using AdminPanelLibrary.Repositories;
+using AdminPanelLibrary.Entities;
 
 namespace AdminPanelComputerClub
 {

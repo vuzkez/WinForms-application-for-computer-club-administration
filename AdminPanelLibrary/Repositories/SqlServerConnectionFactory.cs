@@ -2,7 +2,7 @@
 using LinqToDB;
 using LinqToDB.DataProvider.SqlServer;
 
-namespace AdminPanelLibrary
+namespace AdminPanelLibrary.Repositories
 {
     public class SqlServerConnectionFactory : IDataConnection
     {

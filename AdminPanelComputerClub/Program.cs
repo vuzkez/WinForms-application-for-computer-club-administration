@@ -1,5 +1,8 @@
 using System.Configuration;
 using AdminPanelLibrary;
+using AdminPanelLibrary.Entities;
+using AdminPanelLibrary.Interfaces;
+using AdminPanelLibrary.Repositories;
 
 namespace AdminPanelComputerClub
 {
