@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Linq.Mapping;
+﻿using LinqToDB.Mapping;
 
 namespace AdminPanelLibrary
 {
     [Table(Name = "Seats")]
     public class Seat
     {
-        [Column(Name = "SeatId", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(Name = "SeatId", IsPrimaryKey = true, IsIdentity = true)]
         public int SeatId { get; set; }
 
         [Column(Name = "SeatRoom")]

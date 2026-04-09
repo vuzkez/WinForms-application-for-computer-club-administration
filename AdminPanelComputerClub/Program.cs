@@ -13,9 +13,9 @@ namespace AdminPanelComputerClub
         {
             ApplicationConfiguration.Initialize();
 
-            string connectionString = ConfigurationManager.ConnectionStrings["GameClubDb"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["SqlGameClubDb"].ConnectionString;
             
-            IDataContext dataContextFactory = DataContextSingleton.GetInstance(connectionString);
+            IDataConnection dataContextFactory = SqlServerConnectionFactory.GetInstance(connectionString);
             IOperator operatorService = new Operator(dataContextFactory);
             IAdministrator administratorService = new Admin(dataContextFactory);
 

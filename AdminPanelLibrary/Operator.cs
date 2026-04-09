@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Linq;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
+﻿using LinqToDB;
 
 namespace AdminPanelLibrary
 {
     public class Operator : IOperator
     {
-        private readonly IDataContext dataContext;
+        private readonly IDataConnection dataContext;
 
-        public Operator(IDataContext dataContext)
+        public Operator(IDataConnection dataContext)
         {
             this.dataContext = dataContext;
         }
@@ -22,30 +15,32 @@ namespace AdminPanelLibrary
         {
             using (var db = dataContext.Create())
             {
-                var sessionDb = db.GetTable<Session>().First(p => p.SessionId == sessionId);
+                var sessionDb = db.GetTable<Session>().FirstOrDefault(p => p.SessionId == sessionId);
+
+                if (sessionDb is null)
+                    throw new Exception($"Сессия {sessionId} не найдена");
                 
-                var trafficSettiong = db.GetTable<TariffSetting>()
+                var trafficSetting = db.GetTable<TariffSetting>()
                       .FirstOrDefault(t => t.TypeValue == sessionDb.Tariff.ToString());
-                if (trafficSettiong == null)
+                if (trafficSetting == null)
                 {
-                    throw new Exception("Таблица тарифа не найдена");
+                    throw new Exception($"Таблица тарифа {sessionDb.Tariff} не найдена");
                 }
-                var price = trafficSettiong.PricePerHour;
+                var price = trafficSetting.PricePerHour;
 
                 sessionDb.EndTime = sessionDb.EndTime.AddHours(hours);
                 sessionDb.TotalAmount += hours * price;
 
                 var seat = db.GetTable<Seat>().FirstOrDefault(p => p.SeatId == sessionDb.SeatId);
-                if (seat == null)
-                {
-                    throw new Exception("Место не найдено");
-                }
-                else if (seat.Status == SeatStatus.Expiring)
-                {
-                    seat.Status = SeatStatus.Busy;
-                }
 
-                db.SubmitChanges();
+                if (seat == null)
+                    throw new Exception($"Место {sessionDb.SeatId} не найдено");
+
+                if (seat.Status == SeatStatus.Expiring)
+                    seat.Status = SeatStatus.Busy;
+
+                db.Update(sessionDb);
+                db.Update(seat);
             }
         }
 
@@ -53,11 +48,20 @@ namespace AdminPanelLibrary
         {
             using (var db = dataContext.Create())
             {
-                var session = db.GetTable<Session>().First(p => p.SessionId == sessionId);
+                var session = db.GetTable<Session>().FirstOrDefault(p => p.SessionId == sessionId);
+                
+                if (session is null)
+                    throw new Exception($"Сессия {sessionId} не найдена");
+
                 session.EndTime = DateTime.Now;
-                var seat = db.GetTable<Seat>().First(s => s.SeatId == session.SeatId);
+                var seat = db.GetTable<Seat>().FirstOrDefault(s => s.SeatId == session.SeatId);
+
+                if (seat is null)
+                    throw new Exception($"Место {session.SeatId} не найдено");
+
                 seat.Status = SeatStatus.Free;
-                db.SubmitChanges();
+                db.Update(session);
+                db.Update(seat);
             }
         }
 
@@ -74,12 +78,22 @@ namespace AdminPanelLibrary
 
             using (var db = dataContext.Create())
             {
-                var pricePerHour = db.GetTable<TariffSetting>().First(p => p.TypeValue == tariff.ToString()).PricePerHour;
+                var tariffSetting = db.GetTable<TariffSetting>().FirstOrDefault(p => p.TypeValue == tariff.ToString());
+
+                if (tariffSetting is null)
+                    throw new Exception($"Тарифная сетка {tariff} не найдена!");
+
+                var pricePerHour = tariffSetting.PricePerHour;
                 newClient.TotalAmount = pricePerHour * hours;
-                db.GetTable<Session>().InsertOnSubmit(newClient);
-                var seat = db.GetTable<Seat>().First(s => s.SeatId == seatId);
+                db.Insert(newClient);
+
+                var seat = db.GetTable<Seat>().FirstOrDefault(s => s.SeatId == seatId);
+
+                if (seat is null)
+                    throw new Exception($"Место {seatId} не найдено!");
+
                 seat.Status = SeatStatus.Busy;
-                db.SubmitChanges();
+                db.Update(seat);
             }
         }
 
@@ -107,6 +121,8 @@ namespace AdminPanelLibrary
 
                 foreach (var seat in seats)
                 {
+                    var oldStatus = seat.Status;
+
                     if (activeSessions.TryGetValue(seat.SeatId,out var session))
                     {
                         var remaining = (session.EndTime - DateTime.Now).TotalMinutes;
@@ -116,8 +132,10 @@ namespace AdminPanelLibrary
                     {
                         seat.Status = SeatStatus.Free;
                     }
+
+                    if (seat.Status != oldStatus)
+                        db.Update(seat);
                 }
-                db.SubmitChanges();
                 return seats;
             }
         }

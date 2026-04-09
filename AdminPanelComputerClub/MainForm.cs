@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using LinqToDB;
 using AdminPanelLibrary;
 
 namespace AdminPanelComputerClub
@@ -15,10 +16,10 @@ namespace AdminPanelComputerClub
     public partial class MainForm : Form
     {
         private readonly User user;
-        private readonly IDataContext dataContext;
+        private readonly IDataConnection dataContext;
         private readonly IOperator operatorService;
         private readonly IAdministrator administratorService;
-        public MainForm(User user, IOperator operatorService, IAdministrator administratorService, IDataContext dataContext)
+        public MainForm(User user, IOperator operatorService, IAdministrator administratorService, IDataConnection dataContext)
         {
             this.user = user;
             this.operatorService = operatorService;
@@ -94,7 +95,7 @@ namespace AdminPanelComputerClub
                 if (userFromDb != null)
                 {
                     userFromDb.IsActive = false;
-                    db.SubmitChanges();
+                    db.Update(userFromDb);
                 }
             }
         }

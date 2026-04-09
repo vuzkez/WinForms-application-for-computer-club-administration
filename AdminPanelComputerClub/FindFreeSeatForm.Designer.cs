@@ -9,7 +9,6 @@
         private Button btnOk;
         private Button btnCancel;
         private Label lblPrompt;
-        private Microsoft.Data.SqlClient.SqlDataAdapter sqlDataAdapter1;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
 
@@ -37,7 +36,6 @@
             btnOk = new Button();
             btnCancel = new Button();
             lblPrompt = new Label();
-            sqlDataAdapter1 = new Microsoft.Data.SqlClient.SqlDataAdapter();
             radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
             SuspendLayout();

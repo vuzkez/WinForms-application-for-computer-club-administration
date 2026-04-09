@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LinqToDB;
 
 namespace AdminPanelLibrary
 {
     public class Admin : IAdministrator
     {
-        private readonly IDataContext dataContext;
+        private readonly IDataConnection dataContext;
 
-        public Admin(IDataContext dataContext)
+        public Admin(IDataConnection dataContext)
         {
             this.dataContext = dataContext;
         }
@@ -19,11 +15,12 @@ namespace AdminPanelLibrary
             using (var db = dataContext.Create())
             {
                 var tariffSettings = db.GetTable<TariffSetting>().FirstOrDefault(t => t.TypeValue == tariff.ToString());
-                if (tariffSettings != null)
-                {
-                    tariffSettings.PricePerHour = newPrice;
-                    db.SubmitChanges();
-                }
+
+                if (tariffSettings == null)
+                    throw new Exception($"Тарифная сетка {tariff} не найдена");
+
+                tariffSettings.PricePerHour = newPrice;
+                db.Update(tariffSettings);
             }
         }
 
@@ -44,7 +41,10 @@ namespace AdminPanelLibrary
                 var setting = db.GetTable<TariffSetting>()
                     .FirstOrDefault(t => t.TypeValue == tariff.ToString());
 
-                return setting?.PricePerHour ?? 0;
+                if (setting == null)
+                    throw new Exception($"Тарифная сетка {tariff} не найдена");
+
+                return setting.PricePerHour;
             }
         }
     }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdminPanelLibrary;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using LinqToDB;
 
 namespace AdminPanelComputerClub
 {
@@ -18,11 +18,11 @@ namespace AdminPanelComputerClub
         public TariffType SelectedTariff { get; private set; }
         public DateTime StartTime { get; private set; }
         public int Hours { get; private set; }
-        public IDataContext MyDataContext {  get; private set; }
+        public IDataConnection MyDataContext {  get; private set; }
 
         private decimal dayPrice;
         private decimal nightPrice;
-        public OpenSessionForm(IDataContext dataContext)
+        public OpenSessionForm(IDataConnection dataContext)
         {
             InitializeComponent();
 

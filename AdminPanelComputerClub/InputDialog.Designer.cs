@@ -9,7 +9,6 @@
         private Button btnOk;
         private Button btnCancel;
         private Label lblPrompt;
-        private Microsoft.Data.SqlClient.SqlDataAdapter sqlDataAdapter1;
         private TextBox inputBox;
 
         /// <summary>
@@ -36,7 +35,6 @@
             btnOk = new Button();
             btnCancel = new Button();
             lblPrompt = new Label();
-            sqlDataAdapter1 = new Microsoft.Data.SqlClient.SqlDataAdapter();
             inputBox = new TextBox();
             SuspendLayout();
             // 

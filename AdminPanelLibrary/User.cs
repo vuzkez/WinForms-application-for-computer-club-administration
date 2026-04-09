@@ -1,4 +1,4 @@
-﻿using System.Data.Linq.Mapping;
+﻿using LinqToDB.Mapping;
 
 namespace AdminPanelLibrary
 {
@@ -6,7 +6,7 @@ namespace AdminPanelLibrary
     [Table(Name = "Users")]
     public class User
     {
-        [Column(Name = "UserId", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(Name = "UserId", IsPrimaryKey = true, IsIdentity = true)]
         public int UserId { get; set; }
 
         [Column(Name = "Login")]

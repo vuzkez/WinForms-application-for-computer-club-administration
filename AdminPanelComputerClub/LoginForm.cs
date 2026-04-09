@@ -1,13 +1,13 @@
 using AdminPanelLibrary;
-using System.ComponentModel;
+using LinqToDB;
 
 namespace AdminPanelComputerClub
 {
     public partial class LoginForm : Form
     {
-        private readonly IDataContext context;
+        private readonly IDataConnection context;
         public User CurrentUser { get; private set; }
-        public LoginForm(IDataContext context)
+        public LoginForm(IDataConnection context)
         {
             InitializeComponent();
             this.context = context;
@@ -30,7 +30,7 @@ namespace AdminPanelComputerClub
                         user.IsActive = true;
                         CurrentUser = user;
                         DialogResult = DialogResult.OK;
-                        db.SubmitChanges();
+                        db.Update(user);
                         Close();
                     }
                     else if (user != null && user.IsActive == true)
