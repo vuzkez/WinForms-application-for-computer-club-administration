@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using LinqToDB;
 using AdminPanelLibrary;
+using AdminPanelLibrary.Enums;
 
 namespace AdminPanelComputerClub
 {

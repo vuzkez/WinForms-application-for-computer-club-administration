@@ -1,6 +1,6 @@
 ﻿using LinqToDB.Data;
 
-namespace AdminPanelLibrary
+namespace AdminPanelLibrary.Repositories
 {
     public interface IDataConnection
     {

@@ -1,4 +1,5 @@
-using AdminPanelLibrary;
+using AdminPanelLibrary.Entities;
+using AdminPanelLibrary.Repositories;
 using LinqToDB;
 
 namespace AdminPanelComputerClub

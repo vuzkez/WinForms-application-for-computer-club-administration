@@ -1,4 +1,6 @@
-﻿namespace AdminPanelLibrary
+﻿using AdminPanelLibrary.Enums;
+
+namespace AdminPanelLibrary
 {
     public interface IOperator
     {
