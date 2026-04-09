@@ -15,7 +15,7 @@ namespace AdminPanelLibrary
         public int UserId { get; set; }
 
         [Column(Name = "Tariff")]
-        private string TariffValue { get; set; }
+        public string TariffValue { get; set; }
 
         public TariffType Tariff
         {

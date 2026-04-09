@@ -1,5 +1,6 @@
 ﻿using LinqToDB.Data;
 using LinqToDB;
+using LinqToDB.DataProvider.SqlServer;
 
 namespace AdminPanelLibrary
 {
