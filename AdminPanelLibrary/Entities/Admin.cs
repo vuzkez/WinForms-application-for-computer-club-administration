@@ -1,54 +1,33 @@
 ﻿using AdminPanelLibrary.Enums;
 using AdminPanelLibrary.Interfaces;
 using AdminPanelLibrary.Repositories;
-using LinqToDB;
 
 namespace AdminPanelLibrary.Entities
 {
     public class Admin : IAdministrator
     {
-        private readonly IDataConnection dataContext;
+        private readonly ITariffSettingRepository _tariffRepo;
+        private readonly ISessionRepository _sessionRepo;
 
-        public Admin(IDataConnection dataContext)
+        public Admin(ITariffSettingRepository tariffRepo, ISessionRepository sessionRepo)
         {
-            this.dataContext = dataContext;
+            _tariffRepo = tariffRepo;
+            _sessionRepo = sessionRepo;
         }
+
         public void ConfigureTariff(TariffType tariff, decimal newPrice)
         {
-            using (var db = dataContext.Create())
-            {
-                var tariffSettings = db.GetTable<TariffSetting>().FirstOrDefault(t => t.TypeValue == tariff.ToString());
-
-                if (tariffSettings == null)
-                    throw new Exception($"Тарифная сетка {tariff} не найдена");
-
-                tariffSettings.PricePerHour = newPrice;
-                db.Update(tariffSettings);
-            }
+            _tariffRepo.UpdatePrice(tariff, newPrice);
         }
 
         public decimal GetRevenue(DateTime from, DateTime to)
         {
-            using (var db = dataContext.Create())
-            {
-                return db.GetTable<Session>()
-                    .Where(s => s.EndTime >= from && s.EndTime <= to)
-                    .Sum(s => s.TotalAmount);
-            }
+            return _sessionRepo.GetTotalRevenue(from, to);
         }
 
         public decimal GetTariffPrice(TariffType tariff)
         {
-            using (var db = dataContext.Create())
-            {
-                var setting = db.GetTable<TariffSetting>()
-                    .FirstOrDefault(t => t.TypeValue == tariff.ToString());
-
-                if (setting == null)
-                    throw new Exception($"Тарифная сетка {tariff} не найдена");
-
-                return setting.PricePerHour;
-            }
+            return _tariffRepo.GetPrice(tariff);
         }
     }
 }
