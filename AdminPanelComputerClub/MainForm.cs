@@ -123,17 +123,9 @@ namespace AdminPanelComputerClub
                 {
                     var seats = operatorService.FindFreeSeat(dialog.Result);
 
-                    if (seats != null)
+                    using (var showFreeSeat = new FreeSeatsForm(seats, dialog.Result))
                     {
-                        using (var showFreeSeat = new FreeSeatsForm(seats, dialog.Result))
-                        {
-                            showFreeSeat.ShowDialog();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Нет свободных ПК в комнате {dialog.Result}","Информация",
-                            MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        showFreeSeat.ShowDialog();
                     }
                 }
             }
@@ -141,7 +133,11 @@ namespace AdminPanelComputerClub
 
         private void btnOpenSession_Click(object sender, EventArgs e)
         {
-            using (var inputDialog = new OpenSessionForm(dataContext))
+            var seatRepo = new SeatRepository(dataContext);
+            var tariffRepo = new TariffSettingRepository(dataContext);
+            var sessionRepo = new SessionRepository(dataContext);
+
+            using (var inputDialog = new OpenSessionForm(seatRepo,tariffRepo,sessionRepo))
             {
                 if (inputDialog.ShowDialog() == DialogResult.OK)
                 {

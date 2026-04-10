@@ -19,8 +19,13 @@ namespace AdminPanelComputerClub
             string connectionString = ConfigurationManager.ConnectionStrings["SqlGameClubDb"].ConnectionString;
             
             IDataConnection dataContextFactory = SqlServerConnectionFactory.GetInstance(connectionString);
-            IOperator operatorService = new Operator(dataContextFactory);
-            IAdministrator administratorService = new Admin(dataContextFactory);
+
+            var sessionRepo = new SessionRepository(dataContextFactory);
+            var seatRepo = new SeatRepository(dataContextFactory);
+            var tariffRepo = new TariffSettingRepository(dataContextFactory);
+
+            IOperator operatorService = new Operator(sessionRepo, seatRepo, tariffRepo);
+            IAdministrator administratorService = new Admin(tariffRepo, sessionRepo);
 
             using (var loginForm = new LoginForm(dataContextFactory))
             {
