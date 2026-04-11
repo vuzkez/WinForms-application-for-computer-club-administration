@@ -3,6 +3,7 @@ using AdminPanelLibrary;
 using AdminPanelLibrary.Entities;
 using AdminPanelLibrary.Interfaces;
 using AdminPanelLibrary.Repositories;
+using LinqToDB;
 
 namespace AdminPanelComputerClub
 {
@@ -16,9 +17,10 @@ namespace AdminPanelComputerClub
         {
             ApplicationConfiguration.Initialize();
 
-            string connectionString = ConfigurationManager.ConnectionStrings["SqlGameClubDb"].ConnectionString;
-            
-            IDataConnection dataContextFactory = SqlServerConnectionFactory.GetInstance(connectionString);
+            var connectionStringSettings = ConfigurationManager.ConnectionStrings["SqlGameClubDb"];
+
+            IDataConnection dataContextFactory = ConnectionFactory
+                .GetInstance(connectionStringSettings.ConnectionString,connectionStringSettings.ProviderName);
 
             var sessionRepo = new SessionRepository(dataContextFactory);
             var seatRepo = new SeatRepository(dataContextFactory);
