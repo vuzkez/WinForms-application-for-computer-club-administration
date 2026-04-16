@@ -1,3 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using AdminPanelLibrary.Entities;
 using AdminPanelLibrary.Repositories;
 using LinqToDB;
@@ -8,6 +17,7 @@ namespace AdminPanelComputerClub
     {
         private readonly IDataConnection context;
         public User CurrentUser { get; private set; }
+
         public LoginForm(IDataConnection context)
         {
             InitializeComponent();

@@ -50,7 +50,6 @@ namespace AdminPanelComputerClub
                 if (confirmResult == DialogResult.Yes)
                 {
                     _adminService.ConfigureTariff(TariffType.Day, newDayPrice);
-
                     _adminService.ConfigureTariff(TariffType.Night, newNightPrice);
 
                     MessageBox.Show("Цены успешно обновлены!", "Успех",

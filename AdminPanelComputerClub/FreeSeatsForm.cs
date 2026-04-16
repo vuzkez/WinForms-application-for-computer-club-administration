@@ -19,31 +19,39 @@ namespace AdminPanelComputerClub
 
         private void LoadSeats(List<Seat> freeSeats)
         {
-            if (freeSeats == null || freeSeats.Count == 0)
+            try
             {
+                if (freeSeats == null || freeSeats.Count == 0)
+                {
+                    dgvSeats.Columns.Clear();
+                    dgvSeats.Columns.Add("Message", "Информация");
+                    dgvSeats.Rows.Add("Нет свободных компьютеров");
+                    return;
+                }
+
                 dgvSeats.Columns.Clear();
-                dgvSeats.Columns.Add("Message", "Информация");
-                dgvSeats.Rows.Add("Нет свободных компьютеров");
-                return;
+                dgvSeats.Columns.Add("SeatId", "№ ПК");
+                dgvSeats.Columns.Add("SeatRoom", "Тип комнаты");
+                dgvSeats.Columns.Add("Hardware", "Железо");
+                dgvSeats.Columns.Add("Devices", "Девайсы");
+
+                dgvSeats.Columns["SeatId"].Width = 60;
+                dgvSeats.Columns["SeatRoom"].Width = 100;
+
+                foreach (var seat in freeSeats)
+                {
+                    dgvSeats.Rows.Add(
+                        seat.SeatId,
+                        seat.SeatRoom,
+                        seat.Hardware ?? "—",
+                        seat.Devices ?? "—"
+                    );
+                }
             }
-
-            dgvSeats.Columns.Clear();
-            dgvSeats.Columns.Add("SeatId", "№ ПК");
-            dgvSeats.Columns.Add("SeatRoom", "Тип комнаты");
-            dgvSeats.Columns.Add("Hardware", "Железо");
-            dgvSeats.Columns.Add("Devices", "Девайсы");
-
-            dgvSeats.Columns["SeatId"].Width = 60;
-            dgvSeats.Columns["SeatRoom"].Width = 100;
-
-            foreach (var seat in freeSeats)
+            catch (Exception ex)
             {
-                dgvSeats.Rows.Add(
-                    seat.SeatId,
-                    seat.SeatRoom,
-                    seat.Hardware ?? "—",
-                    seat.Devices ?? "—"
-                );
+                MessageBox.Show($"Ошибка при загрузке списка ПК: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

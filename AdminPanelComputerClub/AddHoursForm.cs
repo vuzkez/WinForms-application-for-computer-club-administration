@@ -45,33 +45,43 @@ namespace AdminPanelComputerClub
 
         private void UpdateSessionInfo()
         {
-            if (!int.TryParse(txtSeatId.Text, out int seatId))
+            try
             {
-                ClearSessionInfo();
-                return;
+                if (!int.TryParse(txtSeatId.Text, out int seatId))
+                {
+                    ClearSessionInfo();
+                    return;
+                }
+
+                var activeSession = _operatorService.GetActiveSessionBySeatId(seatId);
+
+                if (activeSession != null)
+                {
+                    var remaining = activeSession.EndTime - DateTime.Now;
+                    lblSessionInfo.Text =
+                        $"Сессия найдена!\n" +
+                        $"ID сессии: {activeSession.SessionId}\n" +
+                        $"Начало: {activeSession.StartTime:dd.MM.yyyy HH:mm}\n" +
+                        $"Окончание: {activeSession.EndTime:dd.MM.yyyy HH:mm}\n" +
+                        $"Осталось: {remaining.Hours}ч {remaining.Minutes}мин\n" +
+                        $"Тариф: {(activeSession.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
+                        $"Текущая сумма: {activeSession.TotalAmount} руб";
+
+                    lblSessionInfo.ForeColor = Color.Green;
+                    SessionId = activeSession.SessionId;
+                    btnOk.Enabled = true;
+                }
+                else
+                {
+                    lblSessionInfo.Text = "На данном ПК нет активной сессии.";
+                    lblSessionInfo.ForeColor = Color.Red;
+                    SessionId = 0;
+                    btnOk.Enabled = false;
+                }
             }
-
-            var activeSession = _operatorService.GetActiveSessionBySeatId(seatId);
-
-            if (activeSession != null)
+            catch (Exception ex)
             {
-                var remaining = activeSession.EndTime - DateTime.Now;
-                lblSessionInfo.Text =
-                    $"Сессия найдена!\n" +
-                    $"ID сессии: {activeSession.SessionId}\n" +
-                    $"Начало: {activeSession.StartTime:dd.MM.yyyy HH:mm}\n" +
-                    $"Окончание: {activeSession.EndTime:dd.MM.yyyy HH:mm}\n" +
-                    $"Осталось: {remaining.Hours}ч {remaining.Minutes}мин\n" +
-                    $"Тариф: {(activeSession.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
-                    $"Текущая сумма: {activeSession.TotalAmount} руб";
-
-                lblSessionInfo.ForeColor = Color.Green;
-                SessionId = activeSession.SessionId;
-                btnOk.Enabled = true;
-            }
-            else
-            {
-                lblSessionInfo.Text = "На данном ПК нет активной сессии.";
+                lblSessionInfo.Text = "Ошибка при получении данных сессий";
                 lblSessionInfo.ForeColor = Color.Red;
                 SessionId = 0;
                 btnOk.Enabled = false;
@@ -88,40 +98,48 @@ namespace AdminPanelComputerClub
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtSeatId.Text, out int seatId))
+            try
             {
-                MessageBox.Show("Введите корректный номер ПК.", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (!int.TryParse(txtSeatId.Text, out int seatId))
+                {
+                    MessageBox.Show("Введите корректный номер ПК.", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var activeSession = _operatorService.GetActiveSessionBySeatId(seatId);
+
+                if (activeSession == null)
+                {
+                    MessageBox.Show($"На ПК #{seatId} нет активной сессии.", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int hours = (int)nudHours.Value;
+
+                var confirmResult = MessageBox.Show(
+                    $"Добавить {hours} час(ов) к сессии на ПК #{seatId}?\n\n" +
+                    $"Текущее окончание: {activeSession.EndTime:dd.MM.yyyy HH:mm}\n" +
+                    $"Новое окончание: {activeSession.EndTime.AddHours(hours):dd.MM.yyyy HH:mm}\n" +
+                    $"Дополнительная сумма: {activeSession.TotalAmount} руб",
+                    "Подтверждение",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    SelectedSeatId = seatId;
+                    AdditionalHours = hours;
+                    SessionId = activeSession.SessionId;
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
             }
-
-            var activeSession = _operatorService.GetActiveSessionBySeatId(seatId);
-
-            if (activeSession == null)
+            catch (Exception ex)
             {
-                MessageBox.Show($"На ПК #{seatId} нет активной сессии.", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            int hours = (int)nudHours.Value;
-
-            var confirmResult = MessageBox.Show(
-                $"Добавить {hours} час(ов) к сессии на ПК #{seatId}?\n\n" +
-                $"Текущее окончание: {activeSession.EndTime:dd.MM.yyyy HH:mm}\n" +
-                $"Новое окончание: {activeSession.EndTime.AddHours(hours):dd.MM.yyyy HH:mm}\n" +
-                $"Дополнительная сумма: {activeSession.TotalAmount} руб",
-                "Подтверждение",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (confirmResult == DialogResult.Yes)
-            {
-                SelectedSeatId = seatId;
-                AdditionalHours = hours;
-                SessionId = activeSession.SessionId;
-                DialogResult = DialogResult.OK;
-                Close();
+                MessageBox.Show($"Ошибка при добавлении часов: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

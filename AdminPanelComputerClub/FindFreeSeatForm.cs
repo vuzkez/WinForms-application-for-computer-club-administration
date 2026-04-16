@@ -13,6 +13,7 @@ namespace AdminPanelComputerClub
     public partial class FindFreeSeatForm : Form
     {
         public string Result { get; private set; }
+
         public FindFreeSeatForm()
         {
             InitializeComponent();
@@ -20,15 +21,27 @@ namespace AdminPanelComputerClub
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
-                Result = "General";
-            else if (radioButton2.Checked)
-                Result = "Vip";
-            else
-                MessageBox.Show("Выберите тип комнаты!", "Ошибка",
+            try
+            {
+                if (radioButton1.Checked)
+                    Result = "General";
+                else if (radioButton2.Checked)
+                    Result = "Vip";
+                else
+                {
+                    MessageBox.Show("Выберите тип комнаты!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-            DialogResult = DialogResult.OK;
-            Close();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
