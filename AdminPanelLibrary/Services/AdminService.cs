@@ -1,15 +1,15 @@
 ﻿using AdminPanelLibrary.Enums;
 using AdminPanelLibrary.Interfaces;
-using AdminPanelLibrary.Repositories;
+using AdminPanelLibrary.RepositoryInterfaces;
 
 namespace AdminPanelLibrary.Entities
 {
-    public class Admin : IAdministrator
+    public class AdminService : IAdministrator
     {
         private readonly ITariffSettingRepository _tariffRepo;
         private readonly ISessionRepository _sessionRepo;
 
-        public Admin(ITariffSettingRepository tariffRepo, ISessionRepository sessionRepo)
+        public AdminService(ITariffSettingRepository tariffRepo, ISessionRepository sessionRepo)
         {
             _tariffRepo = tariffRepo;
             _sessionRepo = sessionRepo;

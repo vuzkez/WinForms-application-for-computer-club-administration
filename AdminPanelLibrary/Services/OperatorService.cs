@@ -1,15 +1,15 @@
 ﻿using AdminPanelLibrary.Enums;
-using AdminPanelLibrary.Repositories;
+using AdminPanelLibrary.RepositoryInterfaces;
 
 namespace AdminPanelLibrary.Entities
 {
-    public class Operator : IOperator
+    public class OperatorService : IOperator
     {
         private readonly ISessionRepository _sessionRepo;
         private readonly ISeatRepository _seatRepo;
         private readonly ITariffSettingRepository _tariffRepo;
 
-        public Operator(
+        public OperatorService(
             ISessionRepository sessionRepo,
             ISeatRepository seatRepo,
             ITariffSettingRepository tariffRepo)

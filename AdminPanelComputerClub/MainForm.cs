@@ -12,24 +12,32 @@ using LinqToDB;
 using AdminPanelLibrary;
 using AdminPanelLibrary.Enums;
 using AdminPanelLibrary.Interfaces;
-using AdminPanelLibrary.Repositories;
 using AdminPanelLibrary.Entities;
+using AdminPanelLibrary.RepositoryInterfaces;
 
 namespace AdminPanelComputerClub
 {
     public partial class MainForm : Form
     {
         private readonly User user;
-        private readonly IDataConnection dataContext;
         private readonly IOperator operatorService;
         private readonly IAdministrator administratorService;
+        private readonly IAuthentication authenticationService;
+        private readonly ISeatRepository seatRepository;
+        private readonly ISessionRepository sessionRepository;
+        private readonly ITariffSettingRepository tariffRepository;
 
-        public MainForm(User user, IOperator operatorService, IAdministrator administratorService, IDataConnection dataContext)
+        public MainForm(User user, IOperator operatorService, IAdministrator administratorService, 
+            IAuthentication authenticationService,ISeatRepository seatRepository,ISessionRepository sessionRepository, 
+            ITariffSettingRepository tariffRepository)
         {
             this.user = user;
             this.operatorService = operatorService;
             this.administratorService = administratorService;
-            this.dataContext = dataContext;
+            this.authenticationService = authenticationService;
+            this.seatRepository = seatRepository;
+            this.sessionRepository = sessionRepository;
+            this.tariffRepository = tariffRepository;
             AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
             MinimumSize = new Size(1305, 740);
@@ -104,19 +112,11 @@ namespace AdminPanelComputerClub
         {
             try
             {
-                using (var db = dataContext.Create())
-                {
-                    var userFromDb = db.GetTable<User>().FirstOrDefault(u => u.UserId == user.UserId);
-                    if (userFromDb != null)
-                    {
-                        userFromDb.IsActive = false;
-                        db.Update(userFromDb);
-                    }
-                }
+                authenticationService.Logout(user.UserId);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Ошибка при деактивации пользователя: {ex.Message}");
+                throw new Exception($"Ошибка при выходе из формы:\n{ex.Message}");
             }
         }
 
@@ -168,11 +168,7 @@ namespace AdminPanelComputerClub
         {
             try
             {
-                var seatRepo = new SeatRepository(dataContext);
-                var tariffRepo = new TariffSettingRepository(dataContext);
-                var sessionRepo = new SessionRepository(dataContext);
-
-                using (var inputDialog = new OpenSessionForm(seatRepo, tariffRepo, sessionRepo))
+                using (var inputDialog = new OpenSessionForm(seatRepository, tariffRepository, sessionRepository))
                 {
                     if (inputDialog.ShowDialog() == DialogResult.OK)
                     {
@@ -330,37 +326,36 @@ namespace AdminPanelComputerClub
                 if (seatId == 0)
                     return;
 
-                using (var db = dataContext.Create())
+                var seats = operatorService.GetAllSeatsWithStatus();
+
+                var seat = seats.FirstOrDefault(s => s.SeatId == seatId);
+                if (seat != null)
                 {
-                    var seat = db.GetTable<Seat>().FirstOrDefault(s => s.SeatId == seatId);
-                    if (seat != null)
+                    var activeSession = operatorService.GetActiveSessionBySeatId(seatId);
+                    string status = "";
+
+                    if (activeSession != null)
                     {
-                        var activeSession = operatorService.GetActiveSessionBySeatId(seatId);
-                        string status = "";
-
-                        if (activeSession != null)
-                        {
-                            var remaining = activeSession.EndTime - DateTime.Now;
-                            status = activeSession.EndTime > DateTime.Now
-                                ? $"Занят до {activeSession.EndTime:HH:mm} (осталось {remaining.Hours}ч {remaining.Minutes}мин)"
-                                : "Свободен";
-                        }
-                        else
-                        {
-                            status = "Свободен";
-                        }
-
-                        MessageBox.Show(
-                            $"ПК №{seat.SeatId}\n" +
-                            $"Тип комнаты: {seat.SeatRoom}\n" +
-                            $"Железо: {seat.Hardware}\n" +
-                            $"Девайсы: {seat.Devices}\n" +
-                            $"Статус: {status}",
-                            "Информация о компьютере",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information
-                        );
+                        var remaining = activeSession.EndTime - DateTime.Now;
+                        status = activeSession.EndTime > DateTime.Now
+                            ? $"Занят до {activeSession.EndTime:HH:mm} (осталось {remaining.Hours}ч {remaining.Minutes}мин)"
+                            : "Свободен";
                     }
+                    else
+                    {
+                        status = "Свободен";
+                    }
+
+                    MessageBox.Show(
+                        $"ПК №{seat.SeatId}\n" +
+                        $"Тип комнаты: {seat.SeatRoom}\n" +
+                        $"Железо: {seat.Hardware}\n" +
+                        $"Девайсы: {seat.Devices}\n" +
+                        $"Статус: {status}",
+                        "Информация о компьютере",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                 }
             }
             catch (Exception ex)

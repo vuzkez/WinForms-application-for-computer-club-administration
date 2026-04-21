@@ -1,9 +1,7 @@
-﻿using System.Configuration.Provider;
-using LinqToDB;
+﻿using LinqToDB;
 using LinqToDB.Data;
-using LinqToDB.DataProvider.SqlServer;
 
-namespace AdminPanelLibrary.Repositories
+namespace AdminPanelLibrary.Database
 {
     public class ConnectionFactory : IDataConnection
     {

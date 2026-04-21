@@ -8,20 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdminPanelLibrary.Entities;
-using AdminPanelLibrary.Repositories;
+using AdminPanelLibrary.Interfaces;
+using AdminPanelLibrary.RepositoryInterfaces;
 using LinqToDB;
 
 namespace AdminPanelComputerClub
 {
     public partial class LoginForm : Form
     {
-        private readonly IDataConnection context;
+        private readonly IAuthentication authenticationService;
+        private readonly IUserRepository userRepo;
         public User CurrentUser { get; private set; }
 
-        public LoginForm(IDataConnection context)
+        public LoginForm(IAuthentication authenticationService,IUserRepository userRepo)
         {
             InitializeComponent();
-            this.context = context;
+            this.authenticationService = authenticationService;
+            this.userRepo = userRepo;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -31,20 +34,19 @@ namespace AdminPanelComputerClub
 
             try
             {
-                using (var db = context.Create())
-                {
-                    var user = db.GetTable<User>()
-                        .FirstOrDefault(u => u.Login == login && u.Password == password);
+                var user = authenticationService.Login(login, password);
 
-                    if (user != null && user.IsActive == false)
-                    {
-                        user.IsActive = true;
-                        CurrentUser = user;
-                        DialogResult = DialogResult.OK;
-                        db.Update(user);
-                        Close();
-                    }
-                    else if (user != null && user.IsActive == true)
+                if (user != null)
+                {
+                    CurrentUser = user;
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                else
+                {
+                    var tempUser = userRepo.GetByLogin(login, password);
+
+                    if (tempUser != null && tempUser.IsActive)
                     {
                         MessageBox.Show("Пользователь уже активен.", "Ошибка",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);

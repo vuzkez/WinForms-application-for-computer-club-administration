@@ -1,5 +1,7 @@
-﻿using AdminPanelLibrary.Entities;
+﻿using AdminPanelLibrary.Database;
+using AdminPanelLibrary.Entities;
 using AdminPanelLibrary.Enums;
+using AdminPanelLibrary.RepositoryInterfaces;
 using LinqToDB;
 using System;
 using System.Collections.Generic;

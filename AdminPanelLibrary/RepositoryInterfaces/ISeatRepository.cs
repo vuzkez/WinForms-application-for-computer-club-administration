@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AdminPanelLibrary.Entities;
 using AdminPanelLibrary.Enums;
 
-namespace AdminPanelLibrary.Repositories
+namespace AdminPanelLibrary.RepositoryInterfaces
 {
     public interface ISeatRepository : IRepository<Seat>
     {

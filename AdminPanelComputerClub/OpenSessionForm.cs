@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdminPanelLibrary.Entities;
 using AdminPanelLibrary.Enums;
-using AdminPanelLibrary.Repositories;
+using AdminPanelLibrary.RepositoryInterfaces;
 
 namespace AdminPanelComputerClub
 {

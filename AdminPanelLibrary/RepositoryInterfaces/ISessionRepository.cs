@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdminPanelLibrary.Entities;
 
-namespace AdminPanelLibrary.Repositories
+namespace AdminPanelLibrary.RepositoryInterfaces
 {
     public interface ISessionRepository : IRepository<Session>
     {

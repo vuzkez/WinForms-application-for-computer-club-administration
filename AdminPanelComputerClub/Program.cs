@@ -1,5 +1,6 @@
 using System.Configuration;
 using AdminPanelLibrary;
+using AdminPanelLibrary.Database;
 using AdminPanelLibrary.Entities;
 using AdminPanelLibrary.Interfaces;
 using AdminPanelLibrary.Repositories;
@@ -25,16 +26,19 @@ namespace AdminPanelComputerClub
             var sessionRepo = new SessionRepository(dataContextFactory);
             var seatRepo = new SeatRepository(dataContextFactory);
             var tariffRepo = new TariffSettingRepository(dataContextFactory);
+            var userRepo = new UserRepository(dataContextFactory);
 
-            IOperator operatorService = new Operator(sessionRepo, seatRepo, tariffRepo);
-            IAdministrator administratorService = new Admin(tariffRepo, sessionRepo);
+            IOperator operatorService = new OperatorService(sessionRepo, seatRepo, tariffRepo);
+            IAdministrator administratorService = new AdminService(tariffRepo, sessionRepo);
+            IAuthentication authenticationService = new AuthenticationService(userRepo);
 
-            using (var loginForm = new LoginForm(dataContextFactory))
+            using (var loginForm = new LoginForm(authenticationService,userRepo))
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
                     User currentUser = loginForm.CurrentUser;
-                    Application.Run(new MainForm(currentUser,operatorService,administratorService,dataContextFactory));
+                    Application.Run(new MainForm(currentUser,operatorService,administratorService,authenticationService,
+                        seatRepo,sessionRepo,tariffRepo));
                 }
             }
         }

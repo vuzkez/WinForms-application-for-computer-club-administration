@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminPanelLibrary.Repositories
+namespace AdminPanelLibrary.RepositoryInterfaces
 {
     public interface ITariffSettingRepository : IRepository<TariffSetting>
     {
