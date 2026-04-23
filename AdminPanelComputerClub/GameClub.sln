@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanelComputerClub", "AdminPanelComputerClub.csproj", "{0FA69045-38D8-49CF-A3C9-AEEA43498C37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClub.GUI", "GameClub.GUI.csproj", "{0FA69045-38D8-49CF-A3C9-AEEA43498C37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanelLibrary", "..\AdminPanelLibrary\AdminPanelLibrary.csproj", "{1EE29A79-8223-473D-AE51-E20BBF59ECCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClub.Library", "..\AdminPanelLibrary\GameClub.Library.csproj", "{1EE29A79-8223-473D-AE51-E20BBF59ECCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
