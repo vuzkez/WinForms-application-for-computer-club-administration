@@ -20,8 +20,7 @@ namespace AdminPanelComputerClub
 
             var connectionStringSettings = ConfigurationManager.ConnectionStrings["SqlGameClubDb"];
 
-            IDataConnection dataContextFactory = ConnectionFactory
-                .GetInstance(connectionStringSettings.ConnectionString,connectionStringSettings.ProviderName);
+            IDataConnection dataContextFactory = new ConnectionFactory(connectionStringSettings.ConnectionString,connectionStringSettings.ProviderName);
 
             var sessionRepo = new SessionRepository(dataContextFactory);
             var seatRepo = new SeatRepository(dataContextFactory);

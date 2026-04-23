@@ -5,21 +5,13 @@ namespace AdminPanelLibrary.Database
 {
     public class ConnectionFactory : IDataConnection
     {
-        private static ConnectionFactory instance;
         private readonly string connectionString;
         private readonly string providerName;
 
-        private ConnectionFactory(string connectionString,string providerName)
+        public ConnectionFactory(string connectionString,string providerName)
         {
             this.connectionString = connectionString;
             this.providerName = providerName;
-        }
-
-        public static ConnectionFactory GetInstance(string connectionString,string providerName)
-        {
-            if (instance == null)
-                instance = new ConnectionFactory(connectionString, providerName);
-            return instance;
         }
 
         public DataConnection Create()
