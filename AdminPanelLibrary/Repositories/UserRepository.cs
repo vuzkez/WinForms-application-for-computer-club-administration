@@ -53,15 +53,5 @@ namespace AdminPanelLibrary.Repositories
             return await db.GetTable<User>()
                 .FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
         }
-
-        public async Task SetUserActiveAsync(int userId, bool isActive)
-        {
-            var user = await db.GetTable<User>().FirstOrDefaultAsync(u => u.UserId == userId);
-            if (user != null)
-            {
-                user.IsActive = isActive;
-                await db.UpdateAsync(user);
-            }
-        }
     }
 }

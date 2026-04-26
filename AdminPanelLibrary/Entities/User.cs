@@ -27,7 +27,5 @@ namespace AdminPanelLibrary.Entities
         [Column(Name = "FullName")]
         public string FullName { get; set; }
 
-        [Column(Name = "IsActive")]
-        public bool IsActive { get; set; }
     }
 }

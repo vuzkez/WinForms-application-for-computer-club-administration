@@ -13,6 +13,7 @@ namespace AdminPanelComputerClub
 {
     public partial class MainForm : Form
     {
+        private System.Windows.Forms.Timer timer;
         private readonly User user;
         private readonly IOperator operatorService;
         private readonly IAdministrator administratorService;
@@ -31,6 +32,11 @@ namespace AdminPanelComputerClub
             MinimumSize = new Size(1305, 740);
             ConfigureUIByRole();
             _ = UpdateSeatColorsAsync();
+
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 60000;
+            timer.Tick += RefreshTimer_Tick;
+            timer.Start();
         }
 
         private void ConfigureUIByRole()
@@ -96,11 +102,12 @@ namespace AdminPanelComputerClub
             }
         }
 
-        private async void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                await authenticationService.LogoutAsync(user.UserId);
+                timer.Stop();
+                timer.Dispose();
             }
             catch (Exception ex)
             {
@@ -335,6 +342,11 @@ namespace AdminPanelComputerClub
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private async void RefreshTimer_Tick(object? sender, EventArgs? e)
+        {
+            await UpdateSeatColorsAsync();
         }
     }
 }

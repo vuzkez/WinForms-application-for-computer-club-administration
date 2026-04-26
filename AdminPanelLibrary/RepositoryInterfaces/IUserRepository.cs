@@ -11,6 +11,5 @@ namespace AdminPanelLibrary.RepositoryInterfaces
     {
         Task<User?> GetByIdAsync(int id);
         Task<User?> GetByLoginAsync(string login, string password);
-        Task SetUserActiveAsync(int userId, bool isActive);
     }
 }
