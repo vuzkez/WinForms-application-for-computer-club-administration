@@ -1,90 +1,74 @@
-﻿using AdminPanelLibrary.Database;
-using AdminPanelLibrary.Entities;
-using AdminPanelLibrary.Enums;
-using AdminPanelLibrary.RepositoryInterfaces;
-using LinqToDB;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdminPanelLibrary.Database;
+using AdminPanelLibrary.Entities;
+using AdminPanelLibrary.Enums;
+using AdminPanelLibrary.RepositoryInterfaces;
+using LinqToDB;
+using LinqToDB.Async;
+using LinqToDB.Data;
 
 namespace AdminPanelLibrary.Repositories
 {
     public class TariffSettingRepository : ITariffSettingRepository
     {
-        private readonly IDataConnection dataConnection;
+        private readonly DataConnection db;
 
-        public TariffSettingRepository(IDataConnection dataConnection)
+        public TariffSettingRepository(DataConnection connection)
         {
-            this.dataConnection = dataConnection;
+            db = connection;
         }
 
-        public void Add(TariffSetting entity)
+        public async Task AddAsync(TariffSetting entity)
         {
-            using (var db = dataConnection.Create())
-            {
-                db.Insert(entity);
-            }
+            await db.InsertAsync(entity);
         }
 
-        public void Update(TariffSetting entity)
+        public async Task UpdateAsync(TariffSetting entity)
         {
-            using (var db = dataConnection.Create())
-            {
-                db.Update(entity);
-            }
+             await db.UpdateAsync(entity);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             throw new NotSupportedException();
         }
 
-        public IEnumerable<TariffSetting> GetAll()
+        public async Task<List<TariffSetting>> GetAllAsync()
         {
-            using (var db = dataConnection.Create())
-            {
-                return db.GetTable<TariffSetting>().ToList();
-            }
+            return await db.GetTable<TariffSetting>().ToListAsync();
         }
 
-        public TariffSetting? GetByType(TariffType tariff)
+        public async Task<TariffSetting?> GetByTypeAsync(TariffType tariff)
         {
-            using (var db = dataConnection.Create()) 
-            {
-                return db.GetTable<TariffSetting>()
-                    .FirstOrDefault(t => t.TypeValue == tariff.ToString());
-            }
+            return await db.GetTable<TariffSetting>()
+                .FirstOrDefaultAsync(t => t.TypeValue == tariff.ToString());
         }
 
-        public decimal GetPrice(TariffType tariff)
+        public async Task<decimal> GetPriceAsync(TariffType tariff)
         {
-            using (var db = dataConnection.Create()) 
-            {
-                var setting = db.GetTable<TariffSetting>()
-                    .FirstOrDefault(t => t.TypeValue == tariff.ToString());
+            var setting = await db.GetTable<TariffSetting>()
+                .FirstOrDefaultAsync(t => t.TypeValue == tariff.ToString());
 
-                if (setting == null)
-                    throw new Exception($"Тариф {tariff} не найден!");
+            if (setting == null)
+                throw new Exception($"Тариф {tariff} не найден!");
 
-                return setting.PricePerHour;
-            }
+            return setting.PricePerHour;
         }
 
-        public void UpdatePrice(TariffType tariff, decimal newPrice)
+        public async Task UpdatePriceAsync(TariffType tariff, decimal newPrice)
         {
-            using (var db = dataConnection.Create()) 
-            {
-                var setting = db.GetTable<TariffSetting>()
-                    .FirstOrDefault(t => t.TypeValue == tariff.ToString());
+            var setting = await db.GetTable<TariffSetting>()
+                .FirstOrDefaultAsync(t => t.TypeValue == tariff.ToString());
 
-                if (setting == null)
-                    throw new Exception($"Тариф {tariff} не найден!");
+            if (setting == null)
+                throw new Exception($"Тариф {tariff} не найден!");
 
-                setting.PricePerHour = newPrice;
-                db.Update(setting);
-            }
+            setting.PricePerHour = newPrice;
+            await db.UpdateAsync(setting);
         }
     }
 }

@@ -17,24 +17,23 @@ namespace AdminPanelComputerClub
     public partial class LoginForm : Form
     {
         private readonly IAuthentication authenticationService;
-        private readonly IUserRepository userRepo;
+
         public User CurrentUser { get; private set; }
 
-        public LoginForm(IAuthentication authenticationService,IUserRepository userRepo)
+        public LoginForm(IAuthentication authenticationService)
         {
             InitializeComponent();
             this.authenticationService = authenticationService;
-            this.userRepo = userRepo;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
             string login = txtLogin.Text;
             string password = txtPassword.Text;
 
             try
             {
-                var user = authenticationService.Login(login, password);
+                var user = await authenticationService.LoginAsync(login, password);
 
                 if (user != null)
                 {
@@ -44,18 +43,8 @@ namespace AdminPanelComputerClub
                 }
                 else
                 {
-                    var tempUser = userRepo.GetByLogin(login, password);
-
-                    if (tempUser != null && tempUser.IsActive)
-                    {
-                        MessageBox.Show("Пользователь уже активен.", "Ошибка",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Неправильный логин или пароль.", "Ошибка",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MessageBox.Show("Неправильный логин или пароль.", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

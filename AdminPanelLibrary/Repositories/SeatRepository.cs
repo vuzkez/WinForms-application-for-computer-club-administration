@@ -8,74 +8,57 @@ using AdminPanelLibrary.Entities;
 using AdminPanelLibrary.Enums;
 using AdminPanelLibrary.RepositoryInterfaces;
 using LinqToDB;
+using LinqToDB.Async;
+using LinqToDB.Data;
 
 namespace AdminPanelLibrary.Repositories
 {
     public class SeatRepository : ISeatRepository
     {
-        private readonly IDataConnection dataConnection;
+        private readonly DataConnection db;
 
-        public SeatRepository(IDataConnection dataConnection)
+        public SeatRepository(DataConnection connection)
         {
-            this.dataConnection = dataConnection;
+            db = connection;
         }
 
-        public void Add(Seat entity)
+        public async Task AddAsync(Seat entity)
         {
-            using (var db = dataConnection.Create())
-            {
-                db.Insert(entity);
-            }
+            await db.InsertAsync(entity);
         }
 
-        public void Update(Seat entity)
+        public async Task UpdateAsync(Seat entity)
         {
-            using (var db = dataConnection.Create())
-            {
-                db.Update(entity);
-            }
+            await db.UpdateAsync(entity);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            using (var db = dataConnection.Create())
-            {
-                var seat = db.GetTable<Seat>().FirstOrDefault(s => s.SeatId == id);
-                if (seat != null)
-                    db.Delete(seat);
-            }
+            var seat = await db.GetTable<Seat>().FirstOrDefaultAsync(s => s.SeatId == id);
+            if (seat != null)
+                await db.DeleteAsync(seat);
         }
 
-        public IEnumerable<Seat> GetAll()
+        public async Task<List<Seat>> GetAllAsync()
         {
-            using (var db = dataConnection.Create())
-            {
-                return db.GetTable<Seat>().ToList();
-            }
+             return await db.GetTable<Seat>().ToListAsync();
         }
 
-        public IEnumerable<Seat> GetFreeSeatsByRoomType(string roomType)
+        public async Task<List<Seat>> GetFreeSeatsByRoomTypeAsync(string roomType)
         {
-            using (var db = dataConnection.Create())
-            {
-                return db.GetTable<Seat>()
-                    .Where(s => s.SeatRoom == roomType && s.StatusValue == (int)SeatStatus.Free)
-                    .ToList();
-            }
+            return await db.GetTable<Seat>()
+                .Where(s => s.SeatRoom == roomType && s.StatusValue == (int)SeatStatus.Free).ToListAsync();
         }
 
-        public void UpdateStatus(int seatId, SeatStatus seatStatus)
+        public async Task UpdateStatusAsync(int seatId, SeatStatus seatStatus)
         {
-            using (var db = dataConnection.Create()) 
-            {
-                var seat = db.GetTable<Seat>().FirstOrDefault(s => s.SeatId == seatId);
+            var seat = await db.GetTable<Seat>().FirstOrDefaultAsync(s => s.SeatId == seatId);
 
-                if (seat == null)
-                    throw new Exception($"Место {seatId} не найдено!");
+            if (seat == null)
+                throw new Exception($"Место {seatId} не найдено!");
 
-                seat.Status = seatStatus;
-                db.Update(seat);
-            }
+            seat.Status = seatStatus;
+            await db.UpdateAsync(seat);
         }
     }
 }

@@ -10,8 +10,8 @@ namespace AdminPanelLibrary.RepositoryInterfaces
 {
     public interface ITariffSettingRepository : IRepository<TariffSetting>
     {
-        decimal GetPrice(TariffType tariff);
-        void UpdatePrice(TariffType tariff, decimal newPrice);
-        TariffSetting? GetByType(TariffType tariff);
+        Task<decimal> GetPriceAsync(TariffType tariff);
+        Task UpdatePriceAsync(TariffType tariff, decimal newPrice);
+        Task<TariffSetting?> GetByTypeAsync(TariffType tariff);
     }
 }

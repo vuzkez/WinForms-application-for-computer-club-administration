@@ -25,7 +25,7 @@ namespace AdminPanelComputerClub
             nudNightPrice.Value = nightPrice;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -49,8 +49,8 @@ namespace AdminPanelComputerClub
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    _adminService.ConfigureTariff(TariffType.Day, newDayPrice);
-                    _adminService.ConfigureTariff(TariffType.Night, newNightPrice);
+                    await _adminService.ConfigureTariffAsync(TariffType.Day, newDayPrice);
+                    await _adminService.ConfigureTariffAsync(TariffType.Night, newNightPrice);
 
                     MessageBox.Show("Цены успешно обновлены!", "Успех",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);

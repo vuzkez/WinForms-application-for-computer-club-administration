@@ -8,9 +8,9 @@ namespace AdminPanelLibrary.RepositoryInterfaces
 {
     public interface IRepository<T> where T : class
     {
-        void Update(T entity);
-        void Add(T entity);
-        void Delete(int id);
-        IEnumerable<T> GetAll();
+        Task UpdateAsync(T entity);
+        Task AddAsync(T entity);
+        Task DeleteAsync(int id);
+        Task<List<T>> GetAllAsync();
     }
 }

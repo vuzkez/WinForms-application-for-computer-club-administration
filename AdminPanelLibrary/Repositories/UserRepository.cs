@@ -7,79 +7,60 @@ using AdminPanelLibrary.Database;
 using AdminPanelLibrary.Entities;
 using AdminPanelLibrary.RepositoryInterfaces;
 using LinqToDB;
+using LinqToDB.Async;
+using LinqToDB.Data;
 
 namespace AdminPanelLibrary.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly IDataConnection dataConnection;
+        private readonly DataConnection db;
 
-        public UserRepository(IDataConnection dataConnection)
+        public UserRepository(DataConnection connection)
         {
-            this.dataConnection = dataConnection;
+            db = connection;
         }
 
-        public void Add(User entity)
+        public async Task AddAsync(User entity)
         {
-            using (var db = dataConnection.Create())
-            {
-                db.Insert(entity);
-            }
+            await db.InsertAsync(entity);
         }
 
-        public void Update(User entity)
+        public async Task UpdateAsync(User entity)
         {
-            using (var db = dataConnection.Create())
-            {
-                db.Update(entity);
-            }
+            await db.UpdateAsync(entity);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            using (var db = dataConnection.Create())
-            {
-                var user = db.GetTable<User>().FirstOrDefault(u => u.UserId == id);
-                if (user != null)
-                    db.Delete(user);
-            }
+            var user = await db.GetTable<User>().FirstOrDefaultAsync(u => u.UserId == id);
+            if (user != null)
+                await db.DeleteAsync(user);
         }
 
-        public IEnumerable<User> GetAll()
+        public async Task<List<User>> GetAllAsync()
         {
-            using (var db = dataConnection.Create())
-            {
-                return db.GetTable<User>().ToList();
-            }
+            return await db.GetTable<User>().ToListAsync();
         }
 
-        public User? GetById(int id)
+        public async Task<User?> GetByIdAsync(int id)
         {
-            using (var db = dataConnection.Create())
-            {
-                return db.GetTable<User>().FirstOrDefault(u => u.UserId == id);
-            }
+            return await db.GetTable<User>().FirstOrDefaultAsync(u => u.UserId == id);
         }
 
-        public User? GetByLogin(string login, string password)
+        public async Task<User?> GetByLoginAsync(string login, string password)
         {
-            using (var db = dataConnection.Create())
-            {
-                return db.GetTable<User>()
-                    .FirstOrDefault(u => u.Login == login && u.Password == password);
-            }
+            return await db.GetTable<User>()
+                .FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
         }
 
-        public void SetUserActive(int userId, bool isActive)
+        public async Task SetUserActiveAsync(int userId, bool isActive)
         {
-            using (var db = dataConnection.Create())
+            var user = await db.GetTable<User>().FirstOrDefaultAsync(u => u.UserId == userId);
+            if (user != null)
             {
-                var user = db.GetTable<User>().FirstOrDefault(u => u.UserId == userId);
-                if (user != null)
-                {
-                    user.IsActive = isActive;
-                    db.Update(user);
-                }
+                user.IsActive = isActive;
+                await db.UpdateAsync(user);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace AdminPanelLibrary.RepositoryInterfaces
 {
     public interface ISeatRepository : IRepository<Seat>
     {
-        IEnumerable<Seat> GetFreeSeatsByRoomType(string roomType);
-        void UpdateStatus(int seatId,SeatStatus seatStatus);
+        Task<List<Seat>> GetFreeSeatsByRoomTypeAsync(string roomType);
+        Task UpdateStatusAsync(int seatId,SeatStatus seatStatus);
     }
 }

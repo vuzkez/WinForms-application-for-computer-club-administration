@@ -9,8 +9,8 @@ namespace AdminPanelLibrary.Interfaces
 {
     public interface IAuthentication
     {
-        User? Login(string login, string password);
-        void Logout(int userId);
-        bool IsUserActive(int userId);
+        Task<User?> LoginAsync(string login, string password);
+        Task LogoutAsync(int userId);
+        Task<bool> IsUserActiveAsync(int userId);
     }
 }

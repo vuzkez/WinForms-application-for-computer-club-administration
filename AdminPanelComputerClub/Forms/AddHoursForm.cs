@@ -43,7 +43,7 @@ namespace AdminPanelComputerClub
             UpdateSessionInfo();
         }
 
-        private void UpdateSessionInfo()
+        private async void UpdateSessionInfo()
         {
             try
             {
@@ -53,7 +53,7 @@ namespace AdminPanelComputerClub
                     return;
                 }
 
-                var activeSession = _operatorService.GetActiveSessionBySeatId(seatId);
+                var activeSession = await _operatorService.GetActiveSessionBySeatIdAsync(seatId);
 
                 if (activeSession != null)
                 {
@@ -96,7 +96,7 @@ namespace AdminPanelComputerClub
             btnOk.Enabled = false;
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private async void btnOk_Click(object sender, EventArgs e)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace AdminPanelComputerClub
                     return;
                 }
 
-                var activeSession = _operatorService.GetActiveSessionBySeatId(seatId);
+                var activeSession = await _operatorService.GetActiveSessionBySeatIdAsync(seatId);
 
                 if (activeSession == null)
                 {

@@ -9,8 +9,9 @@ namespace AdminPanelLibrary.RepositoryInterfaces
 {
     public interface ISessionRepository : IRepository<Session>
     {
-        Session? GetActiveSessionBySeatId(int seatId);
-        decimal GetTotalRevenue(DateTime from, DateTime to);
-        IEnumerable<Session> GetActiveSessions();
+        Task<Session?> GetActiveSessionBySeatIdAsync(int seatId);
+        Task<decimal> GetTotalRevenueAsync(DateTime from, DateTime to);
+        Task<List<Session>> GetActiveSessionsAsync();
+        Task<Session?> GetByIdAsync(int sessionId);
     }
 }

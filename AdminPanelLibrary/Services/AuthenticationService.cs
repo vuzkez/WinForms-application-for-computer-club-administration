@@ -3,44 +3,74 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdminPanelLibrary.Database;
 using AdminPanelLibrary.Interfaces;
-using AdminPanelLibrary.RepositoryInterfaces;
+using AdminPanelLibrary.UnitOfWork;
 
 namespace AdminPanelLibrary.Entities
 {
     public class AuthenticationService : IAuthentication
     {
-        private readonly IUserRepository userRepo;
+        private readonly IDataConnection dataConnection;
 
-        public AuthenticationService(IUserRepository userRepo)
+        public AuthenticationService(IDataConnection dataConnection)
         {
-            this.userRepo = userRepo;
+            this.dataConnection = dataConnection;
         }
-        public bool IsUserActive(int userId)
+        public async Task<bool> IsUserActiveAsync(int userId)
         {
-            var user = userRepo.GetById(userId);
-
-            if (user == null) 
-                return false;
-            return user.IsActive;
-        }
-
-        public User? Login(string login, string password)
-        {
-            var user = userRepo.GetByLogin(login,password);
-
-            if (user != null && user.IsActive == false)
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
             {
-                userRepo.SetUserActive(user.UserId, true);
-                return user;
-            } 
-                
-            return null;
+                var user = await uow.Users.GetByIdAsync(userId);
+
+                if (user == null)
+                    return false;
+                return user.IsActive;
+            }
         }
 
-        public void Logout(int userId)
+        public async Task<User?> LoginAsync(string login, string password)
         {
-            userRepo.SetUserActive(userId, false);
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                var user = await uow.Users.GetByLoginAsync(login, password);
+
+                if (user != null && user.IsActive == false)
+                {
+                    uow.BeginTransaction();
+                    try
+                    {
+                        await uow.Users.SetUserActiveAsync(user.UserId, true);
+                        uow.Commit();
+                    }
+                    catch 
+                    { 
+                        uow.RollBack();
+                        throw;
+                    }
+                    return user;
+                }
+
+                return null;
+            }
+        }
+
+        public async Task LogoutAsync(int userId)
+        {
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                uow.BeginTransaction();
+                try
+                {
+                    await uow.Users.SetUserActiveAsync(userId, false);
+                    uow.Commit();
+                }
+                catch
+                {
+                    uow.RollBack();
+                    throw;
+                }
+            }
         }
     }
 }

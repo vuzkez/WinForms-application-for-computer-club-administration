@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using LinqToDB;
+using System.Windows.Forms;
 using AdminPanelLibrary;
 using AdminPanelLibrary.Enums;
 using AdminPanelLibrary.Interfaces;
 using AdminPanelLibrary.Entities;
-using AdminPanelLibrary.RepositoryInterfaces;
 
 namespace AdminPanelComputerClub
 {
@@ -23,26 +17,20 @@ namespace AdminPanelComputerClub
         private readonly IOperator operatorService;
         private readonly IAdministrator administratorService;
         private readonly IAuthentication authenticationService;
-        private readonly ISeatRepository seatRepository;
-        private readonly ISessionRepository sessionRepository;
-        private readonly ITariffSettingRepository tariffRepository;
 
-        public MainForm(User user, IOperator operatorService, IAdministrator administratorService, 
-            IAuthentication authenticationService,ISeatRepository seatRepository,ISessionRepository sessionRepository, 
-            ITariffSettingRepository tariffRepository)
+        public MainForm(User user, IOperator operatorService, IAdministrator administratorService,
+            IAuthentication authenticationService)
         {
             this.user = user;
             this.operatorService = operatorService;
             this.administratorService = administratorService;
             this.authenticationService = authenticationService;
-            this.seatRepository = seatRepository;
-            this.sessionRepository = sessionRepository;
-            this.tariffRepository = tariffRepository;
+
             AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
             MinimumSize = new Size(1305, 740);
             ConfigureUIByRole();
-            UpdateSeatColors();
+            _ = UpdateSeatColorsAsync();
         }
 
         private void ConfigureUIByRole()
@@ -61,11 +49,11 @@ namespace AdminPanelComputerClub
             }
         }
 
-        private void UpdateSeatColors()
+        private async Task UpdateSeatColorsAsync()
         {
             try
             {
-                var seats = operatorService.GetAllSeatsWithStatus();
+                var seats = await operatorService.GetAllSeatsWithStatusAsync();
 
                 var seatButtons = new Dictionary<int, Button>()
                 {
@@ -97,50 +85,42 @@ namespace AdminPanelComputerClub
         {
             switch (seat.Status)
             {
-                case SeatStatus.Free:
+                case SeatStatus.Free: 
                     return Color.Green;
-                case SeatStatus.Expiring:
+                case SeatStatus.Expiring: 
                     return Color.Yellow;
-                case SeatStatus.Busy:
+                case SeatStatus.Busy: 
                     return Color.Red;
-                default:
+                default: 
                     return Color.Gray;
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private async void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                authenticationService.Logout(user.UserId);
+                await authenticationService.LogoutAsync(user.UserId);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ошибка при выходе из формы:\n{ex.Message}");
-            }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            UpdateSeatColors();
-        }
-
-        private void btnInfoUser_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                MessageBox.Show($"Пользователь: {user.FullName}.\nРоль: {user.UserRole}.",
-                    "Информация по пользователю",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                MessageBox.Show($"Ошибка при выходе: {ex.Message}", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnFindFreeSeat_Click(object sender, EventArgs e)
+        private async void btnRefresh_Click(object sender, EventArgs e)
+        {
+            await UpdateSeatColorsAsync();
+        }
+
+        private void btnInfoUser_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Пользователь: {user.FullName}.\nРоль: {user.UserRole}.",
+                "Информация о пользователе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private async void btnFindFreeSeat_Click(object sender, EventArgs e)
         {
             try
             {
@@ -148,8 +128,7 @@ namespace AdminPanelComputerClub
                 {
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
-                        var seats = operatorService.FindFreeSeat(dialog.Result);
-
+                        var seats = await operatorService.FindFreeSeatAsync(dialog.Result);
                         using (var showFreeSeat = new FreeSeatsForm(seats, dialog.Result))
                         {
                             showFreeSeat.ShowDialog();
@@ -164,17 +143,22 @@ namespace AdminPanelComputerClub
             }
         }
 
-        private void btnOpenSession_Click(object sender, EventArgs e)
+        private async void btnOpenSession_Click(object sender, EventArgs e)
         {
             try
             {
-                using (var inputDialog = new OpenSessionForm(seatRepository, tariffRepository, sessionRepository))
+                using (var inputDialog = new OpenSessionForm(operatorService,administratorService))
                 {
                     if (inputDialog.ShowDialog() == DialogResult.OK)
                     {
-                        operatorService.OpenSession(inputDialog.SelectedSeatId, user.UserId, inputDialog.SelectedTariff, inputDialog.StartTime,
-                        inputDialog.StartTime.AddHours(inputDialog.Hours));
-                        UpdateSeatColors();
+                        await operatorService.OpenSessionAsync(
+                            inputDialog.SelectedSeatId,
+                            user.UserId,
+                            inputDialog.SelectedTariff,
+                            inputDialog.StartTime,
+                            inputDialog.StartTime.AddHours(inputDialog.Hours)
+                        );
+                        await UpdateSeatColorsAsync();
                     }
                 }
             }
@@ -185,7 +169,7 @@ namespace AdminPanelComputerClub
             }
         }
 
-        private void btnCloseSession_Click(object sender, EventArgs e)
+        private async void btnCloseSession_Click(object sender, EventArgs e)
         {
             try
             {
@@ -195,19 +179,19 @@ namespace AdminPanelComputerClub
                     {
                         if (!int.TryParse(dialog.Result, out int seatId))
                         {
-                            MessageBox.Show("Введите корректный номер ПК (целое число).", "Ошибка",
+                            MessageBox.Show("Введите корректный номер ПК.", "Ошибка",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
                         if (seatId < 1 || seatId > 35)
                         {
-                            MessageBox.Show($"ПК #{seatId} не существует. Доступны номера 1-35.", "Ошибка",
+                            MessageBox.Show($"ПК #{seatId} не существует.", "Ошибка",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
-                        var activeSession = operatorService.GetActiveSessionBySeatId(seatId);
+                        var activeSession = await operatorService.GetActiveSessionBySeatIdAsync(seatId);
 
                         if (activeSession == null)
                         {
@@ -228,9 +212,8 @@ namespace AdminPanelComputerClub
 
                         if (confirmResult == DialogResult.Yes)
                         {
-                            operatorService.CloseSession(activeSession.SessionId);
-                            UpdateSeatColors();
-
+                            await operatorService.CloseSessionAsync(activeSession.SessionId);
+                            await UpdateSeatColorsAsync();
                             MessageBox.Show($"Сессия на ПК #{seatId} успешно закрыта.", "Успех",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -244,7 +227,7 @@ namespace AdminPanelComputerClub
             }
         }
 
-        private void btnAddHours_Click(object sender, EventArgs e)
+        private async void btnAddHours_Click(object sender, EventArgs e)
         {
             try
             {
@@ -252,8 +235,8 @@ namespace AdminPanelComputerClub
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                     {
-                        operatorService.AddHours(form.SessionId, form.AdditionalHours);
-                        UpdateSeatColors();
+                        await operatorService.AddHoursAsync(form.SessionId, form.AdditionalHours);
+                        await UpdateSeatColorsAsync();
 
                         MessageBox.Show($"Добавлено {form.AdditionalHours} час(ов) к сессии на ПК #{form.SelectedSeatId}",
                             "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -267,7 +250,7 @@ namespace AdminPanelComputerClub
             }
         }
 
-        private void btnRevenue_Click(object sender, EventArgs e)
+        private async void btnRevenue_Click(object sender, EventArgs e)
         {
             try
             {
@@ -278,68 +261,57 @@ namespace AdminPanelComputerClub
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при открытии формы выручки: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnAdminPanel_Click(object sender, EventArgs e)
+        private async void btnAdminPanel_Click(object sender, EventArgs e)
         {
             try
             {
-                decimal dayPrice = administratorService.GetTariffPrice(TariffType.Day);
-                decimal nightPrice = administratorService.GetTariffPrice(TariffType.Night);
+                var dayPrice = await administratorService.GetTariffPriceAsync(TariffType.Day);
+                var nightPrice = await administratorService.GetTariffPriceAsync(TariffType.Night);
 
                 using (var form = new TariffForm(administratorService, dayPrice, nightPrice))
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                     {
-                        UpdateSeatColors();
+                        await UpdateSeatColorsAsync();
                         lblStatus.Text = "Тарифы обновлены";
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при открытии панели администратора: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void SeatButton_Click(object sender, EventArgs e)
+        private async void SeatButton_Click(object sender, EventArgs e)
         {
             try
             {
                 Button? clickedButton = sender as Button;
-                if (clickedButton == null)
-                    return;
+                if (clickedButton == null) return;
 
-                string text = clickedButton.Text;
-                int seatId = 0;
+                var match = Regex.Match(clickedButton.Text, @"\d+");
+                if (!match.Success) return;
 
-                var match = Regex.Match(text, @"\d+");
-                if (match.Success)
-                {
-                    seatId = int.Parse(match.Value);
-                }
-
-                if (seatId == 0)
-                    return;
-
-                var seats = operatorService.GetAllSeatsWithStatus();
-
+                int seatId = int.Parse(match.Value);
+                var seats = await operatorService.GetAllSeatsWithStatusAsync();
                 var seat = seats.FirstOrDefault(s => s.SeatId == seatId);
+
                 if (seat != null)
                 {
-                    var activeSession = operatorService.GetActiveSessionBySeatId(seatId);
-                    string status = "";
+                    var activeSession = await operatorService.GetActiveSessionBySeatIdAsync(seatId);
+                    string status;
 
-                    if (activeSession != null)
+                    if (activeSession != null && activeSession.EndTime > DateTime.Now)
                     {
                         var remaining = activeSession.EndTime - DateTime.Now;
-                        status = activeSession.EndTime > DateTime.Now
-                            ? $"Занят до {activeSession.EndTime:HH:mm} (осталось {remaining.Hours}ч {remaining.Minutes}мин)"
-                            : "Свободен";
+                        status = $"Занят до {activeSession.EndTime:HH:mm} (осталось {remaining.Hours}ч {remaining.Minutes}мин)";
                     }
                     else
                     {
@@ -360,8 +332,8 @@ namespace AdminPanelComputerClub
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при получении информации о ПК: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

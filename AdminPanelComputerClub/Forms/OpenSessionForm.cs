@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using AdminPanelLibrary.Entities;
+using AdminPanelLibrary;
 using AdminPanelLibrary.Enums;
-using AdminPanelLibrary.RepositoryInterfaces;
+using AdminPanelLibrary.Interfaces;
 
 namespace AdminPanelComputerClub
 {
@@ -20,27 +14,30 @@ namespace AdminPanelComputerClub
         public DateTime StartTime { get; private set; }
         public int Hours { get; private set; }
 
-        private readonly ISeatRepository _seatRepo;
-        private readonly ITariffSettingRepository _tariffRepo;
-        private readonly ISessionRepository _sessionRepo;
+        private readonly IOperator _operatorService;
+        private readonly IAdministrator _adminService;
         private decimal dayPrice;
         private decimal nightPrice;
 
-        public OpenSessionForm(
-            ISeatRepository seatRepo,
-            ITariffSettingRepository tariffRepo,
-            ISessionRepository sessionRepo)
+        public OpenSessionForm(IOperator operatorService, IAdministrator adminService)
         {
             InitializeComponent();
+            _operatorService = operatorService;
+            _adminService = adminService;
 
+            LoadTariffsAsync();
+
+            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker1.MinDate = DateTime.Now;
+            textBox3.Text = "1";
+        }
+
+        private async void LoadTariffsAsync()
+        {
             try
             {
-                _seatRepo = seatRepo;
-                _tariffRepo = tariffRepo;
-                _sessionRepo = sessionRepo;
-
-                dayPrice = _tariffRepo.GetPrice(TariffType.Day);
-                nightPrice = _tariffRepo.GetPrice(TariffType.Night);
+                dayPrice = await _adminService.GetTariffPriceAsync(TariffType.Day);
+                nightPrice = await _adminService.GetTariffPriceAsync(TariffType.Night);
 
                 radioButton1.Text = $"Дневной ({dayPrice} руб/час)";
                 radioButton2.Text = $"Ночной ({nightPrice} руб/час)";
@@ -51,26 +48,22 @@ namespace AdminPanelComputerClub
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
-
-            dateTimePicker1.Value = DateTime.Now;
-            dateTimePicker1.MinDate = DateTime.Now;
-            textBox3.Text = "1";
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private async void btnOk_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!int.TryParse(textBox2.Text, out int seatId) || seatId <= 0 || seatId > 35)
                 {
-                    MessageBox.Show($"Введите корректный номер ПК (1-35)", "Ошибка",
+                    MessageBox.Show("Введите корректный номер ПК (1-35)", "Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (!radioButton1.Checked && !radioButton2.Checked)
                 {
-                    MessageBox.Show("Выберите хотя бы один вариант тарифа!", "Ошибка",
+                    MessageBox.Show("Выберите тариф!", "Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -82,7 +75,7 @@ namespace AdminPanelComputerClub
                     return;
                 }
 
-                var seats = _seatRepo.GetAll();
+                var seats = await _operatorService.GetAllSeatsWithStatusAsync();
                 var seat = seats.FirstOrDefault(s => s.SeatId == seatId);
 
                 if (seat == null)
@@ -92,11 +85,11 @@ namespace AdminPanelComputerClub
                     return;
                 }
 
-                var activeSession = _sessionRepo.GetActiveSessionBySeatId(seatId);
+                var activeSession = await _operatorService.GetActiveSessionBySeatIdAsync(seatId);
 
                 if (activeSession != null)
                 {
-                    MessageBox.Show($"ПК #{seatId} уже занят! Сессия активна до {activeSession.EndTime}",
+                    MessageBox.Show($"ПК #{seatId} уже занят! Сессия активна до {activeSession.EndTime:HH:mm}",
                         "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }

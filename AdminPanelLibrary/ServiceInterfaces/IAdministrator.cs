@@ -4,8 +4,8 @@ namespace AdminPanelLibrary.Interfaces
 {
     public interface IAdministrator
     {
-        decimal GetRevenue(DateTime from, DateTime to);
-        void ConfigureTariff(TariffType tariff, decimal newPrice);
-        decimal GetTariffPrice(TariffType tariff);
+        Task<decimal> GetRevenueAsync(DateTime from, DateTime to);
+        Task ConfigureTariffAsync(TariffType tariff, decimal newPrice);
+        Task<decimal> GetTariffPriceAsync(TariffType tariff);
     }
 }

@@ -1,85 +1,70 @@
-﻿using AdminPanelLibrary.Database;
-using AdminPanelLibrary.Entities;
-using AdminPanelLibrary.RepositoryInterfaces;
-using LinqToDB;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdminPanelLibrary.Database;
+using AdminPanelLibrary.Entities;
+using AdminPanelLibrary.RepositoryInterfaces;
+using LinqToDB;
+using LinqToDB.Async;
+using LinqToDB.Data;
 
 namespace AdminPanelLibrary.Repositories
 {
     public class SessionRepository : ISessionRepository
     {
-        private readonly IDataConnection dataConnection;
+        private readonly DataConnection db;
 
-        public SessionRepository(IDataConnection dataConnection)
+        public SessionRepository(DataConnection connection)
         {
-            this.dataConnection = dataConnection;
+            db = connection;
         }
 
-        public void Add(Session entity)
+        public async Task AddAsync(Session entity)
         {
-            using (var db = dataConnection.Create())
-            {
-                db.Insert(entity);
-            }
+            await db.InsertAsync(entity);
         }
 
-        public void Update(Session entity)
+        public async Task UpdateAsync(Session entity)
         {
-            using (var db = dataConnection.Create())
-            {
-                db.Update(entity);
-            }
+             await db.UpdateAsync(entity);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            using (var db = dataConnection.Create())
-            {
-                var session = db.GetTable<Session>().FirstOrDefault(s => s.SessionId == id);
-                if (session != null)
-                    db.Delete(session);
-            }
+            var session = await db.GetTable<Session>().FirstOrDefaultAsync(s => s.SessionId == id);
+            if (session != null)
+                await db.DeleteAsync(session);
         }
 
-        public IEnumerable<Session> GetAll()
+        public async Task<List<Session>> GetAllAsync()
         {
-            using (var db = dataConnection.Create())
-            {
-                return db.GetTable<Session>().ToList();
-            }
+             return await db.GetTable<Session>().ToListAsync();
         }
 
-        public Session? GetActiveSessionBySeatId(int seatId)
+        public async Task<Session?> GetActiveSessionBySeatIdAsync(int seatId)
         {
-            using (var db = dataConnection.Create()) 
-            {
-                return db.GetTable<Session>()
-                    .FirstOrDefault(s => s.SeatId == seatId && s.EndTime > DateTime.Now);
-            }
+            return await db.GetTable<Session>()
+                .FirstOrDefaultAsync(s => s.SeatId == seatId && s.EndTime > DateTime.Now);
         }
 
-        public IEnumerable<Session> GetActiveSessions()
+        public async Task<List<Session>> GetActiveSessionsAsync()
         {
-            using (var db = dataConnection.Create()) 
-            {
-                return db.GetTable<Session>()
-                    .Where(s => s.EndTime > DateTime.Now)
-                    .ToList(); 
-            }
+            return await db.GetTable<Session>()
+                .Where(s => s.EndTime > DateTime.Now).ToListAsync(); 
         }
 
-        public decimal GetTotalRevenue(DateTime from, DateTime to)
+        public async Task<decimal> GetTotalRevenueAsync(DateTime from, DateTime to)
         {
-            using (var db = dataConnection.Create())  
-            {
-                return db.GetTable<Session>()
-                    .Where(s => s.EndTime >= from && s.EndTime <= to)
-                    .Sum(s => s.TotalAmount); 
-            }
+            return await db.GetTable<Session>()
+                .Where(s => s.EndTime >= from && s.EndTime <= to)
+                .SumAsync(s => s.TotalAmount); 
+        }
+        public async Task<Session?> GetByIdAsync(int sessionId)
+        {
+            return await db.GetTable<Session>()
+                .FirstOrDefaultAsync(s => s.SessionId == sessionId);
         }
     }
 }

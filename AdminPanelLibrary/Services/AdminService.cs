@@ -1,33 +1,41 @@
 ﻿using AdminPanelLibrary.Enums;
 using AdminPanelLibrary.Interfaces;
-using AdminPanelLibrary.RepositoryInterfaces;
+using AdminPanelLibrary.Database;
+using AdminPanelLibrary.UnitOfWork;
 
 namespace AdminPanelLibrary.Entities
 {
     public class AdminService : IAdministrator
     {
-        private readonly ITariffSettingRepository _tariffRepo;
-        private readonly ISessionRepository _sessionRepo;
+        private readonly IDataConnection dataConnection;
 
-        public AdminService(ITariffSettingRepository tariffRepo, ISessionRepository sessionRepo)
+        public AdminService(IDataConnection dataConnection)
         {
-            _tariffRepo = tariffRepo;
-            _sessionRepo = sessionRepo;
+            this.dataConnection = dataConnection;
         }
 
-        public void ConfigureTariff(TariffType tariff, decimal newPrice)
+        public async Task ConfigureTariffAsync(TariffType tariff, decimal newPrice)
         {
-            _tariffRepo.UpdatePrice(tariff, newPrice);
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                await uow.Tariffs.UpdatePriceAsync(tariff, newPrice);
+            }
         }
 
-        public decimal GetRevenue(DateTime from, DateTime to)
+        public async Task<decimal> GetRevenueAsync(DateTime from, DateTime to)
         {
-            return _sessionRepo.GetTotalRevenue(from, to);
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                return await uow.Sessions.GetTotalRevenueAsync(from, to);
+            }
         }
 
-        public decimal GetTariffPrice(TariffType tariff)
+        public async Task<decimal> GetTariffPriceAsync(TariffType tariff)
         {
-            return _tariffRepo.GetPrice(tariff);
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                return await uow.Tariffs.GetPriceAsync(tariff);
+            }
         }
     }
 }

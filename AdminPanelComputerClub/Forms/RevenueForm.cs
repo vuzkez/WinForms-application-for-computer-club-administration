@@ -21,14 +21,14 @@ namespace AdminPanelComputerClub
             _adminService = adminService;
         }
 
-        private void btnShow_Click(object sender, EventArgs e)
+        private async void btnShow_Click(object sender, EventArgs e)
         {
             try
             {
                 DateTime from = dtpFrom.Value.Date;
                 DateTime to = dtpTo.Value.Date.AddDays(1);
 
-                decimal revenue = _adminService.GetRevenue(from, to);
+                decimal revenue = await _adminService.GetRevenueAsync(from, to);
 
                 txtTotal.Text = $"{revenue:N2} руб";
             }
