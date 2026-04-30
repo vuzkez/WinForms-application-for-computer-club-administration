@@ -135,7 +135,7 @@ namespace GameClub.GUI
                 {
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
-                        var seats = await operatorService.FindFreeSeatAsync(dialog.Result);
+                        var seats = await operatorService.FindFreeSeatsAsync(dialog.Result);
                         using (var showFreeSeat = new FreeSeatsForm(seats, dialog.Result))
                         {
                             showFreeSeat.ShowDialog();

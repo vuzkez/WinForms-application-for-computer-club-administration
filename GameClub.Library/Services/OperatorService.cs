@@ -100,7 +100,7 @@ namespace GameClub.Library.Entities
             }
         }
 
-        public async Task<List<Seat>> FindFreeSeatAsync(string roomType)
+        public async Task<List<Seat>> FindFreeSeatsAsync(string roomType)
         {
             using (var uow = new UnitOfWorkLinq2db(dataConnection))
             {
@@ -159,6 +159,20 @@ namespace GameClub.Library.Entities
             using (var uow = new UnitOfWorkLinq2db(dataConnection))
             {
                 return await uow.Sessions.GetActiveSessionBySeatIdAsync(seatId);
+            }
+        }
+
+        public async Task<List<Seat>> FindActiveSeatsAsync()
+        {
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                var seats = await uow.Seats.GetAllAsync();
+                var activeSessions = await uow.Sessions.GetActiveSessionsAsync();
+
+                if (activeSessions.Count == 0)
+                    return new List<Seat>();
+
+                return seats.Where(seat => activeSessions.Any(session => session.SeatId == seat.SeatId)).ToList();
             }
         }
     }

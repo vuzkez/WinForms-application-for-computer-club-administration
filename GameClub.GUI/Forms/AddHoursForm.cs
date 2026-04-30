@@ -1,14 +1,11 @@
+using GameClub.Library;
+using GameClub.Library.Entities;
+using GameClub.Library.Enums;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using GameClub.Library;
-using GameClub.Library.Enums;
 
 namespace GameClub.GUI
 {
@@ -18,120 +15,140 @@ namespace GameClub.GUI
         public int AdditionalHours { get; private set; }
         public int SessionId { get; private set; }
 
-        private readonly IOperator _operatorService;
+        private readonly IOperator operatorService;
+        private List<Seat> activeSeats;
+        private Dictionary<int, Session> sessionsBySeat;
 
         public AddHoursForm(IOperator operatorService)
         {
             InitializeComponent();
-            _operatorService = operatorService;
+            this.operatorService = operatorService;
 
             nudHours.Minimum = 1;
             nudHours.Maximum = 24;
             nudHours.Value = 1;
 
-            txtSeatId.TextChanged += TxtSeatId_TextChanged;
-            nudHours.ValueChanged += NudHours_ValueChanged;
+            LoadActiveSeatsAsync();
         }
 
-        private void TxtSeatId_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSessionInfo();
-        }
-
-        private void NudHours_ValueChanged(object sender, EventArgs e)
-        {
-            UpdateSessionInfo();
-        }
-
-        private async void UpdateSessionInfo()
+        private async void LoadActiveSeatsAsync()
         {
             try
             {
-                if (!int.TryParse(txtSeatId.Text, out int seatId))
+                activeSeats = await operatorService.FindActiveSeatsAsync();
+
+                if (activeSeats == null || activeSeats.Count == 0)
                 {
-                    ClearSessionInfo();
+                    cmbActiveSeats.Items.Add("Нет активных сессий");
+                    cmbActiveSeats.Enabled = false;
+                    btnOk.Enabled = false;
+                    lblSessionInfo.Text = "Нет активных сессий";
                     return;
                 }
 
-                var activeSession = await _operatorService.GetActiveSessionBySeatIdAsync(seatId);
-
-                if (activeSession != null)
+                sessionsBySeat = new Dictionary<int, Session>();
+                foreach (var seat in activeSeats)
                 {
-                    var remaining = activeSession.EndTime - DateTime.Now;
-                    lblSessionInfo.Text =
-                        $"Сессия найдена!\n" +
-                        $"ID сессии: {activeSession.SessionId}\n" +
-                        $"Начало: {activeSession.StartTime:dd.MM.yyyy HH:mm}\n" +
-                        $"Окончание: {activeSession.EndTime:dd.MM.yyyy HH:mm}\n" +
-                        $"Осталось: {remaining.Hours}ч {remaining.Minutes}мин\n" +
-                        $"Тариф: {(activeSession.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
-                        $"Текущая сумма: {activeSession.TotalAmount} руб";
-
-                    lblSessionInfo.ForeColor = Color.Green;
-                    SessionId = activeSession.SessionId;
-                    btnOk.Enabled = true;
+                    var session = await operatorService.GetActiveSessionBySeatIdAsync(seat.SeatId);
+                    if (session != null)
+                    {
+                        sessionsBySeat[seat.SeatId] = session;
+                    }
                 }
-                else
+
+                cmbActiveSeats.DisplayMember = "Text";
+                cmbActiveSeats.ValueMember = "Value";
+
+                var items = activeSeats.Select(seat => new
                 {
-                    lblSessionInfo.Text = "На данном ПК нет активной сессии.";
-                    lblSessionInfo.ForeColor = Color.Red;
-                    SessionId = 0;
-                    btnOk.Enabled = false;
+                    Text = $"ПК #{seat.SeatId} — {seat.SeatRoom}",
+                    Value = seat.SeatId
+                }).ToList();
+
+                cmbActiveSeats.DataSource = items;
+                cmbActiveSeats.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки активных сессий: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+            }
+        }
+
+        private void cmbActiveSeats_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbActiveSeats.SelectedItem == null) return;
+
+                dynamic selected = cmbActiveSeats.SelectedItem;
+                int seatId = selected.Value;
+
+                var seat = activeSeats.FirstOrDefault(s => s.SeatId == seatId);
+                var session = sessionsBySeat?.GetValueOrDefault(seatId);
+
+                if (seat != null && session != null)
+                {
+                    UpdateSessionInfo(seat, session);
                 }
             }
             catch (Exception ex)
             {
-                lblSessionInfo.Text = "Ошибка при получении данных сессий";
+                lblSessionInfo.Text = "Ошибка при получении данных сессии";
                 lblSessionInfo.ForeColor = Color.Red;
                 SessionId = 0;
                 btnOk.Enabled = false;
             }
         }
 
-        private void ClearSessionInfo()
+        private void UpdateSessionInfo(Seat seat, Session session)
         {
-            lblSessionInfo.Text = "Введите номер ПК...";
-            lblSessionInfo.ForeColor = Color.Gray;
-            SessionId = 0;
-            btnOk.Enabled = false;
+            var remaining = session.EndTime - DateTime.Now;
+
+            lblSessionInfo.Text =
+                $"Сессия найдена!\n" +
+                $"ПК: #{seat.SeatId} ({seat.SeatRoom})\n" +
+                $"Статус: {(seat.Status == SeatStatus.Expiring ? "Скоро освободится" : "Занят")}\n" +
+                $"ID сессии: {session.SessionId}\n" +
+                $"Начало: {session.StartTime:dd.MM.yyyy HH:mm}\n" +
+                $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
+                $"Осталось: {Math.Max(0, remaining.Hours)}ч {Math.Max(0, remaining.Minutes)}мин\n" +
+                $"Тариф: {(session.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
+                $"Текущая сумма: {session.TotalAmount} руб";
+
+            lblSessionInfo.ForeColor = Color.Green;
+            SessionId = session.SessionId;
+            SelectedSeatId = seat.SeatId;
+            btnOk.Enabled = true;
         }
 
         private async void btnOk_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!int.TryParse(txtSeatId.Text, out int seatId))
+                if (SessionId == 0)
                 {
-                    MessageBox.Show("Введите корректный номер ПК.", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                var activeSession = await _operatorService.GetActiveSessionBySeatIdAsync(seatId);
-
-                if (activeSession == null)
-                {
-                    MessageBox.Show($"На ПК #{seatId} нет активной сессии.", "Ошибка",
+                    MessageBox.Show("Выберите активную сессию.", "Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 int hours = (int)nudHours.Value;
+                var session = sessionsBySeat?.GetValueOrDefault(SelectedSeatId);
 
                 var confirmResult = MessageBox.Show(
-                    $"Добавить {hours} час(ов) к сессии на ПК #{seatId}?\n\n" +
-                    $"Текущее окончание: {activeSession.EndTime:dd.MM.yyyy HH:mm}\n" +
-                    $"Новое окончание: {activeSession.EndTime.AddHours(hours):dd.MM.yyyy HH:mm}\n" +
-                    $"Дополнительная сумма: {activeSession.TotalAmount} руб",
+                    $"Добавить {hours} час(ов) к сессии на ПК #{SelectedSeatId}?\n\n" +
+                    $"Текущее окончание: {session?.EndTime:dd.MM.yyyy HH:mm}\n" +
+                    $"Новое окончание: {session?.EndTime.AddHours(hours):dd.MM.yyyy HH:mm}\n" +
+                    $"Текущая сумма: {session?.TotalAmount} руб",
                     "Подтверждение",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    SelectedSeatId = seatId;
                     AdditionalHours = hours;
-                    SessionId = activeSession.SessionId;
                     DialogResult = DialogResult.OK;
                     Close();
                 }
