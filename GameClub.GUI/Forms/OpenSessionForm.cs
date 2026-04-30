@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using GameClub.Library;
 using GameClub.Library.Enums;
 using GameClub.Library.Interfaces;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GameClub.GUI
 {
@@ -19,6 +20,7 @@ namespace GameClub.GUI
         private decimal dayPrice;
         private decimal nightPrice;
 
+        // Конструктор для ручного ввода
         public OpenSessionForm(IOperator operatorService, IAdministrator adminService)
         {
             InitializeComponent();
@@ -30,6 +32,29 @@ namespace GameClub.GUI
             dateTimePicker1.Value = DateTime.Now;
             dateTimePicker1.MinDate = DateTime.Now;
             textBox3.Text = "1";
+
+            textBox2.Visible = true;
+            lblSelectedSeatInfo.Visible = false;
+        }
+
+        // Конструктор с предзаполненным ПК
+        public OpenSessionForm(IOperator operatorService, IAdministrator adminService, int seatId)
+        {
+            InitializeComponent();
+            _operatorService = operatorService;
+            _adminService = adminService;
+
+            LoadTariffsAsync();
+
+            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker1.MinDate = DateTime.Now;
+            textBox3.Text = "1";
+
+            // Скрываем поле ввода, показываем текст
+            textBox2.Visible = false;
+            lblSelectedSeatInfo.Visible = true;
+            lblSelectedSeatInfo.Text = $"Выбрано место номер: {seatId}";
+            SelectedSeatId = seatId;
         }
 
         private async void LoadTariffsAsync()
@@ -54,11 +79,21 @@ namespace GameClub.GUI
         {
             try
             {
-                if (!int.TryParse(textBox2.Text, out int seatId) || seatId <= 0 || seatId > 35)
+                int seatId;
+
+                // Если есть выбранное место - берем его
+                if (lblSelectedSeatInfo.Visible)
                 {
-                    MessageBox.Show("Введите корректный номер ПК (1-35)", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    seatId = SelectedSeatId;
+                }
+                else
+                {
+                    if (!int.TryParse(textBox2.Text, out seatId) || seatId <= 0 || seatId > 35)
+                    {
+                        MessageBox.Show("Введите корректный номер ПК (1-35)", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
 
                 if (!radioButton1.Checked && !radioButton2.Checked)

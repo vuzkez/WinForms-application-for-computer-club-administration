@@ -43,14 +43,14 @@ namespace GameClub.GUI
                 }
                 else
                 {
-                    MessageBox.Show("������������ ����� ��� ������.", "������",
+                    MessageBox.Show("Неправильный логин или пароль.", "Ошибка",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"������ ����������� � ���� ������:\n{ex.Message}",
-                    "������", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Неудалось подключиться к БД:\n{ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

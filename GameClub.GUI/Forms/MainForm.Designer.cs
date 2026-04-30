@@ -110,7 +110,6 @@ namespace GameClub.GUI
             pnlBottom = new Panel();
             btnAddHours = new Button();
             btnCloseSession = new Button();
-            btnOpenSession = new Button();
             btnInfoUser = new Button();
             btnFindFreeSeat = new Button();
             btnRefresh = new Button();
@@ -254,6 +253,7 @@ namespace GameClub.GUI
             btnGen1.Size = new Size(75, 68);
             btnGen1.TabIndex = 5;
             btnGen1.Text = "ПК #1";
+            btnGen1.Click += SeatButton_Click;
             // 
             // btnGen2
             // 
@@ -262,6 +262,7 @@ namespace GameClub.GUI
             btnGen2.Size = new Size(75, 68);
             btnGen2.TabIndex = 6;
             btnGen2.Text = "ПК #2";
+            btnGen2.Click += SeatButton_Click;
             // 
             // btnGen3
             // 
@@ -270,6 +271,7 @@ namespace GameClub.GUI
             btnGen3.Size = new Size(75, 68);
             btnGen3.TabIndex = 7;
             btnGen3.Text = "ПК #3";
+            btnGen3.Click += SeatButton_Click;
             // 
             // btnGen4
             // 
@@ -278,6 +280,7 @@ namespace GameClub.GUI
             btnGen4.Size = new Size(75, 68);
             btnGen4.TabIndex = 8;
             btnGen4.Text = "ПК #4";
+            btnGen4.Click += SeatButton_Click;
             // 
             // btnGen5
             // 
@@ -286,6 +289,7 @@ namespace GameClub.GUI
             btnGen5.Size = new Size(75, 68);
             btnGen5.TabIndex = 9;
             btnGen5.Text = "ПК #5";
+            btnGen5.Click += SeatButton_Click;
             // 
             // btnGen6
             // 
@@ -294,6 +298,7 @@ namespace GameClub.GUI
             btnGen6.Size = new Size(75, 68);
             btnGen6.TabIndex = 10;
             btnGen6.Text = "ПК #6";
+            btnGen6.Click += SeatButton_Click;
             // 
             // btnGen7
             // 
@@ -302,6 +307,7 @@ namespace GameClub.GUI
             btnGen7.Size = new Size(75, 68);
             btnGen7.TabIndex = 11;
             btnGen7.Text = "ПК #7";
+            btnGen7.Click += SeatButton_Click;
             // 
             // btnGen8
             // 
@@ -310,6 +316,7 @@ namespace GameClub.GUI
             btnGen8.Size = new Size(75, 68);
             btnGen8.TabIndex = 12;
             btnGen8.Text = "ПК #8";
+            btnGen8.Click += SeatButton_Click;
             // 
             // btnGen9
             // 
@@ -318,6 +325,7 @@ namespace GameClub.GUI
             btnGen9.Size = new Size(75, 68);
             btnGen9.TabIndex = 13;
             btnGen9.Text = "ПК #9";
+            btnGen9.Click += SeatButton_Click;
             // 
             // btnGen10
             // 
@@ -326,6 +334,7 @@ namespace GameClub.GUI
             btnGen10.Size = new Size(75, 68);
             btnGen10.TabIndex = 14;
             btnGen10.Text = "ПК #10";
+            btnGen10.Click += SeatButton_Click;
             // 
             // btnGen11
             // 
@@ -334,6 +343,7 @@ namespace GameClub.GUI
             btnGen11.Size = new Size(75, 68);
             btnGen11.TabIndex = 15;
             btnGen11.Text = "ПК #11";
+            btnGen11.Click += SeatButton_Click;
             // 
             // btnGen12
             // 
@@ -342,6 +352,7 @@ namespace GameClub.GUI
             btnGen12.Size = new Size(75, 68);
             btnGen12.TabIndex = 16;
             btnGen12.Text = "ПК #12";
+            btnGen12.Click += SeatButton_Click;
             // 
             // btnGen13
             // 
@@ -350,6 +361,7 @@ namespace GameClub.GUI
             btnGen13.Size = new Size(75, 68);
             btnGen13.TabIndex = 17;
             btnGen13.Text = "ПК #13";
+            btnGen13.Click += SeatButton_Click;
             // 
             // btnGen14
             // 
@@ -358,6 +370,7 @@ namespace GameClub.GUI
             btnGen14.Size = new Size(75, 68);
             btnGen14.TabIndex = 18;
             btnGen14.Text = "ПК #14";
+            btnGen14.Click += SeatButton_Click;
             // 
             // btnGen15
             // 
@@ -366,6 +379,7 @@ namespace GameClub.GUI
             btnGen15.Size = new Size(75, 68);
             btnGen15.TabIndex = 19;
             btnGen15.Text = "ПК #15";
+            btnGen15.Click += SeatButton_Click;
             // 
             // btnGen16
             // 
@@ -374,6 +388,7 @@ namespace GameClub.GUI
             btnGen16.Size = new Size(75, 68);
             btnGen16.TabIndex = 20;
             btnGen16.Text = "ПК #16";
+            btnGen16.Click += SeatButton_Click;
             // 
             // btnGen17
             // 
@@ -382,6 +397,7 @@ namespace GameClub.GUI
             btnGen17.Size = new Size(75, 68);
             btnGen17.TabIndex = 21;
             btnGen17.Text = "ПК #17";
+            btnGen17.Click += SeatButton_Click;
             // 
             // btnGen18
             // 
@@ -390,6 +406,7 @@ namespace GameClub.GUI
             btnGen18.Size = new Size(75, 68);
             btnGen18.TabIndex = 22;
             btnGen18.Text = "ПК #18";
+            btnGen18.Click += SeatButton_Click;
             // 
             // btnGen19
             // 
@@ -398,6 +415,7 @@ namespace GameClub.GUI
             btnGen19.Size = new Size(75, 68);
             btnGen19.TabIndex = 23;
             btnGen19.Text = "ПК #19";
+            btnGen19.Click += SeatButton_Click;
             // 
             // btnGen20
             // 
@@ -406,6 +424,7 @@ namespace GameClub.GUI
             btnGen20.Size = new Size(75, 68);
             btnGen20.TabIndex = 24;
             btnGen20.Text = "ПК #20";
+            btnGen20.Click += SeatButton_Click;
             // 
             // btnGen21
             // 
@@ -414,6 +433,7 @@ namespace GameClub.GUI
             btnGen21.Size = new Size(75, 68);
             btnGen21.TabIndex = 25;
             btnGen21.Text = "ПК #21";
+            btnGen21.Click += SeatButton_Click;
             // 
             // btnGen22
             // 
@@ -422,6 +442,7 @@ namespace GameClub.GUI
             btnGen22.Size = new Size(75, 68);
             btnGen22.TabIndex = 26;
             btnGen22.Text = "ПК #22";
+            btnGen22.Click += SeatButton_Click;
             // 
             // btnGen23
             // 
@@ -430,6 +451,7 @@ namespace GameClub.GUI
             btnGen23.Size = new Size(75, 68);
             btnGen23.TabIndex = 27;
             btnGen23.Text = "ПК #23";
+            btnGen23.Click += SeatButton_Click;
             // 
             // btnGen24
             // 
@@ -438,6 +460,7 @@ namespace GameClub.GUI
             btnGen24.Size = new Size(75, 68);
             btnGen24.TabIndex = 28;
             btnGen24.Text = "ПК #24";
+            btnGen24.Click += SeatButton_Click;
             // 
             // btnGen25
             // 
@@ -446,6 +469,7 @@ namespace GameClub.GUI
             btnGen25.Size = new Size(75, 68);
             btnGen25.TabIndex = 29;
             btnGen25.Text = "ПК #25";
+            btnGen25.Click += SeatButton_Click;
             // 
             // pnlRight
             // 
@@ -491,6 +515,7 @@ namespace GameClub.GUI
             btnVip1.Size = new Size(70, 70);
             btnVip1.TabIndex = 1;
             btnVip1.Text = "VIP #26";
+            btnVip1.Click += SeatButton_Click;
             // 
             // btnVip2
             // 
@@ -499,6 +524,7 @@ namespace GameClub.GUI
             btnVip2.Size = new Size(70, 70);
             btnVip2.TabIndex = 2;
             btnVip2.Text = "VIP #27";
+            btnVip2.Click += SeatButton_Click;
             // 
             // btnVip3
             // 
@@ -507,6 +533,7 @@ namespace GameClub.GUI
             btnVip3.Size = new Size(70, 70);
             btnVip3.TabIndex = 3;
             btnVip3.Text = "VIP #28";
+            btnVip3.Click += SeatButton_Click;
             // 
             // btnVip4
             // 
@@ -515,6 +542,7 @@ namespace GameClub.GUI
             btnVip4.Size = new Size(70, 70);
             btnVip4.TabIndex = 4;
             btnVip4.Text = "VIP #29";
+            btnVip4.Click += SeatButton_Click;
             // 
             // btnVip5
             // 
@@ -523,6 +551,7 @@ namespace GameClub.GUI
             btnVip5.Size = new Size(70, 70);
             btnVip5.TabIndex = 5;
             btnVip5.Text = "VIP #30";
+            btnVip5.Click += SeatButton_Click;
             // 
             // pnlVipEntrance
             // 
@@ -578,6 +607,7 @@ namespace GameClub.GUI
             btnVip6.Size = new Size(70, 70);
             btnVip6.TabIndex = 1;
             btnVip6.Text = "VIP #31";
+            btnVip6.Click += SeatButton_Click;
             // 
             // btnVip7
             // 
@@ -586,6 +616,7 @@ namespace GameClub.GUI
             btnVip7.Size = new Size(70, 70);
             btnVip7.TabIndex = 2;
             btnVip7.Text = "VIP #32";
+            btnVip7.Click += SeatButton_Click;
             // 
             // btnVip8
             // 
@@ -594,6 +625,7 @@ namespace GameClub.GUI
             btnVip8.Size = new Size(70, 70);
             btnVip8.TabIndex = 3;
             btnVip8.Text = "VIP #33";
+            btnVip8.Click += SeatButton_Click;
             // 
             // btnVip9
             // 
@@ -602,6 +634,7 @@ namespace GameClub.GUI
             btnVip9.Size = new Size(70, 70);
             btnVip9.TabIndex = 4;
             btnVip9.Text = "VIP #34";
+            btnVip9.Click += SeatButton_Click;
             // 
             // btnVip10
             // 
@@ -610,6 +643,7 @@ namespace GameClub.GUI
             btnVip10.Size = new Size(70, 70);
             btnVip10.TabIndex = 5;
             btnVip10.Text = "VIP #35";
+            btnVip10.Click += SeatButton_Click;
             // 
             // pnlBottom
             // 
@@ -617,7 +651,6 @@ namespace GameClub.GUI
             pnlBottom.BackColor = Color.FromArgb(45, 45, 50);
             pnlBottom.Controls.Add(btnAddHours);
             pnlBottom.Controls.Add(btnCloseSession);
-            pnlBottom.Controls.Add(btnOpenSession);
             pnlBottom.Controls.Add(btnInfoUser);
             pnlBottom.Controls.Add(btnFindFreeSeat);
             pnlBottom.Controls.Add(btnRefresh);
@@ -633,9 +666,9 @@ namespace GameClub.GUI
             btnAddHours.BackColor = Color.Red;
             btnAddHours.FlatStyle = FlatStyle.Flat;
             btnAddHours.ForeColor = Color.White;
-            btnAddHours.Location = new Point(839, 12);
+            btnAddHours.Location = new Point(525, 6);
             btnAddHours.Name = "btnAddHours";
-            btnAddHours.Size = new Size(158, 36);
+            btnAddHours.Size = new Size(158, 42);
             btnAddHours.TabIndex = 7;
             btnAddHours.Text = "Добавить часы";
             btnAddHours.UseVisualStyleBackColor = false;
@@ -646,35 +679,22 @@ namespace GameClub.GUI
             btnCloseSession.BackColor = Color.LightSalmon;
             btnCloseSession.FlatStyle = FlatStyle.Flat;
             btnCloseSession.ForeColor = Color.White;
-            btnCloseSession.Location = new Point(679, 12);
+            btnCloseSession.Location = new Point(365, 6);
             btnCloseSession.Name = "btnCloseSession";
-            btnCloseSession.Size = new Size(154, 36);
+            btnCloseSession.Size = new Size(154, 42);
             btnCloseSession.TabIndex = 6;
             btnCloseSession.Text = "Закрыть сессию";
             btnCloseSession.UseVisualStyleBackColor = false;
             btnCloseSession.Click += btnCloseSession_Click;
-            // 
-            // btnOpenSession
-            // 
-            btnOpenSession.BackColor = Color.FromArgb(0, 0, 192);
-            btnOpenSession.FlatStyle = FlatStyle.Flat;
-            btnOpenSession.ForeColor = Color.White;
-            btnOpenSession.Location = new Point(505, 12);
-            btnOpenSession.Name = "btnOpenSession";
-            btnOpenSession.Size = new Size(168, 36);
-            btnOpenSession.TabIndex = 5;
-            btnOpenSession.Text = "Открыть сессию";
-            btnOpenSession.UseVisualStyleBackColor = false;
-            btnOpenSession.Click += btnOpenSession_Click;
             // 
             // btnInfoUser
             // 
             btnInfoUser.BackColor = Color.LightSeaGreen;
             btnInfoUser.FlatStyle = FlatStyle.Flat;
             btnInfoUser.ForeColor = Color.White;
-            btnInfoUser.Location = new Point(10, 12);
+            btnInfoUser.Location = new Point(6, 6);
             btnInfoUser.Name = "btnInfoUser";
-            btnInfoUser.Size = new Size(143, 36);
+            btnInfoUser.Size = new Size(143, 42);
             btnInfoUser.TabIndex = 4;
             btnInfoUser.Text = "Пользователь";
             btnInfoUser.UseVisualStyleBackColor = false;
@@ -683,13 +703,14 @@ namespace GameClub.GUI
             // btnFindFreeSeat
             // 
             btnFindFreeSeat.BackColor = Color.SteelBlue;
+            btnFindFreeSeat.Cursor = Cursors.IBeam;
             btnFindFreeSeat.FlatStyle = FlatStyle.Flat;
             btnFindFreeSeat.ForeColor = Color.White;
-            btnFindFreeSeat.Location = new Point(160, 12);
+            btnFindFreeSeat.Location = new Point(156, 6);
             btnFindFreeSeat.Name = "btnFindFreeSeat";
-            btnFindFreeSeat.Size = new Size(203, 36);
+            btnFindFreeSeat.Size = new Size(203, 42);
             btnFindFreeSeat.TabIndex = 0;
-            btnFindFreeSeat.Text = "Найти свободный ПК";
+            btnFindFreeSeat.Text = "Найти свободный ПК\nОткрыть сессию";
             btnFindFreeSeat.UseVisualStyleBackColor = false;
             btnFindFreeSeat.Click += btnFindFreeSeat_Click;
             // 
@@ -698,9 +719,9 @@ namespace GameClub.GUI
             btnRefresh.BackColor = Color.DarkGreen;
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(369, 12);
+            btnRefresh.Location = new Point(689, 6);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(130, 36);
+            btnRefresh.Size = new Size(130, 42);
             btnRefresh.TabIndex = 1;
             btnRefresh.Text = "Обновить карту";
             btnRefresh.UseVisualStyleBackColor = false;
@@ -711,9 +732,9 @@ namespace GameClub.GUI
             btnRevenue.BackColor = Color.DarkOrange;
             btnRevenue.FlatStyle = FlatStyle.Flat;
             btnRevenue.ForeColor = Color.White;
-            btnRevenue.Location = new Point(1003, 12);
+            btnRevenue.Location = new Point(999, 6);
             btnRevenue.Name = "btnRevenue";
-            btnRevenue.Size = new Size(120, 36);
+            btnRevenue.Size = new Size(120, 42);
             btnRevenue.TabIndex = 2;
             btnRevenue.Text = "Выручка";
             btnRevenue.UseVisualStyleBackColor = false;
@@ -724,9 +745,9 @@ namespace GameClub.GUI
             btnAdminPanel.BackColor = Color.Purple;
             btnAdminPanel.FlatStyle = FlatStyle.Flat;
             btnAdminPanel.ForeColor = Color.White;
-            btnAdminPanel.Location = new Point(1129, 12);
+            btnAdminPanel.Location = new Point(1125, 6);
             btnAdminPanel.Name = "btnAdminPanel";
-            btnAdminPanel.Size = new Size(152, 36);
+            btnAdminPanel.Size = new Size(152, 42);
             btnAdminPanel.TabIndex = 3;
             btnAdminPanel.Text = "Настроить цену тарифа";
             btnAdminPanel.UseVisualStyleBackColor = false;
@@ -736,15 +757,15 @@ namespace GameClub.GUI
             // 
             statusStrip.ImageScalingSize = new Size(24, 24);
             statusStrip.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip.Location = new Point(0, 668);
+            statusStrip.Location = new Point(0, 678);
             statusStrip.Name = "statusStrip";
-            statusStrip.Size = new Size(1289, 32);
+            statusStrip.Size = new Size(1289, 22);
             statusStrip.TabIndex = 9;
             // 
             // lblStatus
             // 
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(135, 25);
+            lblStatus.Size = new Size(88, 17);
             lblStatus.Text = "Готов к работе";
             // 
             // MainForm
@@ -772,41 +793,6 @@ namespace GameClub.GUI
             statusStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
-            btnGen1.Click += SeatButton_Click;
-            btnGen2.Click += SeatButton_Click;
-            btnGen3.Click += SeatButton_Click;
-            btnGen4.Click += SeatButton_Click;
-            btnGen5.Click += SeatButton_Click;
-            btnGen6.Click += SeatButton_Click;
-            btnGen7.Click += SeatButton_Click;
-            btnGen8.Click += SeatButton_Click;
-            btnGen9.Click += SeatButton_Click;
-            btnGen10.Click += SeatButton_Click;
-            btnGen11.Click += SeatButton_Click;
-            btnGen12.Click += SeatButton_Click;
-            btnGen13.Click += SeatButton_Click;
-            btnGen14.Click += SeatButton_Click;
-            btnGen15.Click += SeatButton_Click;
-            btnGen16.Click += SeatButton_Click;
-            btnGen17.Click += SeatButton_Click;
-            btnGen18.Click += SeatButton_Click;
-            btnGen19.Click += SeatButton_Click;
-            btnGen20.Click += SeatButton_Click;
-            btnGen21.Click += SeatButton_Click;
-            btnGen22.Click += SeatButton_Click;
-            btnGen23.Click += SeatButton_Click;
-            btnGen24.Click += SeatButton_Click;
-            btnGen25.Click += SeatButton_Click;
-            btnVip1.Click += SeatButton_Click;
-            btnVip2.Click += SeatButton_Click;
-            btnVip3.Click += SeatButton_Click;
-            btnVip4.Click += SeatButton_Click;
-            btnVip5.Click += SeatButton_Click;
-            btnVip6.Click += SeatButton_Click;
-            btnVip7.Click += SeatButton_Click;
-            btnVip8.Click += SeatButton_Click;
-            btnVip9.Click += SeatButton_Click;
-            btnVip10.Click += SeatButton_Click;
         }
 
         #endregion
@@ -819,7 +805,6 @@ namespace GameClub.GUI
         private Label lblEntranceTitle;
         private Label lblRegistration;
         private Button btnInfoUser;
-        private Button btnOpenSession;
         private Button btnCloseSession;
         private Button btnAddHours;
     }

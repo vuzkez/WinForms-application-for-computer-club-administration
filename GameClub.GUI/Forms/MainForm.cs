@@ -136,9 +136,28 @@ namespace GameClub.GUI
                     if (dialog.ShowDialog() == DialogResult.OK)
                     {
                         var seats = await operatorService.FindFreeSeatsAsync(dialog.Result);
-                        using (var showFreeSeat = new FreeSeatsForm(seats, dialog.Result))
+                        using (var freeSeatsForm = new FreeSeatsForm(seats, dialog.Result))
                         {
-                            showFreeSeat.ShowDialog();
+                            if (freeSeatsForm.ShowDialog() == DialogResult.OK && freeSeatsForm.SelectedSeat != null)
+                            {
+                                using (var openSessionForm = new OpenSessionForm(operatorService, administratorService,
+                                    freeSeatsForm.SelectedSeat.SeatId))
+                                {
+                                    if (openSessionForm.ShowDialog() == DialogResult.OK)
+                                    {
+                                        await operatorService.OpenSessionAsync(
+                                            openSessionForm.SelectedSeatId,
+                                            user.UserId,
+                                            openSessionForm.SelectedTariff,
+                                            openSessionForm.StartTime,
+                                            openSessionForm.StartTime.AddHours(openSessionForm.Hours)
+                                        );
+                                        await UpdateSeatColorsAsync();
+                                        MessageBox.Show($"Сессия на ПК #{openSessionForm.SelectedSeatId} успешно открыта!",
+                                                            "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -175,55 +194,18 @@ namespace GameClub.GUI
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private async void btnCloseSession_Click(object sender, EventArgs e)
         {
             try
             {
-                using (var dialog = new InputDialog("Введите номер ПК для закрытия сессии:", "Закрытие сессии"))
+                using (var form = new CloseSessionForm(operatorService))
                 {
-                    if (dialog.ShowDialog() == DialogResult.OK)
+                    if (form.ShowDialog() == DialogResult.OK)
                     {
-                        if (!int.TryParse(dialog.Result, out int seatId))
-                        {
-                            MessageBox.Show("Введите корректный номер ПК.", "Ошибка",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        if (seatId < 1 || seatId > 35)
-                        {
-                            MessageBox.Show($"ПК #{seatId} не существует.", "Ошибка",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        var activeSession = await operatorService.GetActiveSessionBySeatIdAsync(seatId);
-
-                        if (activeSession == null)
-                        {
-                            MessageBox.Show($"На ПК #{seatId} нет активной сессии.", "Ошибка",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        var confirmResult = MessageBox.Show(
-                            $"Закрыть сессию на ПК #{seatId}?\n\n" +
-                            $"Начало: {activeSession.StartTime:dd.MM.yyyy HH:mm}\n" +
-                            $"Окончание: {activeSession.EndTime:dd.MM.yyyy HH:mm}\n" +
-                            $"Тариф: {(activeSession.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
-                            $"Сумма: {activeSession.TotalAmount} руб",
-                            "Подтверждение закрытия",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question);
-
-                        if (confirmResult == DialogResult.Yes)
-                        {
-                            await operatorService.CloseSessionAsync(activeSession.SessionId);
-                            await UpdateSeatColorsAsync();
-                            MessageBox.Show($"Сессия на ПК #{seatId} успешно закрыта.", "Успех",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                        await operatorService.CloseSessionAsync(form.SessionId);
+                        await UpdateSeatColorsAsync();
+                        MessageBox.Show($"Сессия на ПК #{form.SelectedSeatId} успешно закрыта.",
+                            "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }

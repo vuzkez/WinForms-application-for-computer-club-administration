@@ -7,14 +7,24 @@ namespace GameClub.GUI
 {
     public partial class FreeSeatsForm : Form
     {
+        public Seat SelectedSeat { get; private set; }
+
         public FreeSeatsForm(List<Seat> freeSeats, string roomType)
         {
             InitializeComponent();
+            SelectedSeat = null;
 
             Text = $"Свободные ПК - {roomType}";
             lblTitle.Text = $"Список свободных ПК в комнате {roomType}";
 
             LoadSeats(freeSeats);
+            ConfigureButtons();
+        }
+
+        private void ConfigureButtons()
+        {
+            btnOpenSession.Visible = true;
+            btnCancel.Text = "Отмена";
         }
 
         private void LoadSeats(List<Seat> freeSeats)
@@ -26,6 +36,7 @@ namespace GameClub.GUI
                     dgvSeats.Columns.Clear();
                     dgvSeats.Columns.Add("Message", "Информация");
                     dgvSeats.Rows.Add("Нет свободных компьютеров");
+                    btnOpenSession.Enabled = false;
                     return;
                 }
 
@@ -47,6 +58,8 @@ namespace GameClub.GUI
                         seat.Devices ?? "—"
                     );
                 }
+
+                btnOpenSession.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -55,9 +68,78 @@ namespace GameClub.GUI
             }
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private void dgvSeats_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            if (e.RowIndex >= 0 && dgvSeats.Rows[e.RowIndex].Cells["SeatId"].Value != null)
+            {
+                SelectCurrentRow(e.RowIndex);
+                OpenSession();
+            }
+        }
+
+        private void dgvSeats_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvSeats.SelectedRows.Count > 0)
+            {
+                int seatId = Convert.ToInt32(dgvSeats.SelectedRows[0].Cells["SeatId"].Value);
+                string roomType = dgvSeats.SelectedRows[0].Cells["SeatRoom"].Value.ToString();
+                lblSelectedSeat.Text = $"Выбран ПК №{seatId} ({roomType})";
+            }
+            else
+            {
+                lblSelectedSeat.Text = "Выберите ПК из списка";
+            }
+        }
+
+        private void SelectCurrentRow(int rowIndex)
+        {
+            dgvSeats.ClearSelection();
+            dgvSeats.Rows[rowIndex].Selected = true;
+        }
+
+        private async void btnOpenSession_Click(object sender, EventArgs e)
+        {
+            OpenSession();
+        }
+
+        private void OpenSession()
+        {
+            try
+            {
+                if (dgvSeats.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Выберите ПК из списка!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int seatId = Convert.ToInt32(dgvSeats.SelectedRows[0].Cells["SeatId"].Value);
+                string roomType = dgvSeats.SelectedRows[0].Cells["SeatRoom"].Value.ToString();
+                string hardware = dgvSeats.SelectedRows[0].Cells["Hardware"].Value.ToString();
+                string devices = dgvSeats.SelectedRows[0].Cells["Devices"].Value.ToString();
+
+                SelectedSeat = new Seat
+                {
+                    SeatId = seatId,
+                    SeatRoom = roomType,
+                    Hardware = hardware,
+                    Devices = devices
+                };
+
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            SelectedSeat = null;
+            DialogResult = DialogResult.Cancel;
             Close();
         }
     }
