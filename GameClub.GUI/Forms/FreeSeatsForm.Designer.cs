@@ -2,7 +2,6 @@ namespace GameClub.GUI
 {
     partial class FreeSeatsForm
     {
-        private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.DataGridView dgvSeats;
         private System.Windows.Forms.Button btnOpenSession;
         private System.Windows.Forms.Button btnCancel;

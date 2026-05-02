@@ -37,5 +37,56 @@ namespace GameClub.Library.Entities
                 return await uow.Tariffs.GetPriceAsync(tariff);
             }
         }
+
+        public async Task<List<User>> GetAllOperatorsAsync()
+        {
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                var allUsers = await uow.Users.GetAllAsync();
+                return allUsers.Where(u => u.UserRole == UserRole.Operator).ToList();
+            }
+        }
+
+        public async Task DeleteOperatorAsync(int userId)
+        {
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                var user = await uow.Users.GetByIdAsync(userId);
+                if (user == null)
+                    throw new Exception("Оператор не найден");
+
+                if (user.UserRole != UserRole.Operator)
+                    throw new Exception("Нельзя удалить админа!");
+
+                await uow.Users.DeleteAsync(userId);
+            }
+        }
+        public async Task UpdateOperatorAsync(User user)
+        {
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                await uow.Users.UpdateAsync(user);
+            }
+        }
+        public async Task AddOperatorAsync(string login, string password, string fullName)
+        {
+            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            {
+                var existing = await uow.Users.IsLoginExistsAsync(login);
+
+                if (existing == true)
+                    throw new Exception($"Логин '{login}' уже занят!");
+
+                var newOper = new User 
+                { 
+                    FullName = fullName,
+                    UserRole = UserRole.Operator,
+                    Login = login,
+                    Password = password
+                };
+
+                await uow.Users.AddAsync(newOper);
+            }
+        }
     }
 }

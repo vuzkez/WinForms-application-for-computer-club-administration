@@ -151,9 +151,9 @@ namespace GameClub.GUI
             // 
             lblSelectedSeatInfo.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblSelectedSeatInfo.ForeColor = Color.DarkGreen;
-            lblSelectedSeatInfo.Location = new Point(106, 9);
+            lblSelectedSeatInfo.Location = new Point(60, 11);
             lblSelectedSeatInfo.Name = "lblSelectedSeatInfo";
-            lblSelectedSeatInfo.Size = new Size(190, 27);
+            lblSelectedSeatInfo.Size = new Size(280, 27);
             lblSelectedSeatInfo.TabIndex = 15;
             lblSelectedSeatInfo.Text = "Выбрано место номер: 0";
             lblSelectedSeatInfo.TextAlign = ContentAlignment.MiddleCenter;
@@ -164,7 +164,7 @@ namespace GameClub.GUI
             textBox2.BackColor = Color.LightYellow;
             textBox2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             textBox2.ForeColor = Color.DarkGreen;
-            textBox2.Location = new Point(151, 9);
+            textBox2.Location = new Point(150, 11);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 27);
             textBox2.TabIndex = 6;

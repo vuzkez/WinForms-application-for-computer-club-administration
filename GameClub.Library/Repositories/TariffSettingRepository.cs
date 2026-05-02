@@ -34,7 +34,7 @@ namespace GameClub.Library.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            throw new NotSupportedException();
+            await db.DeleteAsync(id);
         }
 
         public async Task<List<TariffSetting>> GetAllAsync()

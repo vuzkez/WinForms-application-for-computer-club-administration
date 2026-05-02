@@ -20,7 +20,6 @@ namespace GameClub.GUI
         private decimal dayPrice;
         private decimal nightPrice;
 
-        // Конструктор для ручного ввода
         public OpenSessionForm(IOperator operatorService, IAdministrator adminService)
         {
             InitializeComponent();
@@ -37,7 +36,6 @@ namespace GameClub.GUI
             lblSelectedSeatInfo.Visible = false;
         }
 
-        // Конструктор с предзаполненным ПК
         public OpenSessionForm(IOperator operatorService, IAdministrator adminService, int seatId)
         {
             InitializeComponent();
@@ -50,7 +48,6 @@ namespace GameClub.GUI
             dateTimePicker1.MinDate = DateTime.Now;
             textBox3.Text = "1";
 
-            // Скрываем поле ввода, показываем текст
             textBox2.Visible = false;
             lblSelectedSeatInfo.Visible = true;
             lblSelectedSeatInfo.Text = $"Выбрано место номер: {seatId}";
@@ -81,7 +78,6 @@ namespace GameClub.GUI
             {
                 int seatId;
 
-                // Если есть выбранное место - берем его
                 if (lblSelectedSeatInfo.Visible)
                 {
                     seatId = SelectedSeatId;

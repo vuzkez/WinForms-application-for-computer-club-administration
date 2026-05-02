@@ -134,7 +134,7 @@ namespace GameClub.GUI
             lblSessionInfo.ForeColor = Color.Black;
         }
 
-        private async void btnClose_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             try
             {

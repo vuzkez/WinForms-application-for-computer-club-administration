@@ -117,6 +117,7 @@ namespace GameClub.GUI
             btnAdminPanel = new Button();
             statusStrip = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
+            btnManageOperators = new Button();
             pnlLeft.SuspendLayout();
             pnlGeneralZone.SuspendLayout();
             pnlEntrance.SuspendLayout();
@@ -654,6 +655,7 @@ namespace GameClub.GUI
             pnlBottom.Controls.Add(btnInfoUser);
             pnlBottom.Controls.Add(btnFindFreeSeat);
             pnlBottom.Controls.Add(btnRefresh);
+            pnlBottom.Controls.Add(btnManageOperators);
             pnlBottom.Controls.Add(btnRevenue);
             pnlBottom.Controls.Add(btnAdminPanel);
             pnlBottom.Location = new Point(0, 640);
@@ -768,6 +770,19 @@ namespace GameClub.GUI
             lblStatus.Size = new Size(88, 17);
             lblStatus.Text = "Готов к работе";
             // 
+            // btnManageOperators
+            // 
+            btnManageOperators.BackColor = Color.Teal;
+            btnManageOperators.FlatStyle = FlatStyle.Flat;
+            btnManageOperators.ForeColor = Color.White;
+            btnManageOperators.Location = new Point(825, 6);
+            btnManageOperators.Name = "btnManageOperators";
+            btnManageOperators.Size = new Size(168, 42);
+            btnManageOperators.TabIndex = 10;
+            btnManageOperators.Text = "Операторы";
+            btnManageOperators.UseVisualStyleBackColor = false;
+            btnManageOperators.Click += btnManageOperators_Click;
+            // 
             // MainForm
             // 
             ClientSize = new Size(1289, 700);
@@ -807,5 +822,6 @@ namespace GameClub.GUI
         private Button btnInfoUser;
         private Button btnCloseSession;
         private Button btnAddHours;
+        private Button btnManageOperators;
     }
 }

@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameClub.Library.Entities;
 using GameClub.Library.Interfaces;
-using GameClub.Library.RepositoryInterfaces;
-using LinqToDB;
 
 namespace GameClub.GUI
 {
@@ -24,6 +22,10 @@ namespace GameClub.GUI
         {
             InitializeComponent();
             this.authenticationService = authenticationService;
+            Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            AcceptButton = btnLogin;
+            txtLogin.KeyDown += TxtBox_KeyDown;
+            txtPassword.KeyDown += TxtBox_KeyDown;
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -51,6 +53,27 @@ namespace GameClub.GUI
             {
                 MessageBox.Show($"Неудалось подключиться к БД:\n{ex.Message}",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void TxtBox_KeyDown(object? sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    e.SuppressKeyPress = true;
+                    if (sender == txtPassword)
+                    {
+                        txtLogin.Focus();
+                    }
+                    break;
+
+                case Keys.Down:
+                    e.SuppressKeyPress = true;
+                    if (sender == txtLogin)
+                    {
+                        txtPassword.Focus();
+                    }
+                    break;
             }
         }
     }

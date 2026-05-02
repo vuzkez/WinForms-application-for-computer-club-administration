@@ -23,15 +23,6 @@ namespace GameClub.Library.Database
                 case "sqlserver":
                     options = new DataOptions().UseSqlServer(connectionString);
                     break;
-                case "postgresql":
-                    options = new DataOptions().UsePostgreSQL(connectionString);
-                    break;
-                case "mysql":
-                    options = new DataOptions().UseMySql(connectionString);
-                    break;
-                case "sqlite":
-                    options = new DataOptions().UseSQLite(connectionString);
-                    break;
                 default:
                     throw new Exception($"Неизвестный провайдер: {providerName}");
             }

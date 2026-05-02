@@ -53,5 +53,9 @@ namespace GameClub.Library.Repositories
             return await db.GetTable<User>()
                 .FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
         }
+        public async Task<bool> IsLoginExistsAsync(string login)
+        {
+            return await db.GetTable<User>().AnyAsync(u => u.Login == login);
+        }
     }
 }

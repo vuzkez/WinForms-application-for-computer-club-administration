@@ -11,5 +11,6 @@ namespace GameClub.Library.RepositoryInterfaces
     {
         Task<User?> GetByIdAsync(int id);
         Task<User?> GetByLoginAsync(string login, string password);
+        Task<bool> IsLoginExistsAsync(string login);
     }
 }

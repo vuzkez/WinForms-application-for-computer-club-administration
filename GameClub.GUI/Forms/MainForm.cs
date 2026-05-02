@@ -27,6 +27,7 @@ namespace GameClub.GUI
             this.administratorService = administratorService;
             this.authenticationService = authenticationService;
 
+            Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
             MinimumSize = new Size(1305, 740);
@@ -45,13 +46,15 @@ namespace GameClub.GUI
             {
                 btnRevenue.Visible = true;
                 btnAdminPanel.Visible = true;
-                Text = "GameClub - Администратор";
+                btnManageOperators.Visible = true;
+                Text = "CyberX - Администратор";
             }
             else
             {
                 btnRevenue.Visible = false;
                 btnAdminPanel.Visible = false;
-                Text = "GameClub - Оператор";
+                btnManageOperators.Visible = false;
+                Text = "CyberX - Оператор";
             }
         }
 
@@ -239,7 +242,7 @@ namespace GameClub.GUI
             }
         }
 
-        private async void btnRevenue_Click(object sender, EventArgs e)
+        private void btnRevenue_Click(object sender, EventArgs e)
         {
             try
             {
@@ -329,6 +332,21 @@ namespace GameClub.GUI
         private async void RefreshTimer_Tick(object? sender, EventArgs? e)
         {
             await UpdateSeatColorsAsync();
+        }
+        private void btnManageOperators_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var form = new OperatorsForm(administratorService))
+                {
+                    form.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -97,7 +97,7 @@ namespace GameClub.GUI
             dgvSeats.Rows[rowIndex].Selected = true;
         }
 
-        private async void btnOpenSession_Click(object sender, EventArgs e)
+        private void btnOpenSession_Click(object sender, EventArgs e)
         {
             OpenSession();
         }

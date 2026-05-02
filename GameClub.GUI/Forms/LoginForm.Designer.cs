@@ -87,7 +87,7 @@ namespace GameClub.GUI
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(250, 40);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "GameClub";
+            lblTitle.Text = "CyberX";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblLogin
@@ -120,7 +120,7 @@ namespace GameClub.GUI
             MaximizeBox = false;
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Авторизация - GameClub";
+            Text = "Авторизация - CyberX";
             ResumeLayout(false);
             PerformLayout();
         }

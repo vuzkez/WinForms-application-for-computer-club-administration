@@ -123,7 +123,7 @@ namespace GameClub.GUI
             btnOk.Enabled = true;
         }
 
-        private async void btnOk_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
             try
             {
