@@ -11,15 +11,15 @@ namespace GameClub.Library.Entities
 {
     public class AuthenticationService : IAuthentication
     {
-        private readonly IDataConnection dataConnection;
+        private readonly IUnitOfWorkFactory uowFactory;
 
-        public AuthenticationService(IDataConnection dataConnection)
+        public AuthenticationService(IUnitOfWorkFactory uowFactory)
         {
-            this.dataConnection = dataConnection;
+            this.uowFactory = uowFactory;
         }
         public async Task<User?> LoginAsync(string login, string password)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var user = await uow.Users.GetByLoginAsync(login, password);
 

@@ -58,8 +58,16 @@ namespace GameClub.GUI
             dgvOperators.AllowUserToAddRows = false;
             dgvOperators.AllowUserToDeleteRows = false;
             dgvOperators.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            dgvOperators.BackgroundColor = Color.White;
+            dgvOperators.BackgroundColor = Color.FromArgb(25, 25, 34);
+            dgvOperators.BorderStyle = BorderStyle.None;
+            dgvOperators.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(30, 30, 42);
+            dgvOperators.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(150, 150, 175);
             dgvOperators.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOperators.DefaultCellStyle.BackColor = Color.FromArgb(25, 25, 34);
+            dgvOperators.DefaultCellStyle.ForeColor = Color.FromArgb(210, 210, 230);
+            dgvOperators.DefaultCellStyle.SelectionBackColor = Color.FromArgb(40, 80, 120);
+            dgvOperators.DefaultCellStyle.SelectionForeColor = Color.White;
+            dgvOperators.GridColor = Color.FromArgb(60, 60, 80);
             dgvOperators.Columns.Clear();
             dgvOperators.Columns.Add("UserId", "ID");
             dgvOperators.Columns.Add("Login", "Логин");
@@ -82,8 +90,9 @@ namespace GameClub.GUI
             // 
             // btnAdd
             // 
-            btnAdd.BackColor = Color.SteelBlue;
+            btnAdd.BackColor = Color.FromArgb(30, 100, 160);
             btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAdd.ForeColor = Color.White;
             btnAdd.Location = new Point(20, 225);
@@ -96,9 +105,10 @@ namespace GameClub.GUI
             // 
             // btnEdit
             // 
-            btnEdit.BackColor = Color.DarkOrange;
+            btnEdit.BackColor = Color.FromArgb(150, 80, 10);
             btnEdit.Enabled = false;
             btnEdit.FlatStyle = FlatStyle.Flat;
+            btnEdit.FlatAppearance.BorderSize = 0;
             btnEdit.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnEdit.ForeColor = Color.White;
             btnEdit.Location = new Point(20, 271);
@@ -111,9 +121,10 @@ namespace GameClub.GUI
             // 
             // btnDelete
             // 
-            btnDelete.BackColor = Color.DarkRed;
+            btnDelete.BackColor = Color.FromArgb(140, 30, 30);
             btnDelete.Enabled = false;
             btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.FlatAppearance.BorderSize = 0;
             btnDelete.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
             btnDelete.Location = new Point(187, 225);
@@ -126,10 +137,11 @@ namespace GameClub.GUI
             // 
             // btnClear
             // 
-            btnClear.BackColor = Color.Gray;
+            btnClear.BackColor = Color.FromArgb(55, 55, 70);
             btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.FlatAppearance.BorderSize = 0;
             btnClear.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnClear.ForeColor = Color.White;
+            btnClear.ForeColor = Color.FromArgb(180, 180, 200);
             btnClear.Location = new Point(187, 271);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(103, 40);
@@ -140,10 +152,11 @@ namespace GameClub.GUI
             // 
             // btnCancel
             // 
-            btnCancel.BackColor = Color.Gray;
+            btnCancel.BackColor = Color.FromArgb(55, 55, 70);
             btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnCancel.ForeColor = Color.White;
+            btnCancel.ForeColor = Color.FromArgb(180, 180, 200);
             btnCancel.Location = new Point(612, 405);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(160, 45);
@@ -155,7 +168,7 @@ namespace GameClub.GUI
             // lblTitle
             // 
             lblTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblTitle.ForeColor = Color.DarkBlue;
+            lblTitle.ForeColor = Color.FromArgb(0, 190, 180);
             lblTitle.Location = new Point(12, 9);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(760, 40);
@@ -167,6 +180,7 @@ namespace GameClub.GUI
             // 
             lblLogin.AutoSize = true;
             lblLogin.Font = new Font("Segoe UI", 10F);
+            lblLogin.ForeColor = Color.FromArgb(140, 140, 165);
             lblLogin.Location = new Point(20, 35);
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(50, 19);
@@ -177,6 +191,7 @@ namespace GameClub.GUI
             // 
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 10F);
+            lblPassword.ForeColor = Color.FromArgb(140, 140, 165);
             lblPassword.Location = new Point(20, 95);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(59, 19);
@@ -187,6 +202,7 @@ namespace GameClub.GUI
             // 
             lblFullName.AutoSize = true;
             lblFullName.Font = new Font("Segoe UI", 10F);
+            lblFullName.ForeColor = Color.FromArgb(140, 140, 165);
             lblFullName.Location = new Point(20, 155);
             lblFullName.Name = "lblFullName";
             lblFullName.Size = new Size(43, 19);
@@ -195,7 +211,10 @@ namespace GameClub.GUI
             // 
             // txtLogin
             // 
+            txtLogin.BackColor = Color.FromArgb(35, 35, 50);
+            txtLogin.BorderStyle = BorderStyle.FixedSingle;
             txtLogin.Font = new Font("Segoe UI", 10F);
+            txtLogin.ForeColor = Color.FromArgb(210, 210, 230);
             txtLogin.Location = new Point(20, 58);
             txtLogin.Name = "txtLogin";
             txtLogin.Size = new Size(260, 25);
@@ -203,15 +222,22 @@ namespace GameClub.GUI
             // 
             // txtPassword
             // 
+            txtPassword.BackColor = Color.FromArgb(35, 35, 50);
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
             txtPassword.Font = new Font("Segoe UI", 10F);
+            txtPassword.ForeColor = Color.FromArgb(210, 210, 230);
             txtPassword.Location = new Point(20, 118);
             txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(260, 25);
             txtPassword.TabIndex = 3;
             // 
             // txtFullName
             // 
+            txtFullName.BackColor = Color.FromArgb(35, 35, 50);
+            txtFullName.BorderStyle = BorderStyle.FixedSingle;
             txtFullName.Font = new Font("Segoe UI", 10F);
+            txtFullName.ForeColor = Color.FromArgb(210, 210, 230);
             txtFullName.Location = new Point(20, 178);
             txtFullName.Name = "txtFullName";
             txtFullName.Size = new Size(260, 25);
@@ -220,7 +246,7 @@ namespace GameClub.GUI
             // lblSelected
             // 
             lblSelected.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
-            lblSelected.ForeColor = Color.DarkGreen;
+            lblSelected.ForeColor = Color.FromArgb(100, 220, 100);
             lblSelected.Location = new Point(6, 345);
             lblSelected.Name = "lblSelected";
             lblSelected.Size = new Size(438, 45);
@@ -230,9 +256,11 @@ namespace GameClub.GUI
             // 
             // grpList
             // 
+            grpList.BackColor = Color.FromArgb(28, 28, 38);
             grpList.Controls.Add(dgvOperators);
             grpList.Controls.Add(lblSelected);
             grpList.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grpList.ForeColor = Color.FromArgb(0, 190, 180);
             grpList.Location = new Point(12, 55);
             grpList.Name = "grpList";
             grpList.Size = new Size(450, 400);
@@ -242,6 +270,7 @@ namespace GameClub.GUI
             // 
             // grpForm
             // 
+            grpForm.BackColor = Color.FromArgb(28, 28, 38);
             grpForm.Controls.Add(lblLogin);
             grpForm.Controls.Add(txtLogin);
             grpForm.Controls.Add(lblPassword);
@@ -253,6 +282,7 @@ namespace GameClub.GUI
             grpForm.Controls.Add(btnDelete);
             grpForm.Controls.Add(btnClear);
             grpForm.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            grpForm.ForeColor = Color.FromArgb(0, 190, 180);
             grpForm.Location = new Point(468, 55);
             grpForm.Name = "grpForm";
             grpForm.Size = new Size(304, 340);
@@ -264,6 +294,7 @@ namespace GameClub.GUI
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(18, 18, 24);
             ClientSize = new Size(784, 465);
             Controls.Add(btnCancel);
             Controls.Add(grpForm);

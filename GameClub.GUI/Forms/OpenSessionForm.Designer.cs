@@ -40,8 +40,9 @@ namespace GameClub.GUI
             // 
             // btnOk
             // 
-            btnOk.BackColor = Color.SteelBlue;
+            btnOk.BackColor = Color.FromArgb(30, 100, 160);
             btnOk.FlatStyle = FlatStyle.Flat;
+            btnOk.FlatAppearance.BorderSize = 0;
             btnOk.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnOk.ForeColor = Color.White;
             btnOk.Location = new Point(23, 286);
@@ -54,10 +55,11 @@ namespace GameClub.GUI
             // 
             // btnCancel
             // 
-            btnCancel.BackColor = Color.DarkRed;
+            btnCancel.BackColor = Color.FromArgb(55, 55, 70);
             btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCancel.ForeColor = Color.White;
+            btnCancel.ForeColor = Color.FromArgb(180, 180, 200);
             btnCancel.Location = new Point(244, 286);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(130, 42);
@@ -69,7 +71,7 @@ namespace GameClub.GUI
             // label2
             // 
             label2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            label2.ForeColor = Color.DarkSlateBlue;
+            label2.ForeColor = Color.FromArgb(0, 190, 180);
             label2.Location = new Point(80, 41);
             label2.Name = "label2";
             label2.Size = new Size(240, 30);
@@ -81,7 +83,7 @@ namespace GameClub.GUI
             // 
             radioButton1.AutoSize = true;
             radioButton1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            radioButton1.ForeColor = Color.SteelBlue;
+            radioButton1.ForeColor = Color.FromArgb(80, 160, 255);
             radioButton1.Location = new Point(98, 74);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(90, 23);
@@ -94,7 +96,7 @@ namespace GameClub.GUI
             // 
             radioButton2.AutoSize = true;
             radioButton2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            radioButton2.ForeColor = Color.Purple;
+            radioButton2.ForeColor = Color.FromArgb(160, 80, 255);
             radioButton2.Location = new Point(98, 103);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(82, 23);
@@ -105,6 +107,8 @@ namespace GameClub.GUI
             // 
             // dateTimePicker1
             // 
+            dateTimePicker1.CalendarForeColor = Color.FromArgb(210, 210, 230);
+            dateTimePicker1.CalendarMonthBackground = Color.FromArgb(28, 28, 38);
             dateTimePicker1.CustomFormat = "dd.MM.yyyy HH:mm";
             dateTimePicker1.Font = new Font("Segoe UI", 10F);
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
@@ -116,7 +120,7 @@ namespace GameClub.GUI
             // label4
             // 
             label4.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            label4.ForeColor = Color.DarkSlateBlue;
+            label4.ForeColor = Color.FromArgb(0, 190, 180);
             label4.Location = new Point(106, 143);
             label4.Name = "label4";
             label4.Size = new Size(188, 20);
@@ -127,7 +131,7 @@ namespace GameClub.GUI
             // label5
             // 
             label5.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            label5.ForeColor = Color.DarkSlateBlue;
+            label5.ForeColor = Color.FromArgb(0, 190, 180);
             label5.Location = new Point(106, 203);
             label5.Name = "label5";
             label5.Size = new Size(188, 20);
@@ -137,9 +141,10 @@ namespace GameClub.GUI
             // 
             // textBox3
             // 
-            textBox3.BackColor = Color.LightYellow;
+            textBox3.BackColor = Color.FromArgb(35, 35, 50);
+            textBox3.BorderStyle = BorderStyle.FixedSingle;
             textBox3.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            textBox3.ForeColor = Color.DarkGreen;
+            textBox3.ForeColor = Color.FromArgb(210, 210, 230);
             textBox3.Location = new Point(151, 231);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(100, 27);
@@ -150,7 +155,7 @@ namespace GameClub.GUI
             // lblSelectedSeatInfo
             // 
             lblSelectedSeatInfo.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblSelectedSeatInfo.ForeColor = Color.DarkGreen;
+            lblSelectedSeatInfo.ForeColor = Color.FromArgb(100, 220, 100);
             lblSelectedSeatInfo.Location = new Point(60, 11);
             lblSelectedSeatInfo.Name = "lblSelectedSeatInfo";
             lblSelectedSeatInfo.Size = new Size(280, 27);
@@ -161,9 +166,10 @@ namespace GameClub.GUI
             // 
             // textBox2
             // 
-            textBox2.BackColor = Color.LightYellow;
+            textBox2.BackColor = Color.FromArgb(35, 35, 50);
+            textBox2.BorderStyle = BorderStyle.FixedSingle;
             textBox2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            textBox2.ForeColor = Color.DarkGreen;
+            textBox2.ForeColor = Color.FromArgb(210, 210, 230);
             textBox2.Location = new Point(150, 11);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 27);
@@ -174,6 +180,7 @@ namespace GameClub.GUI
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(18, 18, 24);
             ClientSize = new Size(405, 334);
             Controls.Add(lblSelectedSeatInfo);
             Controls.Add(textBox3);

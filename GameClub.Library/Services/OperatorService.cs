@@ -7,16 +7,16 @@ namespace GameClub.Library.Entities
 {
     public class OperatorService : IOperator
     {
-        private readonly IDataConnection dataConnection;
+        private readonly IUnitOfWorkFactory uowFactory;
 
-        public OperatorService(IDataConnection dataConnection)
+        public OperatorService(IUnitOfWorkFactory uowFactory)
         {
-            this.dataConnection = dataConnection;
+            this.uowFactory = uowFactory;
         }
 
         public async Task OpenSessionAsync(int seatId, int userId, TariffType tariff, DateTime startTime, DateTime endTime)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var pricePerHour = await uow.Tariffs.GetPriceAsync(tariff);
                 int hours = (int)(endTime - startTime).TotalHours;
@@ -48,7 +48,7 @@ namespace GameClub.Library.Entities
 
         public async Task CloseSessionAsync(int sessionId)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var session = await uow.Sessions.GetByIdAsync(sessionId);
 
@@ -73,7 +73,7 @@ namespace GameClub.Library.Entities
 
         public async Task AddHoursAsync(int sessionId, int hours)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var sessionDb = await uow.Sessions.GetByIdAsync(sessionId);
 
@@ -102,7 +102,7 @@ namespace GameClub.Library.Entities
 
         public async Task<List<Seat>> FindFreeSeatsAsync(string roomType)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 if (string.IsNullOrEmpty(roomType))
                     return new List<Seat>();
@@ -113,7 +113,7 @@ namespace GameClub.Library.Entities
 
         public async Task<List<Seat>> GetAllSeatsWithStatusAsync()
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var seats = await uow.Seats.GetAllAsync();
                 var activeSessions = await uow.Sessions.GetActiveSessionsAsync();
@@ -156,7 +156,7 @@ namespace GameClub.Library.Entities
 
         public async Task<Session?> GetActiveSessionBySeatIdAsync(int seatId)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 return await uow.Sessions.GetActiveSessionBySeatIdAsync(seatId);
             }
@@ -164,7 +164,7 @@ namespace GameClub.Library.Entities
 
         public async Task<List<Seat>> FindActiveSeatsAsync()
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var seats = await uow.Seats.GetAllAsync();
                 var activeSessions = await uow.Sessions.GetActiveSessionsAsync();

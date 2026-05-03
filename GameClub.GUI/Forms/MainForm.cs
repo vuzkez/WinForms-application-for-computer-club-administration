@@ -172,31 +172,6 @@ namespace GameClub.GUI
             }
         }
 
-        private async void btnOpenSession_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (var inputDialog = new OpenSessionForm(operatorService,administratorService))
-                {
-                    if (inputDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        await operatorService.OpenSessionAsync(
-                            inputDialog.SelectedSeatId,
-                            user.UserId,
-                            inputDialog.SelectedTariff,
-                            inputDialog.StartTime,
-                            inputDialog.StartTime.AddHours(inputDialog.Hours)
-                        );
-                        await UpdateSeatColorsAsync();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка открытия сессии: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
         private async void btnCloseSession_Click(object sender, EventArgs e)
         {
             try

@@ -3,6 +3,7 @@ using GameClub.Library;
 using GameClub.Library.Database;
 using GameClub.Library.Entities;
 using GameClub.Library.Interfaces;
+using GameClub.Library.UnitOfWork;
 
 namespace GameClub.GUI
 {
@@ -19,10 +20,11 @@ namespace GameClub.GUI
             var connectionStringSettings = ConfigurationManager.ConnectionStrings["SqlGameClubDb"];
 
             IDataConnection dataContextFactory = new ConnectionFactory(connectionStringSettings.ConnectionString,connectionStringSettings.ProviderName);
+            IUnitOfWorkFactory unitOfWorkFactory = new UnitOfWorkFactory(dataContextFactory);
 
-            IOperator operatorService = new OperatorService(dataContextFactory);
-            IAdministrator administratorService = new AdminService(dataContextFactory);
-            IAuthentication authenticationService = new AuthenticationService(dataContextFactory);
+            IOperator operatorService = new OperatorService(unitOfWorkFactory);
+            IAdministrator administratorService = new AdminService(unitOfWorkFactory);
+            IAuthentication authenticationService = new AuthenticationService(unitOfWorkFactory);
 
             using (var loginForm = new LoginForm(authenticationService))
             {

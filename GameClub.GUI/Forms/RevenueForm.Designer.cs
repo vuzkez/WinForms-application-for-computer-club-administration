@@ -51,6 +51,7 @@ namespace GameClub.GUI
             // lblTitle
             // 
             lblTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.FromArgb(0, 190, 180);
             lblTitle.Location = new Point(12, 9);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(360, 30);
@@ -61,6 +62,8 @@ namespace GameClub.GUI
             // lblFrom
             // 
             lblFrom.AutoSize = true;
+            lblFrom.Font = new Font("Segoe UI", 10F);
+            lblFrom.ForeColor = Color.FromArgb(140, 140, 165);
             lblFrom.Location = new Point(20, 60);
             lblFrom.Name = "lblFrom";
             lblFrom.Size = new Size(91, 20);
@@ -69,6 +72,8 @@ namespace GameClub.GUI
             // 
             // dtpFrom
             // 
+            dtpFrom.CalendarForeColor = Color.FromArgb(210, 210, 230);
+            dtpFrom.CalendarMonthBackground = Color.FromArgb(28, 28, 38);
             dtpFrom.Format = DateTimePickerFormat.Short;
             dtpFrom.Location = new Point(120, 57);
             dtpFrom.Name = "dtpFrom";
@@ -79,6 +84,8 @@ namespace GameClub.GUI
             // lblTo
             // 
             lblTo.AutoSize = true;
+            lblTo.Font = new Font("Segoe UI", 10F);
+            lblTo.ForeColor = Color.FromArgb(140, 140, 165);
             lblTo.Location = new Point(260, 60);
             lblTo.Name = "lblTo";
             lblTo.Size = new Size(25, 20);
@@ -87,6 +94,8 @@ namespace GameClub.GUI
             // 
             // dtpTo
             // 
+            dtpTo.CalendarForeColor = Color.FromArgb(210, 210, 230);
+            dtpTo.CalendarMonthBackground = Color.FromArgb(28, 28, 38);
             dtpTo.Format = DateTimePickerFormat.Short;
             dtpTo.Location = new Point(300, 57);
             dtpTo.Name = "dtpTo";
@@ -96,8 +105,10 @@ namespace GameClub.GUI
             // 
             // btnShow
             // 
-            btnShow.BackColor = Color.SteelBlue;
+            btnShow.BackColor = Color.FromArgb(30, 100, 160);
             btnShow.FlatStyle = FlatStyle.Flat;
+            btnShow.FlatAppearance.BorderSize = 0;
+            btnShow.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnShow.ForeColor = Color.White;
             btnShow.Location = new Point(20, 110);
             btnShow.Name = "btnShow";
@@ -109,9 +120,11 @@ namespace GameClub.GUI
             // 
             // btnClose
             // 
-            btnClose.BackColor = Color.DarkRed;
+            btnClose.BackColor = Color.FromArgb(55, 55, 70);
             btnClose.FlatStyle = FlatStyle.Flat;
-            btnClose.ForeColor = Color.White;
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnClose.ForeColor = Color.FromArgb(180, 180, 200);
             btnClose.Location = new Point(300, 110);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(120, 35);
@@ -123,6 +136,7 @@ namespace GameClub.GUI
             // lblTotal
             // 
             lblTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTotal.ForeColor = Color.FromArgb(0, 190, 180);
             lblTotal.Location = new Point(20, 170);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(100, 30);
@@ -132,9 +146,10 @@ namespace GameClub.GUI
             // 
             // txtTotal
             // 
-            txtTotal.BackColor = Color.LightYellow;
+            txtTotal.BackColor = Color.FromArgb(25, 25, 34);
+            txtTotal.BorderStyle = BorderStyle.FixedSingle;
             txtTotal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            txtTotal.ForeColor = Color.DarkGreen;
+            txtTotal.ForeColor = Color.FromArgb(100, 220, 100);
             txtTotal.Location = new Point(120, 170);
             txtTotal.Name = "txtTotal";
             txtTotal.ReadOnly = true;
@@ -147,6 +162,7 @@ namespace GameClub.GUI
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(18, 18, 24);
             ClientSize = new Size(440, 230);
             Controls.Add(txtTotal);
             Controls.Add(lblTotal);

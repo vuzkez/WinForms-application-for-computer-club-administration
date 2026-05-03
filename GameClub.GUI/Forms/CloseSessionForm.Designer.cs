@@ -29,8 +29,11 @@ namespace GameClub.GUI
             // 
             // cmbActiveSeats
             // 
+            cmbActiveSeats.BackColor = Color.FromArgb(35, 35, 50);
             cmbActiveSeats.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbActiveSeats.FlatStyle = FlatStyle.Flat;
             cmbActiveSeats.Font = new Font("Segoe UI", 10F);
+            cmbActiveSeats.ForeColor = Color.FromArgb(210, 210, 230);
             cmbActiveSeats.Location = new Point(157, 14);
             cmbActiveSeats.Margin = new Padding(3, 2, 3, 2);
             cmbActiveSeats.Name = "cmbActiveSeats";
@@ -42,6 +45,7 @@ namespace GameClub.GUI
             // 
             lblSelectSeat.AutoSize = true;
             lblSelectSeat.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            lblSelectSeat.ForeColor = Color.FromArgb(0, 190, 180);
             lblSelectSeat.Location = new Point(10, 16);
             lblSelectSeat.Name = "lblSelectSeat";
             lblSelectSeat.Size = new Size(140, 20);
@@ -50,9 +54,10 @@ namespace GameClub.GUI
             // 
             // lblSessionInfo
             // 
-            lblSessionInfo.BackColor = Color.LightGray;
+            lblSessionInfo.BackColor = Color.FromArgb(25, 25, 34);
             lblSessionInfo.BorderStyle = BorderStyle.FixedSingle;
             lblSessionInfo.Font = new Font("Segoe UI", 10F);
+            lblSessionInfo.ForeColor = Color.FromArgb(210, 210, 230);
             lblSessionInfo.Location = new Point(10, 52);
             lblSessionInfo.Name = "lblSessionInfo";
             lblSessionInfo.Size = new Size(409, 229);
@@ -61,9 +66,10 @@ namespace GameClub.GUI
             // 
             // btnClose
             // 
-            btnClose.BackColor = Color.DarkRed;
+            btnClose.BackColor = Color.FromArgb(140, 30, 30);
             btnClose.Enabled = false;
             btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.FlatAppearance.BorderSize = 0;
             btnClose.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnClose.ForeColor = Color.White;
             btnClose.Location = new Point(10, 292);
@@ -77,10 +83,11 @@ namespace GameClub.GUI
             // 
             // btnCancel
             // 
-            btnCancel.BackColor = Color.Gray;
+            btnCancel.BackColor = Color.FromArgb(55, 55, 70);
             btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnCancel.ForeColor = Color.White;
+            btnCancel.ForeColor = Color.FromArgb(180, 180, 200);
             btnCancel.Location = new Point(306, 292);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
@@ -94,6 +101,7 @@ namespace GameClub.GUI
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(18, 18, 24);
             ClientSize = new Size(430, 339);
             Controls.Add(btnCancel);
             Controls.Add(btnClose);

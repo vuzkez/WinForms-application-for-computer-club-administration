@@ -131,7 +131,7 @@ namespace GameClub.GUI
                 $"Тариф: {(session.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
                 $"Сумма к оплате: {session.TotalAmount:F2} руб";
 
-            lblSessionInfo.ForeColor = Color.Black;
+            lblSessionInfo.ForeColor = Color.DarkRed;
         }
 
         private void btnClose_Click(object sender, EventArgs e)

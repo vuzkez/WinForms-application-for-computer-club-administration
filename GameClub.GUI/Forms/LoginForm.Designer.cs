@@ -1,4 +1,3 @@
-
 using GameClub.Library;
 
 namespace GameClub.GUI
@@ -43,23 +42,33 @@ namespace GameClub.GUI
             // 
             // txtLogin
             // 
+            txtLogin.BackColor = Color.FromArgb(35, 35, 50);
+            txtLogin.BorderStyle = BorderStyle.FixedSingle;
+            txtLogin.Font = new Font("Segoe UI", 10F);
+            txtLogin.ForeColor = Color.FromArgb(210, 210, 230);
             txtLogin.Location = new Point(130, 80);
             txtLogin.Name = "txtLogin";
-            txtLogin.Size = new Size(180, 23);
+            txtLogin.Size = new Size(180, 27);
             txtLogin.TabIndex = 2;
             // 
             // txtPassword
             // 
+            txtPassword.BackColor = Color.FromArgb(35, 35, 50);
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.Font = new Font("Segoe UI", 10F);
+            txtPassword.ForeColor = Color.FromArgb(210, 210, 230);
             txtPassword.Location = new Point(130, 115);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(180, 23);
+            txtPassword.Size = new Size(180, 27);
             txtPassword.TabIndex = 4;
             // 
             // btnLogin
             // 
-            btnLogin.BackColor = Color.DarkGreen;
+            btnLogin.BackColor = Color.FromArgb(30, 100, 160);
             btnLogin.FlatStyle = FlatStyle.Flat;
+            btnLogin.FlatAppearance.BorderSize = 0;
+            btnLogin.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnLogin.ForeColor = Color.White;
             btnLogin.Location = new Point(130, 160);
             btnLogin.Name = "btnLogin";
@@ -71,7 +80,9 @@ namespace GameClub.GUI
             // 
             // lblStatus
             // 
-            lblStatus.BackColor = Color.LightGray;
+            lblStatus.BackColor = Color.FromArgb(25, 25, 34);
+            lblStatus.Font = new Font("Segoe UI", 9F);
+            lblStatus.ForeColor = Color.FromArgb(255, 80, 80);
             lblStatus.Location = new Point(50, 210);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(250, 40);
@@ -81,17 +92,19 @@ namespace GameClub.GUI
             // 
             // lblTitle
             // 
-            lblTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblTitle.ForeColor = Color.DarkBlue;
+            lblTitle.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.FromArgb(0, 190, 180);
             lblTitle.Location = new Point(50, 20);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(250, 40);
+            lblTitle.Size = new Size(250, 45);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "CyberX";
+            lblTitle.Text = "CYBERX";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblLogin
             // 
+            lblLogin.Font = new Font("Segoe UI", 10F);
+            lblLogin.ForeColor = Color.FromArgb(140, 140, 165);
             lblLogin.Location = new Point(50, 80);
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(80, 25);
@@ -100,6 +113,8 @@ namespace GameClub.GUI
             // 
             // lblPassword
             // 
+            lblPassword.Font = new Font("Segoe UI", 10F);
+            lblPassword.ForeColor = Color.FromArgb(140, 140, 165);
             lblPassword.Location = new Point(50, 115);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(80, 25);
@@ -108,6 +123,9 @@ namespace GameClub.GUI
             // 
             // LoginForm
             // 
+            AutoScaleDimensions = new SizeF(7F, 16F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(18, 18, 24);
             ClientSize = new Size(339, 276);
             Controls.Add(lblTitle);
             Controls.Add(lblLogin);

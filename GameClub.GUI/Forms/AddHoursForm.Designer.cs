@@ -13,6 +13,7 @@ namespace GameClub.GUI
         private Label lblSessionInfo;
         private Button btnOk;
         private Button btnCancel;
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -46,14 +47,15 @@ namespace GameClub.GUI
             // 
             // btnOk
             // 
-            btnOk.BackColor = Color.SteelBlue;
+            btnOk.BackColor = Color.FromArgb(30, 100, 160);
             btnOk.Enabled = false;
+            btnOk.FlatAppearance.BorderSize = 0;
             btnOk.FlatStyle = FlatStyle.Flat;
+            btnOk.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnOk.ForeColor = Color.White;
-            btnOk.Location = new Point(29, 375);
-            btnOk.Margin = new Padding(4, 5, 4, 5);
+            btnOk.Location = new Point(20, 240);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(143, 55);
+            btnOk.Size = new Size(100, 35);
             btnOk.TabIndex = 5;
             btnOk.Text = "Добавить";
             btnOk.UseVisualStyleBackColor = false;
@@ -61,13 +63,14 @@ namespace GameClub.GUI
             // 
             // btnCancel
             // 
-            btnCancel.BackColor = Color.DarkRed;
+            btnCancel.BackColor = Color.FromArgb(55, 55, 70);
+            btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(357, 375);
-            btnCancel.Margin = new Padding(4, 5, 4, 5);
+            btnCancel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCancel.ForeColor = Color.FromArgb(180, 180, 200);
+            btnCancel.Location = new Point(250, 240);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(143, 55);
+            btnCancel.Size = new Size(100, 35);
             btnCancel.TabIndex = 6;
             btnCancel.Text = "Отмена";
             btnCancel.UseVisualStyleBackColor = false;
@@ -76,61 +79,70 @@ namespace GameClub.GUI
             // lblSelectSeat
             // 
             lblSelectSeat.AutoSize = true;
-            lblSelectSeat.Location = new Point(29, 34);
-            lblSelectSeat.Margin = new Padding(4, 0, 4, 0);
+            lblSelectSeat.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblSelectSeat.ForeColor = Color.FromArgb(0, 190, 180);
+            lblSelectSeat.Location = new Point(20, 22);
             lblSelectSeat.Name = "lblSelectSeat";
-            lblSelectSeat.Size = new Size(149, 25);
+            lblSelectSeat.Size = new Size(129, 19);
             lblSelectSeat.TabIndex = 7;
             lblSelectSeat.Text = "Активная сессия:";
             // 
             // cmbActiveSeats
             // 
+            cmbActiveSeats.BackColor = Color.FromArgb(35, 35, 50);
             cmbActiveSeats.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbActiveSeats.Location = new Point(186, 31);
-            cmbActiveSeats.Margin = new Padding(4, 5, 4, 5);
+            cmbActiveSeats.FlatStyle = FlatStyle.Flat;
+            cmbActiveSeats.Font = new Font("Segoe UI", 10F);
+            cmbActiveSeats.ForeColor = Color.FromArgb(210, 210, 230);
+            cmbActiveSeats.Location = new Point(150, 22);
             cmbActiveSeats.Name = "cmbActiveSeats";
-            cmbActiveSeats.Size = new Size(284, 33);
+            cmbActiveSeats.Size = new Size(200, 25);
             cmbActiveSeats.TabIndex = 8;
             cmbActiveSeats.SelectedIndexChanged += cmbActiveSeats_SelectedIndexChanged;
             // 
             // lblHours
             // 
             lblHours.AutoSize = true;
-            lblHours.Location = new Point(29, 94);
-            lblHours.Margin = new Padding(4, 0, 4, 0);
+            lblHours.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblHours.ForeColor = Color.FromArgb(0, 190, 180);
+            lblHours.Location = new Point(20, 60);
             lblHours.Name = "lblHours";
-            lblHours.Size = new Size(127, 25);
+            lblHours.Size = new Size(106, 19);
             lblHours.TabIndex = 2;
             lblHours.Text = "Кол-во часов:";
             // 
             // nudHours
             // 
-            nudHours.Location = new Point(171, 89);
-            nudHours.Margin = new Padding(4, 5, 4, 5);
+            nudHours.BackColor = Color.FromArgb(35, 35, 50);
+            nudHours.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            nudHours.ForeColor = Color.FromArgb(210, 210, 230);
+            nudHours.Location = new Point(132, 56);
             nudHours.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
             nudHours.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudHours.Name = "nudHours";
-            nudHours.Size = new Size(143, 31);
+            nudHours.Size = new Size(100, 27);
             nudHours.TabIndex = 3;
             nudHours.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // lblSessionInfo
             // 
-            lblSessionInfo.BackColor = Color.LightGray;
+            lblSessionInfo.BackColor = Color.FromArgb(25, 25, 34);
             lblSessionInfo.BorderStyle = BorderStyle.FixedSingle;
-            lblSessionInfo.Location = new Point(29, 156);
-            lblSessionInfo.Margin = new Padding(4, 0, 4, 0);
+            lblSessionInfo.Font = new Font("Segoe UI", 10F);
+            lblSessionInfo.ForeColor = Color.FromArgb(210, 210, 230);
+            lblSessionInfo.Location = new Point(20, 100);
             lblSessionInfo.Name = "lblSessionInfo";
-            lblSessionInfo.Size = new Size(471, 155);
+            lblSessionInfo.Size = new Size(330, 100);
             lblSessionInfo.TabIndex = 4;
-            lblSessionInfo.Text = "Введите номер ПК...";
+            lblSessionInfo.Text = "Выберите активную сессию...";
             lblSessionInfo.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // AddHoursForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(529, 469);
+            BackColor = Color.FromArgb(18, 18, 24);
+            ClientSize = new Size(370, 300);
             Controls.Add(btnCancel);
             Controls.Add(btnOk);
             Controls.Add(lblSessionInfo);
@@ -139,7 +151,6 @@ namespace GameClub.GUI
             Controls.Add(lblSelectSeat);
             Controls.Add(cmbActiveSeats);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(4, 5, 4, 5);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "AddHoursForm";

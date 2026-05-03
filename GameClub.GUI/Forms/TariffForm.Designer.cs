@@ -46,11 +46,14 @@ namespace GameClub.GUI
             lblDayTitle = new Label();
             lblNightTitle = new Label();
             lblTitle = new Label();
+            ((System.ComponentModel.ISupportInitialize)nudDayPrice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudNightPrice).BeginInit();
             SuspendLayout();
             // 
             // lblTitle
             // 
             lblTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.FromArgb(0, 190, 180);
             lblTitle.Location = new Point(12, 9);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(360, 30);
@@ -61,7 +64,7 @@ namespace GameClub.GUI
             // lblDayTitle
             // 
             lblDayTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblDayTitle.ForeColor = Color.DarkBlue;
+            lblDayTitle.ForeColor = Color.FromArgb(80, 160, 255);
             lblDayTitle.Location = new Point(20, 60);
             lblDayTitle.Name = "lblDayTitle";
             lblDayTitle.Size = new Size(150, 25);
@@ -72,6 +75,8 @@ namespace GameClub.GUI
             // lblDay
             // 
             lblDay.AutoSize = true;
+            lblDay.Font = new Font("Segoe UI", 10F);
+            lblDay.ForeColor = Color.FromArgb(140, 140, 165);
             lblDay.Location = new Point(20, 95);
             lblDay.Name = "lblDay";
             lblDay.Size = new Size(72, 20);
@@ -80,19 +85,22 @@ namespace GameClub.GUI
             // 
             // nudDayPrice
             // 
+            nudDayPrice.BackColor = Color.FromArgb(35, 35, 50);
             nudDayPrice.DecimalPlaces = 2;
+            nudDayPrice.Font = new Font("Segoe UI", 10F);
+            nudDayPrice.ForeColor = Color.FromArgb(210, 210, 230);
             nudDayPrice.Location = new Point(120, 92);
-            nudDayPrice.Maximum = 10000;
-            nudDayPrice.Minimum = 1;
+            nudDayPrice.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            nudDayPrice.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudDayPrice.Name = "nudDayPrice";
             nudDayPrice.Size = new Size(120, 23);
             nudDayPrice.TabIndex = 3;
-            nudDayPrice.Value = 100;
+            nudDayPrice.Value = new decimal(new int[] { 100, 0, 0, 0 });
             // 
             // lblNightTitle
             // 
             lblNightTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblNightTitle.ForeColor = Color.DarkBlue;
+            lblNightTitle.ForeColor = Color.FromArgb(160, 80, 255);
             lblNightTitle.Location = new Point(20, 140);
             lblNightTitle.Name = "lblNightTitle";
             lblNightTitle.Size = new Size(150, 25);
@@ -103,6 +111,8 @@ namespace GameClub.GUI
             // lblNight
             // 
             lblNight.AutoSize = true;
+            lblNight.Font = new Font("Segoe UI", 10F);
+            lblNight.ForeColor = Color.FromArgb(140, 140, 165);
             lblNight.Location = new Point(20, 175);
             lblNight.Name = "lblNight";
             lblNight.Size = new Size(72, 20);
@@ -111,19 +121,24 @@ namespace GameClub.GUI
             // 
             // nudNightPrice
             // 
+            nudNightPrice.BackColor = Color.FromArgb(35, 35, 50);
             nudNightPrice.DecimalPlaces = 2;
+            nudNightPrice.Font = new Font("Segoe UI", 10F);
+            nudNightPrice.ForeColor = Color.FromArgb(210, 210, 230);
             nudNightPrice.Location = new Point(120, 172);
-            nudNightPrice.Maximum = 10000;
-            nudNightPrice.Minimum = 1;
+            nudNightPrice.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            nudNightPrice.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudNightPrice.Name = "nudNightPrice";
             nudNightPrice.Size = new Size(120, 23);
             nudNightPrice.TabIndex = 6;
-            nudNightPrice.Value = 150;
+            nudNightPrice.Value = new decimal(new int[] { 150, 0, 0, 0 });
             // 
             // btnSave
             // 
-            btnSave.BackColor = Color.SteelBlue;
+            btnSave.BackColor = Color.FromArgb(30, 100, 160);
             btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.FlatAppearance.BorderSize = 0;
+            btnSave.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
             btnSave.Location = new Point(20, 230);
             btnSave.Name = "btnSave";
@@ -135,9 +150,11 @@ namespace GameClub.GUI
             // 
             // btnClose
             // 
-            btnClose.BackColor = Color.DarkRed;
+            btnClose.BackColor = Color.FromArgb(55, 55, 70);
             btnClose.FlatStyle = FlatStyle.Flat;
-            btnClose.ForeColor = Color.White;
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnClose.ForeColor = Color.FromArgb(180, 180, 200);
             btnClose.Location = new Point(250, 230);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(120, 35);
@@ -150,6 +167,7 @@ namespace GameClub.GUI
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(18, 18, 24);
             ClientSize = new Size(390, 290);
             Controls.Add(btnClose);
             Controls.Add(btnSave);
@@ -166,6 +184,8 @@ namespace GameClub.GUI
             Name = "TariffForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Настройка тарифов";
+            ((System.ComponentModel.ISupportInitialize)nudDayPrice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudNightPrice).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

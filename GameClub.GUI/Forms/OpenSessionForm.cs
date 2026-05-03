@@ -20,22 +20,6 @@ namespace GameClub.GUI
         private decimal dayPrice;
         private decimal nightPrice;
 
-        public OpenSessionForm(IOperator operatorService, IAdministrator adminService)
-        {
-            InitializeComponent();
-            _operatorService = operatorService;
-            _adminService = adminService;
-
-            LoadTariffsAsync();
-
-            dateTimePicker1.Value = DateTime.Now;
-            dateTimePicker1.MinDate = DateTime.Now;
-            textBox3.Text = "1";
-
-            textBox2.Visible = true;
-            lblSelectedSeatInfo.Visible = false;
-        }
-
         public OpenSessionForm(IOperator operatorService, IAdministrator adminService, int seatId)
         {
             InitializeComponent();

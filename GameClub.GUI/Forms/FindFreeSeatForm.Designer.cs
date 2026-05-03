@@ -42,8 +42,9 @@ namespace GameClub.GUI
             // 
             // btnOk
             // 
-            btnOk.BackColor = Color.SteelBlue;
+            btnOk.BackColor = Color.FromArgb(30, 100, 160);
             btnOk.FlatStyle = FlatStyle.Flat;
+            btnOk.FlatAppearance.BorderSize = 0;
             btnOk.ForeColor = Color.White;
             btnOk.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnOk.Location = new Point(27, 145);
@@ -56,9 +57,10 @@ namespace GameClub.GUI
             // 
             // btnCancel
             // 
-            btnCancel.BackColor = Color.DarkRed;
+            btnCancel.BackColor = Color.FromArgb(55, 55, 70);
             btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.ForeColor = Color.White;
+            btnCancel.FlatAppearance.BorderSize = 0;
+            btnCancel.ForeColor = Color.FromArgb(180, 180, 200);
             btnCancel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnCancel.Location = new Point(163, 145);
             btnCancel.Name = "btnCancel";
@@ -71,7 +73,7 @@ namespace GameClub.GUI
             // lblPrompt
             // 
             lblPrompt.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblPrompt.ForeColor = Color.DarkSlateBlue;
+            lblPrompt.ForeColor = Color.FromArgb(0, 190, 180);
             lblPrompt.Location = new Point(12, 15);
             lblPrompt.Name = "lblPrompt";
             lblPrompt.Size = new Size(276, 30);
@@ -84,7 +86,7 @@ namespace GameClub.GUI
             radioButton1.AutoSize = true;
             radioButton1.Checked = true;
             radioButton1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            radioButton1.ForeColor = Color.SteelBlue;
+            radioButton1.ForeColor = Color.FromArgb(80, 160, 255);
             radioButton1.Location = new Point(49, 70);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(87, 24);
@@ -97,7 +99,7 @@ namespace GameClub.GUI
             // 
             radioButton2.AutoSize = true;
             radioButton2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            radioButton2.ForeColor = Color.DarkGoldenrod;
+            radioButton2.ForeColor = Color.FromArgb(255, 200, 60);
             radioButton2.Location = new Point(175, 70);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(58, 24);
@@ -110,6 +112,7 @@ namespace GameClub.GUI
             // 
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(18, 18, 24);
             ClientSize = new Size(300, 210);
             Controls.Add(radioButton2);
             Controls.Add(radioButton1);

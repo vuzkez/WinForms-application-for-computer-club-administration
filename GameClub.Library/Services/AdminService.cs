@@ -7,16 +7,16 @@ namespace GameClub.Library.Entities
 {
     public class AdminService : IAdministrator
     {
-        private readonly IDataConnection dataConnection;
+        private readonly IUnitOfWorkFactory uowFactory;
 
-        public AdminService(IDataConnection dataConnection)
+        public AdminService(IUnitOfWorkFactory uowFactory)
         {
-            this.dataConnection = dataConnection;
+            this.uowFactory = uowFactory;
         }
 
         public async Task ConfigureTariffAsync(TariffType tariff, decimal newPrice)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 await uow.Tariffs.UpdatePriceAsync(tariff, newPrice);
             }
@@ -24,7 +24,7 @@ namespace GameClub.Library.Entities
 
         public async Task<decimal> GetRevenueAsync(DateTime from, DateTime to)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 return await uow.Sessions.GetTotalRevenueAsync(from, to);
             }
@@ -32,7 +32,7 @@ namespace GameClub.Library.Entities
 
         public async Task<decimal> GetTariffPriceAsync(TariffType tariff)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 return await uow.Tariffs.GetPriceAsync(tariff);
             }
@@ -40,7 +40,7 @@ namespace GameClub.Library.Entities
 
         public async Task<List<User>> GetAllOperatorsAsync()
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var allUsers = await uow.Users.GetAllAsync();
                 return allUsers.Where(u => u.UserRole == UserRole.Operator).ToList();
@@ -49,7 +49,7 @@ namespace GameClub.Library.Entities
 
         public async Task DeleteOperatorAsync(int userId)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var user = await uow.Users.GetByIdAsync(userId);
                 if (user == null)
@@ -63,14 +63,14 @@ namespace GameClub.Library.Entities
         }
         public async Task UpdateOperatorAsync(User user)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 await uow.Users.UpdateAsync(user);
             }
         }
         public async Task AddOperatorAsync(string login, string password, string fullName)
         {
-            using (var uow = new UnitOfWorkLinq2db(dataConnection))
+            using (var uow = uowFactory.Create())
             {
                 var existing = await uow.Users.IsLoginExistsAsync(login);
 
