@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using GameClub.Library;
 using GameClub.Library.Enums;
-using GameClub.Library.Interfaces;
+using GameClub.Library.ServiceInterfaces;
 using GameClub.Library.Entities;
 
 namespace GameClub.GUI

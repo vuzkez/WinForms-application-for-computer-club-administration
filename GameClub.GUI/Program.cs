@@ -2,7 +2,7 @@ using System.Configuration;
 using GameClub.Library;
 using GameClub.Library.Database;
 using GameClub.Library.Entities;
-using GameClub.Library.Interfaces;
+using GameClub.Library.ServiceInterfaces;
 using GameClub.Library.UnitOfWork;
 
 namespace GameClub.GUI
@@ -10,7 +10,7 @@ namespace GameClub.GUI
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        ///  Главная точка входа в программу
         /// </summary>
         [STAThread]
         static void Main()

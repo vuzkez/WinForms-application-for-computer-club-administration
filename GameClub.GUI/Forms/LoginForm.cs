@@ -8,10 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameClub.Library.Entities;
-using GameClub.Library.Interfaces;
+using GameClub.Library.ServiceInterfaces;
 
 namespace GameClub.GUI
 {
+    /// <summary>
+    /// Форма авторизации для админов/операторов
+    /// </summary>
     public partial class LoginForm : Form
     {
         private readonly IAuthentication authenticationService;

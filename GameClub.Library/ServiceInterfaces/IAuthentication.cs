@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameClub.Library.Entities;
 
-namespace GameClub.Library.Interfaces
+namespace GameClub.Library.ServiceInterfaces
 {
     public interface IAuthentication
     {

@@ -1,4 +1,4 @@
-using GameClub.Library;
+using GameClub.Library.ServiceInterfaces;
 using GameClub.Library.Entities;
 using GameClub.Library.Enums;
 using System;
@@ -18,6 +18,7 @@ namespace GameClub.GUI
         private readonly IOperator operatorService;
         private List<Seat> activeSeats;
         private Dictionary<int, Session> sessionsBySeat;
+        private Dictionary<int, TariffSetting> tariffSettings;
 
         public AddHoursForm(IOperator operatorService)
         {
@@ -35,6 +36,9 @@ namespace GameClub.GUI
         {
             try
             {
+                var tariffs = await operatorService.GetAllTariffsAsync();
+                tariffSettings = tariffs.ToDictionary(t => t.TariffId);
+
                 activeSeats = await operatorService.FindActiveSeatsAsync();
 
                 if (activeSeats == null || activeSeats.Count == 0)
@@ -106,6 +110,10 @@ namespace GameClub.GUI
         {
             var remaining = session.EndTime - DateTime.Now;
 
+            string tariffName = "Неизвестный";
+            if (tariffSettings.TryGetValue(session.TariffId, out var tariff))
+                tariffName = tariff.Type == TariffType.Day ? "Дневной" : "Ночной";
+
             lblSessionInfo.Text =
                 $"Сессия найдена!\n" +
                 $"ПК: #{seat.SeatId} ({seat.SeatRoom})\n" +
@@ -114,7 +122,7 @@ namespace GameClub.GUI
                 $"Начало: {session.StartTime:dd.MM.yyyy HH:mm}\n" +
                 $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
                 $"Осталось: {Math.Max(0, remaining.Hours)}ч {Math.Max(0, remaining.Minutes)}мин\n" +
-                $"Тариф: {(session.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
+                $"Тариф: {tariffName}\n" +
                 $"Текущая сумма: {session.TotalAmount} руб";
 
             lblSessionInfo.ForeColor = Color.Green;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using GameClub.Library;
+using GameClub.Library.ServiceInterfaces;
 using GameClub.Library.Entities;
 using GameClub.Library.Enums;
 
@@ -17,6 +17,7 @@ namespace GameClub.GUI
         private readonly IOperator operatorService;
         private List<Seat> activeSeats;
         private Dictionary<int, Session> sessionsBySeat;
+        private Dictionary<int, TariffSetting> tariffSettings;
 
         public CloseSessionForm(IOperator operatorService)
         {
@@ -30,6 +31,9 @@ namespace GameClub.GUI
             try
             {
                 Cursor = Cursors.WaitCursor;
+
+                var tariffs = await operatorService.GetAllTariffsAsync();
+                tariffSettings = tariffs.ToDictionary(t => t.TariffId);
 
                 activeSeats = await operatorService.FindActiveSeatsAsync();
 
@@ -121,6 +125,10 @@ namespace GameClub.GUI
             var remaining = session.EndTime - DateTime.Now;
             var totalHours = (session.EndTime - session.StartTime).TotalHours;
 
+            string tariffName = "Неизвестный";
+            if (tariffSettings.TryGetValue(session.TariffId, out var tariff))
+                tariffName = tariff.Type == TariffType.Day ? "Дневной" : "Ночной";
+
             lblSessionInfo.Text =
                 $"ПК: #{seat.SeatId} ({seat.SeatRoom})\n" +
                 $"ID сессии: {session.SessionId}\n" +
@@ -128,7 +136,7 @@ namespace GameClub.GUI
                 $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
                 $"Длительность: {totalHours:F1} ч\n" +
                 $"Осталось: {Math.Max(0, remaining.Hours)}ч {Math.Max(0, remaining.Minutes)}мин\n" +
-                $"Тариф: {(session.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
+                $"Тариф: {tariffName}\n" +
                 $"Сумма к оплате: {session.TotalAmount:F2} руб";
 
             lblSessionInfo.ForeColor = Color.DarkRed;
@@ -147,11 +155,15 @@ namespace GameClub.GUI
 
                 var session = sessionsBySeat?.GetValueOrDefault(SelectedSeatId);
 
+                string tariffName = "Неизвестный";
+                if (tariffSettings.TryGetValue(session.TariffId, out var tariff))
+                    tariffName = tariff.Type == TariffType.Day ? "Дневной" : "Ночной";
+
                 var confirmResult = MessageBox.Show(
                     $"Закрыть сессию на ПК #{SelectedSeatId}?\n\n" +
                     $"Начало: {session?.StartTime:dd.MM.yyyy HH:mm}\n" +
                     $"Окончание: {session?.EndTime:dd.MM.yyyy HH:mm}\n" +
-                    $"Тариф: {(session?.Tariff == TariffType.Day ? "Дневной" : "Ночной")}\n" +
+                    $"Тариф: {tariffName}\n" +
                     $"Сумма: {session?.TotalAmount:F2} руб",
                     "Подтверждение закрытия",
                     MessageBoxButtons.YesNo,

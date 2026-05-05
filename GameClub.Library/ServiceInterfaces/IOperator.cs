@@ -1,7 +1,7 @@
 using GameClub.Library.Entities;
 using GameClub.Library.Enums;
 
-namespace GameClub.Library
+namespace GameClub.Library.ServiceInterfaces
 {
     public interface IOperator
     {
@@ -12,5 +12,6 @@ namespace GameClub.Library
         Task<List<Seat>> FindActiveSeatsAsync();
         Task<List<Seat>> GetAllSeatsWithStatusAsync();
         Task<Session?> GetActiveSessionBySeatIdAsync(int seatId);
+        Task<List<TariffSetting>> GetAllTariffsAsync();
     }
 }

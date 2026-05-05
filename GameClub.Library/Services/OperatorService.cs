@@ -1,7 +1,6 @@
-using GameClub.Library.Database;
+using GameClub.Library.ServiceInterfaces;
 using GameClub.Library.Enums;
 using GameClub.Library.UnitOfWork;
-using LinqToDB.Async;
 
 namespace GameClub.Library.Entities
 {
@@ -19,22 +18,20 @@ namespace GameClub.Library.Entities
             using (var uow = uowFactory.Create())
             {
                 var pricePerHour = await uow.Tariffs.GetPriceAsync(tariff);
+                var tariffId = await uow.Tariffs.GetIdByTypeAsync(tariff);
                 int hours = (int)(endTime - startTime).TotalHours;
-
-                var newSession = new Session
-                {
-                    Tariff = tariff,
-                    UserId = userId,
-                    SeatId = seatId,
-                    StartTime = startTime,
-                    EndTime = endTime,
-                    TotalAmount = pricePerHour * hours
-                };
 
                 uow.BeginTransaction();
                 try
                 {
-                    await uow.Sessions.AddAsync(newSession);
+                    await uow.Sessions.AddAsync(new Session() {
+                        TariffId = tariffId,
+                        UserId = userId,
+                        SeatId = seatId,
+                        StartTime = startTime,
+                        EndTime = endTime,
+                        TotalAmount = pricePerHour * hours
+                    });
                     await uow.Seats.UpdateStatusAsync(seatId, SeatStatus.Busy);
                     uow.Commit();
                 }
@@ -80,10 +77,11 @@ namespace GameClub.Library.Entities
                 if (sessionDb is null)
                     throw new Exception($"Сессия {sessionId} не найдена");
 
-                var price = await uow.Tariffs.GetPriceAsync(sessionDb.Tariff);
+                
+                var tariff = await uow.Tariffs.GetByIdAsync(sessionDb.TariffId);
 
                 sessionDb.EndTime = sessionDb.EndTime.AddHours(hours);
-                sessionDb.TotalAmount += hours * price;
+                sessionDb.TotalAmount += hours * tariff.PricePerHour;
 
                 uow.BeginTransaction();
                 try
@@ -140,7 +138,6 @@ namespace GameClub.Library.Entities
                         {
                             await uow.Seats.UpdateAsync(seat);
                         }
-
                     }
                     uow.Commit();
                 }
@@ -173,6 +170,14 @@ namespace GameClub.Library.Entities
                     return new List<Seat>();
 
                 return seats.Where(seat => activeSessions.Any(session => session.SeatId == seat.SeatId)).ToList();
+            }
+        }
+
+        public async Task<List<TariffSetting>> GetAllTariffsAsync()
+        {
+            using (var uow = uowFactory.Create())
+            {
+                return await uow.Tariffs.GetAllAsync();
             }
         }
     }

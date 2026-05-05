@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameClub.Library.Enums;
-using GameClub.Library.Interfaces;
+using GameClub.Library.ServiceInterfaces;
 
 namespace GameClub.GUI
 {

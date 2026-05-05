@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameClub.Library.Database;
-using GameClub.Library.Interfaces;
+using GameClub.Library.ServiceInterfaces;
 using GameClub.Library.UnitOfWork;
 
 namespace GameClub.Library.Entities

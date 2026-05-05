@@ -70,5 +70,25 @@ namespace GameClub.Library.Repositories
             setting.PricePerHour = newPrice;
             await db.UpdateAsync(setting);
         }
+
+        public async Task<int> GetIdByTypeAsync(TariffType tariff)
+        {
+            var setting = await db.GetTable<TariffSetting>().FirstOrDefaultAsync(s => s.TypeValue == tariff.ToString());
+
+            if (setting == null)
+                throw new Exception($"Тариф {tariff} не найден!");
+
+            return setting.TariffId;
+        }
+
+        public async Task<TariffSetting> GetByIdAsync(int id)
+        {
+            var tariff = await db.GetTable<TariffSetting>().FirstOrDefaultAsync(t => t.TariffId == id);
+
+            if (tariff == null)
+                throw new Exception($"Тариф по айди {id} не найден!");
+
+            return tariff;
+        }
     }
 }

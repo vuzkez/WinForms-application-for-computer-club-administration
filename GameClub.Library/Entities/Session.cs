@@ -15,14 +15,8 @@ namespace GameClub.Library.Entities
         [Column(Name = "UserId")]
         public int UserId { get; set; }
 
-        [Column(Name = "Tariff")]
-        public string TariffValue { get; set; }
-
-        public TariffType Tariff
-        {
-            get => Enum.Parse<TariffType>(TariffValue);
-            set => TariffValue = value.ToString();
-        }
+        [Column(Name = "TariffId")]
+        public int TariffId { get; set; }
 
         [Column(Name = "StartTime")]
         public DateTime StartTime { get; set; }

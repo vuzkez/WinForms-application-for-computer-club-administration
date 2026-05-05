@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using GameClub.Library.Entities;
 using GameClub.Library.Enums;
-using GameClub.Library.Interfaces;
+using GameClub.Library.ServiceInterfaces;
 
 namespace GameClub.GUI
 {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using GameClub.Library;
 using GameClub.Library.Enums;
-using GameClub.Library.Interfaces;
+using GameClub.Library.ServiceInterfaces;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GameClub.GUI

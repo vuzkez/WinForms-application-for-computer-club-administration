@@ -13,5 +13,7 @@ namespace GameClub.Library.RepositoryInterfaces
         Task<decimal> GetPriceAsync(TariffType tariff);
         Task UpdatePriceAsync(TariffType tariff, decimal newPrice);
         Task<TariffSetting?> GetByTypeAsync(TariffType tariff);
+        Task<int> GetIdByTypeAsync (TariffType tariff);
+        Task<TariffSetting> GetByIdAsync(int tariffId);
     }
 }

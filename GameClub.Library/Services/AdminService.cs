@@ -1,6 +1,5 @@
 using GameClub.Library.Enums;
-using GameClub.Library.Interfaces;
-using GameClub.Library.Database;
+using GameClub.Library.ServiceInterfaces;
 using GameClub.Library.UnitOfWork;
 
 namespace GameClub.Library.Entities

@@ -1,7 +1,7 @@
 using GameClub.Library.Entities;
 using GameClub.Library.Enums;
 
-namespace GameClub.Library.Interfaces
+namespace GameClub.Library.ServiceInterfaces
 {
     public interface IAdministrator
     {
