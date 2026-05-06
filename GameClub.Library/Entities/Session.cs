@@ -26,5 +26,12 @@ namespace GameClub.Library.Entities
 
         [Column(Name = "TotalAmount")]
         public decimal TotalAmount { get; set; }
+
+        [Association(ThisKey = "SeatId", OtherKey = "SeatId", CanBeNull = false)]
+        public Seat Seat { get; set; }
+        [Association(ThisKey = "UserId", OtherKey = "UserId", CanBeNull = false)]
+        public User User { get; set; }
+        [Association(ThisKey = "TariffId", OtherKey = "TariffId", CanBeNull = false)]
+        public TariffSetting TariffSetting { get; set; }
     }
 }

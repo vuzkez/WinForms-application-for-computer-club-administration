@@ -15,24 +15,25 @@ namespace GameClub.GUI
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSelectedSeat = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSeats)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // dgvSeats
-            // 
+            //
             this.dgvSeats.AllowUserToAddRows = false;
             this.dgvSeats.AllowUserToDeleteRows = false;
             this.dgvSeats.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvSeats.BackgroundColor = Color.FromArgb(25, 25, 34);
-            this.dgvSeats.BorderStyle = BorderStyle.None;
-            this.dgvSeats.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(30, 30, 42);
-            this.dgvSeats.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(150, 150, 175);
+            this.dgvSeats.BackgroundColor = System.Drawing.Color.White;
+            this.dgvSeats.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvSeats.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(245, 245, 245);
+            this.dgvSeats.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(80, 80, 80);
+            this.dgvSeats.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.dgvSeats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSeats.DefaultCellStyle.BackColor = Color.FromArgb(25, 25, 34);
-            this.dgvSeats.DefaultCellStyle.ForeColor = Color.FromArgb(210, 210, 230);
-            this.dgvSeats.DefaultCellStyle.SelectionBackColor = Color.FromArgb(40, 80, 120);
-            this.dgvSeats.DefaultCellStyle.SelectionForeColor = Color.White;
-            this.dgvSeats.GridColor = Color.FromArgb(60, 60, 80);
+            this.dgvSeats.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            this.dgvSeats.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
+            this.dgvSeats.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dgvSeats.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(200, 215, 235);
+            this.dgvSeats.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
+            this.dgvSeats.GridColor = System.Drawing.Color.FromArgb(230, 230, 230);
             this.dgvSeats.Location = new System.Drawing.Point(12, 50);
             this.dgvSeats.MultiSelect = false;
             this.dgvSeats.Name = "dgvSeats";
@@ -43,10 +44,10 @@ namespace GameClub.GUI
             this.dgvSeats.TabIndex = 0;
             this.dgvSeats.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeats_CellDoubleClick);
             this.dgvSeats.SelectionChanged += new System.EventHandler(this.dgvSeats_SelectionChanged);
-            // 
+            //
             // btnOpenSession
-            // 
-            this.btnOpenSession.BackColor = Color.FromArgb(30, 100, 160);
+            //
+            this.btnOpenSession.BackColor = System.Drawing.Color.FromArgb(43, 87, 154);
             this.btnOpenSession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenSession.FlatAppearance.BorderSize = 0;
             this.btnOpenSession.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
@@ -58,10 +59,10 @@ namespace GameClub.GUI
             this.btnOpenSession.Text = "Открыть сессию";
             this.btnOpenSession.UseVisualStyleBackColor = false;
             this.btnOpenSession.Click += new System.EventHandler(this.btnOpenSession_Click);
-            // 
+            //
             // btnCancel
-            // 
-            this.btnCancel.BackColor = Color.FromArgb(140, 30, 30);
+            //
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(107, 107, 107);
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
@@ -73,34 +74,34 @@ namespace GameClub.GUI
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
+            //
             // lblTitle
-            // 
+            //
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = Color.FromArgb(0, 190, 180);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(26, 26, 46);
             this.lblTitle.Location = new System.Drawing.Point(12, 15);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(560, 30);
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Список свободных ПК";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
+            //
             // lblSelectedSeat
-            // 
+            //
             this.lblSelectedSeat.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblSelectedSeat.ForeColor = Color.FromArgb(100, 220, 100);
+            this.lblSelectedSeat.ForeColor = System.Drawing.Color.FromArgb(43, 87, 154);
             this.lblSelectedSeat.Location = new System.Drawing.Point(12, 340);
             this.lblSelectedSeat.Name = "lblSelectedSeat";
             this.lblSelectedSeat.Size = new System.Drawing.Size(560, 25);
             this.lblSelectedSeat.TabIndex = 4;
             this.lblSelectedSeat.Text = "Выберите ПК из списка";
             this.lblSelectedSeat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
+            //
             // FreeSeatsForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = Color.FromArgb(18, 18, 24);
+            this.BackColor = System.Drawing.Color.FromArgb(245, 245, 245);
             this.ClientSize = new System.Drawing.Size(584, 425);
             this.Controls.Add(this.lblSelectedSeat);
             this.Controls.Add(this.lblTitle);
@@ -113,7 +114,6 @@ namespace GameClub.GUI
             this.Name = "FreeSeatsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Свободные компьютеры";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSeats)).EndInit();
             this.ResumeLayout(false);
         }
     }

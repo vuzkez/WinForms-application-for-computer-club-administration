@@ -66,28 +66,23 @@ namespace GameClub.Library.Entities
                     throw;
                 }
             }
+            await Task.Delay(100);
         }
 
         public async Task AddHoursAsync(int sessionId, int hours)
         {
             using (var uow = uowFactory.Create())
             {
-                var sessionDb = await uow.Sessions.GetByIdAsync(sessionId);
+                var sessionById = await uow.Sessions.GetByIdWithDetailsAsync(sessionId);
 
-                if (sessionDb is null)
-                    throw new Exception($"Сессия {sessionId} не найдена");
-
-                
-                var tariff = await uow.Tariffs.GetByIdAsync(sessionDb.TariffId);
-
-                sessionDb.EndTime = sessionDb.EndTime.AddHours(hours);
-                sessionDb.TotalAmount += hours * tariff.PricePerHour;
+                sessionById.EndTime = sessionById.EndTime.AddHours(hours);
+                sessionById.TotalAmount += hours * sessionById.TariffSetting.PricePerHour;
 
                 uow.BeginTransaction();
                 try
                 {
-                    await uow.Sessions.UpdateAsync(sessionDb);
-                    await uow.Seats.UpdateStatusAsync(sessionDb.SeatId, SeatStatus.Busy);
+                    await uow.Sessions.UpdateAsync(sessionById);
+                    await uow.Seats.UpdateStatusAsync(sessionById.SeatId, SeatStatus.Busy);
                     uow.Commit();
                 }
                 catch
@@ -116,28 +111,41 @@ namespace GameClub.Library.Entities
                 var seats = await uow.Seats.GetAllAsync();
                 var activeSessions = await uow.Sessions.GetActiveSessionsAsync();
 
+                var statusChanges = new Dictionary<SeatStatus,List<int>>();
+
+                foreach (var seat in seats)
+                {
+                    var oldStatus = seat.Status;
+                    var activeSession = activeSessions.FirstOrDefault(s => s.SeatId == seat.SeatId);
+
+                    if (activeSession != null)
+                    {
+                        var remaining = (activeSession.EndTime - DateTime.Now).TotalMinutes;
+                        seat.Status = remaining <= 15 ? SeatStatus.Expiring : SeatStatus.Busy;
+                    }
+                    else
+                    {
+                        seat.Status = SeatStatus.Free;
+                    }
+
+                    if (seat.Status != oldStatus)
+                    {
+                        if (!statusChanges.ContainsKey(seat.Status))
+                            statusChanges[seat.Status] = new List<int>();
+
+                        statusChanges[seat.Status].Add(seat.SeatId);
+                    }
+                }
+
                 uow.BeginTransaction();
                 try
                 {
-                    foreach (var seat in seats)
+                    foreach (var kvp in statusChanges)
                     {
-                        var oldStatus = seat.Status;
-                        var activeSession = activeSessions.FirstOrDefault(s => s.SeatId == seat.SeatId);
+                        var newStatus = kvp.Key;
+                        var seatIds = kvp.Value;
 
-                        if (activeSession != null)
-                        {
-                            var remaining = (activeSession.EndTime - DateTime.Now).TotalMinutes;
-                            seat.Status = remaining <= 15 ? SeatStatus.Expiring : SeatStatus.Busy;
-                        }
-                        else
-                        {
-                            seat.Status = SeatStatus.Free;
-                        }
-
-                        if (seat.Status != oldStatus)
-                        {
-                            await uow.Seats.UpdateAsync(seat);
-                        }
+                        await uow.Seats.UpdateStatusBatchAsync(seatIds, newStatus);
                     }
                     uow.Commit();
                 }
@@ -178,6 +186,13 @@ namespace GameClub.Library.Entities
             using (var uow = uowFactory.Create())
             {
                 return await uow.Tariffs.GetAllAsync();
+            }
+        }
+        public async Task<List<Session>> GetActiveSessionsWithDetailsAsync()
+        {
+            using (var uow = uowFactory.Create())
+            {
+                return await uow.Sessions.GetActiveSessionsWithDetailsAsync();
             }
         }
     }

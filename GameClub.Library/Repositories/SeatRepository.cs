@@ -60,5 +60,16 @@ namespace GameClub.Library.Repositories
             seat.Status = seatStatus;
             await db.UpdateAsync(seat);
         }
+
+        public async Task UpdateStatusBatchAsync(List<int> seatIds, SeatStatus newStatus)
+        {
+            if (seatIds == null || seatIds.Count == 0)
+                return;
+
+            await db.GetTable<Seat>()
+                .Where(s => seatIds.Contains(s.SeatId)) 
+                .Set(s => s.StatusValue, (int)newStatus)   
+                .UpdateAsync();                              
+        }
     }
 }

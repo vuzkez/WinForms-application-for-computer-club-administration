@@ -12,5 +12,6 @@ namespace GameClub.Library.RepositoryInterfaces
     {
         Task<List<Seat>> GetFreeSeatsByRoomTypeAsync(string roomType);
         Task UpdateStatusAsync(int seatId,SeatStatus seatStatus);
+        Task UpdateStatusBatchAsync(List<int> seatIds, SeatStatus newStatus);
     }
 }

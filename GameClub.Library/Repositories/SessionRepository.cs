@@ -66,5 +66,31 @@ namespace GameClub.Library.Repositories
             return await db.GetTable<Session>()
                 .FirstOrDefaultAsync(s => s.SessionId == sessionId);
         }
+
+        public async Task<Session?> GetActiveSessionBySeatIdWithDetailsAsync(int seatId)
+        {
+            return await db.GetTable<Session>()
+                .Where(s => s.SeatId == seatId && s.EndTime > DateTime.Now)
+                .LoadWith(s => s.Seat)
+                .LoadWith(s => s.User)
+                .LoadWith(s => s.TariffSetting)
+                .FirstOrDefaultAsync();
+        }
+        public async Task<Session?> GetByIdWithDetailsAsync(int sessionId)
+        {
+            return await db.GetTable<Session>()
+                .Where(s => s.SessionId == sessionId)
+                .LoadWith(s => s.TariffSetting)
+                .FirstOrDefaultAsync();
+        }
+        public async Task<List<Session>> GetActiveSessionsWithDetailsAsync()
+        {
+            return await db.GetTable<Session>()
+                .Where(s => s.EndTime  > DateTime.Now)
+                .LoadWith(s => s.Seat)
+                .LoadWith(s => s.User)
+                .LoadWith(s => s.TariffSetting)
+                .ToListAsync();
+        }
     }
 }

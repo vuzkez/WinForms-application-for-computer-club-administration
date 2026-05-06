@@ -26,47 +26,47 @@ namespace GameClub.GUI
             btnClose = new Button();
             btnCancel = new Button();
             SuspendLayout();
-            // 
+            //
             // cmbActiveSeats
-            // 
-            cmbActiveSeats.BackColor = Color.FromArgb(35, 35, 50);
+            //
+            cmbActiveSeats.BackColor = Color.White;
             cmbActiveSeats.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbActiveSeats.FlatStyle = FlatStyle.Flat;
             cmbActiveSeats.Font = new Font("Segoe UI", 10F);
-            cmbActiveSeats.ForeColor = Color.FromArgb(210, 210, 230);
+            cmbActiveSeats.ForeColor = Color.FromArgb(30, 30, 30);
             cmbActiveSeats.Location = new Point(157, 14);
             cmbActiveSeats.Margin = new Padding(3, 2, 3, 2);
             cmbActiveSeats.Name = "cmbActiveSeats";
             cmbActiveSeats.Size = new Size(263, 25);
             cmbActiveSeats.TabIndex = 1;
             cmbActiveSeats.SelectedIndexChanged += cmbActiveSeats_SelectedIndexChanged;
-            // 
+            //
             // lblSelectSeat
-            // 
+            //
             lblSelectSeat.AutoSize = true;
-            lblSelectSeat.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            lblSelectSeat.ForeColor = Color.FromArgb(0, 190, 180);
+            lblSelectSeat.Font = new Font("Segoe UI", 10F);
+            lblSelectSeat.ForeColor = Color.FromArgb(80, 80, 80);
             lblSelectSeat.Location = new Point(10, 16);
             lblSelectSeat.Name = "lblSelectSeat";
             lblSelectSeat.Size = new Size(140, 20);
             lblSelectSeat.TabIndex = 0;
             lblSelectSeat.Text = "Выберите сессию:";
-            // 
+            //
             // lblSessionInfo
-            // 
-            lblSessionInfo.BackColor = Color.FromArgb(25, 25, 34);
+            //
+            lblSessionInfo.BackColor = Color.White;
             lblSessionInfo.BorderStyle = BorderStyle.FixedSingle;
             lblSessionInfo.Font = new Font("Segoe UI", 10F);
-            lblSessionInfo.ForeColor = Color.FromArgb(210, 210, 230);
+            lblSessionInfo.ForeColor = Color.FromArgb(60, 60, 60);
             lblSessionInfo.Location = new Point(10, 52);
             lblSessionInfo.Name = "lblSessionInfo";
             lblSessionInfo.Size = new Size(409, 229);
             lblSessionInfo.TabIndex = 2;
             lblSessionInfo.Text = "Выберите активную сессию из списка...";
-            // 
+            //
             // btnClose
-            // 
-            btnClose.BackColor = Color.FromArgb(140, 30, 30);
+            //
+            btnClose.BackColor = Color.FromArgb(192, 57, 43);
             btnClose.Enabled = false;
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.FlatAppearance.BorderSize = 0;
@@ -80,14 +80,14 @@ namespace GameClub.GUI
             btnClose.Text = "Закрыть сессию";
             btnClose.UseVisualStyleBackColor = false;
             btnClose.Click += btnClose_Click;
-            // 
+            //
             // btnCancel
-            // 
-            btnCancel.BackColor = Color.FromArgb(55, 55, 70);
+            //
+            btnCancel.BackColor = Color.FromArgb(107, 107, 107);
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnCancel.ForeColor = Color.FromArgb(180, 180, 200);
+            btnCancel.ForeColor = Color.White;
             btnCancel.Location = new Point(306, 292);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
@@ -96,12 +96,12 @@ namespace GameClub.GUI
             btnCancel.Text = "Отмена";
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
-            // 
+            //
             // CloseSessionForm
-            // 
+            //
             AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(18, 18, 24);
+            BackColor = Color.FromArgb(245, 245, 245);
             ClientSize = new Size(430, 339);
             Controls.Add(btnCancel);
             Controls.Add(btnClose);

@@ -18,7 +18,6 @@ namespace GameClub.GUI
         private readonly IOperator operatorService;
         private List<Seat> activeSeats;
         private Dictionary<int, Session> sessionsBySeat;
-        private Dictionary<int, TariffSetting> tariffSettings;
 
         public AddHoursForm(IOperator operatorService)
         {
@@ -36,9 +35,6 @@ namespace GameClub.GUI
         {
             try
             {
-                var tariffs = await operatorService.GetAllTariffsAsync();
-                tariffSettings = tariffs.ToDictionary(t => t.TariffId);
-
                 activeSeats = await operatorService.FindActiveSeatsAsync();
 
                 if (activeSeats == null || activeSeats.Count == 0)
@@ -50,15 +46,10 @@ namespace GameClub.GUI
                     return;
                 }
 
-                sessionsBySeat = new Dictionary<int, Session>();
-                foreach (var seat in activeSeats)
-                {
-                    var session = await operatorService.GetActiveSessionBySeatIdAsync(seat.SeatId);
-                    if (session != null)
-                    {
-                        sessionsBySeat[seat.SeatId] = session;
-                    }
-                }
+                var sessionsWithDetails = await operatorService.GetActiveSessionsWithDetailsAsync();
+                sessionsBySeat = sessionsWithDetails
+                    .Where(s => s.SeatId > 0)
+                    .ToDictionary(s => s.SeatId);
 
                 cmbActiveSeats.DisplayMember = "Text";
                 cmbActiveSeats.ValueMember = "Value";
@@ -84,7 +75,8 @@ namespace GameClub.GUI
         {
             try
             {
-                if (cmbActiveSeats.SelectedItem == null) return;
+                if (cmbActiveSeats.SelectedItem == null) 
+                    return;
 
                 dynamic selected = cmbActiveSeats.SelectedItem;
                 int seatId = selected.Value;
@@ -110,9 +102,7 @@ namespace GameClub.GUI
         {
             var remaining = session.EndTime - DateTime.Now;
 
-            string tariffName = "Неизвестный";
-            if (tariffSettings.TryGetValue(session.TariffId, out var tariff))
-                tariffName = tariff.Type == TariffType.Day ? "Дневной" : "Ночной";
+            string tariffName = session.TariffSetting?.Type == TariffType.Day ? "Дневной" : "Ночной";
 
             lblSessionInfo.Text =
                 $"Сессия найдена!\n" +

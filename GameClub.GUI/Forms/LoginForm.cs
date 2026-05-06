@@ -36,6 +36,12 @@ namespace GameClub.GUI
             string login = txtLogin.Text;
             string password = txtPassword.Text;
 
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            {
+                lblStatus.Text = "Введите логин и пароль";
+                return;
+            }
+
             try
             {
                 var user = await authenticationService.LoginAsync(login, password);

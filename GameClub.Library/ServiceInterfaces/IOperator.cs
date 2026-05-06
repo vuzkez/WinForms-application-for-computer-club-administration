@@ -13,5 +13,6 @@ namespace GameClub.Library.ServiceInterfaces
         Task<List<Seat>> GetAllSeatsWithStatusAsync();
         Task<Session?> GetActiveSessionBySeatIdAsync(int seatId);
         Task<List<TariffSetting>> GetAllTariffsAsync();
+        Task<List<Session>> GetActiveSessionsWithDetailsAsync();
     }
 }

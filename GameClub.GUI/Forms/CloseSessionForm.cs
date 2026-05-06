@@ -17,7 +17,6 @@ namespace GameClub.GUI
         private readonly IOperator operatorService;
         private List<Seat> activeSeats;
         private Dictionary<int, Session> sessionsBySeat;
-        private Dictionary<int, TariffSetting> tariffSettings;
 
         public CloseSessionForm(IOperator operatorService)
         {
@@ -32,9 +31,6 @@ namespace GameClub.GUI
             {
                 Cursor = Cursors.WaitCursor;
 
-                var tariffs = await operatorService.GetAllTariffsAsync();
-                tariffSettings = tariffs.ToDictionary(t => t.TariffId);
-
                 activeSeats = await operatorService.FindActiveSeatsAsync();
 
                 if (activeSeats == null || activeSeats.Count == 0)
@@ -47,15 +43,8 @@ namespace GameClub.GUI
                     return;
                 }
 
-                sessionsBySeat = new Dictionary<int, Session>();
-                foreach (var seat in activeSeats)
-                {
-                    var session = await operatorService.GetActiveSessionBySeatIdAsync(seat.SeatId);
-                    if (session != null)
-                    {
-                        sessionsBySeat[seat.SeatId] = session;
-                    }
-                }
+                var sessionsWithDetails = await operatorService.GetActiveSessionsWithDetailsAsync();
+                sessionsBySeat = sessionsWithDetails.Where(s => s.SeatId > 0).ToDictionary(s => s.SeatId);
 
                 cmbActiveSeats.DisplayMember = "Text";
                 cmbActiveSeats.ValueMember = "Value";
@@ -112,7 +101,7 @@ namespace GameClub.GUI
                     btnClose.Enabled = false;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 lblSessionInfo.Text = "Ошибка при получении данных сессии";
                 lblSessionInfo.ForeColor = Color.Red;
@@ -125,9 +114,7 @@ namespace GameClub.GUI
             var remaining = session.EndTime - DateTime.Now;
             var totalHours = (session.EndTime - session.StartTime).TotalHours;
 
-            string tariffName = "Неизвестный";
-            if (tariffSettings.TryGetValue(session.TariffId, out var tariff))
-                tariffName = tariff.Type == TariffType.Day ? "Дневной" : "Ночной";
+            string tariffName = session.TariffSetting.Type == TariffType.Day ? "Дневной" : "Ночной";
 
             lblSessionInfo.Text =
                 $"ПК: #{seat.SeatId} ({seat.SeatRoom})\n" +
@@ -153,11 +140,9 @@ namespace GameClub.GUI
                     return;
                 }
 
-                var session = sessionsBySeat?.GetValueOrDefault(SelectedSeatId);
+                var session = sessionsBySeat.GetValueOrDefault(SelectedSeatId);
 
-                string tariffName = "Неизвестный";
-                if (tariffSettings.TryGetValue(session.TariffId, out var tariff))
-                    tariffName = tariff.Type == TariffType.Day ? "Дневной" : "Ночной";
+                string tariffName = session.TariffSetting.Type == TariffType.Day ? "Дневной" : "Ночной";
 
                 var confirmResult = MessageBox.Show(
                     $"Закрыть сессию на ПК #{SelectedSeatId}?\n\n" +

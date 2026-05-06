@@ -2,9 +2,6 @@ namespace GameClub.GUI
 {
     partial class RevenueForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
         private DateTimePicker dtpFrom;
         private DateTimePicker dtpTo;
@@ -16,10 +13,6 @@ namespace GameClub.GUI
         private TextBox txtTotal;
         private Label lblTitle;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -31,156 +24,154 @@ namespace GameClub.GUI
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            dtpFrom = new DateTimePicker();
-            dtpTo = new DateTimePicker();
-            btnShow = new Button();
-            btnClose = new Button();
-            lblFrom = new Label();
-            lblTo = new Label();
-            lblTotal = new Label();
-            txtTotal = new TextBox();
-            lblTitle = new Label();
-            SuspendLayout();
-            // 
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
+            this.btnShow = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.lblFrom = new System.Windows.Forms.Label();
+            this.lblTo = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            //
             // lblTitle
-            // 
-            lblTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblTitle.ForeColor = Color.FromArgb(0, 190, 180);
-            lblTitle.Location = new Point(12, 9);
-            lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(360, 30);
-            lblTitle.TabIndex = 0;
-            lblTitle.Text = "Отчёт по выручке";
-            lblTitle.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(26, 26, 46);
+            this.lblTitle.Location = new System.Drawing.Point(12, 9);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(360, 30);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Отчёт по выручке";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            //
             // lblFrom
-            // 
-            lblFrom.AutoSize = true;
-            lblFrom.Font = new Font("Segoe UI", 10F);
-            lblFrom.ForeColor = Color.FromArgb(140, 140, 165);
-            lblFrom.Location = new Point(20, 60);
-            lblFrom.Name = "lblFrom";
-            lblFrom.Size = new Size(91, 20);
-            lblFrom.TabIndex = 1;
-            lblFrom.Text = "Период с:";
-            // 
+            //
+            this.lblFrom.AutoSize = true;
+            this.lblFrom.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblFrom.ForeColor = System.Drawing.Color.FromArgb(80, 80, 80);
+            this.lblFrom.Location = new System.Drawing.Point(20, 60);
+            this.lblFrom.Name = "lblFrom";
+            this.lblFrom.Size = new System.Drawing.Size(71, 20);
+            this.lblFrom.TabIndex = 1;
+            this.lblFrom.Text = "Период с:";
+            //
             // dtpFrom
-            // 
-            dtpFrom.CalendarForeColor = Color.FromArgb(210, 210, 230);
-            dtpFrom.CalendarMonthBackground = Color.FromArgb(28, 28, 38);
-            dtpFrom.Format = DateTimePickerFormat.Short;
-            dtpFrom.Location = new Point(120, 57);
-            dtpFrom.Name = "dtpFrom";
-            dtpFrom.Size = new Size(120, 23);
-            dtpFrom.TabIndex = 2;
-            dtpFrom.Value = DateTime.Now.AddDays(-30);
-            // 
+            //
+            this.dtpFrom.CalendarForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
+            this.dtpFrom.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dtpFrom.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFrom.Location = new System.Drawing.Point(100, 57);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(120, 25);
+            this.dtpFrom.TabIndex = 2;
+            this.dtpFrom.Value = System.DateTime.Now.AddDays(-30);
+            //
             // lblTo
-            // 
-            lblTo.AutoSize = true;
-            lblTo.Font = new Font("Segoe UI", 10F);
-            lblTo.ForeColor = Color.FromArgb(140, 140, 165);
-            lblTo.Location = new Point(260, 60);
-            lblTo.Name = "lblTo";
-            lblTo.Size = new Size(25, 20);
-            lblTo.TabIndex = 3;
-            lblTo.Text = "по:";
-            // 
+            //
+            this.lblTo.AutoSize = true;
+            this.lblTo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblTo.ForeColor = System.Drawing.Color.FromArgb(80, 80, 80);
+            this.lblTo.Location = new System.Drawing.Point(235, 60);
+            this.lblTo.Name = "lblTo";
+            this.lblTo.Size = new System.Drawing.Size(25, 20);
+            this.lblTo.TabIndex = 3;
+            this.lblTo.Text = "по:";
+            //
             // dtpTo
-            // 
-            dtpTo.CalendarForeColor = Color.FromArgb(210, 210, 230);
-            dtpTo.CalendarMonthBackground = Color.FromArgb(28, 28, 38);
-            dtpTo.Format = DateTimePickerFormat.Short;
-            dtpTo.Location = new Point(300, 57);
-            dtpTo.Name = "dtpTo";
-            dtpTo.Size = new Size(120, 23);
-            dtpTo.TabIndex = 4;
-            dtpTo.Value = DateTime.Now;
-            // 
+            //
+            this.dtpTo.CalendarForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
+            this.dtpTo.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dtpTo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpTo.Location = new System.Drawing.Point(270, 57);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(120, 25);
+            this.dtpTo.TabIndex = 4;
+            this.dtpTo.Value = System.DateTime.Now;
+            //
             // btnShow
-            // 
-            btnShow.BackColor = Color.FromArgb(30, 100, 160);
-            btnShow.FlatStyle = FlatStyle.Flat;
-            btnShow.FlatAppearance.BorderSize = 0;
-            btnShow.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnShow.ForeColor = Color.White;
-            btnShow.Location = new Point(20, 110);
-            btnShow.Name = "btnShow";
-            btnShow.Size = new Size(120, 35);
-            btnShow.TabIndex = 5;
-            btnShow.Text = "Показать";
-            btnShow.UseVisualStyleBackColor = false;
-            btnShow.Click += btnShow_Click;
-            // 
+            //
+            this.btnShow.BackColor = System.Drawing.Color.FromArgb(43, 87, 154);
+            this.btnShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShow.FlatAppearance.BorderSize = 0;
+            this.btnShow.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnShow.ForeColor = System.Drawing.Color.White;
+            this.btnShow.Location = new System.Drawing.Point(20, 110);
+            this.btnShow.Name = "btnShow";
+            this.btnShow.Size = new System.Drawing.Size(120, 35);
+            this.btnShow.TabIndex = 5;
+            this.btnShow.Text = "Показать";
+            this.btnShow.UseVisualStyleBackColor = false;
+            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
+            //
             // btnClose
-            // 
-            btnClose.BackColor = Color.FromArgb(55, 55, 70);
-            btnClose.FlatStyle = FlatStyle.Flat;
-            btnClose.FlatAppearance.BorderSize = 0;
-            btnClose.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnClose.ForeColor = Color.FromArgb(180, 180, 200);
-            btnClose.Location = new Point(300, 110);
-            btnClose.Name = "btnClose";
-            btnClose.Size = new Size(120, 35);
-            btnClose.TabIndex = 6;
-            btnClose.Text = "Закрыть";
-            btnClose.UseVisualStyleBackColor = false;
-            btnClose.Click += btnClose_Click;
-            // 
+            //
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(107, 107, 107);
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Location = new System.Drawing.Point(270, 110);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(120, 35);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = "Закрыть";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            //
             // lblTotal
-            // 
-            lblTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblTotal.ForeColor = Color.FromArgb(0, 190, 180);
-            lblTotal.Location = new Point(20, 170);
-            lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(100, 30);
-            lblTotal.TabIndex = 7;
-            lblTotal.Text = "Итого:";
-            lblTotal.TextAlign = ContentAlignment.MiddleLeft;
-            // 
+            //
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(26, 26, 46);
+            this.lblTotal.Location = new System.Drawing.Point(20, 170);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(100, 30);
+            this.lblTotal.TabIndex = 7;
+            this.lblTotal.Text = "Итого:";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            //
             // txtTotal
-            // 
-            txtTotal.BackColor = Color.FromArgb(25, 25, 34);
-            txtTotal.BorderStyle = BorderStyle.FixedSingle;
-            txtTotal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            txtTotal.ForeColor = Color.FromArgb(100, 220, 100);
-            txtTotal.Location = new Point(120, 170);
-            txtTotal.Name = "txtTotal";
-            txtTotal.ReadOnly = true;
-            txtTotal.Size = new Size(300, 29);
-            txtTotal.TabIndex = 8;
-            txtTotal.Text = "0.00 руб";
-            txtTotal.TextAlign = HorizontalAlignment.Right;
-            // 
+            //
+            this.txtTotal.BackColor = System.Drawing.Color.White;
+            this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.txtTotal.ForeColor = System.Drawing.Color.FromArgb(43, 87, 154);
+            this.txtTotal.Location = new System.Drawing.Point(100, 170);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
+            this.txtTotal.Size = new System.Drawing.Size(290, 29);
+            this.txtTotal.TabIndex = 8;
+            this.txtTotal.Text = "0.00 руб";
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            //
             // RevenueForm
-            // 
-            AutoScaleDimensions = new SizeF(7F, 16F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(18, 18, 24);
-            ClientSize = new Size(440, 230);
-            Controls.Add(txtTotal);
-            Controls.Add(lblTotal);
-            Controls.Add(btnClose);
-            Controls.Add(btnShow);
-            Controls.Add(dtpTo);
-            Controls.Add(lblTo);
-            Controls.Add(dtpFrom);
-            Controls.Add(lblFrom);
-            Controls.Add(lblTitle);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
-            MinimizeBox = false;
-            Name = "RevenueForm";
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Выручка";
-            ResumeLayout(false);
-            PerformLayout();
+            //
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(245, 245, 245);
+            this.ClientSize = new System.Drawing.Size(410, 230);
+            this.Controls.Add(this.txtTotal);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnShow);
+            this.Controls.Add(this.dtpTo);
+            this.Controls.Add(this.lblTo);
+            this.Controls.Add(this.dtpFrom);
+            this.Controls.Add(this.lblFrom);
+            this.Controls.Add(this.lblTitle);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "RevenueForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Выручка";
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         #endregion
