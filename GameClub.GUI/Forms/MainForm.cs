@@ -42,19 +42,18 @@ namespace GameClub.GUI
 
         private void ConfigureUIByRole()
         {
+            Text = $"CyberX - Пользователь: {user.FullName}. Роль: {user.UserRole}.";
             if (user.UserRole == UserRole.Administrator)
             {
                 btnRevenue.Visible = true;
                 btnAdminPanel.Visible = true;
                 btnManageOperators.Visible = true;
-                Text = "CyberX - Администратор";
             }
             else
             {
                 btnRevenue.Visible = false;
                 btnAdminPanel.Visible = false;
                 btnManageOperators.Visible = false;
-                Text = "CyberX - Оператор";
             }
         }
 
@@ -94,13 +93,13 @@ namespace GameClub.GUI
         {
             switch (seat.Status)
             {
-                case SeatStatus.Free: 
+                case SeatStatus.Free:
                     return Color.Green;
-                case SeatStatus.Expiring: 
+                case SeatStatus.Expiring:
                     return Color.Yellow;
-                case SeatStatus.Busy: 
+                case SeatStatus.Busy:
                     return Color.Red;
-                default: 
+                default:
                     return Color.Gray;
             }
         }
@@ -122,12 +121,6 @@ namespace GameClub.GUI
         private async void btnRefresh_Click(object sender, EventArgs e)
         {
             await UpdateSeatColorsAsync();
-        }
-
-        private void btnInfoUser_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show($"Пользователь: {user.FullName}.\nРоль: {user.UserRole}.",
-                "Информация о пользователе", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private async void btnFindFreeSeat_Click(object sender, EventArgs e)
@@ -245,7 +238,6 @@ namespace GameClub.GUI
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         await UpdateSeatColorsAsync();
-                        lblStatus.Text = "Тарифы обновлены";
                     }
                 }
             }

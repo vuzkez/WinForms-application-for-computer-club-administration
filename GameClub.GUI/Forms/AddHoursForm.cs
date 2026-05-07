@@ -89,7 +89,7 @@ namespace GameClub.GUI
                     UpdateSessionInfo(seat, session);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 lblSessionInfo.Text = "Ошибка при получении данных сессии";
                 lblSessionInfo.ForeColor = Color.Red;
@@ -108,10 +108,9 @@ namespace GameClub.GUI
                 $"Сессия найдена!\n" +
                 $"ПК: #{seat.SeatId} ({seat.SeatRoom})\n" +
                 $"Статус: {(seat.Status == SeatStatus.Expiring ? "Скоро освободится" : "Занят")}\n" +
-                $"ID сессии: {session.SessionId}\n" +
                 $"Начало: {session.StartTime:dd.MM.yyyy HH:mm}\n" +
                 $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
-                $"Осталось: {Math.Max(0, remaining.Hours)}ч {Math.Max(0, remaining.Minutes)}мин\n" +
+                $"Осталось: {remaining.Hours}ч {remaining.Minutes}мин\n" +
                 $"Тариф: {tariffName}\n" +
                 $"Текущая сумма: {session.TotalAmount} руб";
 
@@ -133,13 +132,15 @@ namespace GameClub.GUI
                 }
 
                 int hours = (int)nudHours.Value;
-                var session = sessionsBySeat?.GetValueOrDefault(SelectedSeatId);
+                var session = sessionsBySeat.GetValueOrDefault(SelectedSeatId);
+                var additionalCost = hours * session.TariffSetting.PricePerHour;
 
                 var confirmResult = MessageBox.Show(
                     $"Добавить {hours} час(ов) к сессии на ПК #{SelectedSeatId}?\n\n" +
-                    $"Текущее окончание: {session?.EndTime:dd.MM.yyyy HH:mm}\n" +
-                    $"Новое окончание: {session?.EndTime.AddHours(hours):dd.MM.yyyy HH:mm}\n" +
-                    $"Текущая сумма: {session?.TotalAmount} руб",
+                    $"Текущее окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
+                    $"Новое окончание: {session.EndTime.AddHours(hours):dd.MM.yyyy HH:mm}\n" +
+                    $"Текущая сумма: {session.TotalAmount} руб\n" +
+                    $"Будущая сумма: {session.TotalAmount + additionalCost}",
                     "Подтверждение",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);

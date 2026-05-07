@@ -47,9 +47,10 @@ namespace GameClub.GUI
             btnOk.FlatStyle = FlatStyle.Flat;
             btnOk.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnOk.ForeColor = Color.White;
-            btnOk.Location = new Point(12, 100);
+            btnOk.Location = new Point(17, 150);
+            btnOk.Margin = new Padding(4, 4, 4, 4);
             btnOk.Name = "btnOk";
-            btnOk.Size = new Size(110, 40);
+            btnOk.Size = new Size(157, 60);
             btnOk.TabIndex = 0;
             btnOk.Text = "ОК";
             btnOk.UseVisualStyleBackColor = false;
@@ -62,9 +63,10 @@ namespace GameClub.GUI
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(163, 100);
+            btnCancel.Location = new Point(233, 150);
+            btnCancel.Margin = new Padding(4, 4, 4, 4);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(110, 40);
+            btnCancel.Size = new Size(157, 60);
             btnCancel.TabIndex = 1;
             btnCancel.Text = "Отмена";
             btnCancel.UseVisualStyleBackColor = false;
@@ -74,9 +76,10 @@ namespace GameClub.GUI
             // 
             lblPrompt.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblPrompt.ForeColor = Color.FromArgb(43, 87, 154);
-            lblPrompt.Location = new Point(12, 15);
+            lblPrompt.Location = new Point(17, 22);
+            lblPrompt.Margin = new Padding(4, 0, 4, 0);
             lblPrompt.Name = "lblPrompt";
-            lblPrompt.Size = new Size(276, 30);
+            lblPrompt.Size = new Size(394, 45);
             lblPrompt.TabIndex = 2;
             lblPrompt.Text = "Выберите тип комнаты для поиска";
             lblPrompt.TextAlign = ContentAlignment.MiddleCenter;
@@ -87,9 +90,10 @@ namespace GameClub.GUI
             radioButton1.Checked = true;
             radioButton1.Font = new Font("Segoe UI", 10F);
             radioButton1.ForeColor = Color.FromArgb(50, 50, 50);
-            radioButton1.Location = new Point(57, 58);
+            radioButton1.Location = new Point(81, 87);
+            radioButton1.Margin = new Padding(4, 4, 4, 4);
             radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(74, 23);
+            radioButton1.Size = new Size(104, 32);
             radioButton1.TabIndex = 0;
             radioButton1.TabStop = true;
             radioButton1.Text = "General";
@@ -100,9 +104,10 @@ namespace GameClub.GUI
             radioButton2.AutoSize = true;
             radioButton2.Font = new Font("Segoe UI", 10F);
             radioButton2.ForeColor = Color.FromArgb(50, 50, 50);
-            radioButton2.Location = new Point(163, 58);
+            radioButton2.Location = new Point(244, 87);
+            radioButton2.Margin = new Padding(4, 4, 4, 4);
             radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(48, 23);
+            radioButton2.Size = new Size(65, 32);
             radioButton2.TabIndex = 1;
             radioButton2.TabStop = true;
             radioButton2.Text = "VIP";
@@ -110,16 +115,17 @@ namespace GameClub.GUI
             // 
             // FindFreeSeatForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 16F);
+            AutoScaleDimensions = new SizeF(10F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
-            ClientSize = new Size(300, 151);
+            ClientSize = new Size(408, 226);
             Controls.Add(radioButton2);
             Controls.Add(radioButton1);
             Controls.Add(lblPrompt);
             Controls.Add(btnCancel);
             Controls.Add(btnOk);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4, 4, 4, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FindFreeSeatForm";

@@ -22,8 +22,6 @@ namespace GameClub.GUI
         private Button btnRefresh;
         private Button btnRevenue;
         private Button btnAdminPanel;
-        private StatusStrip statusStrip;
-        private ToolStripStatusLabel lblStatus;
 
         // Кнопки мест General (25 шт)
         private Button btnGen1, btnGen2, btnGen3, btnGen4, btnGen5;
@@ -110,14 +108,11 @@ namespace GameClub.GUI
             pnlBottom = new Panel();
             btnAddHours = new Button();
             btnCloseSession = new Button();
-            btnInfoUser = new Button();
             btnFindFreeSeat = new Button();
             btnRefresh = new Button();
             btnManageOperators = new Button();
             btnRevenue = new Button();
             btnAdminPanel = new Button();
-            statusStrip = new StatusStrip();
-            lblStatus = new ToolStripStatusLabel();
             pnlLeft.SuspendLayout();
             pnlGeneralZone.SuspendLayout();
             pnlEntrance.SuspendLayout();
@@ -127,7 +122,6 @@ namespace GameClub.GUI
             pnlVipEntrance.SuspendLayout();
             pnlVipZone2.SuspendLayout();
             pnlBottom.SuspendLayout();
-            statusStrip.SuspendLayout();
             SuspendLayout();
             // 
             // pnlLeft
@@ -195,9 +189,9 @@ namespace GameClub.GUI
             pnlEntrance.Anchor = AnchorStyles.Left;
             pnlEntrance.BackColor = Color.FromArgb(230, 230, 230);
             pnlEntrance.Controls.Add(lblEntranceTitle);
-            pnlEntrance.Location = new Point(10, 281);
+            pnlEntrance.Location = new Point(3, 282);
             pnlEntrance.Name = "pnlEntrance";
-            pnlEntrance.Size = new Size(56, 110);
+            pnlEntrance.Size = new Size(83, 78);
             pnlEntrance.TabIndex = 2;
             // 
             // lblEntranceTitle
@@ -205,9 +199,9 @@ namespace GameClub.GUI
             lblEntranceTitle.Anchor = AnchorStyles.Left;
             lblEntranceTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblEntranceTitle.ForeColor = Color.FromArgb(43, 87, 154);
-            lblEntranceTitle.Location = new Point(0, 0);
+            lblEntranceTitle.Location = new Point(0, -1);
             lblEntranceTitle.Name = "lblEntranceTitle";
-            lblEntranceTitle.Size = new Size(56, 111);
+            lblEntranceTitle.Size = new Size(83, 79);
             lblEntranceTitle.TabIndex = 0;
             lblEntranceTitle.Text = "ВХОД ";
             lblEntranceTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -254,7 +248,7 @@ namespace GameClub.GUI
             btnGen1.FlatStyle = FlatStyle.Flat;
             btnGen1.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen1.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen1.Location = new Point(85, 28);
+            btnGen1.Location = new Point(118, 18);
             btnGen1.Name = "btnGen1";
             btnGen1.Size = new Size(75, 68);
             btnGen1.TabIndex = 5;
@@ -269,7 +263,7 @@ namespace GameClub.GUI
             btnGen2.FlatStyle = FlatStyle.Flat;
             btnGen2.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen2.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen2.Location = new Point(166, 28);
+            btnGen2.Location = new Point(199, 18);
             btnGen2.Name = "btnGen2";
             btnGen2.Size = new Size(75, 68);
             btnGen2.TabIndex = 6;
@@ -284,7 +278,7 @@ namespace GameClub.GUI
             btnGen3.FlatStyle = FlatStyle.Flat;
             btnGen3.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen3.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen3.Location = new Point(247, 28);
+            btnGen3.Location = new Point(280, 18);
             btnGen3.Name = "btnGen3";
             btnGen3.Size = new Size(75, 68);
             btnGen3.TabIndex = 7;
@@ -299,7 +293,7 @@ namespace GameClub.GUI
             btnGen4.FlatStyle = FlatStyle.Flat;
             btnGen4.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen4.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen4.Location = new Point(328, 28);
+            btnGen4.Location = new Point(361, 18);
             btnGen4.Name = "btnGen4";
             btnGen4.Size = new Size(75, 68);
             btnGen4.TabIndex = 8;
@@ -314,7 +308,7 @@ namespace GameClub.GUI
             btnGen5.FlatStyle = FlatStyle.Flat;
             btnGen5.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen5.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen5.Location = new Point(409, 28);
+            btnGen5.Location = new Point(442, 18);
             btnGen5.Name = "btnGen5";
             btnGen5.Size = new Size(75, 68);
             btnGen5.TabIndex = 9;
@@ -329,7 +323,7 @@ namespace GameClub.GUI
             btnGen6.FlatStyle = FlatStyle.Flat;
             btnGen6.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen6.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen6.Location = new Point(490, 28);
+            btnGen6.Location = new Point(523, 18);
             btnGen6.Name = "btnGen6";
             btnGen6.Size = new Size(75, 68);
             btnGen6.TabIndex = 10;
@@ -344,7 +338,7 @@ namespace GameClub.GUI
             btnGen7.FlatStyle = FlatStyle.Flat;
             btnGen7.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen7.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen7.Location = new Point(572, 28);
+            btnGen7.Location = new Point(605, 18);
             btnGen7.Name = "btnGen7";
             btnGen7.Size = new Size(75, 68);
             btnGen7.TabIndex = 11;
@@ -359,7 +353,7 @@ namespace GameClub.GUI
             btnGen8.FlatStyle = FlatStyle.Flat;
             btnGen8.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen8.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen8.Location = new Point(653, 28);
+            btnGen8.Location = new Point(686, 18);
             btnGen8.Name = "btnGen8";
             btnGen8.Size = new Size(75, 68);
             btnGen8.TabIndex = 12;
@@ -374,7 +368,7 @@ namespace GameClub.GUI
             btnGen9.FlatStyle = FlatStyle.Flat;
             btnGen9.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen9.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen9.Location = new Point(737, 28);
+            btnGen9.Location = new Point(770, 18);
             btnGen9.Name = "btnGen9";
             btnGen9.Size = new Size(75, 68);
             btnGen9.TabIndex = 13;
@@ -389,7 +383,7 @@ namespace GameClub.GUI
             btnGen10.FlatStyle = FlatStyle.Flat;
             btnGen10.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen10.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen10.Location = new Point(818, 28);
+            btnGen10.Location = new Point(851, 18);
             btnGen10.Name = "btnGen10";
             btnGen10.Size = new Size(75, 68);
             btnGen10.TabIndex = 14;
@@ -404,7 +398,7 @@ namespace GameClub.GUI
             btnGen11.FlatStyle = FlatStyle.Flat;
             btnGen11.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen11.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen11.Location = new Point(88, 117);
+            btnGen11.Location = new Point(121, 107);
             btnGen11.Name = "btnGen11";
             btnGen11.Size = new Size(75, 68);
             btnGen11.TabIndex = 15;
@@ -419,7 +413,7 @@ namespace GameClub.GUI
             btnGen12.FlatStyle = FlatStyle.Flat;
             btnGen12.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen12.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen12.Location = new Point(168, 117);
+            btnGen12.Location = new Point(201, 107);
             btnGen12.Name = "btnGen12";
             btnGen12.Size = new Size(75, 68);
             btnGen12.TabIndex = 16;
@@ -434,7 +428,7 @@ namespace GameClub.GUI
             btnGen13.FlatStyle = FlatStyle.Flat;
             btnGen13.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen13.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen13.Location = new Point(249, 117);
+            btnGen13.Location = new Point(282, 107);
             btnGen13.Name = "btnGen13";
             btnGen13.Size = new Size(75, 68);
             btnGen13.TabIndex = 17;
@@ -449,7 +443,7 @@ namespace GameClub.GUI
             btnGen14.FlatStyle = FlatStyle.Flat;
             btnGen14.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen14.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen14.Location = new Point(328, 117);
+            btnGen14.Location = new Point(361, 107);
             btnGen14.Name = "btnGen14";
             btnGen14.Size = new Size(75, 68);
             btnGen14.TabIndex = 18;
@@ -464,7 +458,7 @@ namespace GameClub.GUI
             btnGen15.FlatStyle = FlatStyle.Flat;
             btnGen15.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen15.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen15.Location = new Point(412, 117);
+            btnGen15.Location = new Point(445, 107);
             btnGen15.Name = "btnGen15";
             btnGen15.Size = new Size(75, 68);
             btnGen15.TabIndex = 19;
@@ -479,7 +473,7 @@ namespace GameClub.GUI
             btnGen16.FlatStyle = FlatStyle.Flat;
             btnGen16.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen16.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen16.Location = new Point(494, 117);
+            btnGen16.Location = new Point(527, 107);
             btnGen16.Name = "btnGen16";
             btnGen16.Size = new Size(75, 68);
             btnGen16.TabIndex = 20;
@@ -494,7 +488,7 @@ namespace GameClub.GUI
             btnGen17.FlatStyle = FlatStyle.Flat;
             btnGen17.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen17.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen17.Location = new Point(575, 118);
+            btnGen17.Location = new Point(608, 108);
             btnGen17.Name = "btnGen17";
             btnGen17.Size = new Size(75, 68);
             btnGen17.TabIndex = 21;
@@ -509,7 +503,7 @@ namespace GameClub.GUI
             btnGen18.FlatStyle = FlatStyle.Flat;
             btnGen18.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen18.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen18.Location = new Point(656, 119);
+            btnGen18.Location = new Point(689, 109);
             btnGen18.Name = "btnGen18";
             btnGen18.Size = new Size(75, 68);
             btnGen18.TabIndex = 22;
@@ -524,7 +518,7 @@ namespace GameClub.GUI
             btnGen19.FlatStyle = FlatStyle.Flat;
             btnGen19.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen19.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen19.Location = new Point(737, 118);
+            btnGen19.Location = new Point(770, 108);
             btnGen19.Name = "btnGen19";
             btnGen19.Size = new Size(75, 68);
             btnGen19.TabIndex = 23;
@@ -539,7 +533,7 @@ namespace GameClub.GUI
             btnGen20.FlatStyle = FlatStyle.Flat;
             btnGen20.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen20.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen20.Location = new Point(818, 119);
+            btnGen20.Location = new Point(851, 109);
             btnGen20.Name = "btnGen20";
             btnGen20.Size = new Size(75, 68);
             btnGen20.TabIndex = 24;
@@ -554,7 +548,7 @@ namespace GameClub.GUI
             btnGen21.FlatStyle = FlatStyle.Flat;
             btnGen21.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen21.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen21.Location = new Point(282, 204);
+            btnGen21.Location = new Point(315, 194);
             btnGen21.Name = "btnGen21";
             btnGen21.Size = new Size(75, 68);
             btnGen21.TabIndex = 25;
@@ -569,7 +563,7 @@ namespace GameClub.GUI
             btnGen22.FlatStyle = FlatStyle.Flat;
             btnGen22.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen22.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen22.Location = new Point(363, 204);
+            btnGen22.Location = new Point(396, 194);
             btnGen22.Name = "btnGen22";
             btnGen22.Size = new Size(75, 68);
             btnGen22.TabIndex = 26;
@@ -584,7 +578,7 @@ namespace GameClub.GUI
             btnGen23.FlatStyle = FlatStyle.Flat;
             btnGen23.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen23.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen23.Location = new Point(444, 204);
+            btnGen23.Location = new Point(477, 194);
             btnGen23.Name = "btnGen23";
             btnGen23.Size = new Size(75, 68);
             btnGen23.TabIndex = 27;
@@ -599,7 +593,7 @@ namespace GameClub.GUI
             btnGen24.FlatStyle = FlatStyle.Flat;
             btnGen24.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen24.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen24.Location = new Point(525, 204);
+            btnGen24.Location = new Point(558, 194);
             btnGen24.Name = "btnGen24";
             btnGen24.Size = new Size(75, 68);
             btnGen24.TabIndex = 28;
@@ -614,7 +608,7 @@ namespace GameClub.GUI
             btnGen25.FlatStyle = FlatStyle.Flat;
             btnGen25.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
             btnGen25.ForeColor = Color.FromArgb(80, 80, 80);
-            btnGen25.Location = new Point(606, 204);
+            btnGen25.Location = new Point(639, 194);
             btnGen25.Name = "btnGen25";
             btnGen25.Size = new Size(75, 68);
             btnGen25.TabIndex = 29;
@@ -863,7 +857,6 @@ namespace GameClub.GUI
             pnlBottom.BorderStyle = BorderStyle.FixedSingle;
             pnlBottom.Controls.Add(btnAddHours);
             pnlBottom.Controls.Add(btnCloseSession);
-            pnlBottom.Controls.Add(btnInfoUser);
             pnlBottom.Controls.Add(btnFindFreeSeat);
             pnlBottom.Controls.Add(btnRefresh);
             pnlBottom.Controls.Add(btnManageOperators);
@@ -871,7 +864,7 @@ namespace GameClub.GUI
             pnlBottom.Controls.Add(btnAdminPanel);
             pnlBottom.Location = new Point(0, 640);
             pnlBottom.Name = "pnlBottom";
-            pnlBottom.Size = new Size(1390, 60);
+            pnlBottom.Size = new Size(1390, 82);
             pnlBottom.TabIndex = 8;
             // 
             // btnAddHours
@@ -881,9 +874,9 @@ namespace GameClub.GUI
             btnAddHours.FlatStyle = FlatStyle.Flat;
             btnAddHours.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnAddHours.ForeColor = Color.White;
-            btnAddHours.Location = new Point(574, 9);
+            btnAddHours.Location = new Point(401, 9);
             btnAddHours.Name = "btnAddHours";
-            btnAddHours.Size = new Size(158, 40);
+            btnAddHours.Size = new Size(160, 60);
             btnAddHours.TabIndex = 7;
             btnAddHours.Text = "Добавить часы";
             btnAddHours.UseVisualStyleBackColor = false;
@@ -896,28 +889,13 @@ namespace GameClub.GUI
             btnCloseSession.FlatStyle = FlatStyle.Flat;
             btnCloseSession.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnCloseSession.ForeColor = Color.White;
-            btnCloseSession.Location = new Point(392, 9);
+            btnCloseSession.Location = new Point(235, 9);
             btnCloseSession.Name = "btnCloseSession";
-            btnCloseSession.Size = new Size(176, 40);
+            btnCloseSession.Size = new Size(160, 60);
             btnCloseSession.TabIndex = 6;
             btnCloseSession.Text = "Закрыть сессию";
             btnCloseSession.UseVisualStyleBackColor = false;
             btnCloseSession.Click += btnCloseSession_Click;
-            // 
-            // btnInfoUser
-            // 
-            btnInfoUser.BackColor = Color.FromArgb(107, 107, 107);
-            btnInfoUser.FlatAppearance.BorderSize = 0;
-            btnInfoUser.FlatStyle = FlatStyle.Flat;
-            btnInfoUser.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            btnInfoUser.ForeColor = Color.White;
-            btnInfoUser.Location = new Point(6, 9);
-            btnInfoUser.Name = "btnInfoUser";
-            btnInfoUser.Size = new Size(161, 40);
-            btnInfoUser.TabIndex = 4;
-            btnInfoUser.Text = "Пользователь";
-            btnInfoUser.UseVisualStyleBackColor = false;
-            btnInfoUser.Click += btnInfoUser_Click;
             // 
             // btnFindFreeSeat
             // 
@@ -926,11 +904,11 @@ namespace GameClub.GUI
             btnFindFreeSeat.FlatStyle = FlatStyle.Flat;
             btnFindFreeSeat.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnFindFreeSeat.ForeColor = Color.White;
-            btnFindFreeSeat.Location = new Point(175, 9);
+            btnFindFreeSeat.Location = new Point(9, 9);
             btnFindFreeSeat.Name = "btnFindFreeSeat";
-            btnFindFreeSeat.Size = new Size(211, 40);
+            btnFindFreeSeat.Size = new Size(220, 60);
             btnFindFreeSeat.TabIndex = 0;
-            btnFindFreeSeat.Text = "Найти свободный ПК\n";
+            btnFindFreeSeat.Text = "Найти свободный ПК\n Открыть сессию";
             btnFindFreeSeat.UseVisualStyleBackColor = false;
             btnFindFreeSeat.Click += btnFindFreeSeat_Click;
             // 
@@ -941,11 +919,11 @@ namespace GameClub.GUI
             btnRefresh.FlatStyle = FlatStyle.Flat;
             btnRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnRefresh.ForeColor = Color.White;
-            btnRefresh.Location = new Point(738, 9);
+            btnRefresh.Location = new Point(1230, 9);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(130, 40);
+            btnRefresh.Size = new Size(147, 60);
             btnRefresh.TabIndex = 1;
-            btnRefresh.Text = "Обновить";
+            btnRefresh.Text = "Обновить карту";
             btnRefresh.UseVisualStyleBackColor = false;
             btnRefresh.Click += btnRefresh_Click;
             // 
@@ -956,11 +934,11 @@ namespace GameClub.GUI
             btnManageOperators.FlatStyle = FlatStyle.Flat;
             btnManageOperators.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnManageOperators.ForeColor = Color.White;
-            btnManageOperators.Location = new Point(874, 9);
+            btnManageOperators.Location = new Point(567, 9);
             btnManageOperators.Name = "btnManageOperators";
-            btnManageOperators.Size = new Size(165, 40);
+            btnManageOperators.Size = new Size(160, 60);
             btnManageOperators.TabIndex = 10;
-            btnManageOperators.Text = "Операторы";
+            btnManageOperators.Text = "Настройка операторов";
             btnManageOperators.UseVisualStyleBackColor = false;
             btnManageOperators.Click += btnManageOperators_Click;
             // 
@@ -971,11 +949,11 @@ namespace GameClub.GUI
             btnRevenue.FlatStyle = FlatStyle.Flat;
             btnRevenue.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnRevenue.ForeColor = Color.White;
-            btnRevenue.Location = new Point(1045, 9);
+            btnRevenue.Location = new Point(732, 9);
             btnRevenue.Name = "btnRevenue";
-            btnRevenue.Size = new Size(138, 40);
+            btnRevenue.Size = new Size(160, 60);
             btnRevenue.TabIndex = 2;
-            btnRevenue.Text = "Выручка";
+            btnRevenue.Text = "Выручка по дате";
             btnRevenue.UseVisualStyleBackColor = false;
             btnRevenue.Click += btnRevenue_Click;
             // 
@@ -986,37 +964,18 @@ namespace GameClub.GUI
             btnAdminPanel.FlatStyle = FlatStyle.Flat;
             btnAdminPanel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnAdminPanel.ForeColor = Color.White;
-            btnAdminPanel.Location = new Point(1189, 9);
+            btnAdminPanel.Location = new Point(898, 9);
             btnAdminPanel.Name = "btnAdminPanel";
-            btnAdminPanel.Size = new Size(175, 40);
+            btnAdminPanel.Size = new Size(160, 60);
             btnAdminPanel.TabIndex = 3;
-            btnAdminPanel.Text = "Настроить цену";
+            btnAdminPanel.Text = "Настроить цену тарифа";
             btnAdminPanel.UseVisualStyleBackColor = false;
             btnAdminPanel.Click += btnAdminPanel_Click;
-            // 
-            // statusStrip
-            // 
-            statusStrip.BackColor = Color.FromArgb(245, 245, 245);
-            statusStrip.ImageScalingSize = new Size(24, 24);
-            statusStrip.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip.Location = new Point(0, 690);
-            statusStrip.Name = "statusStrip";
-            statusStrip.Size = new Size(1390, 32);
-            statusStrip.SizingGrip = false;
-            statusStrip.TabIndex = 9;
-            // 
-            // lblStatus
-            // 
-            lblStatus.ForeColor = Color.FromArgb(80, 80, 80);
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(135, 25);
-            lblStatus.Text = "Готов к работе";
             // 
             // MainForm
             // 
             ClientSize = new Size(1390, 722);
             Controls.Add(pnlBottom);
-            Controls.Add(statusStrip);
             Controls.Add(pnlRight);
             Controls.Add(pnlLeft);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -1035,10 +994,7 @@ namespace GameClub.GUI
             pnlVipEntrance.ResumeLayout(false);
             pnlVipZone2.ResumeLayout(false);
             pnlBottom.ResumeLayout(false);
-            statusStrip.ResumeLayout(false);
-            statusStrip.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -1050,7 +1006,6 @@ namespace GameClub.GUI
         private Label lblVip2;
         private Label lblEntranceTitle;
         private Label lblRegistration;
-        private Button btnInfoUser;
         private Button btnCloseSession;
         private Button btnAddHours;
         private Button btnManageOperators;

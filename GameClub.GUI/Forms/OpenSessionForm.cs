@@ -28,8 +28,6 @@ namespace GameClub.GUI
 
             LoadTariffsAsync();
 
-            dateTimePicker1.Value = DateTime.Now;
-            dateTimePicker1.MinDate = DateTime.Now;
             textBox3.Text = "1";
 
             textBox2.Visible = false;
@@ -47,6 +45,8 @@ namespace GameClub.GUI
 
                 radioButton1.Text = $"Дневной ({dayPrice} руб/час)";
                 radioButton2.Text = $"Ночной ({nightPrice} руб/час)";
+
+                label1.Text = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
             }
             catch (Exception ex)
             {
@@ -111,7 +111,7 @@ namespace GameClub.GUI
 
                 SelectedSeatId = seatId;
                 SelectedTariff = radioButton1.Checked ? TariffType.Day : TariffType.Night;
-                StartTime = dateTimePicker1.Value;
+                StartTime = DateTime.Now;
                 Hours = hours;
 
                 DialogResult = DialogResult.OK;

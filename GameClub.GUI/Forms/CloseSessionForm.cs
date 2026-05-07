@@ -118,11 +118,10 @@ namespace GameClub.GUI
 
             lblSessionInfo.Text =
                 $"ПК: #{seat.SeatId} ({seat.SeatRoom})\n" +
-                $"ID сессии: {session.SessionId}\n" +
                 $"Начало: {session.StartTime:dd.MM.yyyy HH:mm}\n" +
                 $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
                 $"Длительность: {totalHours:F1} ч\n" +
-                $"Осталось: {Math.Max(0, remaining.Hours)}ч {Math.Max(0, remaining.Minutes)}мин\n" +
+                $"Осталось: {remaining.Hours}ч {remaining.Minutes}мин\n" +
                 $"Тариф: {tariffName}\n" +
                 $"Сумма к оплате: {session.TotalAmount:F2} руб";
 
@@ -146,10 +145,10 @@ namespace GameClub.GUI
 
                 var confirmResult = MessageBox.Show(
                     $"Закрыть сессию на ПК #{SelectedSeatId}?\n\n" +
-                    $"Начало: {session?.StartTime:dd.MM.yyyy HH:mm}\n" +
-                    $"Окончание: {session?.EndTime:dd.MM.yyyy HH:mm}\n" +
+                    $"Начало: {session.StartTime:dd.MM.yyyy HH:mm}\n" +
+                    $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
                     $"Тариф: {tariffName}\n" +
-                    $"Сумма: {session?.TotalAmount:F2} руб",
+                    $"Сумма: {session.TotalAmount:F2} руб",
                     "Подтверждение закрытия",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);

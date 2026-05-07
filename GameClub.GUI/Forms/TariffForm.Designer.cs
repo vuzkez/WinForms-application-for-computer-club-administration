@@ -26,153 +26,167 @@ namespace GameClub.GUI
 
         private void InitializeComponent()
         {
-            this.lblDay = new System.Windows.Forms.Label();
-            this.lblNight = new System.Windows.Forms.Label();
-            this.nudDayPrice = new System.Windows.Forms.NumericUpDown();
-            this.nudNightPrice = new System.Windows.Forms.NumericUpDown();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.lblDayTitle = new System.Windows.Forms.Label();
-            this.lblNightTitle = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            //
-            // lblTitle
-            //
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(26, 26, 46);
-            this.lblTitle.Location = new System.Drawing.Point(12, 9);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(360, 30);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Настройка тарифов";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
-            // lblDayTitle
-            //
-            this.lblDayTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblDayTitle.ForeColor = System.Drawing.Color.FromArgb(43, 87, 154);
-            this.lblDayTitle.Location = new System.Drawing.Point(20, 60);
-            this.lblDayTitle.Name = "lblDayTitle";
-            this.lblDayTitle.Size = new System.Drawing.Size(150, 25);
-            this.lblDayTitle.TabIndex = 1;
-            this.lblDayTitle.Text = "Дневной тариф";
-            this.lblDayTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            lblDay = new Label();
+            lblNight = new Label();
+            nudDayPrice = new NumericUpDown();
+            nudNightPrice = new NumericUpDown();
+            btnSave = new Button();
+            btnClose = new Button();
+            lblDayTitle = new Label();
+            lblNightTitle = new Label();
+            lblTitle = new Label();
+            ((System.ComponentModel.ISupportInitialize)nudDayPrice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudNightPrice).BeginInit();
+            SuspendLayout();
+            // 
             // lblDay
-            //
-            this.lblDay.AutoSize = true;
-            this.lblDay.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblDay.ForeColor = System.Drawing.Color.FromArgb(80, 80, 80);
-            this.lblDay.Location = new System.Drawing.Point(20, 95);
-            this.lblDay.Name = "lblDay";
-            this.lblDay.Size = new System.Drawing.Size(72, 20);
-            this.lblDay.TabIndex = 2;
-            this.lblDay.Text = "Цена (руб):";
-            //
-            // nudDayPrice
-            //
-            this.nudDayPrice.BackColor = System.Drawing.Color.White;
-            this.nudDayPrice.DecimalPlaces = 2;
-            this.nudDayPrice.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.nudDayPrice.ForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
-            this.nudDayPrice.Location = new System.Drawing.Point(120, 92);
-            this.nudDayPrice.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
-            this.nudDayPrice.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.nudDayPrice.Name = "nudDayPrice";
-            this.nudDayPrice.Size = new System.Drawing.Size(120, 25);
-            this.nudDayPrice.TabIndex = 3;
-            this.nudDayPrice.Value = new decimal(new int[] { 100, 0, 0, 0 });
-            //
-            // lblNightTitle
-            //
-            this.lblNightTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblNightTitle.ForeColor = System.Drawing.Color.FromArgb(43, 87, 154);
-            this.lblNightTitle.Location = new System.Drawing.Point(20, 140);
-            this.lblNightTitle.Name = "lblNightTitle";
-            this.lblNightTitle.Size = new System.Drawing.Size(150, 25);
-            this.lblNightTitle.TabIndex = 4;
-            this.lblNightTitle.Text = "Ночной тариф";
-            this.lblNightTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
+            lblDay.AutoSize = true;
+            lblDay.Font = new Font("Segoe UI", 10F);
+            lblDay.ForeColor = Color.FromArgb(80, 80, 80);
+            lblDay.Location = new Point(29, 142);
+            lblDay.Margin = new Padding(4, 0, 4, 0);
+            lblDay.Name = "lblDay";
+            lblDay.Size = new Size(114, 28);
+            lblDay.TabIndex = 2;
+            lblDay.Text = "Цена (руб):";
+            // 
             // lblNight
-            //
-            this.lblNight.AutoSize = true;
-            this.lblNight.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblNight.ForeColor = System.Drawing.Color.FromArgb(80, 80, 80);
-            this.lblNight.Location = new System.Drawing.Point(20, 175);
-            this.lblNight.Name = "lblNight";
-            this.lblNight.Size = new System.Drawing.Size(72, 20);
-            this.lblNight.TabIndex = 5;
-            this.lblNight.Text = "Цена (руб):";
-            //
+            // 
+            lblNight.AutoSize = true;
+            lblNight.Font = new Font("Segoe UI", 10F);
+            lblNight.ForeColor = Color.FromArgb(80, 80, 80);
+            lblNight.Location = new Point(29, 262);
+            lblNight.Margin = new Padding(4, 0, 4, 0);
+            lblNight.Name = "lblNight";
+            lblNight.Size = new Size(114, 28);
+            lblNight.TabIndex = 5;
+            lblNight.Text = "Цена (руб):";
+            // 
+            // nudDayPrice
+            // 
+            nudDayPrice.BackColor = Color.White;
+            nudDayPrice.DecimalPlaces = 2;
+            nudDayPrice.Font = new Font("Segoe UI", 10F);
+            nudDayPrice.ForeColor = Color.FromArgb(30, 30, 30);
+            nudDayPrice.Location = new Point(171, 138);
+            nudDayPrice.Margin = new Padding(4, 4, 4, 4);
+            nudDayPrice.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            nudDayPrice.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudDayPrice.Name = "nudDayPrice";
+            nudDayPrice.Size = new Size(171, 34);
+            nudDayPrice.TabIndex = 3;
+            nudDayPrice.Value = new decimal(new int[] { 100, 0, 0, 0 });
+            // 
             // nudNightPrice
-            //
-            this.nudNightPrice.BackColor = System.Drawing.Color.White;
-            this.nudNightPrice.DecimalPlaces = 2;
-            this.nudNightPrice.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.nudNightPrice.ForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
-            this.nudNightPrice.Location = new System.Drawing.Point(120, 172);
-            this.nudNightPrice.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
-            this.nudNightPrice.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.nudNightPrice.Name = "nudNightPrice";
-            this.nudNightPrice.Size = new System.Drawing.Size(120, 25);
-            this.nudNightPrice.TabIndex = 6;
-            this.nudNightPrice.Value = new decimal(new int[] { 150, 0, 0, 0 });
-            //
+            // 
+            nudNightPrice.BackColor = Color.White;
+            nudNightPrice.DecimalPlaces = 2;
+            nudNightPrice.Font = new Font("Segoe UI", 10F);
+            nudNightPrice.ForeColor = Color.FromArgb(30, 30, 30);
+            nudNightPrice.Location = new Point(171, 258);
+            nudNightPrice.Margin = new Padding(4, 4, 4, 4);
+            nudNightPrice.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            nudNightPrice.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudNightPrice.Name = "nudNightPrice";
+            nudNightPrice.Size = new Size(171, 34);
+            nudNightPrice.TabIndex = 6;
+            nudNightPrice.Value = new decimal(new int[] { 150, 0, 0, 0 });
+            // 
             // btnSave
-            //
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(43, 87, 154);
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(20, 230);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(120, 35);
-            this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            //
+            // 
+            btnSave.BackColor = Color.FromArgb(43, 87, 154);
+            btnSave.FlatAppearance.BorderSize = 0;
+            btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnSave.ForeColor = Color.White;
+            btnSave.Location = new Point(29, 345);
+            btnSave.Margin = new Padding(4, 4, 4, 4);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(171, 52);
+            btnSave.TabIndex = 7;
+            btnSave.Text = "Сохранить";
+            btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
+            // 
             // btnClose
-            //
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(107, 107, 107);
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(250, 230);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(120, 35);
-            this.btnClose.TabIndex = 8;
-            this.btnClose.Text = "Закрыть";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            //
+            // 
+            btnClose.BackColor = Color.FromArgb(107, 107, 107);
+            btnClose.FlatAppearance.BorderSize = 0;
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnClose.ForeColor = Color.White;
+            btnClose.Location = new Point(357, 345);
+            btnClose.Margin = new Padding(4, 4, 4, 4);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(171, 52);
+            btnClose.TabIndex = 8;
+            btnClose.Text = "Закрыть";
+            btnClose.UseVisualStyleBackColor = false;
+            btnClose.Click += btnClose_Click;
+            // 
+            // lblDayTitle
+            // 
+            lblDayTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblDayTitle.ForeColor = Color.FromArgb(43, 87, 154);
+            lblDayTitle.Location = new Point(29, 90);
+            lblDayTitle.Margin = new Padding(4, 0, 4, 0);
+            lblDayTitle.Name = "lblDayTitle";
+            lblDayTitle.Size = new Size(214, 38);
+            lblDayTitle.TabIndex = 1;
+            lblDayTitle.Text = "Дневной тариф";
+            lblDayTitle.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblNightTitle
+            // 
+            lblNightTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblNightTitle.ForeColor = Color.FromArgb(43, 87, 154);
+            lblNightTitle.Location = new Point(29, 210);
+            lblNightTitle.Margin = new Padding(4, 0, 4, 0);
+            lblNightTitle.Name = "lblNightTitle";
+            lblNightTitle.Size = new Size(214, 38);
+            lblNightTitle.TabIndex = 4;
+            lblNightTitle.Text = "Ночной тариф";
+            lblNightTitle.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblTitle
+            // 
+            lblTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.FromArgb(26, 26, 46);
+            lblTitle.Location = new Point(17, 14);
+            lblTitle.Margin = new Padding(4, 0, 4, 0);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(514, 45);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Настройка тарифов";
+            lblTitle.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // TariffForm
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(245, 245, 245);
-            this.ClientSize = new System.Drawing.Size(390, 290);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.nudNightPrice);
-            this.Controls.Add(this.lblNight);
-            this.Controls.Add(this.lblNightTitle);
-            this.Controls.Add(this.nudDayPrice);
-            this.Controls.Add(this.lblDay);
-            this.Controls.Add(this.lblDayTitle);
-            this.Controls.Add(this.lblTitle);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "TariffForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Настройка тарифов";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            AutoScaleDimensions = new SizeF(10F, 24F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 245, 245);
+            ClientSize = new Size(557, 415);
+            Controls.Add(btnClose);
+            Controls.Add(btnSave);
+            Controls.Add(nudNightPrice);
+            Controls.Add(lblNight);
+            Controls.Add(lblNightTitle);
+            Controls.Add(nudDayPrice);
+            Controls.Add(lblDay);
+            Controls.Add(lblDayTitle);
+            Controls.Add(lblTitle);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4, 4, 4, 4);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "TariffForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Настройка тарифов";
+            ((System.ComponentModel.ISupportInitialize)nudDayPrice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudNightPrice).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
