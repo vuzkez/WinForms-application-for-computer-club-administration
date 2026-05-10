@@ -1,132 +1,73 @@
 using System;
-using System.Linq;
 using System.Windows.Forms;
-using GameClub.Library;
+using GameClub.GUI.ViewInterfaces;
 using GameClub.Library.Enums;
-using GameClub.Library.ServiceInterfaces;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace GameClub.GUI.Views;
-
-public partial class OpenSessionForm : Form
+namespace GameClub.GUI.Views
 {
-    public int SelectedSeatId { get; private set; }
-    public TariffType SelectedTariff { get; private set; }
-    public DateTime StartTime { get; private set; }
-    public int Hours { get; private set; }
-
-    private readonly IOperator _operatorService;
-    private readonly IAdministrator _adminService;
-    private decimal dayPrice;
-    private decimal nightPrice;
-
-    public OpenSessionForm(IOperator operatorService, IAdministrator adminService, int seatId)
+    public partial class OpenSessionForm : Form, IOpenSessionView
     {
-        InitializeComponent();
-        _operatorService = operatorService;
-        _adminService = adminService;
+        public int SelectedSeatId { get; private set; }
+        public TariffType SelectedTariff { get; private set; }
+        public DateTime StartTime { get; private set; }
+        public int Hours { get; private set; }
 
-        LoadTariffsAsync();
+        public string SeatIdText => textBox2.Text;
+        public bool IsSeatPreselected => lblSelectedSeatInfo.Visible;
+        public bool IsDayTariffSelected => radioButton1.Checked;
+        public bool IsNightTariffSelected => radioButton2.Checked;
+        public string HoursText => textBox3.Text;
 
-        textBox3.Text = "1";
+        public event EventHandler ConfirmOpen;
+        public event EventHandler FormLoaded;
 
-        textBox2.Visible = false;
-        lblSelectedSeatInfo.Visible = true;
-        lblSelectedSeatInfo.Text = $"Выбрано место номер: {seatId}";
-        SelectedSeatId = seatId;
-    }
-
-    private async void LoadTariffsAsync()
-    {
-        try
+        public OpenSessionForm(
+            Library.ServiceInterfaces.IOperator operatorService,
+            Library.ServiceInterfaces.IAdministrator adminService,
+            int seatId)
         {
-            dayPrice = await _adminService.GetTariffPriceAsync(TariffType.Day);
-            nightPrice = await _adminService.GetTariffPriceAsync(TariffType.Night);
+            InitializeComponent();
 
-            radioButton1.Text = $"Дневной ({dayPrice} руб/час)";
-            radioButton2.Text = $"Ночной ({nightPrice} руб/час)";
-
-            label1.Text = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка загрузки тарифов: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Close();
-        }
-    }
-
-    private async void btnOk_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            int seatId;
-
-            if (lblSelectedSeatInfo.Visible)
-            {
-                seatId = SelectedSeatId;
-            }
-            else
-            {
-                if (!int.TryParse(textBox2.Text, out seatId) || seatId <= 0 || seatId > 35)
-                {
-                    MessageBox.Show("Введите корректный номер ПК (1-35)", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-
-            if (!radioButton1.Checked && !radioButton2.Checked)
-            {
-                MessageBox.Show("Выберите тариф!", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!int.TryParse(textBox3.Text, out int hours) || hours <= 0)
-            {
-                MessageBox.Show("Введите корректное количество часов (>0)", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var seats = await _operatorService.GetAllSeatsWithStatusAsync();
-            var seat = seats.FirstOrDefault(s => s.SeatId == seatId);
-
-            if (seat == null)
-            {
-                MessageBox.Show($"ПК #{seatId} не существует!", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var activeSession = await _operatorService.GetActiveSessionBySeatIdAsync(seatId);
-
-            if (activeSession != null)
-            {
-                MessageBox.Show($"ПК #{seatId} уже занят! Сессия активна до {activeSession.EndTime:HH:mm}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            textBox3.Text = "1";
+            textBox2.Visible = false;
+            lblSelectedSeatInfo.Visible = true;
+            lblSelectedSeatInfo.Text = $"Место: {seatId}";
             SelectedSeatId = seatId;
-            SelectedTariff = radioButton1.Checked ? TariffType.Day : TariffType.Night;
-            StartTime = DateTime.Now;
-            Hours = hours;
 
+            btnOk.Click += (s, e) =>
+            {
+                if (!IsSeatPreselected && int.TryParse(SeatIdText, out int sid))
+                    SelectedSeatId = sid;
+
+                SelectedTariff = radioButton1.Checked ? TariffType.Day : TariffType.Night;
+                StartTime = DateTime.Now;
+                if (int.TryParse(HoursText, out int h)) Hours = h;
+
+                ConfirmOpen?.Invoke(this, EventArgs.Empty);
+            };
+
+            btnCancel.Click += (s, e) =>
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+            };
+
+            Load += (s, e) => FormLoaded?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void SetDayTariffLabel(string text) => radioButton1.Text = text;
+        public void SetNightTariffLabel(string text) => radioButton2.Text = text;
+        public void SetCurrentDateTime(string text) => label1.Text = text;
+
+        public void ShowError(string message)
+        {
+            MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        public void CloseWithOk()
+        {
             DialogResult = DialogResult.OK;
             Close();
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка при открытии сессии: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        DialogResult = DialogResult.Cancel;
-        Close();
     }
 }

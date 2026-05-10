@@ -86,7 +86,6 @@
             this.dgvOperators.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOperators.Size = new System.Drawing.Size(438, 310);
             this.dgvOperators.TabIndex = 0;
-            this.dgvOperators.SelectionChanged += new System.EventHandler(this.dgvOperators_SelectionChanged);
             //
             // btnAdd
             //
@@ -101,7 +100,6 @@
             this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             //
             // btnEdit
             //
@@ -117,7 +115,6 @@
             this.btnEdit.TabIndex = 7;
             this.btnEdit.Text = "Редактировать";
             this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             //
             // btnDelete
             //
@@ -133,7 +130,6 @@
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             //
             // btnClear
             //
@@ -148,7 +144,6 @@
             this.btnClear.TabIndex = 9;
             this.btnClear.Text = "Очистить";
             this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             //
             // btnCancel
             //
@@ -163,7 +158,6 @@
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Закрыть";
             this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             //
             // lblTitle
             //

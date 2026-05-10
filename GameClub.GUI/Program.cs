@@ -33,8 +33,14 @@ namespace GameClub.GUI.Views
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
                     User currentUser = loginForm.AuthenticatedUser;
-                    Application.Run(new MainForm(currentUser,operatorService,administratorService,authenticationService));
+
+                    var mainForm = new MainForm(currentUser, operatorService, administratorService, authenticationService);
+
+                    var mainPresenter = new MainPresenter(mainForm, currentUser, operatorService, administratorService);
+
+                    Application.Run(mainForm);
                 }
+
             }
         }
     }

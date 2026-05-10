@@ -254,7 +254,6 @@ namespace GameClub.GUI.Views
             btnGen1.TabIndex = 5;
             btnGen1.Text = "ПК #1";
             btnGen1.UseVisualStyleBackColor = false;
-            btnGen1.Click += SeatButton_Click;
             // 
             // btnGen2
             // 
@@ -269,7 +268,6 @@ namespace GameClub.GUI.Views
             btnGen2.TabIndex = 6;
             btnGen2.Text = "ПК #2";
             btnGen2.UseVisualStyleBackColor = false;
-            btnGen2.Click += SeatButton_Click;
             // 
             // btnGen3
             // 
@@ -284,7 +282,6 @@ namespace GameClub.GUI.Views
             btnGen3.TabIndex = 7;
             btnGen3.Text = "ПК #3";
             btnGen3.UseVisualStyleBackColor = false;
-            btnGen3.Click += SeatButton_Click;
             // 
             // btnGen4
             // 
@@ -299,7 +296,6 @@ namespace GameClub.GUI.Views
             btnGen4.TabIndex = 8;
             btnGen4.Text = "ПК #4";
             btnGen4.UseVisualStyleBackColor = false;
-            btnGen4.Click += SeatButton_Click;
             // 
             // btnGen5
             // 
@@ -314,7 +310,6 @@ namespace GameClub.GUI.Views
             btnGen5.TabIndex = 9;
             btnGen5.Text = "ПК #5";
             btnGen5.UseVisualStyleBackColor = false;
-            btnGen5.Click += SeatButton_Click;
             // 
             // btnGen6
             // 
@@ -329,7 +324,6 @@ namespace GameClub.GUI.Views
             btnGen6.TabIndex = 10;
             btnGen6.Text = "ПК #6";
             btnGen6.UseVisualStyleBackColor = false;
-            btnGen6.Click += SeatButton_Click;
             // 
             // btnGen7
             // 
@@ -344,7 +338,6 @@ namespace GameClub.GUI.Views
             btnGen7.TabIndex = 11;
             btnGen7.Text = "ПК #7";
             btnGen7.UseVisualStyleBackColor = false;
-            btnGen7.Click += SeatButton_Click;
             // 
             // btnGen8
             // 
@@ -359,7 +352,6 @@ namespace GameClub.GUI.Views
             btnGen8.TabIndex = 12;
             btnGen8.Text = "ПК #8";
             btnGen8.UseVisualStyleBackColor = false;
-            btnGen8.Click += SeatButton_Click;
             // 
             // btnGen9
             // 
@@ -374,7 +366,6 @@ namespace GameClub.GUI.Views
             btnGen9.TabIndex = 13;
             btnGen9.Text = "ПК #9";
             btnGen9.UseVisualStyleBackColor = false;
-            btnGen9.Click += SeatButton_Click;
             // 
             // btnGen10
             // 
@@ -389,7 +380,6 @@ namespace GameClub.GUI.Views
             btnGen10.TabIndex = 14;
             btnGen10.Text = "ПК #10";
             btnGen10.UseVisualStyleBackColor = false;
-            btnGen10.Click += SeatButton_Click;
             // 
             // btnGen11
             // 
@@ -404,7 +394,6 @@ namespace GameClub.GUI.Views
             btnGen11.TabIndex = 15;
             btnGen11.Text = "ПК #11";
             btnGen11.UseVisualStyleBackColor = false;
-            btnGen11.Click += SeatButton_Click;
             // 
             // btnGen12
             // 
@@ -419,7 +408,6 @@ namespace GameClub.GUI.Views
             btnGen12.TabIndex = 16;
             btnGen12.Text = "ПК #12";
             btnGen12.UseVisualStyleBackColor = false;
-            btnGen12.Click += SeatButton_Click;
             // 
             // btnGen13
             // 
@@ -434,7 +422,6 @@ namespace GameClub.GUI.Views
             btnGen13.TabIndex = 17;
             btnGen13.Text = "ПК #13";
             btnGen13.UseVisualStyleBackColor = false;
-            btnGen13.Click += SeatButton_Click;
             // 
             // btnGen14
             // 
@@ -449,7 +436,6 @@ namespace GameClub.GUI.Views
             btnGen14.TabIndex = 18;
             btnGen14.Text = "ПК #14";
             btnGen14.UseVisualStyleBackColor = false;
-            btnGen14.Click += SeatButton_Click;
             // 
             // btnGen15
             // 
@@ -464,7 +450,6 @@ namespace GameClub.GUI.Views
             btnGen15.TabIndex = 19;
             btnGen15.Text = "ПК #15";
             btnGen15.UseVisualStyleBackColor = false;
-            btnGen15.Click += SeatButton_Click;
             // 
             // btnGen16
             // 
@@ -479,7 +464,6 @@ namespace GameClub.GUI.Views
             btnGen16.TabIndex = 20;
             btnGen16.Text = "ПК #16";
             btnGen16.UseVisualStyleBackColor = false;
-            btnGen16.Click += SeatButton_Click;
             // 
             // btnGen17
             // 
@@ -494,7 +478,6 @@ namespace GameClub.GUI.Views
             btnGen17.TabIndex = 21;
             btnGen17.Text = "ПК #17";
             btnGen17.UseVisualStyleBackColor = false;
-            btnGen17.Click += SeatButton_Click;
             // 
             // btnGen18
             // 
@@ -509,7 +492,6 @@ namespace GameClub.GUI.Views
             btnGen18.TabIndex = 22;
             btnGen18.Text = "ПК #18";
             btnGen18.UseVisualStyleBackColor = false;
-            btnGen18.Click += SeatButton_Click;
             // 
             // btnGen19
             // 
@@ -524,7 +506,6 @@ namespace GameClub.GUI.Views
             btnGen19.TabIndex = 23;
             btnGen19.Text = "ПК #19";
             btnGen19.UseVisualStyleBackColor = false;
-            btnGen19.Click += SeatButton_Click;
             // 
             // btnGen20
             // 
@@ -539,7 +520,6 @@ namespace GameClub.GUI.Views
             btnGen20.TabIndex = 24;
             btnGen20.Text = "ПК #20";
             btnGen20.UseVisualStyleBackColor = false;
-            btnGen20.Click += SeatButton_Click;
             // 
             // btnGen21
             // 
@@ -554,7 +534,6 @@ namespace GameClub.GUI.Views
             btnGen21.TabIndex = 25;
             btnGen21.Text = "ПК #21";
             btnGen21.UseVisualStyleBackColor = false;
-            btnGen21.Click += SeatButton_Click;
             // 
             // btnGen22
             // 
@@ -569,7 +548,6 @@ namespace GameClub.GUI.Views
             btnGen22.TabIndex = 26;
             btnGen22.Text = "ПК #22";
             btnGen22.UseVisualStyleBackColor = false;
-            btnGen22.Click += SeatButton_Click;
             // 
             // btnGen23
             // 
@@ -584,7 +562,6 @@ namespace GameClub.GUI.Views
             btnGen23.TabIndex = 27;
             btnGen23.Text = "ПК #23";
             btnGen23.UseVisualStyleBackColor = false;
-            btnGen23.Click += SeatButton_Click;
             // 
             // btnGen24
             // 
@@ -599,7 +576,6 @@ namespace GameClub.GUI.Views
             btnGen24.TabIndex = 28;
             btnGen24.Text = "ПК #24";
             btnGen24.UseVisualStyleBackColor = false;
-            btnGen24.Click += SeatButton_Click;
             // 
             // btnGen25
             // 
@@ -614,7 +590,6 @@ namespace GameClub.GUI.Views
             btnGen25.TabIndex = 29;
             btnGen25.Text = "ПК #25";
             btnGen25.UseVisualStyleBackColor = false;
-            btnGen25.Click += SeatButton_Click;
             // 
             // pnlRight
             // 
@@ -666,7 +641,6 @@ namespace GameClub.GUI.Views
             btnVip1.TabIndex = 1;
             btnVip1.Text = "VIP #26";
             btnVip1.UseVisualStyleBackColor = false;
-            btnVip1.Click += SeatButton_Click;
             // 
             // btnVip2
             // 
@@ -681,7 +655,6 @@ namespace GameClub.GUI.Views
             btnVip2.TabIndex = 2;
             btnVip2.Text = "VIP #27";
             btnVip2.UseVisualStyleBackColor = false;
-            btnVip2.Click += SeatButton_Click;
             // 
             // btnVip3
             // 
@@ -696,7 +669,6 @@ namespace GameClub.GUI.Views
             btnVip3.TabIndex = 3;
             btnVip3.Text = "VIP #28";
             btnVip3.UseVisualStyleBackColor = false;
-            btnVip3.Click += SeatButton_Click;
             // 
             // btnVip4
             // 
@@ -711,7 +683,6 @@ namespace GameClub.GUI.Views
             btnVip4.TabIndex = 4;
             btnVip4.Text = "VIP #29";
             btnVip4.UseVisualStyleBackColor = false;
-            btnVip4.Click += SeatButton_Click;
             // 
             // btnVip5
             // 
@@ -726,7 +697,6 @@ namespace GameClub.GUI.Views
             btnVip5.TabIndex = 5;
             btnVip5.Text = "VIP #30";
             btnVip5.UseVisualStyleBackColor = false;
-            btnVip5.Click += SeatButton_Click;
             // 
             // pnlVipEntrance
             // 
@@ -788,7 +758,6 @@ namespace GameClub.GUI.Views
             btnVip6.TabIndex = 1;
             btnVip6.Text = "VIP #31";
             btnVip6.UseVisualStyleBackColor = false;
-            btnVip6.Click += SeatButton_Click;
             // 
             // btnVip7
             // 
@@ -803,7 +772,6 @@ namespace GameClub.GUI.Views
             btnVip7.TabIndex = 2;
             btnVip7.Text = "VIP #32";
             btnVip7.UseVisualStyleBackColor = false;
-            btnVip7.Click += SeatButton_Click;
             // 
             // btnVip8
             // 
@@ -818,7 +786,6 @@ namespace GameClub.GUI.Views
             btnVip8.TabIndex = 3;
             btnVip8.Text = "VIP #33";
             btnVip8.UseVisualStyleBackColor = false;
-            btnVip8.Click += SeatButton_Click;
             // 
             // btnVip9
             // 
@@ -833,7 +800,6 @@ namespace GameClub.GUI.Views
             btnVip9.TabIndex = 4;
             btnVip9.Text = "VIP #34";
             btnVip9.UseVisualStyleBackColor = false;
-            btnVip9.Click += SeatButton_Click;
             // 
             // btnVip10
             // 
@@ -848,7 +814,6 @@ namespace GameClub.GUI.Views
             btnVip10.TabIndex = 5;
             btnVip10.Text = "VIP #35";
             btnVip10.UseVisualStyleBackColor = false;
-            btnVip10.Click += SeatButton_Click;
             // 
             // pnlBottom
             // 
@@ -880,7 +845,6 @@ namespace GameClub.GUI.Views
             btnAddHours.TabIndex = 7;
             btnAddHours.Text = "Добавить часы";
             btnAddHours.UseVisualStyleBackColor = false;
-            btnAddHours.Click += btnAddHours_Click;
             // 
             // btnCloseSession
             // 
@@ -895,7 +859,6 @@ namespace GameClub.GUI.Views
             btnCloseSession.TabIndex = 6;
             btnCloseSession.Text = "Закрыть сессию";
             btnCloseSession.UseVisualStyleBackColor = false;
-            btnCloseSession.Click += btnCloseSession_Click;
             // 
             // btnFindFreeSeat
             // 
@@ -910,7 +873,6 @@ namespace GameClub.GUI.Views
             btnFindFreeSeat.TabIndex = 0;
             btnFindFreeSeat.Text = "Найти свободный ПК\n Открыть сессию";
             btnFindFreeSeat.UseVisualStyleBackColor = false;
-            btnFindFreeSeat.Click += btnFindFreeSeat_Click;
             // 
             // btnRefresh
             // 
@@ -925,7 +887,6 @@ namespace GameClub.GUI.Views
             btnRefresh.TabIndex = 1;
             btnRefresh.Text = "Обновить карту";
             btnRefresh.UseVisualStyleBackColor = false;
-            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnManageOperators
             // 
@@ -940,7 +901,6 @@ namespace GameClub.GUI.Views
             btnManageOperators.TabIndex = 10;
             btnManageOperators.Text = "Настройка операторов";
             btnManageOperators.UseVisualStyleBackColor = false;
-            btnManageOperators.Click += btnManageOperators_Click;
             // 
             // btnRevenue
             // 
@@ -955,7 +915,6 @@ namespace GameClub.GUI.Views
             btnRevenue.TabIndex = 2;
             btnRevenue.Text = "Выручка по дате";
             btnRevenue.UseVisualStyleBackColor = false;
-            btnRevenue.Click += btnRevenue_Click;
             // 
             // btnAdminPanel
             // 
@@ -970,7 +929,6 @@ namespace GameClub.GUI.Views
             btnAdminPanel.TabIndex = 3;
             btnAdminPanel.Text = "Настроить цену тарифа";
             btnAdminPanel.UseVisualStyleBackColor = false;
-            btnAdminPanel.Click += btnAdminPanel_Click;
             // 
             // MainForm
             // 
@@ -984,7 +942,6 @@ namespace GameClub.GUI.Views
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CyberX";
-            FormClosing += MainForm_FormClosing;
             pnlLeft.ResumeLayout(false);
             pnlGeneralZone.ResumeLayout(false);
             pnlEntrance.ResumeLayout(false);

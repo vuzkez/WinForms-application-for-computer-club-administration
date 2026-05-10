@@ -1,74 +1,64 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using GameClub.GUI.ViewInterfaces;
 using GameClub.Library.Enums;
 using GameClub.Library.ServiceInterfaces;
 
-namespace GameClub.GUI.Views;
-
-public partial class TariffForm : Form
+namespace GameClub.GUI.Views
 {
-    private readonly IAdministrator _adminService;
-
-    public TariffForm(IAdministrator adminService, decimal dayPrice, decimal nightPrice)
+    public partial class TariffForm : Form, ITariffView
     {
-        InitializeComponent();
-        _adminService = adminService;
+        public decimal DayPrice => nudDayPrice.Value;
+        public decimal NightPrice => nudNightPrice.Value;
 
-        nudDayPrice.Value = dayPrice;
-        nudNightPrice.Value = nightPrice;
-    }
+        public event EventHandler SaveRequested;
 
-    private async void btnSave_Click(object sender, EventArgs e)
-    {
-        try
+        public TariffForm(IAdministrator adminService, decimal dayPrice, decimal nightPrice)
         {
-            decimal newDayPrice = nudDayPrice.Value;
-            decimal newNightPrice = nudNightPrice.Value;
+            InitializeComponent();
 
-            if (newDayPrice <= 0 || newNightPrice <= 0)
+            nudDayPrice.Value = dayPrice;
+            nudNightPrice.Value = nightPrice;
+
+            btnSave.Click += (s, e) =>
             {
-                MessageBox.Show("Цена должна быть больше 0 рублей.", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                var result = MessageBox.Show(
+                    $"Сохранить тарифы?\n\nДневной: {nudDayPrice.Value} руб\nНочной: {nudNightPrice.Value} руб",
+                    "Подтверждение",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
 
-            var confirmResult = MessageBox.Show(
-                $"Сохранить новые цены?\n\n" +
-                $"Дневной тариф: {newDayPrice} руб/час\n" +
-                $"Ночной тариф: {newNightPrice} руб/час",
-                "Подтверждение",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                    SaveRequested?.Invoke(this, EventArgs.Empty);
+            };
 
-            if (confirmResult == DialogResult.Yes)
+            btnClose.Click += (s, e) =>
             {
-                await _adminService.ConfigureTariffAsync(TariffType.Day, newDayPrice);
-                await _adminService.ConfigureTariffAsync(TariffType.Night, newNightPrice);
-
-                MessageBox.Show("Цены успешно обновлены!", "Успех",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.Cancel;
                 Close();
-            }
+            };
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
 
-    private void btnClose_Click(object sender, EventArgs e)
-    {
-        DialogResult = DialogResult.Cancel;
-        Close();
+        public void SetPrices(decimal dayPrice, decimal nightPrice)
+        {
+            nudDayPrice.Value = dayPrice;
+            nudNightPrice.Value = nightPrice;
+        }
+
+        public void ShowError(string message)
+        {
+            MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        public void ShowInfo(string message)
+        {
+            MessageBox.Show(message, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public void CloseWithOk()
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 }

@@ -1,320 +1,115 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using GameClub.Library;
-using GameClub.Library.Enums;
-using GameClub.Library.ServiceInterfaces;
+using GameClub.GUI.ViewInterfaces;
 using GameClub.Library.Entities;
-using GameClub.GUI.Presenters;
+using GameClub.Library.ServiceInterfaces;
 
-namespace GameClub.GUI.Views;
-
-public partial class MainForm : Form
+namespace GameClub.GUI.Views
 {
-    private System.Windows.Forms.Timer timer;
-    private readonly User user;
-    private readonly IOperator operatorService;
-    private readonly IAdministrator administratorService;
-    private readonly IAuthentication authenticationService;
-
-    public MainForm(User user, IOperator operatorService, IAdministrator administratorService,
-        IAuthentication authenticationService)
+    public partial class MainForm : Form, IMainView
     {
-        this.user = user;
-        this.operatorService = operatorService;
-        this.administratorService = administratorService;
-        this.authenticationService = authenticationService;
+        private System.Windows.Forms.Timer timer;
 
-        Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-        AutoScaleMode = AutoScaleMode.Dpi;
-        InitializeComponent();
-        MinimumSize = new Size(1305, 740);
-        ConfigureUIByRole();
-        _ = UpdateSeatColorsAsync();
+        public event EventHandler RefreshRequested;
+        public event EventHandler FindFreeSeatRequested;
+        public event EventHandler CloseSessionRequested;
+        public event EventHandler AddHoursRequested;
+        public event EventHandler RevenueRequested;
+        public event EventHandler AdminPanelRequested;
+        public event EventHandler ManageOperatorsRequested;
+        public event EventHandler<int> SeatButtonClicked;
 
-        timer = new System.Windows.Forms.Timer();
-        timer.Interval = 60000;
-        timer.Tick += RefreshTimer_Tick;
-        timer.Start();
-    }
-
-    private void ConfigureUIByRole()
-    {
-        Text = $"CyberX - Пользователь: {user.FullName}. Роль: {user.UserRole}.";
-        if (user.UserRole == UserRole.Administrator)
+        public MainForm(User user, IOperator operatorService, IAdministrator administratorService,
+            IAuthentication authenticationService)
         {
-            btnRevenue.Visible = true;
-            btnAdminPanel.Visible = true;
-            btnManageOperators.Visible = true;
+            Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            InitializeComponent();
+            MinimumSize = new Size(1305, 740);
+
+            btnRefresh.Click += (s, e) => RefreshRequested?.Invoke(this, EventArgs.Empty);
+            btnFindFreeSeat.Click += (s, e) => FindFreeSeatRequested?.Invoke(this, EventArgs.Empty);
+            btnCloseSession.Click += (s, e) => CloseSessionRequested?.Invoke(this, EventArgs.Empty);
+            btnAddHours.Click += (s, e) => AddHoursRequested?.Invoke(this, EventArgs.Empty);
+            btnRevenue.Click += (s, e) => RevenueRequested?.Invoke(this, EventArgs.Empty);
+            btnAdminPanel.Click += (s, e) => AdminPanelRequested?.Invoke(this, EventArgs.Empty);
+            btnManageOperators.Click += (s, e) => ManageOperatorsRequested?.Invoke(this, EventArgs.Empty);
+
+            WireUpSeatButtons();
+
+            timer = new System.Windows.Forms.Timer { Interval = 60000 };
+            timer.Tick += (s, e) => RefreshRequested?.Invoke(this, EventArgs.Empty);
+            timer.Start();
+
+            FormClosing += (s, e) => { timer.Stop(); timer.Dispose(); };
         }
-        else
-        {
-            btnRevenue.Visible = false;
-            btnAdminPanel.Visible = false;
-            btnManageOperators.Visible = false;
-        }
-    }
 
-    private async Task UpdateSeatColorsAsync()
-    {
-        try
+        private void WireUpSeatButtons()
         {
-            var seats = await operatorService.GetAllSeatsWithStatusAsync();
-
-            var seatButtons = new Dictionary<int, Button>()
+            var seatButtons = new Button[]
             {
-                { 1, btnGen1 }, { 2, btnGen2 }, { 3, btnGen3 }, { 4, btnGen4 }, { 5, btnGen5 },
-                { 6, btnGen6 }, { 7, btnGen7 }, { 8, btnGen8 }, { 9, btnGen9 }, { 10, btnGen10 },
+                btnGen1,  btnGen2,  btnGen3,  btnGen4,  btnGen5,
+                btnGen6,  btnGen7,  btnGen8,  btnGen9,  btnGen10,
+                btnGen11, btnGen12, btnGen13, btnGen14, btnGen15,
+                btnGen16, btnGen17, btnGen18, btnGen19, btnGen20,
+                btnGen21, btnGen22, btnGen23, btnGen24, btnGen25,
+                btnVip1,  btnVip2,  btnVip3,  btnVip4,  btnVip5,
+                btnVip6,  btnVip7,  btnVip8,  btnVip9,  btnVip10
+            };
+
+            foreach (var btn in seatButtons)
+            {
+                btn.Click += SeatButton_Click;
+            }
+        }
+
+        private void SeatButton_Click(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                var match = Regex.Match(btn.Text, @"\d+");
+                if (match.Success)
+                    SeatButtonClicked?.Invoke(this, int.Parse(match.Value));
+            }
+        }
+
+        public void SetTitle(string title) => Text = title;
+
+        public void ShowAdminButtons(bool visible)
+        {
+            btnRevenue.Visible = visible;
+            btnAdminPanel.Visible = visible;
+            btnManageOperators.Visible = visible;
+        }
+
+        public void SetSeatColor(int seatId, Color color)
+        {
+            var map = new Dictionary<int, Button>
+            {
+                { 1,  btnGen1  }, { 2,  btnGen2  }, { 3,  btnGen3  }, { 4,  btnGen4  }, { 5,  btnGen5  },
+                { 6,  btnGen6  }, { 7,  btnGen7  }, { 8,  btnGen8  }, { 9,  btnGen9  }, { 10, btnGen10 },
                 { 11, btnGen11 }, { 12, btnGen12 }, { 13, btnGen13 }, { 14, btnGen14 }, { 15, btnGen15 },
                 { 16, btnGen16 }, { 17, btnGen17 }, { 18, btnGen18 }, { 19, btnGen19 }, { 20, btnGen20 },
                 { 21, btnGen21 }, { 22, btnGen22 }, { 23, btnGen23 }, { 24, btnGen24 }, { 25, btnGen25 },
-                { 26, btnVip1 }, { 27, btnVip2 }, { 28, btnVip3 }, { 29, btnVip4 }, { 30, btnVip5 },
-                { 31, btnVip6 }, { 32, btnVip7 }, { 33, btnVip8 }, { 34, btnVip9 }, { 35, btnVip10 }
+                { 26, btnVip1  }, { 27, btnVip2  }, { 28, btnVip3  }, { 29, btnVip4  }, { 30, btnVip5  },
+                { 31, btnVip6  }, { 32, btnVip7  }, { 33, btnVip8  }, { 34, btnVip9  }, { 35, btnVip10 }
             };
 
-            foreach (var seat in seats)
-            {
-                if (seatButtons.TryGetValue(seat.SeatId, out var btn))
-                {
-                    btn.BackColor = GetColor(seat);
-                }
-            }
+            if (map.TryGetValue(seatId, out var button))
+                button.BackColor = color;
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка обновления статусов ПК: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
 
-    private Color GetColor(Seat seat)
-    {
-        switch (seat.Status)
+        public void ShowError(string message)
         {
-            case SeatStatus.Free:
-                return Color.Green;
-            case SeatStatus.Expiring:
-                return Color.Yellow;
-            case SeatStatus.Busy:
-                return Color.Red;
-            default:
-                return Color.Gray;
+            MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-    }
 
-    private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-    {
-        try
+        public void ShowInfo(string message)
         {
-            timer.Stop();
-            timer.Dispose();
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка при выходе: {ex.Message}", "Ошибка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private async void btnRefresh_Click(object sender, EventArgs e)
-    {
-        await UpdateSeatColorsAsync();
-    }
-
-    private async void btnFindFreeSeat_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            using (var dialog = new FindFreeSeatForm())
-            {
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var seats = await operatorService.FindFreeSeatsAsync(dialog.Result);
-                    using (var freeSeatsForm = new FreeSeatsForm(seats, dialog.Result))
-                    {
-                        if (freeSeatsForm.ShowDialog() == DialogResult.OK && freeSeatsForm.SelectedSeat != null)
-                        {
-                            using (var openSessionForm = new OpenSessionForm(operatorService, administratorService,
-                                freeSeatsForm.SelectedSeat.SeatId))
-                            {
-                                if (openSessionForm.ShowDialog() == DialogResult.OK)
-                                {
-                                    await operatorService.OpenSessionAsync(
-                                        openSessionForm.SelectedSeatId,
-                                        user.UserId,
-                                        openSessionForm.SelectedTariff,
-                                        openSessionForm.StartTime,
-                                        openSessionForm.StartTime.AddHours(openSessionForm.Hours)
-                                    );
-                                    await UpdateSeatColorsAsync();
-                                    MessageBox.Show($"Сессия на ПК #{openSessionForm.SelectedSeatId} успешно открыта!",
-                                                        "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка при поиске свободных мест: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private async void btnCloseSession_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            using (var form = new CloseSessionForm(operatorService))
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    await operatorService.CloseSessionAsync(form.SessionId);
-                    await UpdateSeatColorsAsync();
-                    MessageBox.Show($"Сессия на ПК #{form.SelectedSeatId} успешно закрыта.",
-                        "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка при закрытии сессии: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private async void btnAddHours_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            using (var form = new AddHoursForm(operatorService))
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    await operatorService.AddHoursAsync(form.SessionId, form.AdditionalHours);
-                    await UpdateSeatColorsAsync();
-
-                    MessageBox.Show($"Добавлено {form.AdditionalHours} час(ов) к сессии на ПК #{form.SelectedSeatId}",
-                        "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка при добавлении часов: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private void btnRevenue_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            using (var form = new RevenueForm())
-            {
-                var presenter = new RevenuePresenter(form,administratorService);
-                form.ShowDialog();
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private async void btnAdminPanel_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            var dayPrice = await administratorService.GetTariffPriceAsync(TariffType.Day);
-            var nightPrice = await administratorService.GetTariffPriceAsync(TariffType.Night);
-
-            using (var form = new TariffForm(administratorService, dayPrice, nightPrice))
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    await UpdateSeatColorsAsync();
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private async void SeatButton_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            Button? clickedButton = sender as Button;
-            if (clickedButton == null) return;
-
-            var match = Regex.Match(clickedButton.Text, @"\d+");
-            if (!match.Success) return;
-
-            int seatId = int.Parse(match.Value);
-            var seats = await operatorService.GetAllSeatsWithStatusAsync();
-            var seat = seats.FirstOrDefault(s => s.SeatId == seatId);
-
-            if (seat != null)
-            {
-                var activeSession = await operatorService.GetActiveSessionBySeatIdAsync(seatId);
-                string status;
-
-                if (activeSession != null && activeSession.EndTime > DateTime.Now)
-                {
-                    var remaining = activeSession.EndTime - DateTime.Now;
-                    status = $"Занят до {activeSession.EndTime:HH:mm} (осталось {remaining.Hours}ч {remaining.Minutes}мин)";
-                }
-                else
-                {
-                    status = "Свободен";
-                }
-
-                MessageBox.Show(
-                    $"ПК №{seat.SeatId}\n" +
-                    $"Тип комнаты: {seat.SeatRoom}\n" +
-                    $"Железо: {seat.Hardware}\n" +
-                    $"Девайсы: {seat.Devices}\n" +
-                    $"Статус: {status}",
-                    "Информация о компьютере",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private async void RefreshTimer_Tick(object? sender, EventArgs? e)
-    {
-        await UpdateSeatColorsAsync();
-    }
-    private void btnManageOperators_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            using (var form = new OperatorsForm(administratorService))
-            {
-                form.ShowDialog();
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(message, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

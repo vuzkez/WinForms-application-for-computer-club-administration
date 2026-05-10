@@ -55,8 +55,6 @@ partial class FreeSeatsForm
         dgvSeats.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         dgvSeats.Size = new Size(1380, 448);
         dgvSeats.TabIndex = 0;
-        dgvSeats.CellDoubleClick += dgvSeats_CellDoubleClick;
-        dgvSeats.SelectionChanged += dgvSeats_SelectionChanged;
         // 
         // btnOpenSession
         // 
@@ -72,7 +70,6 @@ partial class FreeSeatsForm
         btnOpenSession.TabIndex = 1;
         btnOpenSession.Text = "Открыть сессию";
         btnOpenSession.UseVisualStyleBackColor = false;
-        btnOpenSession.Click += btnOpenSession_Click;
         // 
         // btnCancel
         // 
@@ -88,7 +85,6 @@ partial class FreeSeatsForm
         btnCancel.TabIndex = 2;
         btnCancel.Text = "Отмена";
         btnCancel.UseVisualStyleBackColor = false;
-        btnCancel.Click += btnCancel_Click;
         // 
         // lblTitle
         // 

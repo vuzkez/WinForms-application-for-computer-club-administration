@@ -1,167 +1,95 @@
-using GameClub.Library.ServiceInterfaces;
-using GameClub.Library.Entities;
-using GameClub.Library.Enums;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
+using GameClub.GUI.ViewInterfaces;
+using GameClub.Library.ServiceInterfaces;
 
-namespace GameClub.GUI.Views;
-
-public partial class AddHoursForm : Form
+namespace GameClub.GUI.Views
 {
-    public int SelectedSeatId { get; private set; }
-    public int AdditionalHours { get; private set; }
-    public int SessionId { get; private set; }
-
-    private readonly IOperator operatorService;
-    private List<Seat> activeSeats;
-    private Dictionary<int, Session> sessionsBySeat;
-
-    public AddHoursForm(IOperator operatorService)
+    public partial class AddHoursForm : Form, IAddHoursView
     {
-        InitializeComponent();
-        this.operatorService = operatorService;
+        public int SelectedSeatId { get; private set; }
+        public int AdditionalHours { get; private set; }
+        public int SessionId { get; private set; }
 
-        nudHours.Minimum = 1;
-        nudHours.Maximum = 24;
-        nudHours.Value = 1;
-
-        LoadActiveSeatsAsync();
-    }
-
-    private async void LoadActiveSeatsAsync()
-    {
-        try
+        public int SelectedComboSeatId
         {
-            activeSeats = await operatorService.FindActiveSeatsAsync();
-
-            if (activeSeats == null || activeSeats.Count == 0)
+            get
             {
-                cmbActiveSeats.Items.Add("Нет активных сессий");
-                cmbActiveSeats.Enabled = false;
-                btnOk.Enabled = false;
-                lblSessionInfo.Text = "Нет активных сессий";
-                return;
+                if (cmbActiveSeats.SelectedItem == null) return 0;
+                dynamic item = cmbActiveSeats.SelectedItem;
+                return item.Value;
             }
+        }
+        public int NudHoursValue => (int)nudHours.Value;
 
-            var sessionsWithDetails = await operatorService.GetActiveSessionsWithDetailsAsync();
-            sessionsBySeat = sessionsWithDetails
-                .Where(s => s.SeatId > 0)
-                .ToDictionary(s => s.SeatId);
+        public event EventHandler ConfirmAddHours;
+        public event EventHandler SeatSelectionChanged;
 
+        public AddHoursForm(IOperator operatorService)
+        {
+            InitializeComponent();
+            nudHours.Minimum = 1;
+            nudHours.Maximum = 24;
+            nudHours.Value = 1;
+
+            cmbActiveSeats.SelectedIndexChanged += (s, e) => SeatSelectionChanged?.Invoke(this, EventArgs.Empty);
+
+            btnOk.Click += (s, e) =>
+            {
+                dynamic item = cmbActiveSeats.SelectedItem;
+                if (item != null)
+                {
+                    SelectedSeatId = item.Value;
+                    AdditionalHours = (int)nudHours.Value;
+                }
+                ConfirmAddHours?.Invoke(this, EventArgs.Empty);
+            };
+
+            btnCancel.Click += (s, e) =>
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+            };
+        }
+
+        public void LoadActiveSeats(List<object> items)
+        {
             cmbActiveSeats.DisplayMember = "Text";
             cmbActiveSeats.ValueMember = "Value";
-
-            var items = activeSeats.Select(seat => new
-            {
-                Text = $"ПК #{seat.SeatId} — {seat.SeatRoom}",
-                Value = seat.SeatId
-            }).ToList();
-
             cmbActiveSeats.DataSource = items;
             cmbActiveSeats.SelectedIndex = 0;
         }
-        catch (Exception ex)
+
+        public void SetNoActiveSeats()
         {
-            MessageBox.Show($"Ошибка загрузки активных сессий: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            cmbActiveSeats.Items.Add("Нет активных мест");
+            cmbActiveSeats.Enabled = false;
+            btnOk.Enabled = false;
+            lblSessionInfo.Text = "Нет активных сессий";
+        }
+
+        public void UpdateSessionInfo(string text, bool isValid)
+        {
+            lblSessionInfo.Text = text;
+            lblSessionInfo.ForeColor = isValid ? Color.Green : Color.Red;
+            btnOk.Enabled = isValid;
+        }
+
+        public void SetSessionId(int sessionId) => SessionId = sessionId;
+
+        public void ShowError(string message)
+        {
+            MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void CloseWithOk()
+        {
+            DialogResult = DialogResult.OK;
             Close();
         }
-    }
 
-    private void cmbActiveSeats_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        try
-        {
-            if (cmbActiveSeats.SelectedItem == null) 
-                return;
-
-            dynamic selected = cmbActiveSeats.SelectedItem;
-            int seatId = selected.Value;
-
-            var seat = activeSeats.FirstOrDefault(s => s.SeatId == seatId);
-            var session = sessionsBySeat?.GetValueOrDefault(seatId);
-
-            if (seat != null && session != null)
-            {
-                UpdateSessionInfo(seat, session);
-            }
-        }
-        catch
-        {
-            lblSessionInfo.Text = "Ошибка при получении данных сессии";
-            lblSessionInfo.ForeColor = Color.Red;
-            SessionId = 0;
-            btnOk.Enabled = false;
-        }
-    }
-
-    private void UpdateSessionInfo(Seat seat, Session session)
-    {
-        var remaining = session.EndTime - DateTime.Now;
-
-        string tariffName = session.TariffSetting?.Type == TariffType.Day ? "Дневной" : "Ночной";
-
-        lblSessionInfo.Text =
-            $"Сессия найдена!\n" +
-            $"ПК: #{seat.SeatId} ({seat.SeatRoom})\n" +
-            $"Статус: {(seat.Status == SeatStatus.Expiring ? "Скоро освободится" : "Занят")}\n" +
-            $"Начало: {session.StartTime:dd.MM.yyyy HH:mm}\n" +
-            $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
-            $"Осталось: {remaining.Hours}ч {remaining.Minutes}мин\n" +
-            $"Тариф: {tariffName}\n" +
-            $"Текущая сумма: {session.TotalAmount} руб";
-
-        lblSessionInfo.ForeColor = Color.Green;
-        SessionId = session.SessionId;
-        SelectedSeatId = seat.SeatId;
-        btnOk.Enabled = true;
-    }
-
-    private void btnOk_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            if (SessionId == 0)
-            {
-                MessageBox.Show("Выберите активную сессию.", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            int hours = (int)nudHours.Value;
-            var session = sessionsBySeat.GetValueOrDefault(SelectedSeatId);
-            var additionalCost = hours * session.TariffSetting.PricePerHour;
-
-            var confirmResult = MessageBox.Show(
-                $"Добавить {hours} час(ов) к сессии на ПК #{SelectedSeatId}?\n\n" +
-                $"Текущее окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
-                $"Новое окончание: {session.EndTime.AddHours(hours):dd.MM.yyyy HH:mm}\n" +
-                $"Текущая сумма: {session.TotalAmount} руб\n" +
-                $"Будущая сумма: {session.TotalAmount + additionalCost}",
-                "Подтверждение",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (confirmResult == DialogResult.Yes)
-            {
-                AdditionalHours = hours;
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка при добавлении часов: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        DialogResult = DialogResult.Cancel;
-        Close();
+        public new void Close() => base.Close();
     }
 }

@@ -39,7 +39,6 @@ namespace GameClub.GUI.Views
             cmbActiveSeats.Name = "cmbActiveSeats";
             cmbActiveSeats.Size = new Size(263, 25);
             cmbActiveSeats.TabIndex = 1;
-            cmbActiveSeats.SelectedIndexChanged += cmbActiveSeats_SelectedIndexChanged;
             //
             // lblSelectSeat
             //
@@ -79,7 +78,6 @@ namespace GameClub.GUI.Views
             btnClose.TabIndex = 3;
             btnClose.Text = "Закрыть сессию";
             btnClose.UseVisualStyleBackColor = false;
-            btnClose.Click += btnClose_Click;
             //
             // btnCancel
             //
@@ -95,7 +93,6 @@ namespace GameClub.GUI.Views
             btnCancel.TabIndex = 4;
             btnCancel.Text = "Отмена";
             btnCancel.UseVisualStyleBackColor = false;
-            btnCancel.Click += btnCancel_Click;
             //
             // CloseSessionForm
             //

@@ -60,7 +60,6 @@ partial class AddHoursForm
         btnOk.TabIndex = 5;
         btnOk.Text = "Добавить";
         btnOk.UseVisualStyleBackColor = false;
-        btnOk.Click += btnOk_Click;
         // 
         // btnCancel
         // 
@@ -76,7 +75,6 @@ partial class AddHoursForm
         btnCancel.TabIndex = 6;
         btnCancel.Text = "Отмена";
         btnCancel.UseVisualStyleBackColor = false;
-        btnCancel.Click += btnCancel_Click;
         // 
         // lblSelectSeat
         // 
@@ -102,7 +100,6 @@ partial class AddHoursForm
         cmbActiveSeats.Name = "cmbActiveSeats";
         cmbActiveSeats.Size = new Size(284, 36);
         cmbActiveSeats.TabIndex = 8;
-        cmbActiveSeats.SelectedIndexChanged += cmbActiveSeats_SelectedIndexChanged;
         // 
         // lblHours
         // 

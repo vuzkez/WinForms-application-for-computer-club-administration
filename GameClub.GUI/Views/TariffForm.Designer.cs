@@ -107,7 +107,6 @@ namespace GameClub.GUI.Views
             btnSave.TabIndex = 7;
             btnSave.Text = "Сохранить";
             btnSave.UseVisualStyleBackColor = false;
-            btnSave.Click += btnSave_Click;
             // 
             // btnClose
             // 
@@ -123,7 +122,6 @@ namespace GameClub.GUI.Views
             btnClose.TabIndex = 8;
             btnClose.Text = "Закрыть";
             btnClose.UseVisualStyleBackColor = false;
-            btnClose.Click += btnClose_Click;
             // 
             // lblDayTitle
             // 

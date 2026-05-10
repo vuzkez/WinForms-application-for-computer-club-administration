@@ -53,7 +53,6 @@ namespace GameClub.GUI.Views
             btnOk.TabIndex = 1;
             btnOk.Text = "Открыть сессию";
             btnOk.UseVisualStyleBackColor = false;
-            btnOk.Click += btnOk_Click;
             // 
             // btnCancel
             // 
@@ -69,7 +68,6 @@ namespace GameClub.GUI.Views
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Отмена";
             btnCancel.UseVisualStyleBackColor = false;
-            btnCancel.Click += btnCancel_Click;
             // 
             // label2
             // 

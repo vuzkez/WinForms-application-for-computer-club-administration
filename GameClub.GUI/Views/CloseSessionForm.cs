@@ -1,174 +1,103 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
+using GameClub.GUI.ViewInterfaces;
 using GameClub.Library.ServiceInterfaces;
-using GameClub.Library.Entities;
-using GameClub.Library.Enums;
 
-namespace GameClub.GUI.Views;
-
-public partial class CloseSessionForm : Form
+namespace GameClub.GUI.Views
 {
-    public int SelectedSeatId { get; private set; }
-    public int SessionId { get; private set; }
-
-    private readonly IOperator operatorService;
-    private List<Seat> activeSeats;
-    private Dictionary<int, Session> sessionsBySeat;
-
-    public CloseSessionForm(IOperator operatorService)
+    public partial class CloseSessionForm : Form, ICloseSessionView
     {
-        InitializeComponent();
-        this.operatorService = operatorService;
-        LoadActiveSeatsAsync();
-    }
+        // Результаты для вызывающего кода
+        public int SelectedSeatId { get; private set; }
+        public int SessionId { get; private set; }
 
-    private async void LoadActiveSeatsAsync()
-    {
-        try
+        // Данные с формы, читаемые презентером
+        public int SelectedComboSeatId
         {
-            Cursor = Cursors.WaitCursor;
-
-            activeSeats = await operatorService.FindActiveSeatsAsync();
-
-            if (activeSeats == null || activeSeats.Count == 0)
+            get
             {
-                cmbActiveSeats.Items.Add("Нет активных сессий");
-                cmbActiveSeats.Enabled = false;
-                btnClose.Enabled = false;
-                lblSessionInfo.Text = "Нет активных сессий для закрытия";
-                lblSessionInfo.ForeColor = Color.Red;
-                return;
-            }
-
-            var sessionsWithDetails = await operatorService.GetActiveSessionsWithDetailsAsync();
-            sessionsBySeat = sessionsWithDetails.Where(s => s.SeatId > 0).ToDictionary(s => s.SeatId);
-
-            cmbActiveSeats.DisplayMember = "Text";
-            cmbActiveSeats.ValueMember = "Value";
-
-            var items = activeSeats.Select(seat => new
-            {
-                Text = $"ПК #{seat.SeatId} — {seat.SeatRoom}",
-                Value = seat.SeatId
-            }).ToList();
-
-            cmbActiveSeats.DataSource = items;
-
-            if (items.Count > 0)
-            {
-                cmbActiveSeats.SelectedIndex = 0;
+                if (cmbActiveSeats.SelectedItem == null) return 0;
+                dynamic item = cmbActiveSeats.SelectedItem;
+                return item.Value;
             }
         }
-        catch (Exception ex)
+
+        public event EventHandler ConfirmClose;
+        public event EventHandler SeatSelectionChanged;
+
+        public CloseSessionForm(IOperator operatorService)
         {
-            MessageBox.Show($"Ошибка загрузки активных сессий: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            btnClose.Enabled = false;
+            InitializeComponent();
+
+            cmbActiveSeats.SelectedIndexChanged += (s, e) => SeatSelectionChanged?.Invoke(this, EventArgs.Empty);
+
+            btnClose.Click += (s, e) =>
+            {
+                var result = MessageBox.Show(
+                    $"Закрыть сессию на месте #{SelectedComboSeatId}?",
+                    "Подтверждение",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    dynamic item = cmbActiveSeats.SelectedItem;
+                    if (item != null) SelectedSeatId = item.Value;
+
+                    ConfirmClose?.Invoke(this, EventArgs.Empty);
+                }
+            };
+
+            btnCancel.Click += (s, e) =>
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+            };
         }
-        finally
+
+        public void LoadActiveSeats(List<object> items)
         {
             Cursor = Cursors.Default;
+            cmbActiveSeats.DisplayMember = "Text";
+            cmbActiveSeats.ValueMember = "Value";
+            cmbActiveSeats.DataSource = items;
+            if (items.Count > 0) cmbActiveSeats.SelectedIndex = 0;
         }
-    }
 
-    private void cmbActiveSeats_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        try
+        public void SetNoActiveSeats()
         {
-            if (cmbActiveSeats.SelectedItem == null) 
-                return;
-
-            dynamic selected = cmbActiveSeats.SelectedItem;
-            int seatId = selected.Value;
-
-            var seat = activeSeats?.FirstOrDefault(s => s.SeatId == seatId);
-            var session = sessionsBySeat?.GetValueOrDefault(seatId);
-
-            if (seat != null && session != null)
-            {
-                UpdateSessionInfo(seat, session);
-                SelectedSeatId = seatId;
-                SessionId = session.SessionId;
-                btnClose.Enabled = true;
-            }
-            else
-            {
-                lblSessionInfo.Text = "Не удалось получить данные сессии";
-                lblSessionInfo.ForeColor = Color.Red;
-                btnClose.Enabled = false;
-            }
-        }
-        catch
-        {
-            lblSessionInfo.Text = "Ошибка при получении данных сессии";
-            lblSessionInfo.ForeColor = Color.Red;
+            Cursor = Cursors.Default;
+            cmbActiveSeats.Items.Add("Нет активных мест");
+            cmbActiveSeats.Enabled = false;
             btnClose.Enabled = false;
+            lblSessionInfo.Text = "Нет активных сессий";
+            lblSessionInfo.ForeColor = Color.Red;
         }
-    }
 
-    private void UpdateSessionInfo(Seat seat, Session session)
-    {
-        var remaining = session.EndTime - DateTime.Now;
-        var totalHours = (session.EndTime - session.StartTime).TotalHours;
-
-        string tariffName = session.TariffSetting.Type == TariffType.Day ? "Дневной" : "Ночной";
-
-        lblSessionInfo.Text =
-            $"ПК: #{seat.SeatId} ({seat.SeatRoom})\n" +
-            $"Начало: {session.StartTime:dd.MM.yyyy HH:mm}\n" +
-            $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
-            $"Длительность: {totalHours:F1} ч\n" +
-            $"Осталось: {remaining.Hours}ч {remaining.Minutes}мин\n" +
-            $"Тариф: {tariffName}\n" +
-            $"Сумма к оплате: {session.TotalAmount:F2} руб";
-
-        lblSessionInfo.ForeColor = Color.DarkRed;
-    }
-
-    private void btnClose_Click(object sender, EventArgs e)
-    {
-        try
+        public void UpdateSessionInfo(string text)
         {
-            if (SessionId == 0 || SelectedSeatId == 0)
-            {
-                MessageBox.Show("Выберите активную сессию для закрытия.", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            lblSessionInfo.Text = text;
+            lblSessionInfo.ForeColor = Color.DarkRed;
+            btnClose.Enabled = true;
 
-            var session = sessionsBySeat.GetValueOrDefault(SelectedSeatId);
-
-            string tariffName = session.TariffSetting.Type == TariffType.Day ? "Дневной" : "Ночной";
-
-            var confirmResult = MessageBox.Show(
-                $"Закрыть сессию на ПК #{SelectedSeatId}?\n\n" +
-                $"Начало: {session.StartTime:dd.MM.yyyy HH:mm}\n" +
-                $"Окончание: {session.EndTime:dd.MM.yyyy HH:mm}\n" +
-                $"Тариф: {tariffName}\n" +
-                $"Сумма: {session.TotalAmount:F2} руб",
-                "Подтверждение закрытия",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (confirmResult == DialogResult.Yes)
-            {
-                DialogResult = DialogResult.OK;
-                Close();
-            }
         }
-        catch (Exception ex)
+
+        public void SetSessionId(int sessionId) => SessionId = sessionId;
+        public void SetSelectedSeatId(int seatId) => SelectedSeatId = seatId;
+
+        public void ShowError(string message)
         {
-            MessageBox.Show($"Ошибка при закрытии сессии: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-    }
 
-    private void btnCancel_Click(object sender, EventArgs e)
-    {
-        DialogResult = DialogResult.Cancel;
-        Close();
+        public void CloseWithOk()
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        public new void Close() => base.Close();
     }
 }
