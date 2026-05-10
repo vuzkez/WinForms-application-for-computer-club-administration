@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GameClub.Library.Entities;
+using GameClub.Domain.Entities;
 
 namespace GameClub.GUI.ViewInterfaces
 {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Library.ServiceInterfaces;
+using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Views;
 

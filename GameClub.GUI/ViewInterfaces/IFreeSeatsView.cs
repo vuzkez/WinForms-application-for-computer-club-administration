@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using GameClub.Library.Entities;
+using GameClub.Domain.Entities;
 
 namespace GameClub.GUI.ViewInterfaces
 {
     public interface IFreeSeatsView
     {
-        // Выбранное место после закрытия формы
         Seat SelectedSeat { get; }
 
         event EventHandler OpenSessionRequested;

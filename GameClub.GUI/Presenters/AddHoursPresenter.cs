@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Library.Entities;
-using GameClub.Library.Enums;
-using GameClub.Library.ServiceInterfaces;
+using GameClub.Domain.Entities;
+using GameClub.Domain.Enums;
+using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Presenters
 {

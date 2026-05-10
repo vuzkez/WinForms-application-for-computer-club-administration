@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameClub.Library.Entities;
+using GameClub.Domain.Entities;
 
 namespace GameClub.GUI.ViewInterfaces
 {

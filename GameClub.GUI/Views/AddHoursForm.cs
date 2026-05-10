@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Library.ServiceInterfaces;
+using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Views
 {

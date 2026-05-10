@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Library.Entities;
+using GameClub.Domain.Entities;
 
 namespace GameClub.GUI.Presenters
 {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Library.Entities;
+using GameClub.Domain.Entities;
 
 namespace GameClub.GUI.Views
 {

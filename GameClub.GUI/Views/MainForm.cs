@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Library.Entities;
-using GameClub.Library.ServiceInterfaces;
+using GameClub.Domain.Entities;
+using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Views
 {

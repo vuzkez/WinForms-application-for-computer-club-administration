@@ -1,7 +1,7 @@
 using System;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Library.Enums;
-using GameClub.Library.ServiceInterfaces;
+using GameClub.Domain.Enums;
+using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Presenters
 {

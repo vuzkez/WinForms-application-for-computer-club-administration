@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using GameClub.Library.Entities;
+using GameClub.Domain.Entities;
 
 namespace GameClub.GUI.ViewInterfaces
 {
@@ -15,7 +15,6 @@ namespace GameClub.GUI.ViewInterfaces
         event EventHandler AdminPanelRequested;
         event EventHandler ManageOperatorsRequested;
 
-        // Передаётся seatId кнопки при клике
         event EventHandler<int> SeatButtonClicked;
 
         void SetTitle(string title);

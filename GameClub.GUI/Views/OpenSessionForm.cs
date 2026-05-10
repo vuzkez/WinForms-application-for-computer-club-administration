@@ -1,7 +1,8 @@
 using System;
 using System.Windows.Forms;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Library.Enums;
+using GameClub.Domain.Enums;
+using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Views
 {
@@ -21,10 +22,7 @@ namespace GameClub.GUI.Views
         public event EventHandler ConfirmOpen;
         public event EventHandler FormLoaded;
 
-        public OpenSessionForm(
-            Library.ServiceInterfaces.IOperator operatorService,
-            Library.ServiceInterfaces.IAdministrator adminService,
-            int seatId)
+        public OpenSessionForm(IOperator operatorService,IAdministrator adminService,int seatId)
         {
             InitializeComponent();
 

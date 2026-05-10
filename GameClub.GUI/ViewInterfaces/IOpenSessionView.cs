@@ -1,17 +1,15 @@
 using System;
-using GameClub.Library.Enums;
+using GameClub.Domain.Enums;
 
 namespace GameClub.GUI.ViewInterfaces
 {
     public interface IOpenSessionView
     {
-        // Данные выбранные пользователем
         int SelectedSeatId { get; }
         TariffType SelectedTariff { get; }
         DateTime StartTime { get; }
         int Hours { get; }
 
-        // Входные данные с формы
         string SeatIdText { get; }
         bool IsSeatPreselected { get; }
         bool IsDayTariffSelected { get; }

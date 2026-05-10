@@ -1,11 +1,14 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClub.GUI", "GameClub.GUI\GameClub.GUI.csproj", "{0FA69045-38D8-49CF-A3C9-AEEA43498C37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClub.Library", "GameClub.Library\GameClub.Library.csproj", "{1EE29A79-8223-473D-AE51-E20BBF59ECCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClub.BusinessLogic", "GameClub.BusinessLogic\GameClub.BusinessLogic.csproj", "{1095D2F9-9B7C-7EF9-8AD9-118BF28181C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClub.DataAccess", "GameClub.DataAccess\GameClub.DataAccess.csproj", "{6275CC07-B397-34FB-8C41-F4C707C27A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClub.Domain", "GameClub.Domain\GameClub.Domain.csproj", "{9E2C1F96-3EEC-3386-2A56-7BEC3F5F19D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +20,18 @@ Global
 		{0FA69045-38D8-49CF-A3C9-AEEA43498C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FA69045-38D8-49CF-A3C9-AEEA43498C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FA69045-38D8-49CF-A3C9-AEEA43498C37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1EE29A79-8223-473D-AE51-E20BBF59ECCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1EE29A79-8223-473D-AE51-E20BBF59ECCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EE29A79-8223-473D-AE51-E20BBF59ECCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1EE29A79-8223-473D-AE51-E20BBF59ECCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1095D2F9-9B7C-7EF9-8AD9-118BF28181C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1095D2F9-9B7C-7EF9-8AD9-118BF28181C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1095D2F9-9B7C-7EF9-8AD9-118BF28181C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1095D2F9-9B7C-7EF9-8AD9-118BF28181C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6275CC07-B397-34FB-8C41-F4C707C27A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6275CC07-B397-34FB-8C41-F4C707C27A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6275CC07-B397-34FB-8C41-F4C707C27A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6275CC07-B397-34FB-8C41-F4C707C27A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E2C1F96-3EEC-3386-2A56-7BEC3F5F19D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E2C1F96-3EEC-3386-2A56-7BEC3F5F19D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E2C1F96-3EEC-3386-2A56-7BEC3F5F19D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E2C1F96-3EEC-3386-2A56-7BEC3F5F19D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

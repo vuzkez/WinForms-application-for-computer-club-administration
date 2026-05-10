@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using GameClub.Library.Entities;
+using GameClub.Domain.Entities;
 
 namespace GameClub.GUI.ViewInterfaces
 {
     public interface IOperatorsView
     {
-        // Входные данные с формы
         string LoginInput { get; }
         string PasswordInput { get; }
         string FullNameInput { get; }

@@ -1,9 +1,10 @@
 using System.Configuration;
 using GameClub.GUI.Presenters;
-using GameClub.Library.Database;
-using GameClub.Library.Entities;
-using GameClub.Library.ServiceInterfaces;
-using GameClub.Library.UnitOfWork;
+using GameClub.DataAccess.Database;
+using GameClub.Domain.Entities;
+using GameClub.BusinessLogic.ServiceInterfaces;
+using GameClub.DataAccess.UnitOfWork;
+using GameClub.BusinessLogic.Services;
 
 namespace GameClub.GUI.Views
 {
