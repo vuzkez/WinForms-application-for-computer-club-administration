@@ -1,11 +1,11 @@
 using System.Configuration;
-using GameClub.Library;
+using GameClub.GUI.Presenters;
 using GameClub.Library.Database;
 using GameClub.Library.Entities;
 using GameClub.Library.ServiceInterfaces;
 using GameClub.Library.UnitOfWork;
 
-namespace GameClub.GUI
+namespace GameClub.GUI.Views
 {
     internal static class Program
     {
@@ -26,11 +26,13 @@ namespace GameClub.GUI
             IAdministrator administratorService = new AdminService(unitOfWorkFactory);
             IAuthentication authenticationService = new AuthenticationService(unitOfWorkFactory);
 
-            using (var loginForm = new LoginForm(authenticationService))
+            using (var loginForm = new LoginForm())
             {
+                var loginPresenter = new LoginPresenter(loginForm, authenticationService);
+
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
-                    User currentUser = loginForm.CurrentUser;
+                    User currentUser = loginForm.AuthenticatedUser;
                     Application.Run(new MainForm(currentUser,operatorService,administratorService,authenticationService));
                 }
             }

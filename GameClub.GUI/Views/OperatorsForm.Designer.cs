@@ -1,4 +1,4 @@
-﻿namespace GameClub.GUI
+﻿namespace GameClub.GUI.Views
 {
     partial class OperatorsForm
     {

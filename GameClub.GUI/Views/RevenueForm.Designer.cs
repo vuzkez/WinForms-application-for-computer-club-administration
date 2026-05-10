@@ -1,4 +1,4 @@
-namespace GameClub.GUI
+namespace GameClub.GUI.Views
 {
     partial class RevenueForm
     {
@@ -107,7 +107,6 @@ namespace GameClub.GUI
             this.btnShow.TabIndex = 5;
             this.btnShow.Text = "Показать";
             this.btnShow.UseVisualStyleBackColor = false;
-            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
             //
             // btnClose
             //
@@ -122,7 +121,6 @@ namespace GameClub.GUI
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Закрыть";
             this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             //
             // lblTotal
             //
