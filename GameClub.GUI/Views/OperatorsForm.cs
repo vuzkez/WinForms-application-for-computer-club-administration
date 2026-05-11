@@ -68,6 +68,7 @@ namespace GameClub.GUI.Views
             btnAdd.Click += (s, e) => AddRequested?.Invoke(this, EventArgs.Empty);
             btnEdit.Click += (s, e) => EditRequested?.Invoke(this, EventArgs.Empty);
             btnClear.Click += (s, e) => ClearRequested?.Invoke(this, EventArgs.Empty);
+            dgvOperators.SelectionChanged += (s, e) => SelectionChanged?.Invoke(this, EventArgs.Empty);
             btnCancel.Click += (s, e) =>
             {
                 DialogResult = DialogResult.Cancel;
@@ -118,8 +119,6 @@ namespace GameClub.GUI.Views
             btnEdit.Enabled = true;
             btnDelete.Enabled = true;
             btnAdd.Enabled = true;
-
-            dgvOperators.SelectionChanged += (s, e) => SelectionChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

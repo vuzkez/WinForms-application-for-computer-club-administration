@@ -12,7 +12,7 @@ namespace GameClub.GUI.Presenters
     public class LoginPresenter
     {
         /// <summary>
-        /// Поля для хранения сервиса аунтификации и представления
+        /// Поля для хранения сервиса аутентификации и представления
         /// </summary>
         private readonly ILoginView view;
         private readonly IAuthentication authenticationService;

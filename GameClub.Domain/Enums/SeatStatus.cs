@@ -1,5 +1,8 @@
-namespace GameClub.Domain.Enums
+﻿namespace GameClub.Domain.Enums
 {
+    /// <summary>
+    /// Статус места
+    /// </summary>
     public enum SeatStatus
     {
         Free,
@@ -7,4 +10,3 @@ namespace GameClub.Domain.Enums
         Expiring
     }
 }
-

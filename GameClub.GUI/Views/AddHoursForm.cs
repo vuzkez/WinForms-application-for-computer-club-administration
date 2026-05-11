@@ -33,11 +33,6 @@ namespace GameClub.GUI.Views
         }
 
         /// <summary>
-        /// Свойство для получения количества часов из NumericUpDown
-        /// </summary>
-        public int NudHoursValue => (int)nudHours.Value;
-
-        /// <summary>
         /// Событие подтверждения добавления часов
         /// </summary>
         public event EventHandler ConfirmAddHours;

@@ -5,15 +5,25 @@ using GameClub.Domain.Entities;
 
 namespace GameClub.BusinessLogic.Services
 {
+    /// <summary>
+    /// Реализация операционных действий: управление сессиями, поиск мест, работа с тарифами
+    /// </summary>
     public class OperatorService : IOperator
     {
         private readonly IUnitOfWorkFactory uowFactory;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="uowFactory">Фабрика единиц работы</param>
         public OperatorService(IUnitOfWorkFactory uowFactory)
         {
             this.uowFactory = uowFactory;
         }
 
+        /// <summary>
+        /// Открыть новую сессию на указанном месте
+        /// </summary>
         public async Task OpenSessionAsync(int seatId, int userId, TariffType tariff, DateTime startTime, DateTime endTime)
         {
             using (var uow = uowFactory.Create())
@@ -25,7 +35,8 @@ namespace GameClub.BusinessLogic.Services
                 uow.BeginTransaction();
                 try
                 {
-                    await uow.Sessions.AddAsync(new Session() {
+                    await uow.Sessions.AddAsync(new Session()
+                    {
                         TariffId = tariffId,
                         UserId = userId,
                         SeatId = seatId,
@@ -44,6 +55,9 @@ namespace GameClub.BusinessLogic.Services
             }
         }
 
+        /// <summary>
+        /// Закрыть активную сессию по её идентификатору
+        /// </summary>
         public async Task CloseSessionAsync(int sessionId)
         {
             using (var uow = uowFactory.Create())
@@ -53,7 +67,7 @@ namespace GameClub.BusinessLogic.Services
                 if (session is null)
                     throw new Exception($"Сессия {sessionId} не найдена");
 
-                session.EndTime = DateTime.Now;
+                session.EndTime = DateTime.Now.AddSeconds(-1);
                 uow.BeginTransaction();
                 try
                 {
@@ -63,18 +77,23 @@ namespace GameClub.BusinessLogic.Services
                 }
                 catch
                 {
-                    uow.RollBack(); 
+                    uow.RollBack();
                     throw;
                 }
             }
-            await Task.Delay(100);
         }
 
+        /// <summary>
+        /// Добавить часы к активной сессии
+        /// </summary>
         public async Task AddHoursAsync(int sessionId, int hours)
         {
             using (var uow = uowFactory.Create())
             {
                 var sessionById = await uow.Sessions.GetByIdWithDetailsAsync(sessionId);
+
+                if (sessionById == null)
+                    throw new Exception($"Сессия по id: {sessionId} не найдена!");
 
                 sessionById.EndTime = sessionById.EndTime.AddHours(hours);
                 sessionById.TotalAmount += hours * sessionById.TariffSetting.PricePerHour;
@@ -94,6 +113,9 @@ namespace GameClub.BusinessLogic.Services
             }
         }
 
+        /// <summary>
+        /// Найти свободные места в зале указанного типа
+        /// </summary>
         public async Task<List<Seat>> FindFreeSeatsAsync(string roomType)
         {
             using (var uow = uowFactory.Create())
@@ -105,6 +127,9 @@ namespace GameClub.BusinessLogic.Services
             }
         }
 
+        /// <summary>
+        /// Получить все места с актуальным статусом
+        /// </summary>
         public async Task<List<Seat>> GetAllSeatsWithStatusAsync()
         {
             using (var uow = uowFactory.Create())
@@ -112,7 +137,7 @@ namespace GameClub.BusinessLogic.Services
                 var seats = await uow.Seats.GetAllAsync();
                 var activeSessions = await uow.Sessions.GetActiveSessionsAsync();
 
-                var statusChanges = new Dictionary<SeatStatus,List<int>>();
+                var statusChanges = new Dictionary<SeatStatus, List<int>>();
 
                 foreach (var seat in seats)
                 {
@@ -160,6 +185,9 @@ namespace GameClub.BusinessLogic.Services
             }
         }
 
+        /// <summary>
+        /// Получить активную сессию по идентификатору места
+        /// </summary>
         public async Task<Session?> GetActiveSessionBySeatIdAsync(int seatId)
         {
             using (var uow = uowFactory.Create())
@@ -168,20 +196,26 @@ namespace GameClub.BusinessLogic.Services
             }
         }
 
+        /// <summary>
+        /// Найти все места, на которых прямо сейчас идёт активная сессия
+        /// </summary>
         public async Task<List<Seat>> FindActiveSeatsAsync()
         {
             using (var uow = uowFactory.Create())
             {
-                var seats = await uow.Seats.GetAllAsync();
-                var activeSessions = await uow.Sessions.GetActiveSessionsAsync();
+                var activeSessions = await uow.Sessions.GetActiveSessionsWithDetailsAsync();
 
-                if (activeSessions.Count == 0)
-                    return new List<Seat>();
-
-                return seats.Where(seat => activeSessions.Any(session => session.SeatId == seat.SeatId)).ToList();
+                return activeSessions
+                    .Where(s => s.Seat != null)
+                    .Select(s => s.Seat)
+                    .Distinct()
+                    .ToList();
             }
         }
 
+        /// <summary>
+        /// Получить все тарифы
+        /// </summary>
         public async Task<List<TariffSetting>> GetAllTariffsAsync()
         {
             using (var uow = uowFactory.Create())
@@ -189,6 +223,10 @@ namespace GameClub.BusinessLogic.Services
                 return await uow.Tariffs.GetAllAsync();
             }
         }
+
+        /// <summary>
+        /// Получить все активные сессии с подгруженными связанными сущностями
+        /// </summary>
         public async Task<List<Session>> GetActiveSessionsWithDetailsAsync()
         {
             using (var uow = uowFactory.Create())

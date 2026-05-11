@@ -17,7 +17,6 @@ namespace GameClub.GUI.ViewInterfaces
         int AdditionalHours { get; }
         int SessionId { get; }
         int SelectedComboSeatId { get; }
-        int NudHoursValue { get; }
 
         /// <summary>
         /// Событие подтверждения добавления часов

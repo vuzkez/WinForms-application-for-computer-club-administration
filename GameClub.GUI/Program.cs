@@ -10,6 +10,9 @@ namespace GameClub.GUI.Views
 {
     internal static class Program
     {
+        /// <summary>
+        /// Точка входа в приложение
+        /// </summary>
         [STAThread]
         static void Main()
         {

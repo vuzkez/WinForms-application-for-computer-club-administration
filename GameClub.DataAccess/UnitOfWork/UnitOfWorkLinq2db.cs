@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GameClub.DataAccess.Database;
 using GameClub.DataAccess.Repositories;
 using GameClub.DataAccess.RepositoryInterfaces;
@@ -10,17 +5,42 @@ using LinqToDB.Data;
 
 namespace GameClub.DataAccess.UnitOfWork
 {
+    /// <summary>
+    /// Реализация единицы работы через LinqToDB: управление транзакцией и доступ к репозиториям
+    /// </summary>
     public class UnitOfWorkLinq2db : IUnitOfWork
     {
+        /// <summary>
+        /// Подключение и флаги
+        /// </summary>
         private readonly DataConnection connection;
         private bool disposed;
         private bool hasActiveTransaction;
 
+        /// <summary>
+        /// Репозиторий мест
+        /// </summary>
         public ISeatRepository Seats { get; }
+
+        /// <summary>
+        /// Репозиторий сессий
+        /// </summary>
         public ISessionRepository Sessions { get; }
+
+        /// <summary>
+        /// Репозиторий тарифов
+        /// </summary>
         public ITariffSettingRepository Tariffs { get; }
+
+        /// <summary>
+        /// Репозиторий пользователей
+        /// </summary>
         public IUserRepository Users { get; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="dataConnection">Фабрика подключений к БД</param>
         public UnitOfWorkLinq2db(IDataConnection dataConnection)
         {
             connection = dataConnection.Create();
@@ -31,6 +51,9 @@ namespace GameClub.DataAccess.UnitOfWork
             Users = new UserRepository(connection);
         }
 
+        /// <summary>
+        /// Начать транзакцию, если ещё не начата
+        /// </summary>
         public void BeginTransaction()
         {
             if (!hasActiveTransaction)
@@ -40,6 +63,9 @@ namespace GameClub.DataAccess.UnitOfWork
             }
         }
 
+        /// <summary>
+        /// Зафиксировать транзакцию
+        /// </summary>
         public void Commit()
         {
             if (hasActiveTransaction)
@@ -49,6 +75,9 @@ namespace GameClub.DataAccess.UnitOfWork
             }
         }
 
+        /// <summary>
+        /// Откатить транзакцию
+        /// </summary>
         public void RollBack()
         {
             if (hasActiveTransaction)
@@ -58,6 +87,9 @@ namespace GameClub.DataAccess.UnitOfWork
             }
         }
 
+        /// <summary>
+        /// Освободить подключение
+        /// </summary>
         public void Dispose()
         {
             if (!disposed)
@@ -68,4 +100,3 @@ namespace GameClub.DataAccess.UnitOfWork
         }
     }
 }
-

@@ -6,7 +6,7 @@ using GameClub.Domain.Entities;
 namespace GameClub.GUI.Views
 {
     /// <summary>
-    /// Форма представления аунтификации
+    /// Форма представления аутентификации
     /// </summary>
     public partial class LoginForm : Form, ILoginView
     {
@@ -47,7 +47,7 @@ namespace GameClub.GUI.Views
         }
 
         /// <summary>
-        /// Метод вызывающийся при успешной аунтификации
+        /// Метод вызывающийся при успешной аутентификации
         /// </summary>
         /// <param name="user"></param>
         public void LoginSuccessful(User user)

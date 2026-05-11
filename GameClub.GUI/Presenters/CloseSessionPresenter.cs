@@ -80,7 +80,7 @@ namespace GameClub.GUI.Presenters
                     {
                         var remaining = firstSession.EndTime - DateTime.Now;
                         var totalHours = (firstSession.EndTime - firstSession.StartTime).TotalHours;
-                        string tariffName = firstSession.TariffSetting.Type == TariffType.Day ? "Дневной" : "Ночной";
+                        string tariffName = firstSession.TariffSetting?.Type == TariffType.Day ? "Дневной" : "Ночной";
 
                         string info =
                             $"Место: #{firstSeat.SeatId} ({firstSeat.SeatRoom})\n" +
@@ -121,7 +121,7 @@ namespace GameClub.GUI.Presenters
                 {
                     var remaining = session.EndTime - DateTime.Now;
                     var totalHours = (session.EndTime - session.StartTime).TotalHours;
-                    string tariffName = session.TariffSetting.Type == TariffType.Day ? "Дневной" : "Ночной";
+                    string tariffName = session.TariffSetting?.Type == TariffType.Day ? "Дневной" : "Ночной";
 
                     string info =
                         $"Место: #{seat.SeatId} ({seat.SeatRoom})\n" +

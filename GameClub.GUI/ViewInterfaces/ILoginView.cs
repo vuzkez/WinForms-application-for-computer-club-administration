@@ -8,7 +8,7 @@ using GameClub.Domain.Entities;
 namespace GameClub.GUI.ViewInterfaces
 {
     /// <summary>
-    /// Интерфейс представления формы аунтификации
+    /// Интерфейс представления формы аутентификации
     /// </summary>
     public interface ILoginView
     {
@@ -19,7 +19,7 @@ namespace GameClub.GUI.ViewInterfaces
         string Password { get; }
 
         /// <summary>
-        /// Событие при попытке аунтификации
+        /// Событие при попытке аутентификации
         /// </summary>
         event EventHandler LoginAttempt;
 
@@ -30,7 +30,7 @@ namespace GameClub.GUI.ViewInterfaces
         void ShowError(string message);
 
         /// <summary>
-        /// Метод использующийся при успешной аунтификации
+        /// Метод использующийся при успешной аутентификации
         /// </summary>
         /// <param name="user">Пользователь</param>
         void LoginSuccessful(User user);
