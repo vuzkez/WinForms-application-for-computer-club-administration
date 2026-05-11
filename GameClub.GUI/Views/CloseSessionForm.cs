@@ -3,31 +3,48 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.BusinessLogic.ServiceInterfaces;
+using GameClub.Domain.DTO;
 
 namespace GameClub.GUI.Views
 {
+    /// <summary>
+    /// Форма закрытия активной сессии
+    /// </summary>
     public partial class CloseSessionForm : Form, ICloseSessionView
     {
-        // Результаты для вызывающего кода
+        /// <summary>
+        /// Свойства для передачи результатов презентеру
+        /// </summary>
         public int SelectedSeatId { get; private set; }
         public int SessionId { get; private set; }
 
-        // Данные с формы, читаемые презентером
+        /// <summary>
+        /// Свойство для получения ID выбранного места из выпадающего списка
+        /// </summary>
         public int SelectedComboSeatId
         {
             get
             {
-                if (cmbActiveSeats.SelectedItem == null) return 0;
-                dynamic item = cmbActiveSeats.SelectedItem;
-                return item.Value;
+                if (cmbActiveSeats.SelectedItem is ComboBoxItem item)
+                    return item.Value;
+                return 0;
             }
         }
 
+        /// <summary>
+        /// Событие подтверждения закрытия сессии
+        /// </summary>
         public event EventHandler ConfirmClose;
+
+        /// <summary>
+        /// Событие выбора места в выпадающем списке
+        /// </summary>
         public event EventHandler SeatSelectionChanged;
 
-        public CloseSessionForm(IOperator operatorService)
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public CloseSessionForm()
         {
             InitializeComponent();
 
@@ -43,8 +60,8 @@ namespace GameClub.GUI.Views
 
                 if (result == DialogResult.Yes)
                 {
-                    dynamic item = cmbActiveSeats.SelectedItem;
-                    if (item != null) SelectedSeatId = item.Value;
+                    if (cmbActiveSeats.SelectedItem is ComboBoxItem item)
+                        SelectedSeatId = item.Value;
 
                     ConfirmClose?.Invoke(this, EventArgs.Empty);
                 }
@@ -57,18 +74,28 @@ namespace GameClub.GUI.Views
             };
         }
 
-        public void LoadActiveSeats(List<object> items)
+        /// <summary>
+        /// Загрузка списка активных мест в выпадающий список
+        /// </summary>
+        /// <param name="items">Список мест</param>
+        public void LoadActiveSeats(List<ComboBoxItem> items)
         {
             Cursor = Cursors.Default;
             cmbActiveSeats.DisplayMember = "Text";
             cmbActiveSeats.ValueMember = "Value";
             cmbActiveSeats.DataSource = items;
-            if (items.Count > 0) cmbActiveSeats.SelectedIndex = 0;
+            if (items.Count > 0) 
+                cmbActiveSeats.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Установка состояния при отсутствии активных сессий
+        /// </summary>
         public void SetNoActiveSeats()
         {
             Cursor = Cursors.Default;
+            cmbActiveSeats.DataSource = null;
+            cmbActiveSeats.Items.Clear();
             cmbActiveSeats.Items.Add("Нет активных мест");
             cmbActiveSeats.Enabled = false;
             btnClose.Enabled = false;
@@ -76,28 +103,45 @@ namespace GameClub.GUI.Views
             lblSessionInfo.ForeColor = Color.Red;
         }
 
+        /// <summary>
+        /// Обновление информации о выбранной сессии
+        /// </summary>
+        /// <param name="text">Текст информации</param>
         public void UpdateSessionInfo(string text)
         {
             lblSessionInfo.Text = text;
             lblSessionInfo.ForeColor = Color.DarkRed;
             btnClose.Enabled = true;
-
         }
 
+        /// <summary>
+        /// Сохранение ID сессии
+        /// </summary>
+        /// <param name="sessionId">ID сессии</param>
         public void SetSessionId(int sessionId) => SessionId = sessionId;
+
+        /// <summary>
+        /// Сохранение ID выбранного места
+        /// </summary>
+        /// <param name="seatId">ID места</param>
         public void SetSelectedSeatId(int seatId) => SelectedSeatId = seatId;
 
+        /// <summary>
+        /// Отображение сообщения об ошибке
+        /// </summary>
+        /// <param name="message">Текст ошибки</param>
         public void ShowError(string message)
         {
             MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Закрытие формы с положительным результатом
+        /// </summary>
         public void CloseWithOk()
         {
             DialogResult = DialogResult.OK;
             Close();
         }
-
-        public new void Close() => base.Close();
     }
 }

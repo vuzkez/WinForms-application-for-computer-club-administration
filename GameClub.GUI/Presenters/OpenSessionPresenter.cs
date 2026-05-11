@@ -1,16 +1,29 @@
 using System;
+using System.Linq;
 using GameClub.GUI.ViewInterfaces;
 using GameClub.Domain.Enums;
 using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Presenters
 {
+    /// <summary>
+    /// Презентер формы открытия новой сессии
+    /// </summary>
     public class OpenSessionPresenter
     {
+        /// <summary>
+        /// Поля для хранения представления и сервисов
+        /// </summary>
         private readonly IOpenSessionView view;
         private readonly IOperator operatorService;
         private readonly IAdministrator adminService;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="view">Отображение</param>
+        /// <param name="operatorService">Сервис оператора</param>
+        /// <param name="adminService">Сервис администратора</param>
         public OpenSessionPresenter(IOpenSessionView view, IOperator operatorService, IAdministrator adminService)
         {
             this.view = view;
@@ -21,6 +34,10 @@ namespace GameClub.GUI.Presenters
             this.view.ConfirmOpen += OnConfirmOpen;
         }
 
+        /// <summary>
+        /// Событие загрузки формы
+        /// Загружает цены дневного и ночного тарифов и отображает их
+        /// </summary>
         private async void OnFormLoaded(object sender, EventArgs e)
         {
             try
@@ -39,6 +56,11 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки "Открыть сессию".
+        /// Проверяет номер места, выбранный тариф, количество часов
+        /// и отсутствие активной сессии на выбранном месте
+        /// </summary>
         private async void OnConfirmOpen(object sender, EventArgs e)
         {
             try
@@ -71,7 +93,7 @@ namespace GameClub.GUI.Presenters
                 }
 
                 var seats = await operatorService.GetAllSeatsWithStatusAsync();
-                var seat = System.Linq.Enumerable.FirstOrDefault(seats, s => s.SeatId == seatId);
+                var seat = seats.FirstOrDefault(s => s.SeatId == seatId);
 
                 if (seat == null)
                 {

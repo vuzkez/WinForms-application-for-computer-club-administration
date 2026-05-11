@@ -6,12 +6,26 @@ using GameClub.Domain.Entities;
 
 namespace GameClub.GUI.Views
 {
+    /// <summary>
+    /// Форма отображения списка свободных мест в выбранном зале
+    /// </summary>
     public partial class FreeSeatsForm : Form, IFreeSeatsView
     {
+        /// <summary>
+        /// Свойство для получения выбранного места
+        /// </summary>
         public Seat SelectedSeat { get; private set; }
 
+        /// <summary>
+        /// Событие запроса на открытие сессии для выбранного места
+        /// </summary>
         public event EventHandler OpenSessionRequested;
 
+        /// <summary>
+        /// Конструктор формы
+        /// </summary>
+        /// <param name="freeSeats">Список свободных мест</param>
+        /// <param name="roomType">Тип выбранного зала</param>
         public FreeSeatsForm(List<Seat> freeSeats, string roomType)
         {
             InitializeComponent();
@@ -59,6 +73,11 @@ namespace GameClub.GUI.Views
             };
         }
 
+        /// <summary>
+        /// Загрузка списка свободных мест в таблицу
+        /// </summary>
+        /// <param name="seats">Список свободных мест</param>
+        /// <param name="roomType">Тип выбранного зала</param>
         public void LoadSeats(List<Seat> seats, string roomType)
         {
             Text = $"Свободные места - {roomType}";
@@ -89,11 +108,19 @@ namespace GameClub.GUI.Views
             btnOpenSession.Enabled = true;
         }
 
+        /// <summary>
+        /// Отображение сообщения об ошибке
+        /// </summary>
+        /// <param name="message">Текст ошибки</param>
         public void ShowError(string message)
         {
             MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        /// <summary>
+        /// Закрытие формы с передачей выбранного места
+        /// </summary>
+        /// <param name="seat">Выбранное место</param>
         public void CloseWithOk(Seat seat)
         {
             SelectedSeat = seat;

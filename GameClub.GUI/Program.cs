@@ -1,18 +1,15 @@
 using System.Configuration;
 using GameClub.GUI.Presenters;
-using GameClub.DataAccess.Database;
-using GameClub.Domain.Entities;
+using GameClub.GUI.ViewInterfaces;
 using GameClub.BusinessLogic.ServiceInterfaces;
-using GameClub.DataAccess.UnitOfWork;
 using GameClub.BusinessLogic.Services;
+using GameClub.DataAccess.Database;
+using GameClub.DataAccess.UnitOfWork;
 
 namespace GameClub.GUI.Views
 {
     internal static class Program
     {
-        /// <summary>
-        ///  Главная точка входа в программу
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -20,7 +17,9 @@ namespace GameClub.GUI.Views
 
             var connectionStringSettings = ConfigurationManager.ConnectionStrings["SqlGameClubDb"];
 
-            IDataConnection dataContextFactory = new ConnectionFactory(connectionStringSettings.ConnectionString,connectionStringSettings.ProviderName);
+            IDataConnection dataContextFactory = new ConnectionFactory(
+                connectionStringSettings.ConnectionString,
+                connectionStringSettings.ProviderName);
             IUnitOfWorkFactory unitOfWorkFactory = new UnitOfWorkFactory(dataContextFactory);
 
             IOperator operatorService = new OperatorService(unitOfWorkFactory);
@@ -33,15 +32,19 @@ namespace GameClub.GUI.Views
 
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
-                    User currentUser = loginForm.AuthenticatedUser;
+                    var currentUser = loginForm.AuthenticatedUser;
 
-                    var mainForm = new MainForm(currentUser, operatorService, administratorService, authenticationService);
+                    using (var mainForm = new MainForm())
+                    {
+                        var mainPresenter = new MainPresenter(
+                            mainForm,
+                            currentUser,
+                            operatorService,
+                            administratorService);
 
-                    var mainPresenter = new MainPresenter(mainForm, currentUser, operatorService, administratorService);
-
-                    Application.Run(mainForm);
+                        Application.Run(mainForm);
+                    }
                 }
-
             }
         }
     }

@@ -8,14 +8,28 @@ using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Presenters
 {
+    /// <summary>
+    /// Презентер формы управления операторами
+    /// </summary>
     public class OperatorsPresenter
     {
+        /// <summary>
+        /// Поля для хранения представления и сервиса администратора
+        /// </summary>
         private readonly IOperatorsView view;
         private readonly IAdministrator adminService;
 
+        /// <summary>
+        /// Поля для хранения списка операторов и выбранного оператора
+        /// </summary>
         private List<User> operators;
         private User selectedOperator;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="view">Отображение</param>
+        /// <param name="adminService">Сервис администратора</param>
         public OperatorsPresenter(IOperatorsView view, IAdministrator adminService)
         {
             this.view = view;
@@ -30,6 +44,9 @@ namespace GameClub.GUI.Presenters
             LoadOperatorsAsync();
         }
 
+        /// <summary>
+        /// Загрузка списка операторов из базы данных
+        /// </summary>
         private async void LoadOperatorsAsync()
         {
             try
@@ -43,6 +60,10 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Событие выбора оператора в таблице
+        /// Заполняет поля ввода данными выбранного оператора
+        /// </summary>
         private void OnSelectionChanged(object sender, EventArgs e)
         {
             int? userId = view.SelectedOperatorId;
@@ -64,6 +85,10 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Событие очистки формы
+        /// Сбрасывает выбранного оператора и поля ввода
+        /// </summary>
         private void OnClearRequested(object sender, EventArgs e)
         {
             selectedOperator = null;
@@ -71,6 +96,10 @@ namespace GameClub.GUI.Presenters
             view.ClearSelection();
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки "Добавить"
+        /// Валидирует поля и добавляет нового оператора
+        /// </summary>
         private async void OnAddRequested(object sender, EventArgs e)
         {
             try
@@ -116,6 +145,10 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки "Редактировать"
+        /// Валидирует поля и обновляет данные выбранного оператора
+        /// </summary>
         private async void OnEditRequested(object sender, EventArgs e)
         {
             if (selectedOperator == null)
@@ -166,6 +199,10 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки "Удалить"
+        /// Удаляет выбранного оператора из базы данных
+        /// </summary>
         private async void OnDeleteRequested(object sender, EventArgs e)
         {
             if (selectedOperator == null)

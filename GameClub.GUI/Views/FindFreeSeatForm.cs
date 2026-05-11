@@ -4,12 +4,24 @@ using GameClub.GUI.ViewInterfaces;
 
 namespace GameClub.GUI.Views
 {
+    /// <summary>
+    /// Форма выбора типа зала для поиска свободных мест
+    /// </summary>
     public partial class FindFreeSeatForm : Form, IFindFreeSeatView
     {
+        /// <summary>
+        /// Свойство для получения выбранного типа зала (General / Vip)
+        /// </summary>
         public string Result { get; private set; }
 
+        /// <summary>
+        /// Событие подтверждения выбора типа зала
+        /// </summary>
         public event EventHandler ConfirmSelection;
 
+        /// <summary>
+        /// Конструктор формы
+        /// </summary>
         public FindFreeSeatForm()
         {
             InitializeComponent();
@@ -29,11 +41,18 @@ namespace GameClub.GUI.Views
             btnCancel.Click += (s, e) => Close();
         }
 
+        /// <summary>
+        /// Отображение сообщения об ошибке
+        /// </summary>
+        /// <param name="message">Текст ошибки</param>
         public void ShowError(string message)
         {
             MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Закрытие формы с положительным результатом
+        /// </summary>
         public void CloseWithOk()
         {
             DialogResult = DialogResult.OK;

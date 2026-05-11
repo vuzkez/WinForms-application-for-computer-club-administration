@@ -1,24 +1,35 @@
 using System;
 using System.Windows.Forms;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Domain.Enums;
-using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Views
 {
+    /// <summary>
+    /// Форма настройки тарифов (дневного и ночного)
+    /// </summary>
     public partial class TariffForm : Form, ITariffView
     {
+        /// <summary>
+        /// Свойство для получения цены дневного тарифа
+        /// </summary>
         public decimal DayPrice => nudDayPrice.Value;
+
+        /// <summary>
+        /// Свойство для получения цены ночного тарифа
+        /// </summary>
         public decimal NightPrice => nudNightPrice.Value;
 
+        /// <summary>
+        /// Событие сохранения новых тарифов
+        /// </summary>
         public event EventHandler SaveRequested;
 
-        public TariffForm(IAdministrator adminService, decimal dayPrice, decimal nightPrice)
+        /// <summary>
+        /// Конструктор формы
+        /// </summary>
+        public TariffForm()
         {
             InitializeComponent();
-
-            nudDayPrice.Value = dayPrice;
-            nudNightPrice.Value = nightPrice;
 
             btnSave.Click += (s, e) =>
             {
@@ -39,22 +50,38 @@ namespace GameClub.GUI.Views
             };
         }
 
+        /// <summary>
+        /// Установка текущих цен тарифов при загрузке формы
+        /// </summary>
+        /// <param name="dayPrice">Цена дневного тарифа</param>
+        /// <param name="nightPrice">Цена ночного тарифа</param>
         public void SetPrices(decimal dayPrice, decimal nightPrice)
         {
             nudDayPrice.Value = dayPrice;
             nudNightPrice.Value = nightPrice;
         }
 
+        /// <summary>
+        /// Отображение сообщения об ошибке
+        /// </summary>
+        /// <param name="message">Текст ошибки</param>
         public void ShowError(string message)
         {
             MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        /// <summary>
+        /// Отображение информационного сообщения
+        /// </summary>
+        /// <param name="message">Текст сообщения</param>
         public void ShowInfo(string message)
         {
             MessageBox.Show(message, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// Закрытие формы с положительным результатом
+        /// </summary>
         public void CloseWithOk()
         {
             DialogResult = DialogResult.OK;

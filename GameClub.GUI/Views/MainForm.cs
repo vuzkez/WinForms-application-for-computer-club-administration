@@ -4,26 +4,65 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using GameClub.GUI.ViewInterfaces;
-using GameClub.Domain.Entities;
-using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Views
 {
+    /// <summary>
+    /// Главная форма приложения - карта компьютерного клуба
+    /// Отображает 35 мест и панель управления
+    /// </summary>
     public partial class MainForm : Form, IMainView
     {
+        /// <summary>
+        /// Таймер автоматического обновления карты мест (раз в минуту)
+        /// </summary>
         private System.Windows.Forms.Timer timer;
 
+        /// <summary>
+        /// Событие обновления карты мест
+        /// </summary>
         public event EventHandler RefreshRequested;
+
+        /// <summary>
+        /// Событие поиска свободного места
+        /// </summary>
         public event EventHandler FindFreeSeatRequested;
+
+        /// <summary>
+        /// Событие закрытия активной сессии
+        /// </summary>
         public event EventHandler CloseSessionRequested;
+
+        /// <summary>
+        /// Событие добавления часов к сессии
+        /// </summary>
         public event EventHandler AddHoursRequested;
+
+        /// <summary>
+        /// Событие просмотра выручки
+        /// </summary>
         public event EventHandler RevenueRequested;
+
+        /// <summary>
+        /// Событие открытия панели администратора (настройка тарифов)
+        /// </summary>
         public event EventHandler AdminPanelRequested;
+
+        /// <summary>
+        /// Событие управления операторами
+        /// </summary>
         public event EventHandler ManageOperatorsRequested;
+
+        /// <summary>
+        /// Событие нажатия на кнопку места на карте.
+        /// Параметр — ID выбранного места.
+        /// </summary>
         public event EventHandler<int> SeatButtonClicked;
 
-        public MainForm(User user, IOperator operatorService, IAdministrator administratorService,
-            IAuthentication authenticationService)
+        /// <summary>
+        /// Конструктор формы
+        /// </summary>
+        public MainForm()
         {
             Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             AutoScaleMode = AutoScaleMode.Dpi;
@@ -47,6 +86,9 @@ namespace GameClub.GUI.Views
             FormClosing += (s, e) => { timer.Stop(); timer.Dispose(); };
         }
 
+        /// <summary>
+        /// Подписка на клики всех 35 кнопок мест (General + VIP)
+        /// </summary>
         private void WireUpSeatButtons()
         {
             var seatButtons = new Button[]
@@ -66,6 +108,10 @@ namespace GameClub.GUI.Views
             }
         }
 
+        /// <summary>
+        /// Обработчик клика по кнопке места.
+        /// Извлекает номер ПК из текста кнопки и вызывает событие SeatButtonClicked
+        /// </summary>
         private void SeatButton_Click(object sender, EventArgs e)
         {
             if (sender is Button btn)
@@ -76,8 +122,16 @@ namespace GameClub.GUI.Views
             }
         }
 
+        /// <summary>
+        /// Установка заголовка формы
+        /// </summary>
+        /// <param name="title">Текст заголовка</param>
         public void SetTitle(string title) => Text = title;
 
+        /// <summary>
+        /// Отображение или скрытие кнопок администратора
+        /// </summary>
+        /// <param name="visible">Флаг видимости кнопок</param>
         public void ShowAdminButtons(bool visible)
         {
             btnRevenue.Visible = visible;
@@ -85,6 +139,11 @@ namespace GameClub.GUI.Views
             btnManageOperators.Visible = visible;
         }
 
+        /// <summary>
+        /// Установка цвета кнопки места на карте
+        /// </summary>
+        /// <param name="seatId">ID места (1-35)</param>
+        /// <param name="color">Цвет кнопки</param>
         public void SetSeatColor(int seatId, Color color)
         {
             var map = new Dictionary<int, Button>
@@ -102,11 +161,19 @@ namespace GameClub.GUI.Views
                 button.BackColor = color;
         }
 
+        /// <summary>
+        /// Отображение сообщения об ошибке
+        /// </summary>
+        /// <param name="message">Текст ошибки</param>
         public void ShowError(string message)
         {
             MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Отображение информационного сообщения
+        /// </summary>
+        /// <param name="message">Текст сообщения</param>
         public void ShowInfo(string message)
         {
             MessageBox.Show(message, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);

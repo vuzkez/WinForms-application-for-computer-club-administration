@@ -9,13 +9,32 @@ using GameClub.BusinessLogic.ServiceInterfaces;
 
 namespace GameClub.GUI.Presenters
 {
+    /// <summary>
+    /// Главный презентер приложения
+    /// Управляет картой мест, поиском, открытием/закрытием сессий,
+    /// добавлением часов, выручкой, тарифами и операторами
+    /// </summary>
     public class MainPresenter
     {
+        /// <summary>
+        /// Поля для хранения представления и текущего пользователя
+        /// </summary>
         private readonly IMainView view;
         private readonly User user;
+
+        /// <summary>
+        /// Поля для хранения сервисов оператора и администратора
+        /// </summary>
         private readonly IOperator operatorService;
         private readonly IAdministrator administratorService;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="view">Отображение главной формы</param>
+        /// <param name="user">Авторизованный пользователь</param>
+        /// <param name="operatorService">Сервис оператора</param>
+        /// <param name="administratorService">Сервис администратора</param>
         public MainPresenter(IMainView view, User user, IOperator operatorService, IAdministrator administratorService)
         {
             this.view = view;
@@ -36,12 +55,18 @@ namespace GameClub.GUI.Presenters
             _ = RefreshSeatsAsync();
         }
 
+        /// <summary>
+        /// Настройка интерфейса в зависимости от роли пользователя
+        /// </summary>
         private void ConfigureUIByRole()
         {
             view.SetTitle($"CyberX - Пользователь: {user.FullName}. Роль: {user.UserRole}.");
             view.ShowAdminButtons(user.UserRole == UserRole.Administrator);
         }
 
+        /// <summary>
+        /// Обновление цветов всех мест на карте
+        /// </summary>
         private async Task RefreshSeatsAsync()
         {
             try
@@ -58,17 +83,30 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Получение цвета места в зависимости от его статуса
+        /// </summary>
+        /// <param name="seat">Место</param>
+        /// <returns>Цвет: зелёный — свободно, жёлтый — истекает, красный — занято, серый — неизвестно</returns>
         private Color GetColor(Seat seat)
         {
             switch (seat.Status)
             {
-                case SeatStatus.Free:     return Color.Green;
-                case SeatStatus.Expiring: return Color.Yellow;
-                case SeatStatus.Busy:     return Color.Red;
-                default:                  return Color.Gray;
+                case SeatStatus.Free:
+                    return Color.Green;
+                case SeatStatus.Expiring:
+                    return Color.Yellow;
+                case SeatStatus.Busy:
+                    return Color.Red;
+                default:
+                    return Color.Gray;
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки поиска свободного места
+        /// Выбор зала - список свободных мест - открытие сессии
+        /// </summary>
         private async void OnFindFreeSeat(object sender, EventArgs e)
         {
             try
@@ -76,7 +114,7 @@ namespace GameClub.GUI.Presenters
                 using (var dialog = new Views.FindFreeSeatForm())
                 {
                     var p = new FindFreeSeatPresenter(dialog);
-                    if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                    if (dialog.ShowDialog() != DialogResult.OK)
                         return;
 
                     string roomType = dialog.Result;
@@ -85,16 +123,17 @@ namespace GameClub.GUI.Presenters
                     using (var freeSeatsForm = new Views.FreeSeatsForm(seats, roomType))
                     {
                         var p2 = new FreeSeatsPresenter(freeSeatsForm, seats, roomType);
-                        if (freeSeatsForm.ShowDialog() != System.Windows.Forms.DialogResult.OK
+                        if (freeSeatsForm.ShowDialog() != DialogResult.OK
                             || freeSeatsForm.SelectedSeat == null)
                             return;
 
                         int seatId = freeSeatsForm.SelectedSeat.SeatId;
 
-                        using (var openForm = new Views.OpenSessionForm(operatorService, administratorService, seatId))
+                        using (var openForm = new Views.OpenSessionForm())
                         {
+                            openForm.SetPreselectedSeat(seatId);
                             var p3 = new OpenSessionPresenter(openForm, operatorService, administratorService);
-                            if (openForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            if (openForm.ShowDialog() == DialogResult.OK)
                             {
                                 await operatorService.OpenSessionAsync(
                                     openForm.SelectedSeatId,
@@ -116,14 +155,17 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки закрытия активной сессии
+        /// </summary>
         private async void OnCloseSession(object sender, EventArgs e)
         {
             try
             {
-                using (var form = new Views.CloseSessionForm(operatorService))
+                using (var form = new Views.CloseSessionForm())
                 {
                     var p = new CloseSessionPresenter(form, operatorService);
-                    if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    if (form.ShowDialog() == DialogResult.OK)
                     {
                         await operatorService.CloseSessionAsync(form.SessionId);
                         await RefreshSeatsAsync();
@@ -137,14 +179,17 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки добавления часов к активной сессии
+        /// </summary>
         private async void OnAddHours(object sender, EventArgs e)
         {
             try
             {
-                using (var form = new Views.AddHoursForm(operatorService))
+                using (var form = new Views.AddHoursForm())
                 {
                     var p = new AddHoursPresenter(form, operatorService);
-                    if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    if (form.ShowDialog() == DialogResult.OK)
                     {
                         await operatorService.AddHoursAsync(form.SessionId, form.AdditionalHours);
                         await RefreshSeatsAsync();
@@ -158,6 +203,54 @@ namespace GameClub.GUI.Presenters
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки настройки тарифов 
+        /// </summary>
+        private async void OnAdminPanel(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal dayPrice = await administratorService.GetTariffPriceAsync(TariffType.Day);
+                decimal nightPrice = await administratorService.GetTariffPriceAsync(TariffType.Night);
+
+                using (var form = new Views.TariffForm())
+                {
+                    form.SetPrices(dayPrice, nightPrice);
+                    var p = new TariffPresenter(form, administratorService);
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        await RefreshSeatsAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                view.ShowError($"Ошибка: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Обработчик кнопки управления операторами
+        /// </summary>
+        private void OnManageOperators(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var form = new Views.OperatorsForm())
+                {
+                    var p = new OperatorsPresenter(form, administratorService);
+                    form.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                view.ShowError($"Ошибка: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Обработчик кнопки просмотра выручки
+        /// </summary>
         private void OnRevenue(object sender, EventArgs e)
         {
             try
@@ -174,44 +267,11 @@ namespace GameClub.GUI.Presenters
             }
         }
 
-        private async void OnAdminPanel(object sender, EventArgs e)
-        {
-            try
-            {
-                decimal dayPrice = await administratorService.GetTariffPriceAsync(TariffType.Day);
-                decimal nightPrice = await administratorService.GetTariffPriceAsync(TariffType.Night);
-
-                using (var form = new Views.TariffForm(administratorService, dayPrice, nightPrice))
-                {
-                    var p = new TariffPresenter(form, administratorService);
-                    if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        await RefreshSeatsAsync();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                view.ShowError($"Ошибка: {ex.Message}");
-            }
-        }
-
-        private void OnManageOperators(object sender, EventArgs e)
-        {
-            try
-            {
-                using (var form = new Views.OperatorsForm(administratorService))
-                {
-                    var p = new OperatorsPresenter(form, administratorService);
-                    form.ShowDialog();
-                }
-            }
-            catch (Exception ex)
-            {
-                view.ShowError($"Ошибка: {ex.Message}");
-            }
-        }
-
+        /// <summary>
+        /// Обработчик нажатия на кнопку места на карте
+        /// Показывает подробную информацию о ПК и активной сессии
+        /// </summary>
+        /// <param name="seatId">ID выбранного места</param>
         private async void OnSeatButtonClicked(object sender, int seatId)
         {
             try
